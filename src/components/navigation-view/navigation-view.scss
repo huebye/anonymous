@@ -1,0 +1,18 @@
+.navigation {
+    display: flex;
+    flex-direction: column;
+    position: sticky;
+    top: 500px;
+}
+
+button {
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: black;
+    color: white;
+    border: none;
+    font-size: 25px;
+    font-weight: 400;
+    margin: 0;
+    margin-left: 130px;
+    cursor: pointer;
+}
