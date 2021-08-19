@@ -1,6 +1,7 @@
 import React from 'react';
 import logo from 'url:./logo.svg'
 import './logo-view.scss'
+import 'url:../../fonts/edwardian-script-itc-regular.ttf';
 
 
 export class LogoView extends React.Component {
