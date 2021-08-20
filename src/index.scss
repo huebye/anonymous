@@ -19,6 +19,7 @@ $backcolor: black;
     display: block;
     min-height: 100vh;
     min-width: 100vw;
+    overflow: auto;
     color: $color;
     background-color: $backcolor;
 }

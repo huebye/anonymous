@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import { MainView } from './components/main-view/main-view';
 // Import statement to indicate that you need to bundle `./index.scss`
 import './index.scss';
-import './fonts/edwardian-script-itc-regular.ttf';
+import 'url:./fonts/edwardian-script-itc-regular.ttf';
 
 // Main component (will eventually use all the others)
 class AnonymousCollection extends React.Component {
