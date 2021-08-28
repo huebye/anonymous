@@ -8,22 +8,8 @@ import { Controlled as ControlledZoom } from 'react-medium-image-zoom'
 import 'react-medium-image-zoom/dist/styles.css';
 import ImageGallery from 'react-image-gallery';
 import "react-image-gallery/styles/css/image-gallery.css";
+const axios = require('axios');
 
-
-const images = [
-    {
-      original: WillyBrandt ,
-      description: '• Willy Brandt',
-    },
-    {
-      original: TwoTrucks ,
-      description: '• Two Trucks',
-    },
-    {
-      original: CorporateIdentity ,
-      description: '• Corporate Identity',
-    }
-  ];
 
 export class ImageSlideView extends React.Component {
     constructor() {
@@ -47,7 +33,7 @@ export class ImageSlideView extends React.Component {
             clickedImage: null,
             isZoomed: true,
             fullscreen: false,
-            imageIndex: 0
+            imageIndex: 0,
         }
       }
 
@@ -74,6 +60,22 @@ export class ImageSlideView extends React.Component {
 
     render () {
     const { fullscreen ,isZoomed} = this.state
+    const {art, image} = this.props
+
+    const images = [
+      {
+        original: image ,
+        description: '• Willy Brandt',
+      },
+      {
+        original: TwoTrucks ,
+        description: '• Two Trucks',
+      },
+      {
+        original: CorporateIdentity ,
+        description: '• Corporate Identity',
+      }
+    ];
 if(fullscreen === false) {
   return (
     <div className="imageslide">
