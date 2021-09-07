@@ -4,8 +4,18 @@ import { BrowserRouter as Router, Route } from "react-router-dom";
 import { LogoView } from '../logo-view/logo-view';
 import { NavigationView } from '../navigation-view/navigation-view';
 import { ImageSlideView } from '../imageslide-view/imageslide-view';
-const axios = require('axios');
+import { initializeApp } from 'firebase/app';
+import { getFirestore, collection, getDocs } from 'firebase/firestore/lite';
 
+const firebaseConfig = {
+  apiKey: "AIzaSyBBgAzuBjkjql4n5NpORB2ACC4yX5agEO4",
+  authDomain: "anonymous-da3b5.firebaseapp.com",
+  projectId: "anonymous-da3b5",
+  storageBucket: "anonymous-da3b5.appspot.com",
+  messagingSenderId: "1049067056124",
+  appId: "1:1049067056124:web:eaf8db415d82e8a069a079",
+  measurementId: "G-WC8RFHKR2V"
+};
 
 export class MainView extends React.Component {
     constructor() {
@@ -14,28 +24,23 @@ export class MainView extends React.Component {
             art: {},
             imagePath: {},
         }
-        
+
     }
 
 
     componentDidMount() {
-        this.getArt();
-        console.log(this.state.art)
+      const app = initializeApp(firebaseConfig);
+      const db = getFirestore(app);
+
+      async function getData(db) {
+        const anonymousCol = collection(db, 'anonymous');
+        const anonymousSnapshot = await getDocs(anonymousCol);
+        const dataList = anonymousSnapshot.docs.map(doc => doc.data());
+        return dataList;
+      }
+      console.log(dataList);
       }
 
-      getArt() {
-        axios.get('https://shrouded-caverns-29574.herokuapp.com/art')
-        .then(response => {
-          this.setState({
-            art: response.data,   
-            imagePath: response.data[0].ImagePath                                          
-          });
-          console.log(this.state.imagePath)
-        })
-        .catch(function (error) {
-          console.log(error);
-        });
-      }
 
     render () {
        const {art} = this.state

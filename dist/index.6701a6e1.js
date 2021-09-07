@@ -979,7 +979,7 @@ _reactDomDefault.default.render(/*#__PURE__*/ _reactDefault.default.createElemen
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-runtime":"8xIwr","react":"6TuXu","react-dom":"gkWJK","./components/main-view/main-view":"2zHas","./index.scss":"jUTZ8","@parcel/transformer-js/src/esmodule-helpers.js":"JacNc","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"5V79J","url:./fonts/edwardian-script-itc-regular.ttf":"9CH5F"}],"8xIwr":[function(require,module,exports) {
+},{"react/jsx-runtime":"8xIwr","react":"6TuXu","react-dom":"gkWJK","./components/main-view/main-view":"2zHas","./index.scss":"jUTZ8","url:./fonts/edwardian-script-itc-regular.ttf":"9CH5F","@parcel/transformer-js/src/esmodule-helpers.js":"JacNc","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"5V79J"}],"8xIwr":[function(require,module,exports) {
 'use strict';
 module.exports = require('./cjs/react-jsx-runtime.development.js');
 
@@ -22756,7 +22756,17 @@ var _reactRouterDom = require("react-router-dom");
 var _logoView = require("../logo-view/logo-view");
 var _navigationView = require("../navigation-view/navigation-view");
 var _imageslideView = require("../imageslide-view/imageslide-view");
-const axios = require('axios');
+var _app = require("firebase/app");
+var _lite = require("firebase/firestore/lite");
+const firebaseConfig = {
+    apiKey: "AIzaSyBBgAzuBjkjql4n5NpORB2ACC4yX5agEO4",
+    authDomain: "anonymous-da3b5.firebaseapp.com",
+    projectId: "anonymous-da3b5",
+    storageBucket: "anonymous-da3b5.appspot.com",
+    messagingSenderId: "1049067056124",
+    appId: "1:1049067056124:web:eaf8db415d82e8a069a079",
+    measurementId: "G-WC8RFHKR2V"
+};
 class MainView extends _reactDefault.default.Component {
     constructor(){
         super();
@@ -22768,32 +22778,29 @@ class MainView extends _reactDefault.default.Component {
         };
     }
     componentDidMount() {
-        this.getArt();
-        console.log(this.state.art);
-    }
-    getArt() {
-        axios.get('https://shrouded-caverns-29574.herokuapp.com/art').then((response)=>{
-            this.setState({
-                art: response.data,
-                imagePath: response.data[0].ImagePath
-            });
-            console.log(this.state.imagePath);
-        }).catch(function(error) {
-            console.log(error);
-        });
+        const app = _app.initializeApp(firebaseConfig);
+        const db = _lite.getFirestore(app);
+        async function getData(db1) {
+            const anonymousCol = _lite.collection(db1, 'anonymous');
+            const anonymousSnapshot = await _lite.getDocs(anonymousCol);
+            const dataList = anonymousSnapshot.docs.map((doc)=>doc.data()
+            );
+            return dataList;
+        }
+        console.log(dataList);
     }
     render() {
         const { art  } = this.state;
         return(/*#__PURE__*/ _jsxRuntime.jsx(_reactRouterDom.BrowserRouter, {
             __source: {
                 fileName: "src/components/main-view/main-view.jsx",
-                lineNumber: 43
+                lineNumber: 48
             },
             __self: this,
             children: /*#__PURE__*/ _jsxRuntime.jsxs("div", {
                 __source: {
                     fileName: "src/components/main-view/main-view.jsx",
-                    lineNumber: 44
+                    lineNumber: 49
                 },
                 __self: this,
                 children: [
@@ -22802,14 +22809,14 @@ class MainView extends _reactDefault.default.Component {
                         path: "/",
                         __source: {
                             fileName: "src/components/main-view/main-view.jsx",
-                            lineNumber: 45
+                            lineNumber: 50
                         },
                         __self: this,
                         children: [
                             /*#__PURE__*/ _jsxRuntime.jsx(_logoView.LogoView, {
                                 __source: {
                                     fileName: "src/components/main-view/main-view.jsx",
-                                    lineNumber: 46
+                                    lineNumber: 51
                                 },
                                 __self: this
                             }),
@@ -22817,14 +22824,14 @@ class MainView extends _reactDefault.default.Component {
                                 className: "start",
                                 __source: {
                                     fileName: "src/components/main-view/main-view.jsx",
-                                    lineNumber: 47
+                                    lineNumber: 52
                                 },
                                 __self: this,
                                 children: [
                                     /*#__PURE__*/ _jsxRuntime.jsx(_navigationView.NavigationView, {
                                         __source: {
                                             fileName: "src/components/main-view/main-view.jsx",
-                                            lineNumber: 48
+                                            lineNumber: 53
                                         },
                                         __self: this
                                     }),
@@ -22833,7 +22840,7 @@ class MainView extends _reactDefault.default.Component {
                                         image: this.state.imagePath,
                                         __source: {
                                             fileName: "src/components/main-view/main-view.jsx",
-                                            lineNumber: 49
+                                            lineNumber: 54
                                         },
                                         __self: this
                                     })
@@ -22846,14 +22853,14 @@ class MainView extends _reactDefault.default.Component {
                         path: "/artist",
                         __source: {
                             fileName: "src/components/main-view/main-view.jsx",
-                            lineNumber: 53
+                            lineNumber: 58
                         },
                         __self: this,
                         children: [
                             /*#__PURE__*/ _jsxRuntime.jsx(_logoView.LogoView, {
                                 __source: {
                                     fileName: "src/components/main-view/main-view.jsx",
-                                    lineNumber: 54
+                                    lineNumber: 59
                                 },
                                 __self: this
                             }),
@@ -22861,13 +22868,13 @@ class MainView extends _reactDefault.default.Component {
                                 className: "start",
                                 __source: {
                                     fileName: "src/components/main-view/main-view.jsx",
-                                    lineNumber: 55
+                                    lineNumber: 60
                                 },
                                 __self: this,
                                 children: /*#__PURE__*/ _jsxRuntime.jsx(_navigationView.NavigationView, {
                                     __source: {
                                         fileName: "src/components/main-view/main-view.jsx",
-                                        lineNumber: 56
+                                        lineNumber: 61
                                     },
                                     __self: this
                                 })
@@ -22885,7 +22892,7 @@ class MainView extends _reactDefault.default.Component {
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-runtime":"8xIwr","react":"6TuXu","./main-view.scss":"jyMAr","react-router-dom":"cpyQW","../logo-view/logo-view":"21Hac","../navigation-view/navigation-view":"3XDAu","../imageslide-view/imageslide-view":"cx3Hi","@parcel/transformer-js/src/esmodule-helpers.js":"JacNc","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"5V79J","axios":"iYoWk"}],"jyMAr":[function() {},{}],"cpyQW":[function(require,module,exports) {
+},{"react/jsx-runtime":"8xIwr","react":"6TuXu","./main-view.scss":"jyMAr","react-router-dom":"cpyQW","../logo-view/logo-view":"21Hac","../navigation-view/navigation-view":"3XDAu","../imageslide-view/imageslide-view":"cx3Hi","firebase/app":"1tQjj","firebase/firestore/lite":"jRsWt","@parcel/transformer-js/src/esmodule-helpers.js":"JacNc","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"5V79J"}],"jyMAr":[function() {},{}],"cpyQW":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "MemoryRouter", ()=>_reactRouter.MemoryRouter
@@ -26394,7 +26401,7 @@ class ImageSlideView extends _reactDefault.default.Component {
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-runtime":"8xIwr","react":"6TuXu","./imageslide-view.scss":"laukI","./TwoTrucks.png":"EnTAq","./WillyBrandt.png":"6oDEg","./CorporateIdentity.png":"6SVx7","react-medium-image-zoom":"iZshw","react-medium-image-zoom/dist/styles.css":"e3nYk","@parcel/transformer-js/src/esmodule-helpers.js":"JacNc","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"5V79J","react-image-gallery":"dIlbG","react-image-gallery/styles/css/image-gallery.css":"hrVig","axios":"iYoWk"}],"laukI":[function() {},{}],"EnTAq":[function(require,module,exports) {
+},{"react/jsx-runtime":"8xIwr","react":"6TuXu","./imageslide-view.scss":"laukI","./TwoTrucks.png":"EnTAq","./WillyBrandt.png":"6oDEg","./CorporateIdentity.png":"6SVx7","react-medium-image-zoom":"iZshw","react-medium-image-zoom/dist/styles.css":"e3nYk","react-image-gallery":"dIlbG","react-image-gallery/styles/css/image-gallery.css":"hrVig","axios":"iYoWk","@parcel/transformer-js/src/esmodule-helpers.js":"JacNc","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"5V79J"}],"laukI":[function() {},{}],"EnTAq":[function(require,module,exports) {
 module.exports = require('./helpers/bundle-url').getBundleURL('3VpAv') + "TwoTrucks.9ff8dc0c.png";
 
 },{"./helpers/bundle-url":"8YnfL"}],"6oDEg":[function(require,module,exports) {
@@ -30810,7 +30817,8417 @@ module.exports = CancelToken;
     return typeof payload === 'object' && payload.isAxiosError === true;
 };
 
-},{}],"jUTZ8":[function() {},{}],"9CH5F":[function(require,module,exports) {
+},{}],"1tQjj":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+var _app = require("@firebase/app");
+parcelHelpers.exportAll(_app, exports);
+var name = "firebase";
+var version = "9.0.1";
+/**
+ * @license
+ * Copyright 2020 Google LLC
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *   http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */ _app.registerVersion(name, version, 'app');
+
+},{"@firebase/app":"3wZLz","@parcel/transformer-js/src/esmodule-helpers.js":"JacNc"}],"3wZLz":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "FirebaseError", ()=>_util.FirebaseError
+);
+parcelHelpers.export(exports, "SDK_VERSION", ()=>SDK_VERSION
+);
+parcelHelpers.export(exports, "_DEFAULT_ENTRY_NAME", ()=>DEFAULT_ENTRY_NAME
+);
+parcelHelpers.export(exports, "_addComponent", ()=>_addComponent
+);
+parcelHelpers.export(exports, "_addOrOverwriteComponent", ()=>_addOrOverwriteComponent
+);
+parcelHelpers.export(exports, "_apps", ()=>_apps
+);
+parcelHelpers.export(exports, "_clearComponents", ()=>_clearComponents
+);
+parcelHelpers.export(exports, "_components", ()=>_components
+);
+parcelHelpers.export(exports, "_getProvider", ()=>_getProvider
+);
+parcelHelpers.export(exports, "_registerComponent", ()=>_registerComponent
+);
+parcelHelpers.export(exports, "_removeServiceInstance", ()=>_removeServiceInstance
+);
+parcelHelpers.export(exports, "deleteApp", ()=>deleteApp
+);
+parcelHelpers.export(exports, "getApp", ()=>getApp
+);
+parcelHelpers.export(exports, "getApps", ()=>getApps
+);
+parcelHelpers.export(exports, "initializeApp", ()=>initializeApp
+);
+parcelHelpers.export(exports, "onLog", ()=>onLog
+);
+parcelHelpers.export(exports, "registerVersion", ()=>registerVersion
+);
+parcelHelpers.export(exports, "setLogLevel", ()=>setLogLevel
+);
+var _component = require("@firebase/component");
+var _logger = require("@firebase/logger");
+var _util = require("@firebase/util");
+/**
+ * @license
+ * Copyright 2019 Google LLC
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *   http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */ class PlatformLoggerServiceImpl {
+    constructor(container){
+        this.container = container;
+    }
+    // In initial implementation, this will be called by installations on
+    // auth token refresh, and installations will send this string.
+    getPlatformInfoString() {
+        const providers = this.container.getProviders();
+        // Loop through providers and get library/version pairs from any that are
+        // version components.
+        return providers.map((provider)=>{
+            if (isVersionServiceProvider(provider)) {
+                const service = provider.getImmediate();
+                return `${service.library}/${service.version}`;
+            } else return null;
+        }).filter((logString)=>logString
+        ).join(' ');
+    }
+}
+/**
+ *
+ * @param provider check if this provider provides a VersionService
+ *
+ * NOTE: Using Provider<'app-version'> is a hack to indicate that the provider
+ * provides VersionService. The provider is not necessarily a 'app-version'
+ * provider.
+ */ function isVersionServiceProvider(provider) {
+    const component = provider.getComponent();
+    return (component === null || component === void 0 ? void 0 : component.type) === "VERSION" /* VERSION */ ;
+}
+const name$o = "@firebase/app";
+const version$1 = "0.7.0";
+/**
+ * @license
+ * Copyright 2019 Google LLC
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *   http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */ const logger = new _logger.Logger('@firebase/app');
+const name$n = "@firebase/app-compat";
+const name$m = "@firebase/analytics-compat";
+const name$l = "@firebase/analytics";
+const name$k = "@firebase/app-check-compat";
+const name$j = "@firebase/app-check";
+const name$i = "@firebase/auth";
+const name$h = "@firebase/auth-compat";
+const name$g = "@firebase/database";
+const name$f = "@firebase/database-compat";
+const name$e = "@firebase/functions";
+const name$d = "@firebase/functions-compat";
+const name$c = "@firebase/installations";
+const name$b = "@firebase/installations-compat";
+const name$a = "@firebase/messaging";
+const name$9 = "@firebase/messaging-compat";
+const name$8 = "@firebase/performance";
+const name$7 = "@firebase/performance-compat";
+const name$6 = "@firebase/remote-config";
+const name$5 = "@firebase/remote-config-compat";
+const name$4 = "@firebase/storage";
+const name$3 = "@firebase/storage-compat";
+const name$2 = "@firebase/firestore";
+const name$1 = "@firebase/firestore-compat";
+const name = "firebase";
+const version = "9.0.0";
+/**
+ * @license
+ * Copyright 2019 Google LLC
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *   http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */ /**
+ * The default app name
+ *
+ * @internal
+ */ const DEFAULT_ENTRY_NAME = '[DEFAULT]';
+const PLATFORM_LOG_STRING = {
+    [name$o]: 'fire-core',
+    [name$n]: 'fire-core-compat',
+    [name$l]: 'fire-analytics',
+    [name$m]: 'fire-analytics-compat',
+    [name$j]: 'fire-app-check',
+    [name$k]: 'fire-app-check-compat',
+    [name$i]: 'fire-auth',
+    [name$h]: 'fire-auth-compat',
+    [name$g]: 'fire-rtdb',
+    [name$f]: 'fire-rtdb-compat',
+    [name$e]: 'fire-fn',
+    [name$d]: 'fire-fn-compat',
+    [name$c]: 'fire-iid',
+    [name$b]: 'fire-iid-compat',
+    [name$a]: 'fire-fcm',
+    [name$9]: 'fire-fcm-compat',
+    [name$8]: 'fire-perf',
+    [name$7]: 'fire-perf-compat',
+    [name$6]: 'fire-rc',
+    [name$5]: 'fire-rc-compat',
+    [name$4]: 'fire-gcs',
+    [name$3]: 'fire-gcs-compat',
+    [name$2]: 'fire-fst',
+    [name$1]: 'fire-fst-compat',
+    'fire-js': 'fire-js',
+    [name]: 'fire-js-all'
+};
+/**
+ * @license
+ * Copyright 2019 Google LLC
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *   http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */ /**
+ * @internal
+ */ const _apps = new Map();
+/**
+ * Registered components.
+ *
+ * @internal
+ */ // eslint-disable-next-line @typescript-eslint/no-explicit-any
+const _components = new Map();
+/**
+ * @param component - the component being added to this app's container
+ *
+ * @internal
+ */ function _addComponent(app, component) {
+    try {
+        app.container.addComponent(component);
+    } catch (e) {
+        logger.debug(`Component ${component.name} failed to register with FirebaseApp ${app.name}`, e);
+    }
+}
+/**
+ *
+ * @internal
+ */ function _addOrOverwriteComponent(app, component) {
+    app.container.addOrOverwriteComponent(component);
+}
+/**
+ *
+ * @param component - the component to register
+ * @returns whether or not the component is registered successfully
+ *
+ * @internal
+ */ function _registerComponent(component) {
+    const componentName = component.name;
+    if (_components.has(componentName)) {
+        logger.debug(`There were multiple attempts to register component ${componentName}.`);
+        return false;
+    }
+    _components.set(componentName, component);
+    // add the component to existing app instances
+    for (const app of _apps.values())_addComponent(app, component);
+    return true;
+}
+/**
+ *
+ * @param app - FirebaseApp instance
+ * @param name - service name
+ *
+ * @returns the provider for the service with the matching name
+ *
+ * @internal
+ */ function _getProvider(app, name1) {
+    return app.container.getProvider(name1);
+}
+/**
+ *
+ * @param app - FirebaseApp instance
+ * @param name - service name
+ * @param instanceIdentifier - service instance identifier in case the service supports multiple instances
+ *
+ * @internal
+ */ function _removeServiceInstance(app, name1, instanceIdentifier = DEFAULT_ENTRY_NAME) {
+    _getProvider(app, name1).clearInstance(instanceIdentifier);
+}
+/**
+ * Test only
+ *
+ * @internal
+ */ function _clearComponents() {
+    _components.clear();
+}
+/**
+ * @license
+ * Copyright 2019 Google LLC
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *   http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */ const ERRORS = {
+    ["no-app" /* NO_APP */ ]: "No Firebase App '{$appName}' has been created - call Firebase App.initializeApp()",
+    ["bad-app-name" /* BAD_APP_NAME */ ]: "Illegal App name: '{$appName}",
+    ["duplicate-app" /* DUPLICATE_APP */ ]: "Firebase App named '{$appName}' already exists with different options or config",
+    ["app-deleted" /* APP_DELETED */ ]: "Firebase App named '{$appName}' already deleted",
+    ["invalid-app-argument" /* INVALID_APP_ARGUMENT */ ]: "firebase.{$appName}() takes either no argument or a Firebase App instance.",
+    ["invalid-log-argument" /* INVALID_LOG_ARGUMENT */ ]: 'First argument to `onLog` must be null or a function.'
+};
+const ERROR_FACTORY = new _util.ErrorFactory('app', 'Firebase', ERRORS);
+/**
+ * @license
+ * Copyright 2019 Google LLC
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *   http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */ class FirebaseAppImpl {
+    constructor(options, config, container1){
+        this._isDeleted = false;
+        this._options = Object.assign({
+        }, options);
+        this._config = Object.assign({
+        }, config);
+        this._name = config.name;
+        this._automaticDataCollectionEnabled = config.automaticDataCollectionEnabled;
+        this._container = container1;
+        this.container.addComponent(new _component.Component('app', ()=>this
+        , "PUBLIC" /* PUBLIC */ ));
+    }
+    get automaticDataCollectionEnabled() {
+        this.checkDestroyed();
+        return this._automaticDataCollectionEnabled;
+    }
+    set automaticDataCollectionEnabled(val) {
+        this.checkDestroyed();
+        this._automaticDataCollectionEnabled = val;
+    }
+    get name() {
+        this.checkDestroyed();
+        return this._name;
+    }
+    get options() {
+        this.checkDestroyed();
+        return this._options;
+    }
+    get config() {
+        this.checkDestroyed();
+        return this._config;
+    }
+    get container() {
+        return this._container;
+    }
+    get isDeleted() {
+        return this._isDeleted;
+    }
+    set isDeleted(val) {
+        this._isDeleted = val;
+    }
+    /**
+     * This function will throw an Error if the App has already been deleted -
+     * use before performing API actions on the App.
+     */ checkDestroyed() {
+        if (this.isDeleted) throw ERROR_FACTORY.create("app-deleted" /* APP_DELETED */ , {
+            appName: this._name
+        });
+    }
+}
+/**
+ * @license
+ * Copyright 2019 Google LLC
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *   http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */ /**
+ * The current SDK version.
+ *
+ * @public
+ */ const SDK_VERSION = version;
+function initializeApp(options1, rawConfig = {
+}) {
+    if (typeof rawConfig !== 'object') {
+        const name1 = rawConfig;
+        rawConfig = {
+            name: name1
+        };
+    }
+    const config1 = Object.assign({
+        name: DEFAULT_ENTRY_NAME,
+        automaticDataCollectionEnabled: false
+    }, rawConfig);
+    const name1 = config1.name;
+    if (typeof name1 !== 'string' || !name1) throw ERROR_FACTORY.create("bad-app-name" /* BAD_APP_NAME */ , {
+        appName: String(name1)
+    });
+    const existingApp = _apps.get(name1);
+    if (existingApp) {
+        // return the existing app if options and config deep equal the ones in the existing app.
+        if (_util.deepEqual(options1, existingApp.options) && _util.deepEqual(config1, existingApp.config)) return existingApp;
+        else throw ERROR_FACTORY.create("duplicate-app" /* DUPLICATE_APP */ , {
+            appName: name1
+        });
+    }
+    const container2 = new _component.ComponentContainer(name1);
+    for (const component of _components.values())container2.addComponent(component);
+    const newApp = new FirebaseAppImpl(options1, config1, container2);
+    _apps.set(name1, newApp);
+    return newApp;
+}
+/**
+ * Retrieves a {@link @firebase/app#FirebaseApp} instance.
+ *
+ * When called with no arguments, the default app is returned. When an app name
+ * is provided, the app corresponding to that name is returned.
+ *
+ * An exception is thrown if the app being retrieved has not yet been
+ * initialized.
+ *
+ * @example
+ * ```javascript
+ * // Return the default app
+ * const app = getApp();
+ * ```
+ *
+ * @example
+ * ```javascript
+ * // Return a named app
+ * const otherApp = getApp("otherApp");
+ * ```
+ *
+ * @param name - Optional name of the app to return. If no name is
+ *   provided, the default is `"[DEFAULT]"`.
+ *
+ * @returns The app corresponding to the provided app name.
+ *   If no app name is provided, the default app is returned.
+ *
+ * @public
+ */ function getApp(name1 = DEFAULT_ENTRY_NAME) {
+    const app = _apps.get(name1);
+    if (!app) throw ERROR_FACTORY.create("no-app" /* NO_APP */ , {
+        appName: name1
+    });
+    return app;
+}
+/**
+ * A (read-only) array of all initialized apps.
+ * @public
+ */ function getApps() {
+    return Array.from(_apps.values());
+}
+/**
+ * Renders this app unusable and frees the resources of all associated
+ * services.
+ *
+ * @example
+ * ```javascript
+ * deleteApp(app)
+ *   .then(function() {
+ *     console.log("App deleted successfully");
+ *   })
+ *   .catch(function(error) {
+ *     console.log("Error deleting app:", error);
+ *   });
+ * ```
+ *
+ * @public
+ */ async function deleteApp(app) {
+    const name1 = app.name;
+    if (_apps.has(name1)) {
+        _apps.delete(name1);
+        await Promise.all(app.container.getProviders().map((provider)=>provider.delete()
+        ));
+        app.isDeleted = true;
+    }
+}
+/**
+ * Registers a library's name and version for platform logging purposes.
+ * @param library - Name of 1p or 3p library (e.g. firestore, angularfire)
+ * @param version - Current version of that library.
+ * @param variant - Bundle variant, e.g., node, rn, etc.
+ *
+ * @public
+ */ function registerVersion(libraryKeyOrName, version1, variant) {
+    var _a;
+    // TODO: We can use this check to whitelist strings when/if we set up
+    // a good whitelist system.
+    let library = (_a = PLATFORM_LOG_STRING[libraryKeyOrName]) !== null && _a !== void 0 ? _a : libraryKeyOrName;
+    if (variant) library += `-${variant}`;
+    const libraryMismatch = library.match(/\s|\//);
+    const versionMismatch = version1.match(/\s|\//);
+    if (libraryMismatch || versionMismatch) {
+        const warning = [
+            `Unable to register library "${library}" with version "${version1}":`
+        ];
+        if (libraryMismatch) warning.push(`library name "${library}" contains illegal characters (whitespace or "/")`);
+        if (libraryMismatch && versionMismatch) warning.push('and');
+        if (versionMismatch) warning.push(`version name "${version1}" contains illegal characters (whitespace or "/")`);
+        logger.warn(warning.join(' '));
+        return;
+    }
+    _registerComponent(new _component.Component(`${library}-version`, ()=>({
+            library,
+            version: version1
+        })
+    , "VERSION" /* VERSION */ ));
+}
+/**
+ * Sets log handler for all Firebase SDKs.
+ * @param logCallback - An optional custom log handler that executes user code whenever
+ * the Firebase SDK makes a logging call.
+ *
+ * @public
+ */ function onLog(logCallback, options1) {
+    if (logCallback !== null && typeof logCallback !== 'function') throw ERROR_FACTORY.create("invalid-log-argument" /* INVALID_LOG_ARGUMENT */ );
+    _logger.setUserLogHandler(logCallback, options1);
+}
+/**
+ * Sets log level for all Firebase SDKs.
+ *
+ * All of the log types above the current log level are captured (i.e. if
+ * you set the log level to `info`, errors are logged, but `debug` and
+ * `verbose` logs are not).
+ *
+ * @public
+ */ function setLogLevel(logLevel) {
+    _logger.setLogLevel(logLevel);
+}
+/**
+ * @license
+ * Copyright 2019 Google LLC
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *   http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */ function registerCoreComponents(variant) {
+    _registerComponent(new _component.Component('platform-logger', (container2)=>new PlatformLoggerServiceImpl(container2)
+    , "PRIVATE" /* PRIVATE */ ));
+    // Register `app` package.
+    registerVersion(name$o, version$1, variant);
+    // Register platform SDK identifier (no version).
+    registerVersion('fire-js', '');
+}
+/**
+ * Firebase App
+ *
+ * @remarks This package coordinates the communication between the different Firebase components
+ * @packageDocumentation
+ */ registerCoreComponents();
+
+},{"@firebase/component":"inEPs","@firebase/logger":"A0nlJ","@firebase/util":"3qRMM","@parcel/transformer-js/src/esmodule-helpers.js":"JacNc"}],"inEPs":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "Component", ()=>Component
+);
+parcelHelpers.export(exports, "ComponentContainer", ()=>ComponentContainer
+);
+parcelHelpers.export(exports, "Provider", ()=>Provider
+);
+var _tslib = require("tslib");
+var _util = require("@firebase/util");
+/**
+ * Component for service name T, e.g. `auth`, `auth-internal`
+ */ var Component = function() {
+    /**
+     *
+     * @param name The public service name, e.g. app, auth, firestore, database
+     * @param instanceFactory Service factory responsible for creating the public interface
+     * @param type whether the service provided by the component is public or private
+     */ function Component1(name, instanceFactory, type) {
+        this.name = name;
+        this.instanceFactory = instanceFactory;
+        this.type = type;
+        this.multipleInstances = false;
+        /**
+         * Properties to be added to the service namespace
+         */ this.serviceProps = {
+        };
+        this.instantiationMode = "LAZY" /* LAZY */ ;
+        this.onInstanceCreated = null;
+    }
+    Component1.prototype.setInstantiationMode = function(mode) {
+        this.instantiationMode = mode;
+        return this;
+    };
+    Component1.prototype.setMultipleInstances = function(multipleInstances) {
+        this.multipleInstances = multipleInstances;
+        return this;
+    };
+    Component1.prototype.setServiceProps = function(props) {
+        this.serviceProps = props;
+        return this;
+    };
+    Component1.prototype.setInstanceCreatedCallback = function(callback) {
+        this.onInstanceCreated = callback;
+        return this;
+    };
+    return Component1;
+}();
+/**
+ * @license
+ * Copyright 2019 Google LLC
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *   http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */ var DEFAULT_ENTRY_NAME = '[DEFAULT]';
+/**
+ * @license
+ * Copyright 2019 Google LLC
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *   http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */ /**
+ * Provider for instance for service name T, e.g. 'auth', 'auth-internal'
+ * NameServiceMapping[T] is an alias for the type of the instance
+ */ var Provider = function() {
+    function Provider1(name, container) {
+        this.name = name;
+        this.container = container;
+        this.component = null;
+        this.instances = new Map();
+        this.instancesDeferred = new Map();
+        this.instancesOptions = new Map();
+        this.onInitCallbacks = new Map();
+    }
+    /**
+     * @param identifier A provider can provide mulitple instances of a service
+     * if this.component.multipleInstances is true.
+     */ Provider1.prototype.get = function(identifier) {
+        // if multipleInstances is not supported, use the default name
+        var normalizedIdentifier = this.normalizeInstanceIdentifier(identifier);
+        if (!this.instancesDeferred.has(normalizedIdentifier)) {
+            var deferred = new _util.Deferred();
+            this.instancesDeferred.set(normalizedIdentifier, deferred);
+            if (this.isInitialized(normalizedIdentifier) || this.shouldAutoInitialize()) // initialize the service if it can be auto-initialized
+            try {
+                var instance = this.getOrInitializeService({
+                    instanceIdentifier: normalizedIdentifier
+                });
+                if (instance) deferred.resolve(instance);
+            } catch (e) {
+            // when the instance factory throws an exception during get(), it should not cause
+            // a fatal error. We just return the unresolved promise in this case.
+            }
+        }
+        return this.instancesDeferred.get(normalizedIdentifier).promise;
+    };
+    Provider1.prototype.getImmediate = function(options) {
+        var _a;
+        // if multipleInstances is not supported, use the default name
+        var normalizedIdentifier = this.normalizeInstanceIdentifier(options === null || options === void 0 ? void 0 : options.identifier);
+        var optional = (_a = options === null || options === void 0 ? void 0 : options.optional) !== null && _a !== void 0 ? _a : false;
+        if (this.isInitialized(normalizedIdentifier) || this.shouldAutoInitialize()) try {
+            return this.getOrInitializeService({
+                instanceIdentifier: normalizedIdentifier
+            });
+        } catch (e) {
+            if (optional) return null;
+            else throw e;
+        }
+        else {
+            // In case a component is not initialized and should/can not be auto-initialized at the moment, return null if the optional flag is set, or throw
+            if (optional) return null;
+            else throw Error("Service " + this.name + " is not available");
+        }
+    };
+    Provider1.prototype.getComponent = function() {
+        return this.component;
+    };
+    Provider1.prototype.setComponent = function(component) {
+        var e_1, _a;
+        if (component.name !== this.name) throw Error("Mismatching Component " + component.name + " for Provider " + this.name + ".");
+        if (this.component) throw Error("Component for " + this.name + " has already been provided");
+        this.component = component;
+        // return early without attempting to initialize the component if the component requires explicit initialization (calling `Provider.initialize()`)
+        if (!this.shouldAutoInitialize()) return;
+        // if the service is eager, initialize the default instance
+        if (isComponentEager(component)) try {
+            this.getOrInitializeService({
+                instanceIdentifier: DEFAULT_ENTRY_NAME
+            });
+        } catch (e) {
+        // when the instance factory for an eager Component throws an exception during the eager
+        // initialization, it should not cause a fatal error.
+        // TODO: Investigate if we need to make it configurable, because some component may want to cause
+        // a fatal error in this case?
+        }
+        try {
+            // Create service instances for the pending promises and resolve them
+            // NOTE: if this.multipleInstances is false, only the default instance will be created
+            // and all promises with resolve with it regardless of the identifier.
+            for(var _b = _tslib.__values(this.instancesDeferred.entries()), _c = _b.next(); !_c.done; _c = _b.next()){
+                var _d = _tslib.__read(_c.value, 2), instanceIdentifier = _d[0], instanceDeferred = _d[1];
+                var normalizedIdentifier = this.normalizeInstanceIdentifier(instanceIdentifier);
+                try {
+                    // `getOrInitializeService()` should always return a valid instance since a component is guaranteed. use ! to make typescript happy.
+                    var instance = this.getOrInitializeService({
+                        instanceIdentifier: normalizedIdentifier
+                    });
+                    instanceDeferred.resolve(instance);
+                } catch (e) {
+                // when the instance factory throws an exception, it should not cause
+                // a fatal error. We just leave the promise unresolved.
+                }
+            }
+        } catch (e_1_1) {
+            e_1 = {
+                error: e_1_1
+            };
+        } finally{
+            try {
+                if (_c && !_c.done && (_a = _b.return)) _a.call(_b);
+            } finally{
+                if (e_1) throw e_1.error;
+            }
+        }
+    };
+    Provider1.prototype.clearInstance = function(identifier) {
+        if (identifier === void 0) identifier = DEFAULT_ENTRY_NAME;
+        this.instancesDeferred.delete(identifier);
+        this.instancesOptions.delete(identifier);
+        this.instances.delete(identifier);
+    };
+    // app.delete() will call this method on every provider to delete the services
+    // TODO: should we mark the provider as deleted?
+    Provider1.prototype.delete = function() {
+        return _tslib.__awaiter(this, void 0, void 0, function() {
+            var services;
+            return _tslib.__generator(this, function(_a) {
+                switch(_a.label){
+                    case 0:
+                        services = Array.from(this.instances.values());
+                        return [
+                            4 /*yield*/ ,
+                            Promise.all(_tslib.__spreadArray(_tslib.__spreadArray([], _tslib.__read(services.filter(function(service) {
+                                return 'INTERNAL' in service;
+                            }) // legacy services
+                            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                            .map(function(service) {
+                                return service.INTERNAL.delete();
+                            }))), _tslib.__read(services.filter(function(service) {
+                                return '_delete' in service;
+                            }) // modularized services
+                            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                            .map(function(service) {
+                                return service._delete();
+                            }))))
+                        ];
+                    case 1:
+                        _a.sent();
+                        return [
+                            2 /*return*/ 
+                        ];
+                }
+            });
+        });
+    };
+    Provider1.prototype.isComponentSet = function() {
+        return this.component != null;
+    };
+    Provider1.prototype.isInitialized = function(identifier) {
+        if (identifier === void 0) identifier = DEFAULT_ENTRY_NAME;
+        return this.instances.has(identifier);
+    };
+    Provider1.prototype.getOptions = function(identifier) {
+        if (identifier === void 0) identifier = DEFAULT_ENTRY_NAME;
+        return this.instancesOptions.get(identifier) || {
+        };
+    };
+    Provider1.prototype.initialize = function(opts) {
+        var e_2, _a;
+        if (opts === void 0) opts = {
+        };
+        var _b = opts.options, options = _b === void 0 ? {
+        } : _b;
+        var normalizedIdentifier = this.normalizeInstanceIdentifier(opts.instanceIdentifier);
+        if (this.isInitialized(normalizedIdentifier)) throw Error(this.name + "(" + normalizedIdentifier + ") has already been initialized");
+        if (!this.isComponentSet()) throw Error("Component " + this.name + " has not been registered yet");
+        var instance = this.getOrInitializeService({
+            instanceIdentifier: normalizedIdentifier,
+            options: options
+        });
+        try {
+            // resolve any pending promise waiting for the service instance
+            for(var _c = _tslib.__values(this.instancesDeferred.entries()), _d = _c.next(); !_d.done; _d = _c.next()){
+                var _e = _tslib.__read(_d.value, 2), instanceIdentifier = _e[0], instanceDeferred = _e[1];
+                var normalizedDeferredIdentifier = this.normalizeInstanceIdentifier(instanceIdentifier);
+                if (normalizedIdentifier === normalizedDeferredIdentifier) instanceDeferred.resolve(instance);
+            }
+        } catch (e_2_1) {
+            e_2 = {
+                error: e_2_1
+            };
+        } finally{
+            try {
+                if (_d && !_d.done && (_a = _c.return)) _a.call(_c);
+            } finally{
+                if (e_2) throw e_2.error;
+            }
+        }
+        return instance;
+    };
+    /**
+     *
+     * @param callback - a function that will be invoked  after the provider has been initialized by calling provider.initialize().
+     * The function is invoked SYNCHRONOUSLY, so it should not execute any longrunning tasks in order to not block the program.
+     *
+     * @param identifier An optional instance identifier
+     * @returns a function to unregister the callback
+     */ Provider1.prototype.onInit = function(callback, identifier) {
+        var _a;
+        var normalizedIdentifier = this.normalizeInstanceIdentifier(identifier);
+        var existingCallbacks = (_a = this.onInitCallbacks.get(normalizedIdentifier)) !== null && _a !== void 0 ? _a : new Set();
+        existingCallbacks.add(callback);
+        this.onInitCallbacks.set(normalizedIdentifier, existingCallbacks);
+        var existingInstance = this.instances.get(normalizedIdentifier);
+        if (existingInstance) callback(existingInstance, normalizedIdentifier);
+        return function() {
+            existingCallbacks.delete(callback);
+        };
+    };
+    /**
+     * Invoke onInit callbacks synchronously
+     * @param instance the service instance`
+     */ Provider1.prototype.invokeOnInitCallbacks = function(instance, identifier) {
+        var e_3, _a;
+        var callbacks = this.onInitCallbacks.get(identifier);
+        if (!callbacks) return;
+        try {
+            for(var callbacks_1 = _tslib.__values(callbacks), callbacks_1_1 = callbacks_1.next(); !callbacks_1_1.done; callbacks_1_1 = callbacks_1.next()){
+                var callback = callbacks_1_1.value;
+                try {
+                    callback(instance, identifier);
+                } catch (_b) {
+                // ignore errors in the onInit callback
+                }
+            }
+        } catch (e_3_1) {
+            e_3 = {
+                error: e_3_1
+            };
+        } finally{
+            try {
+                if (callbacks_1_1 && !callbacks_1_1.done && (_a = callbacks_1.return)) _a.call(callbacks_1);
+            } finally{
+                if (e_3) throw e_3.error;
+            }
+        }
+    };
+    Provider1.prototype.getOrInitializeService = function(_a) {
+        var instanceIdentifier = _a.instanceIdentifier, _b = _a.options, options = _b === void 0 ? {
+        } : _b;
+        var instance = this.instances.get(instanceIdentifier);
+        if (!instance && this.component) {
+            instance = this.component.instanceFactory(this.container, {
+                instanceIdentifier: normalizeIdentifierForFactory(instanceIdentifier),
+                options: options
+            });
+            this.instances.set(instanceIdentifier, instance);
+            this.instancesOptions.set(instanceIdentifier, options);
+            /**
+             * Invoke onInit listeners.
+             * Note this.component.onInstanceCreated is different, which is used by the component creator,
+             * while onInit listeners are registered by consumers of the provider.
+             */ this.invokeOnInitCallbacks(instance, instanceIdentifier);
+            /**
+             * Order is important
+             * onInstanceCreated() should be called after this.instances.set(instanceIdentifier, instance); which
+             * makes `isInitialized()` return true.
+             */ if (this.component.onInstanceCreated) try {
+                this.component.onInstanceCreated(this.container, instanceIdentifier, instance);
+            } catch (_c) {
+            // ignore errors in the onInstanceCreatedCallback
+            }
+        }
+        return instance || null;
+    };
+    Provider1.prototype.normalizeInstanceIdentifier = function(identifier) {
+        if (identifier === void 0) identifier = DEFAULT_ENTRY_NAME;
+        if (this.component) return this.component.multipleInstances ? identifier : DEFAULT_ENTRY_NAME;
+        else return identifier; // assume multiple instances are supported before the component is provided.
+    };
+    Provider1.prototype.shouldAutoInitialize = function() {
+        return !!this.component && this.component.instantiationMode !== "EXPLICIT" /* EXPLICIT */ ;
+    };
+    return Provider1;
+}();
+// undefined should be passed to the service factory for the default instance
+function normalizeIdentifierForFactory(identifier) {
+    return identifier === DEFAULT_ENTRY_NAME ? undefined : identifier;
+}
+function isComponentEager(component) {
+    return component.instantiationMode === "EAGER" /* EAGER */ ;
+}
+/**
+ * @license
+ * Copyright 2019 Google LLC
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *   http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */ /**
+ * ComponentContainer that provides Providers for service name T, e.g. `auth`, `auth-internal`
+ */ var ComponentContainer = function() {
+    function ComponentContainer1(name) {
+        this.name = name;
+        this.providers = new Map();
+    }
+    /**
+     *
+     * @param component Component being added
+     * @param overwrite When a component with the same name has already been registered,
+     * if overwrite is true: overwrite the existing component with the new component and create a new
+     * provider with the new component. It can be useful in tests where you want to use different mocks
+     * for different tests.
+     * if overwrite is false: throw an exception
+     */ ComponentContainer1.prototype.addComponent = function(component) {
+        var provider = this.getProvider(component.name);
+        if (provider.isComponentSet()) throw new Error("Component " + component.name + " has already been registered with " + this.name);
+        provider.setComponent(component);
+    };
+    ComponentContainer1.prototype.addOrOverwriteComponent = function(component) {
+        var provider = this.getProvider(component.name);
+        if (provider.isComponentSet()) // delete the existing provider from the container, so we can register the new component
+        this.providers.delete(component.name);
+        this.addComponent(component);
+    };
+    /**
+     * getProvider provides a type safe interface where it can only be called with a field name
+     * present in NameServiceMapping interface.
+     *
+     * Firebase SDKs providing services should extend NameServiceMapping interface to register
+     * themselves.
+     */ ComponentContainer1.prototype.getProvider = function(name) {
+        if (this.providers.has(name)) return this.providers.get(name);
+        // create a Provider for a service that hasn't registered with Firebase
+        var provider = new Provider(name, this);
+        this.providers.set(name, provider);
+        return provider;
+    };
+    ComponentContainer1.prototype.getProviders = function() {
+        return Array.from(this.providers.values());
+    };
+    return ComponentContainer1;
+}();
+
+},{"tslib":"bjkXk","@firebase/util":"3qRMM","@parcel/transformer-js/src/esmodule-helpers.js":"JacNc"}],"3qRMM":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "CONSTANTS", ()=>CONSTANTS
+);
+parcelHelpers.export(exports, "Deferred", ()=>Deferred
+);
+parcelHelpers.export(exports, "ErrorFactory", ()=>ErrorFactory
+);
+parcelHelpers.export(exports, "FirebaseError", ()=>FirebaseError1
+);
+parcelHelpers.export(exports, "MAX_VALUE_MILLIS", ()=>MAX_VALUE_MILLIS
+);
+parcelHelpers.export(exports, "RANDOM_FACTOR", ()=>RANDOM_FACTOR
+);
+parcelHelpers.export(exports, "Sha1", ()=>Sha1
+);
+parcelHelpers.export(exports, "areCookiesEnabled", ()=>areCookiesEnabled
+);
+parcelHelpers.export(exports, "assert", ()=>assert
+);
+parcelHelpers.export(exports, "assertionError", ()=>assertionError
+);
+parcelHelpers.export(exports, "async", ()=>async
+);
+parcelHelpers.export(exports, "base64", ()=>base64
+);
+parcelHelpers.export(exports, "base64Decode", ()=>base64Decode
+);
+parcelHelpers.export(exports, "base64Encode", ()=>base64Encode
+);
+parcelHelpers.export(exports, "base64urlEncodeWithoutPadding", ()=>base64urlEncodeWithoutPadding
+);
+parcelHelpers.export(exports, "calculateBackoffMillis", ()=>calculateBackoffMillis
+);
+parcelHelpers.export(exports, "contains", ()=>contains
+);
+parcelHelpers.export(exports, "createMockUserToken", ()=>createMockUserToken
+);
+parcelHelpers.export(exports, "createSubscribe", ()=>createSubscribe
+);
+parcelHelpers.export(exports, "decode", ()=>decode
+);
+parcelHelpers.export(exports, "deepCopy", ()=>deepCopy
+);
+parcelHelpers.export(exports, "deepEqual", ()=>deepEqual
+);
+parcelHelpers.export(exports, "deepExtend", ()=>deepExtend
+);
+parcelHelpers.export(exports, "errorPrefix", ()=>errorPrefix
+);
+parcelHelpers.export(exports, "extractQuerystring", ()=>extractQuerystring
+);
+parcelHelpers.export(exports, "getGlobal", ()=>getGlobal
+);
+parcelHelpers.export(exports, "getModularInstance", ()=>getModularInstance
+);
+parcelHelpers.export(exports, "getUA", ()=>getUA
+);
+parcelHelpers.export(exports, "isAdmin", ()=>isAdmin
+);
+parcelHelpers.export(exports, "isBrowser", ()=>isBrowser
+);
+parcelHelpers.export(exports, "isBrowserExtension", ()=>isBrowserExtension
+);
+parcelHelpers.export(exports, "isElectron", ()=>isElectron
+);
+parcelHelpers.export(exports, "isEmpty", ()=>isEmpty
+);
+parcelHelpers.export(exports, "isIE", ()=>isIE
+);
+parcelHelpers.export(exports, "isIndexedDBAvailable", ()=>isIndexedDBAvailable
+);
+parcelHelpers.export(exports, "isMobileCordova", ()=>isMobileCordova
+);
+parcelHelpers.export(exports, "isNode", ()=>isNode
+);
+parcelHelpers.export(exports, "isNodeSdk", ()=>isNodeSdk
+);
+parcelHelpers.export(exports, "isReactNative", ()=>isReactNative
+);
+parcelHelpers.export(exports, "isSafari", ()=>isSafari
+);
+parcelHelpers.export(exports, "isUWP", ()=>isUWP
+);
+parcelHelpers.export(exports, "isValidFormat", ()=>isValidFormat
+);
+parcelHelpers.export(exports, "isValidTimestamp", ()=>isValidTimestamp
+);
+parcelHelpers.export(exports, "issuedAtTime", ()=>issuedAtTime
+);
+parcelHelpers.export(exports, "jsonEval", ()=>jsonEval
+);
+parcelHelpers.export(exports, "map", ()=>map
+);
+parcelHelpers.export(exports, "ordinal", ()=>ordinal
+);
+parcelHelpers.export(exports, "querystring", ()=>querystring
+);
+parcelHelpers.export(exports, "querystringDecode", ()=>querystringDecode
+);
+parcelHelpers.export(exports, "safeGet", ()=>safeGet
+);
+parcelHelpers.export(exports, "stringLength", ()=>stringLength
+);
+parcelHelpers.export(exports, "stringToByteArray", ()=>stringToByteArray
+);
+parcelHelpers.export(exports, "stringify", ()=>stringify
+);
+parcelHelpers.export(exports, "validateArgCount", ()=>validateArgCount
+);
+parcelHelpers.export(exports, "validateCallback", ()=>validateCallback
+);
+parcelHelpers.export(exports, "validateContextObject", ()=>validateContextObject
+);
+parcelHelpers.export(exports, "validateIndexedDBOpenable", ()=>validateIndexedDBOpenable
+);
+parcelHelpers.export(exports, "validateNamespace", ()=>validateNamespace
+);
+var _tslib = require("tslib");
+var global = arguments[3];
+/**
+ * @license
+ * Copyright 2017 Google LLC
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *   http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */ /**
+ * @fileoverview Firebase constants.  Some of these (@defines) can be overridden at compile-time.
+ */ var CONSTANTS = {
+    /**
+     * @define {boolean} Whether this is the client Node.js SDK.
+     */ NODE_CLIENT: false,
+    /**
+     * @define {boolean} Whether this is the Admin Node.js SDK.
+     */ NODE_ADMIN: false,
+    /**
+     * Firebase SDK Version
+     */ SDK_VERSION: '${JSCORE_VERSION}'
+};
+/**
+ * @license
+ * Copyright 2017 Google LLC
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *   http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */ /**
+ * Throws an error if the provided assertion is falsy
+ */ var assert = function(assertion, message) {
+    if (!assertion) throw assertionError(message);
+};
+/**
+ * Returns an Error object suitable for throwing.
+ */ var assertionError = function(message) {
+    return new Error('Firebase Database (' + CONSTANTS.SDK_VERSION + ') INTERNAL ASSERT FAILED: ' + message);
+};
+/**
+ * @license
+ * Copyright 2017 Google LLC
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *   http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */ var stringToByteArray$1 = function(str) {
+    // TODO(user): Use native implementations if/when available
+    var out = [];
+    var p = 0;
+    for(var i = 0; i < str.length; i++){
+        var c = str.charCodeAt(i);
+        if (c < 128) out[p++] = c;
+        else if (c < 2048) {
+            out[p++] = c >> 6 | 192;
+            out[p++] = c & 63 | 128;
+        } else if ((c & 64512) === 55296 && i + 1 < str.length && (str.charCodeAt(i + 1) & 64512) === 56320) {
+            // Surrogate Pair
+            c = 65536 + ((c & 1023) << 10) + (str.charCodeAt(++i) & 1023);
+            out[p++] = c >> 18 | 240;
+            out[p++] = c >> 12 & 63 | 128;
+            out[p++] = c >> 6 & 63 | 128;
+            out[p++] = c & 63 | 128;
+        } else {
+            out[p++] = c >> 12 | 224;
+            out[p++] = c >> 6 & 63 | 128;
+            out[p++] = c & 63 | 128;
+        }
+    }
+    return out;
+};
+/**
+ * Turns an array of numbers into the string given by the concatenation of the
+ * characters to which the numbers correspond.
+ * @param bytes Array of numbers representing characters.
+ * @return Stringification of the array.
+ */ var byteArrayToString = function(bytes) {
+    // TODO(user): Use native implementations if/when available
+    var out = [];
+    var pos = 0, c = 0;
+    while(pos < bytes.length){
+        var c1 = bytes[pos++];
+        if (c1 < 128) out[c++] = String.fromCharCode(c1);
+        else if (c1 > 191 && c1 < 224) {
+            var c2 = bytes[pos++];
+            out[c++] = String.fromCharCode((c1 & 31) << 6 | c2 & 63);
+        } else if (c1 > 239 && c1 < 365) {
+            // Surrogate Pair
+            var c2 = bytes[pos++];
+            var c3 = bytes[pos++];
+            var c4 = bytes[pos++];
+            var u = ((c1 & 7) << 18 | (c2 & 63) << 12 | (c3 & 63) << 6 | c4 & 63) - 65536;
+            out[c++] = String.fromCharCode(55296 + (u >> 10));
+            out[c++] = String.fromCharCode(56320 + (u & 1023));
+        } else {
+            var c2 = bytes[pos++];
+            var c3 = bytes[pos++];
+            out[c++] = String.fromCharCode((c1 & 15) << 12 | (c2 & 63) << 6 | c3 & 63);
+        }
+    }
+    return out.join('');
+};
+// We define it as an object literal instead of a class because a class compiled down to es5 can't
+// be treeshaked. https://github.com/rollup/rollup/issues/1691
+// Static lookup maps, lazily populated by init_()
+var base64 = {
+    /**
+     * Maps bytes to characters.
+     */ byteToCharMap_: null,
+    /**
+     * Maps characters to bytes.
+     */ charToByteMap_: null,
+    /**
+     * Maps bytes to websafe characters.
+     * @private
+     */ byteToCharMapWebSafe_: null,
+    /**
+     * Maps websafe characters to bytes.
+     * @private
+     */ charToByteMapWebSafe_: null,
+    /**
+     * Our default alphabet, shared between
+     * ENCODED_VALS and ENCODED_VALS_WEBSAFE
+     */ ENCODED_VALS_BASE: "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789",
+    /**
+     * Our default alphabet. Value 64 (=) is special; it means "nothing."
+     */ get ENCODED_VALS () {
+        return this.ENCODED_VALS_BASE + '+/=';
+    },
+    /**
+     * Our websafe alphabet.
+     */ get ENCODED_VALS_WEBSAFE () {
+        return this.ENCODED_VALS_BASE + '-_.';
+    },
+    /**
+     * Whether this browser supports the atob and btoa functions. This extension
+     * started at Mozilla but is now implemented by many browsers. We use the
+     * ASSUME_* variables to avoid pulling in the full useragent detection library
+     * but still allowing the standard per-browser compilations.
+     *
+     */ HAS_NATIVE_SUPPORT: typeof atob === 'function',
+    /**
+     * Base64-encode an array of bytes.
+     *
+     * @param input An array of bytes (numbers with
+     *     value in [0, 255]) to encode.
+     * @param webSafe Boolean indicating we should use the
+     *     alternative alphabet.
+     * @return The base64 encoded string.
+     */ encodeByteArray: function(input, webSafe) {
+        if (!Array.isArray(input)) throw Error('encodeByteArray takes an array as a parameter');
+        this.init_();
+        var byteToCharMap = webSafe ? this.byteToCharMapWebSafe_ : this.byteToCharMap_;
+        var output = [];
+        for(var i = 0; i < input.length; i += 3){
+            var byte1 = input[i];
+            var haveByte2 = i + 1 < input.length;
+            var byte2 = haveByte2 ? input[i + 1] : 0;
+            var haveByte3 = i + 2 < input.length;
+            var byte3 = haveByte3 ? input[i + 2] : 0;
+            var outByte1 = byte1 >> 2;
+            var outByte2 = (byte1 & 3) << 4 | byte2 >> 4;
+            var outByte3 = (byte2 & 15) << 2 | byte3 >> 6;
+            var outByte4 = byte3 & 63;
+            if (!haveByte3) {
+                outByte4 = 64;
+                if (!haveByte2) outByte3 = 64;
+            }
+            output.push(byteToCharMap[outByte1], byteToCharMap[outByte2], byteToCharMap[outByte3], byteToCharMap[outByte4]);
+        }
+        return output.join('');
+    },
+    /**
+     * Base64-encode a string.
+     *
+     * @param input A string to encode.
+     * @param webSafe If true, we should use the
+     *     alternative alphabet.
+     * @return The base64 encoded string.
+     */ encodeString: function(input, webSafe) {
+        // Shortcut for Mozilla browsers that implement
+        // a native base64 encoder in the form of "btoa/atob"
+        if (this.HAS_NATIVE_SUPPORT && !webSafe) return btoa(input);
+        return this.encodeByteArray(stringToByteArray$1(input), webSafe);
+    },
+    /**
+     * Base64-decode a string.
+     *
+     * @param input to decode.
+     * @param webSafe True if we should use the
+     *     alternative alphabet.
+     * @return string representing the decoded value.
+     */ decodeString: function(input, webSafe) {
+        // Shortcut for Mozilla browsers that implement
+        // a native base64 encoder in the form of "btoa/atob"
+        if (this.HAS_NATIVE_SUPPORT && !webSafe) return atob(input);
+        return byteArrayToString(this.decodeStringToByteArray(input, webSafe));
+    },
+    /**
+     * Base64-decode a string.
+     *
+     * In base-64 decoding, groups of four characters are converted into three
+     * bytes.  If the encoder did not apply padding, the input length may not
+     * be a multiple of 4.
+     *
+     * In this case, the last group will have fewer than 4 characters, and
+     * padding will be inferred.  If the group has one or two characters, it decodes
+     * to one byte.  If the group has three characters, it decodes to two bytes.
+     *
+     * @param input Input to decode.
+     * @param webSafe True if we should use the web-safe alphabet.
+     * @return bytes representing the decoded value.
+     */ decodeStringToByteArray: function(input, webSafe) {
+        this.init_();
+        var charToByteMap = webSafe ? this.charToByteMapWebSafe_ : this.charToByteMap_;
+        var output = [];
+        for(var i = 0; i < input.length;){
+            var byte1 = charToByteMap[input.charAt(i++)];
+            var haveByte2 = i < input.length;
+            var byte2 = haveByte2 ? charToByteMap[input.charAt(i)] : 0;
+            ++i;
+            var haveByte3 = i < input.length;
+            var byte3 = haveByte3 ? charToByteMap[input.charAt(i)] : 64;
+            ++i;
+            var haveByte4 = i < input.length;
+            var byte4 = haveByte4 ? charToByteMap[input.charAt(i)] : 64;
+            ++i;
+            if (byte1 == null || byte2 == null || byte3 == null || byte4 == null) throw Error();
+            var outByte1 = byte1 << 2 | byte2 >> 4;
+            output.push(outByte1);
+            if (byte3 !== 64) {
+                var outByte2 = byte2 << 4 & 240 | byte3 >> 2;
+                output.push(outByte2);
+                if (byte4 !== 64) {
+                    var outByte3 = byte3 << 6 & 192 | byte4;
+                    output.push(outByte3);
+                }
+            }
+        }
+        return output;
+    },
+    /**
+     * Lazy static initialization function. Called before
+     * accessing any of the static map variables.
+     * @private
+     */ init_: function() {
+        if (!this.byteToCharMap_) {
+            this.byteToCharMap_ = {
+            };
+            this.charToByteMap_ = {
+            };
+            this.byteToCharMapWebSafe_ = {
+            };
+            this.charToByteMapWebSafe_ = {
+            };
+            // We want quick mappings back and forth, so we precompute two maps.
+            for(var i = 0; i < this.ENCODED_VALS.length; i++){
+                this.byteToCharMap_[i] = this.ENCODED_VALS.charAt(i);
+                this.charToByteMap_[this.byteToCharMap_[i]] = i;
+                this.byteToCharMapWebSafe_[i] = this.ENCODED_VALS_WEBSAFE.charAt(i);
+                this.charToByteMapWebSafe_[this.byteToCharMapWebSafe_[i]] = i;
+                // Be forgiving when decoding and correctly decode both encodings.
+                if (i >= this.ENCODED_VALS_BASE.length) {
+                    this.charToByteMap_[this.ENCODED_VALS_WEBSAFE.charAt(i)] = i;
+                    this.charToByteMapWebSafe_[this.ENCODED_VALS.charAt(i)] = i;
+                }
+            }
+        }
+    }
+};
+/**
+ * URL-safe base64 encoding
+ */ var base64Encode = function(str) {
+    var utf8Bytes = stringToByteArray$1(str);
+    return base64.encodeByteArray(utf8Bytes, true);
+};
+/**
+ * URL-safe base64 encoding (without "." padding in the end).
+ * e.g. Used in JSON Web Token (JWT) parts.
+ */ var base64urlEncodeWithoutPadding = function(str) {
+    // Use base64url encoding and remove padding in the end (dot characters).
+    return base64Encode(str).replace(/\./g, '');
+};
+/**
+ * URL-safe base64 decoding
+ *
+ * NOTE: DO NOT use the global atob() function - it does NOT support the
+ * base64Url variant encoding.
+ *
+ * @param str To be decoded
+ * @return Decoded result, if possible
+ */ var base64Decode = function(str) {
+    try {
+        return base64.decodeString(str, true);
+    } catch (e) {
+        console.error('base64Decode failed: ', e);
+    }
+    return null;
+};
+/**
+ * @license
+ * Copyright 2017 Google LLC
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *   http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */ /**
+ * Do a deep-copy of basic JavaScript Objects or Arrays.
+ */ function deepCopy(value) {
+    return deepExtend(undefined, value);
+}
+/**
+ * Copy properties from source to target (recursively allows extension
+ * of Objects and Arrays).  Scalar values in the target are over-written.
+ * If target is undefined, an object of the appropriate type will be created
+ * (and returned).
+ *
+ * We recursively copy all child properties of plain Objects in the source- so
+ * that namespace- like dictionaries are merged.
+ *
+ * Note that the target can be a function, in which case the properties in
+ * the source Object are copied onto it as static properties of the Function.
+ *
+ * Note: we don't merge __proto__ to prevent prototype pollution
+ */ function deepExtend(target, source) {
+    if (!(source instanceof Object)) return source;
+    switch(source.constructor){
+        case Date:
+            // Treat Dates like scalars; if the target date object had any child
+            // properties - they will be lost!
+            var dateValue = source;
+            return new Date(dateValue.getTime());
+        case Object:
+            if (target === undefined) target = {
+            };
+            break;
+        case Array:
+            // Always copy the array source and overwrite the target.
+            target = [];
+            break;
+        default:
+            // Not a plain Object - treat it as a scalar.
+            return source;
+    }
+    for(var prop in source){
+        // use isValidKey to guard against prototype pollution. See https://snyk.io/vuln/SNYK-JS-LODASH-450202
+        if (!source.hasOwnProperty(prop) || !isValidKey(prop)) continue;
+        target[prop] = deepExtend(target[prop], source[prop]);
+    }
+    return target;
+}
+function isValidKey(key) {
+    return key !== '__proto__';
+}
+/**
+ * @license
+ * Copyright 2017 Google LLC
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *   http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */ var Deferred = function() {
+    function Deferred1() {
+        var _this = this;
+        this.reject = function() {
+        };
+        this.resolve = function() {
+        };
+        this.promise = new Promise(function(resolve, reject) {
+            _this.resolve = resolve;
+            _this.reject = reject;
+        });
+    }
+    /**
+     * Our API internals are not promiseified and cannot because our callback APIs have subtle expectations around
+     * invoking promises inline, which Promises are forbidden to do. This method accepts an optional node-style callback
+     * and returns a node-style callback which will resolve or reject the Deferred's promise.
+     */ Deferred1.prototype.wrapCallback = function(callback) {
+        var _this = this;
+        return function(error, value) {
+            if (error) _this.reject(error);
+            else _this.resolve(value);
+            if (typeof callback === 'function') {
+                // Attaching noop handler just in case developer wasn't expecting
+                // promises
+                _this.promise.catch(function() {
+                });
+                // Some of our callbacks don't expect a value and our own tests
+                // assert that the parameter length is 1
+                if (callback.length === 1) callback(error);
+                else callback(error, value);
+            }
+        };
+    };
+    return Deferred1;
+}();
+/**
+ * @license
+ * Copyright 2021 Google LLC
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *   http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */ function createMockUserToken(token, projectId) {
+    if (token.uid) throw new Error('The "uid" field is no longer supported by mockUserToken. Please use "sub" instead for Firebase Auth User ID.');
+    // Unsecured JWTs use "none" as the algorithm.
+    var header = {
+        alg: 'none',
+        type: 'JWT'
+    };
+    var project = projectId || 'demo-project';
+    var iat = token.iat || 0;
+    var sub = token.sub || token.user_id;
+    if (!sub) throw new Error("mockUserToken must contain 'sub' or 'user_id' field!");
+    var payload = _tslib.__assign({
+        // Set all required fields to decent defaults
+        iss: "https://securetoken.google.com/" + project,
+        aud: project,
+        iat: iat,
+        exp: iat + 3600,
+        auth_time: iat,
+        sub: sub,
+        user_id: sub,
+        firebase: {
+            sign_in_provider: 'custom',
+            identities: {
+            }
+        }
+    }, token);
+    // Unsecured JWTs use the empty string as a signature.
+    var signature = '';
+    return [
+        base64urlEncodeWithoutPadding(JSON.stringify(header)),
+        base64urlEncodeWithoutPadding(JSON.stringify(payload)),
+        signature
+    ].join('.');
+}
+/**
+ * @license
+ * Copyright 2017 Google LLC
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *   http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */ /**
+ * Returns navigator.userAgent string or '' if it's not defined.
+ * @return user agent string
+ */ function getUA() {
+    if (typeof navigator !== 'undefined' && typeof navigator['userAgent'] === 'string') return navigator['userAgent'];
+    else return '';
+}
+/**
+ * Detect Cordova / PhoneGap / Ionic frameworks on a mobile device.
+ *
+ * Deliberately does not rely on checking `file://` URLs (as this fails PhoneGap
+ * in the Ripple emulator) nor Cordova `onDeviceReady`, which would normally
+ * wait for a callback.
+ */ function isMobileCordova() {
+    return typeof window !== 'undefined' && // @ts-ignore Setting up an broadly applicable index signature for Window
+    // just to deal with this case would probably be a bad idea.
+    !!(window['cordova'] || window['phonegap'] || window['PhoneGap']) && /ios|iphone|ipod|ipad|android|blackberry|iemobile/i.test(getUA());
+}
+/**
+ * Detect Node.js.
+ *
+ * @return true if Node.js environment is detected.
+ */ // Node detection logic from: https://github.com/iliakan/detect-node/
+function isNode() {
+    try {
+        return Object.prototype.toString.call(global.process) === '[object process]';
+    } catch (e) {
+        return false;
+    }
+}
+/**
+ * Detect Browser Environment
+ */ function isBrowser() {
+    return typeof self === 'object' && self.self === self;
+}
+function isBrowserExtension() {
+    var runtime = typeof chrome === 'object' ? chrome.runtime : typeof browser === 'object' ? browser.runtime : undefined;
+    return typeof runtime === 'object' && runtime.id !== undefined;
+}
+/**
+ * Detect React Native.
+ *
+ * @return true if ReactNative environment is detected.
+ */ function isReactNative() {
+    return typeof navigator === 'object' && navigator['product'] === 'ReactNative';
+}
+/** Detects Electron apps. */ function isElectron() {
+    return getUA().indexOf('Electron/') >= 0;
+}
+/** Detects Internet Explorer. */ function isIE() {
+    var ua = getUA();
+    return ua.indexOf('MSIE ') >= 0 || ua.indexOf('Trident/') >= 0;
+}
+/** Detects Universal Windows Platform apps. */ function isUWP() {
+    return getUA().indexOf('MSAppHost/') >= 0;
+}
+/**
+ * Detect whether the current SDK build is the Node version.
+ *
+ * @return true if it's the Node SDK build.
+ */ function isNodeSdk() {
+    return CONSTANTS.NODE_CLIENT === true || CONSTANTS.NODE_ADMIN === true;
+}
+/** Returns true if we are running in Safari. */ function isSafari() {
+    return !isNode() && navigator.userAgent.includes('Safari') && !navigator.userAgent.includes('Chrome');
+}
+/**
+ * This method checks if indexedDB is supported by current browser/service worker context
+ * @return true if indexedDB is supported by current browser/service worker context
+ */ function isIndexedDBAvailable() {
+    return 'indexedDB' in self && indexedDB != null;
+}
+/**
+ * This method validates browser/sw context for indexedDB by opening a dummy indexedDB database and reject
+ * if errors occur during the database open operation.
+ *
+ * @throws exception if current browser/sw context can't run idb.open (ex: Safari iframe, Firefox
+ * private browsing)
+ */ function validateIndexedDBOpenable() {
+    return new Promise(function(resolve, reject) {
+        try {
+            var preExist_1 = true;
+            var DB_CHECK_NAME_1 = 'validate-browser-context-for-indexeddb-analytics-module';
+            var request_1 = self.indexedDB.open(DB_CHECK_NAME_1);
+            request_1.onsuccess = function() {
+                request_1.result.close();
+                // delete database only when it doesn't pre-exist
+                if (!preExist_1) self.indexedDB.deleteDatabase(DB_CHECK_NAME_1);
+                resolve(true);
+            };
+            request_1.onupgradeneeded = function() {
+                preExist_1 = false;
+            };
+            request_1.onerror = function() {
+                var _a;
+                reject(((_a = request_1.error) === null || _a === void 0 ? void 0 : _a.message) || '');
+            };
+        } catch (error) {
+            reject(error);
+        }
+    });
+}
+/**
+ *
+ * This method checks whether cookie is enabled within current browser
+ * @return true if cookie is enabled within current browser
+ */ function areCookiesEnabled() {
+    if (!navigator || !navigator.cookieEnabled) return false;
+    return true;
+}
+/**
+ * Polyfill for `globalThis` object.
+ * @returns the `globalThis` object for the given environment.
+ */ function getGlobal() {
+    if (typeof self !== 'undefined') return self;
+    if (typeof window !== 'undefined') return window;
+    if (typeof global !== 'undefined') return global;
+    throw new Error('Unable to locate global object.');
+}
+/**
+ * @license
+ * Copyright 2017 Google LLC
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *   http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */ var ERROR_NAME = 'FirebaseError';
+// Based on code from:
+// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error#Custom_Error_Types
+var FirebaseError1 = function(_super) {
+    _tslib.__extends(FirebaseError2, _super);
+    function FirebaseError2(code, message, customData) {
+        var _this = _super.call(this, message) || this;
+        _this.code = code;
+        _this.customData = customData;
+        _this.name = ERROR_NAME;
+        // Fix For ES5
+        // https://github.com/Microsoft/TypeScript-wiki/blob/master/Breaking-Changes.md#extending-built-ins-like-error-array-and-map-may-no-longer-work
+        Object.setPrototypeOf(_this, FirebaseError2.prototype);
+        // Maintains proper stack trace for where our error was thrown.
+        // Only available on V8.
+        if (Error.captureStackTrace) Error.captureStackTrace(_this, ErrorFactory.prototype.create);
+        return _this;
+    }
+    return FirebaseError2;
+}(Error);
+var ErrorFactory = function() {
+    function ErrorFactory1(service, serviceName, errors) {
+        this.service = service;
+        this.serviceName = serviceName;
+        this.errors = errors;
+    }
+    ErrorFactory1.prototype.create = function(code) {
+        var data = [];
+        for(var _i = 1; _i < arguments.length; _i++)data[_i - 1] = arguments[_i];
+        var customData = data[0] || {
+        };
+        var fullCode = this.service + "/" + code;
+        var template = this.errors[code];
+        var message = template ? replaceTemplate(template, customData) : 'Error';
+        // Service Name: Error message (service/code).
+        var fullMessage = this.serviceName + ": " + message + " (" + fullCode + ").";
+        var error = new FirebaseError1(fullCode, fullMessage, customData);
+        return error;
+    };
+    return ErrorFactory1;
+}();
+function replaceTemplate(template, data) {
+    return template.replace(PATTERN, function(_, key) {
+        var value = data[key];
+        return value != null ? String(value) : "<" + key + "?>";
+    });
+}
+var PATTERN = /\{\$([^}]+)}/g;
+/**
+ * @license
+ * Copyright 2017 Google LLC
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *   http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */ /**
+ * Evaluates a JSON string into a javascript object.
+ *
+ * @param {string} str A string containing JSON.
+ * @return {*} The javascript object representing the specified JSON.
+ */ function jsonEval(str) {
+    return JSON.parse(str);
+}
+/**
+ * Returns JSON representing a javascript object.
+ * @param {*} data Javascript object to be stringified.
+ * @return {string} The JSON contents of the object.
+ */ function stringify(data) {
+    return JSON.stringify(data);
+}
+/**
+ * @license
+ * Copyright 2017 Google LLC
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *   http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */ /**
+ * Decodes a Firebase auth. token into constituent parts.
+ *
+ * Notes:
+ * - May return with invalid / incomplete claims if there's no native base64 decoding support.
+ * - Doesn't check if the token is actually valid.
+ */ var decode = function(token) {
+    var header = {
+    }, claims = {
+    }, data = {
+    }, signature = '';
+    try {
+        var parts = token.split('.');
+        header = jsonEval(base64Decode(parts[0]) || '');
+        claims = jsonEval(base64Decode(parts[1]) || '');
+        signature = parts[2];
+        data = claims['d'] || {
+        };
+        delete claims['d'];
+    } catch (e) {
+    }
+    return {
+        header: header,
+        claims: claims,
+        data: data,
+        signature: signature
+    };
+};
+/**
+ * Decodes a Firebase auth. token and checks the validity of its time-based claims. Will return true if the
+ * token is within the time window authorized by the 'nbf' (not-before) and 'iat' (issued-at) claims.
+ *
+ * Notes:
+ * - May return a false negative if there's no native base64 decoding support.
+ * - Doesn't check if the token is actually valid.
+ */ var isValidTimestamp = function(token) {
+    var claims = decode(token).claims;
+    var now = Math.floor(new Date().getTime() / 1000);
+    var validSince = 0, validUntil = 0;
+    if (typeof claims === 'object') {
+        if (claims.hasOwnProperty('nbf')) validSince = claims['nbf'];
+        else if (claims.hasOwnProperty('iat')) validSince = claims['iat'];
+        if (claims.hasOwnProperty('exp')) validUntil = claims['exp'];
+        else // token will expire after 24h by default
+        validUntil = validSince + 86400;
+    }
+    return !!now && !!validSince && !!validUntil && now >= validSince && now <= validUntil;
+};
+/**
+ * Decodes a Firebase auth. token and returns its issued at time if valid, null otherwise.
+ *
+ * Notes:
+ * - May return null if there's no native base64 decoding support.
+ * - Doesn't check if the token is actually valid.
+ */ var issuedAtTime = function(token) {
+    var claims = decode(token).claims;
+    if (typeof claims === 'object' && claims.hasOwnProperty('iat')) return claims['iat'];
+    return null;
+};
+/**
+ * Decodes a Firebase auth. token and checks the validity of its format. Expects a valid issued-at time.
+ *
+ * Notes:
+ * - May return a false negative if there's no native base64 decoding support.
+ * - Doesn't check if the token is actually valid.
+ */ var isValidFormat = function(token) {
+    var decoded = decode(token), claims = decoded.claims;
+    return !!claims && typeof claims === 'object' && claims.hasOwnProperty('iat');
+};
+/**
+ * Attempts to peer into an auth token and determine if it's an admin auth token by looking at the claims portion.
+ *
+ * Notes:
+ * - May return a false negative if there's no native base64 decoding support.
+ * - Doesn't check if the token is actually valid.
+ */ var isAdmin = function(token) {
+    var claims = decode(token).claims;
+    return typeof claims === 'object' && claims['admin'] === true;
+};
+/**
+ * @license
+ * Copyright 2017 Google LLC
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *   http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */ function contains(obj, key) {
+    return Object.prototype.hasOwnProperty.call(obj, key);
+}
+function safeGet(obj, key) {
+    if (Object.prototype.hasOwnProperty.call(obj, key)) return obj[key];
+    else return undefined;
+}
+function isEmpty(obj) {
+    for(var key in obj){
+        if (Object.prototype.hasOwnProperty.call(obj, key)) return false;
+    }
+    return true;
+}
+function map(obj, fn, contextObj) {
+    var res = {
+    };
+    for(var key in obj)if (Object.prototype.hasOwnProperty.call(obj, key)) res[key] = fn.call(contextObj, obj[key], key, obj);
+    return res;
+}
+/**
+ * Deep equal two objects. Support Arrays and Objects.
+ */ function deepEqual(a, b) {
+    if (a === b) return true;
+    var aKeys = Object.keys(a);
+    var bKeys = Object.keys(b);
+    for(var _i = 0, aKeys_1 = aKeys; _i < aKeys_1.length; _i++){
+        var k = aKeys_1[_i];
+        if (!bKeys.includes(k)) return false;
+        var aProp = a[k];
+        var bProp = b[k];
+        if (isObject(aProp) && isObject(bProp)) {
+            if (!deepEqual(aProp, bProp)) return false;
+        } else if (aProp !== bProp) return false;
+    }
+    for(var _a = 0, bKeys_1 = bKeys; _a < bKeys_1.length; _a++){
+        var k = bKeys_1[_a];
+        if (!aKeys.includes(k)) return false;
+    }
+    return true;
+}
+function isObject(thing) {
+    return thing !== null && typeof thing === 'object';
+}
+/**
+ * @license
+ * Copyright 2017 Google LLC
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *   http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */ /**
+ * Returns a querystring-formatted string (e.g. &arg=val&arg2=val2) from a
+ * params object (e.g. {arg: 'val', arg2: 'val2'})
+ * Note: You must prepend it with ? when adding it to a URL.
+ */ function querystring(querystringParams) {
+    var params = [];
+    var _loop_1 = function(key, value) {
+        if (Array.isArray(value)) value.forEach(function(arrayVal) {
+            params.push(encodeURIComponent(key) + '=' + encodeURIComponent(arrayVal));
+        });
+        else params.push(encodeURIComponent(key) + '=' + encodeURIComponent(value));
+    };
+    for(var _i = 0, _a = Object.entries(querystringParams); _i < _a.length; _i++){
+        var _b = _a[_i], key = _b[0], value = _b[1];
+        _loop_1(key, value);
+    }
+    return params.length ? '&' + params.join('&') : '';
+}
+/**
+ * Decodes a querystring (e.g. ?arg=val&arg2=val2) into a params object
+ * (e.g. {arg: 'val', arg2: 'val2'})
+ */ function querystringDecode(querystring1) {
+    var obj = {
+    };
+    var tokens = querystring1.replace(/^\?/, '').split('&');
+    tokens.forEach(function(token) {
+        if (token) {
+            var _a = token.split('='), key = _a[0], value = _a[1];
+            obj[decodeURIComponent(key)] = decodeURIComponent(value);
+        }
+    });
+    return obj;
+}
+/**
+ * Extract the query string part of a URL, including the leading question mark (if present).
+ */ function extractQuerystring(url) {
+    var queryStart = url.indexOf('?');
+    if (!queryStart) return '';
+    var fragmentStart = url.indexOf('#', queryStart);
+    return url.substring(queryStart, fragmentStart > 0 ? fragmentStart : undefined);
+}
+/**
+ * @license
+ * Copyright 2017 Google LLC
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *   http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */ /**
+ * @fileoverview SHA-1 cryptographic hash.
+ * Variable names follow the notation in FIPS PUB 180-3:
+ * http://csrc.nist.gov/publications/fips/fips180-3/fips180-3_final.pdf.
+ *
+ * Usage:
+ *   var sha1 = new sha1();
+ *   sha1.update(bytes);
+ *   var hash = sha1.digest();
+ *
+ * Performance:
+ *   Chrome 23:   ~400 Mbit/s
+ *   Firefox 16:  ~250 Mbit/s
+ *
+ */ /**
+ * SHA-1 cryptographic hash constructor.
+ *
+ * The properties declared here are discussed in the above algorithm document.
+ * @constructor
+ * @final
+ * @struct
+ */ var Sha1 = function() {
+    function Sha11() {
+        /**
+         * Holds the previous values of accumulated variables a-e in the compress_
+         * function.
+         * @private
+         */ this.chain_ = [];
+        /**
+         * A buffer holding the partially computed hash result.
+         * @private
+         */ this.buf_ = [];
+        /**
+         * An array of 80 bytes, each a part of the message to be hashed.  Referred to
+         * as the message schedule in the docs.
+         * @private
+         */ this.W_ = [];
+        /**
+         * Contains data needed to pad messages less than 64 bytes.
+         * @private
+         */ this.pad_ = [];
+        /**
+         * @private {number}
+         */ this.inbuf_ = 0;
+        /**
+         * @private {number}
+         */ this.total_ = 0;
+        this.blockSize = 64;
+        this.pad_[0] = 128;
+        for(var i = 1; i < this.blockSize; ++i)this.pad_[i] = 0;
+        this.reset();
+    }
+    Sha11.prototype.reset = function() {
+        this.chain_[0] = 1732584193;
+        this.chain_[1] = 4023233417;
+        this.chain_[2] = 2562383102;
+        this.chain_[3] = 271733878;
+        this.chain_[4] = 3285377520;
+        this.inbuf_ = 0;
+        this.total_ = 0;
+    };
+    /**
+     * Internal compress helper function.
+     * @param buf Block to compress.
+     * @param offset Offset of the block in the buffer.
+     * @private
+     */ Sha11.prototype.compress_ = function(buf, offset) {
+        if (!offset) offset = 0;
+        var W = this.W_;
+        // get 16 big endian words
+        if (typeof buf === 'string') for(var i = 0; i < 16; i++){
+            // TODO(user): [bug 8140122] Recent versions of Safari for Mac OS and iOS
+            // have a bug that turns the post-increment ++ operator into pre-increment
+            // during JIT compilation.  We have code that depends heavily on SHA-1 for
+            // correctness and which is affected by this bug, so I've removed all uses
+            // of post-increment ++ in which the result value is used.  We can revert
+            // this change once the Safari bug
+            // (https://bugs.webkit.org/show_bug.cgi?id=109036) has been fixed and
+            // most clients have been updated.
+            W[i] = buf.charCodeAt(offset) << 24 | buf.charCodeAt(offset + 1) << 16 | buf.charCodeAt(offset + 2) << 8 | buf.charCodeAt(offset + 3);
+            offset += 4;
+        }
+        else for(var i = 0; i < 16; i++){
+            W[i] = buf[offset] << 24 | buf[offset + 1] << 16 | buf[offset + 2] << 8 | buf[offset + 3];
+            offset += 4;
+        }
+        // expand to 80 words
+        for(var i = 16; i < 80; i++){
+            var t = W[i - 3] ^ W[i - 8] ^ W[i - 14] ^ W[i - 16];
+            W[i] = (t << 1 | t >>> 31) & 4294967295;
+        }
+        var a = this.chain_[0];
+        var b = this.chain_[1];
+        var c = this.chain_[2];
+        var d = this.chain_[3];
+        var e = this.chain_[4];
+        var f, k;
+        // TODO(user): Try to unroll this loop to speed up the computation.
+        for(var i = 0; i < 80; i++){
+            if (i < 40) {
+                if (i < 20) {
+                    f = d ^ b & (c ^ d);
+                    k = 1518500249;
+                } else {
+                    f = b ^ c ^ d;
+                    k = 1859775393;
+                }
+            } else if (i < 60) {
+                f = b & c | d & (b | c);
+                k = 2400959708;
+            } else {
+                f = b ^ c ^ d;
+                k = 3395469782;
+            }
+            var t = (a << 5 | a >>> 27) + f + e + k + W[i] & 4294967295;
+            e = d;
+            d = c;
+            c = (b << 30 | b >>> 2) & 4294967295;
+            b = a;
+            a = t;
+        }
+        this.chain_[0] = this.chain_[0] + a & 4294967295;
+        this.chain_[1] = this.chain_[1] + b & 4294967295;
+        this.chain_[2] = this.chain_[2] + c & 4294967295;
+        this.chain_[3] = this.chain_[3] + d & 4294967295;
+        this.chain_[4] = this.chain_[4] + e & 4294967295;
+    };
+    Sha11.prototype.update = function(bytes, length) {
+        // TODO(johnlenz): tighten the function signature and remove this check
+        if (bytes == null) return;
+        if (length === undefined) length = bytes.length;
+        var lengthMinusBlock = length - this.blockSize;
+        var n = 0;
+        // Using local instead of member variables gives ~5% speedup on Firefox 16.
+        var buf = this.buf_;
+        var inbuf = this.inbuf_;
+        // The outer while loop should execute at most twice.
+        while(n < length){
+            // When we have no data in the block to top up, we can directly process the
+            // input buffer (assuming it contains sufficient data). This gives ~25%
+            // speedup on Chrome 23 and ~15% speedup on Firefox 16, but requires that
+            // the data is provided in large chunks (or in multiples of 64 bytes).
+            if (inbuf === 0) while(n <= lengthMinusBlock){
+                this.compress_(bytes, n);
+                n += this.blockSize;
+            }
+            if (typeof bytes === 'string') while(n < length){
+                buf[inbuf] = bytes.charCodeAt(n);
+                ++inbuf;
+                ++n;
+                if (inbuf === this.blockSize) {
+                    this.compress_(buf);
+                    inbuf = 0;
+                    break;
+                }
+            }
+            else while(n < length){
+                buf[inbuf] = bytes[n];
+                ++inbuf;
+                ++n;
+                if (inbuf === this.blockSize) {
+                    this.compress_(buf);
+                    inbuf = 0;
+                    break;
+                }
+            }
+        }
+        this.inbuf_ = inbuf;
+        this.total_ += length;
+    };
+    /** @override */ Sha11.prototype.digest = function() {
+        var digest = [];
+        var totalBits = this.total_ * 8;
+        // Add pad 0x80 0x00*.
+        if (this.inbuf_ < 56) this.update(this.pad_, 56 - this.inbuf_);
+        else this.update(this.pad_, this.blockSize - (this.inbuf_ - 56));
+        // Add # bits.
+        for(var i = this.blockSize - 1; i >= 56; i--){
+            this.buf_[i] = totalBits & 255;
+            totalBits /= 256; // Don't use bit-shifting here!
+        }
+        this.compress_(this.buf_);
+        var n = 0;
+        for(var i = 0; i < 5; i++)for(var j = 24; j >= 0; j -= 8){
+            digest[n] = this.chain_[i] >> j & 255;
+            ++n;
+        }
+        return digest;
+    };
+    return Sha11;
+}();
+/**
+ * Helper to make a Subscribe function (just like Promise helps make a
+ * Thenable).
+ *
+ * @param executor Function which can make calls to a single Observer
+ *     as a proxy.
+ * @param onNoObservers Callback when count of Observers goes to zero.
+ */ function createSubscribe(executor, onNoObservers) {
+    var proxy = new ObserverProxy(executor, onNoObservers);
+    return proxy.subscribe.bind(proxy);
+}
+/**
+ * Implement fan-out for any number of Observers attached via a subscribe
+ * function.
+ */ var ObserverProxy = function() {
+    /**
+     * @param executor Function which can make calls to a single Observer
+     *     as a proxy.
+     * @param onNoObservers Callback when count of Observers goes to zero.
+     */ function ObserverProxy1(executor, onNoObservers) {
+        var _this = this;
+        this.observers = [];
+        this.unsubscribes = [];
+        this.observerCount = 0;
+        // Micro-task scheduling by calling task.then().
+        this.task = Promise.resolve();
+        this.finalized = false;
+        this.onNoObservers = onNoObservers;
+        // Call the executor asynchronously so subscribers that are called
+        // synchronously after the creation of the subscribe function
+        // can still receive the very first value generated in the executor.
+        this.task.then(function() {
+            executor(_this);
+        }).catch(function(e) {
+            _this.error(e);
+        });
+    }
+    ObserverProxy1.prototype.next = function(value) {
+        this.forEachObserver(function(observer) {
+            observer.next(value);
+        });
+    };
+    ObserverProxy1.prototype.error = function(error) {
+        this.forEachObserver(function(observer) {
+            observer.error(error);
+        });
+        this.close(error);
+    };
+    ObserverProxy1.prototype.complete = function() {
+        this.forEachObserver(function(observer) {
+            observer.complete();
+        });
+        this.close();
+    };
+    /**
+     * Subscribe function that can be used to add an Observer to the fan-out list.
+     *
+     * - We require that no event is sent to a subscriber sychronously to their
+     *   call to subscribe().
+     */ ObserverProxy1.prototype.subscribe = function(nextOrObserver, error, complete) {
+        var _this = this;
+        var observer;
+        if (nextOrObserver === undefined && error === undefined && complete === undefined) throw new Error('Missing Observer.');
+        // Assemble an Observer object when passed as callback functions.
+        if (implementsAnyMethods(nextOrObserver, [
+            'next',
+            'error',
+            'complete'
+        ])) observer = nextOrObserver;
+        else observer = {
+            next: nextOrObserver,
+            error: error,
+            complete: complete
+        };
+        if (observer.next === undefined) observer.next = noop;
+        if (observer.error === undefined) observer.error = noop;
+        if (observer.complete === undefined) observer.complete = noop;
+        var unsub = this.unsubscribeOne.bind(this, this.observers.length);
+        // Attempt to subscribe to a terminated Observable - we
+        // just respond to the Observer with the final error or complete
+        // event.
+        if (this.finalized) // eslint-disable-next-line @typescript-eslint/no-floating-promises
+        this.task.then(function() {
+            try {
+                if (_this.finalError) observer.error(_this.finalError);
+                else observer.complete();
+            } catch (e) {
+            // nothing
+            }
+            return;
+        });
+        this.observers.push(observer);
+        return unsub;
+    };
+    // Unsubscribe is synchronous - we guarantee that no events are sent to
+    // any unsubscribed Observer.
+    ObserverProxy1.prototype.unsubscribeOne = function(i) {
+        if (this.observers === undefined || this.observers[i] === undefined) return;
+        delete this.observers[i];
+        this.observerCount -= 1;
+        if (this.observerCount === 0 && this.onNoObservers !== undefined) this.onNoObservers(this);
+    };
+    ObserverProxy1.prototype.forEachObserver = function(fn) {
+        if (this.finalized) // Already closed by previous event....just eat the additional values.
+        return;
+        // Since sendOne calls asynchronously - there is no chance that
+        // this.observers will become undefined.
+        for(var i = 0; i < this.observers.length; i++)this.sendOne(i, fn);
+    };
+    // Call the Observer via one of it's callback function. We are careful to
+    // confirm that the observe has not been unsubscribed since this asynchronous
+    // function had been queued.
+    ObserverProxy1.prototype.sendOne = function(i, fn) {
+        var _this = this;
+        // Execute the callback asynchronously
+        // eslint-disable-next-line @typescript-eslint/no-floating-promises
+        this.task.then(function() {
+            if (_this.observers !== undefined && _this.observers[i] !== undefined) try {
+                fn(_this.observers[i]);
+            } catch (e) {
+                // Ignore exceptions raised in Observers or missing methods of an
+                // Observer.
+                // Log error to console. b/31404806
+                if (typeof console !== 'undefined' && console.error) console.error(e);
+            }
+        });
+    };
+    ObserverProxy1.prototype.close = function(err) {
+        var _this = this;
+        if (this.finalized) return;
+        this.finalized = true;
+        if (err !== undefined) this.finalError = err;
+        // Proxy is no longer needed - garbage collect references
+        // eslint-disable-next-line @typescript-eslint/no-floating-promises
+        this.task.then(function() {
+            _this.observers = undefined;
+            _this.onNoObservers = undefined;
+        });
+    };
+    return ObserverProxy1;
+}();
+/** Turn synchronous function into one called asynchronously. */ // eslint-disable-next-line @typescript-eslint/ban-types
+function async(fn, onError) {
+    return function() {
+        var args = [];
+        for(var _i = 0; _i < arguments.length; _i++)args[_i] = arguments[_i];
+        Promise.resolve(true).then(function() {
+            fn.apply(void 0, args);
+        }).catch(function(error) {
+            if (onError) onError(error);
+        });
+    };
+}
+/**
+ * Return true if the object passed in implements any of the named methods.
+ */ function implementsAnyMethods(obj, methods) {
+    if (typeof obj !== 'object' || obj === null) return false;
+    for(var _i = 0, methods_1 = methods; _i < methods_1.length; _i++){
+        var method = methods_1[_i];
+        if (method in obj && typeof obj[method] === 'function') return true;
+    }
+    return false;
+}
+function noop() {
+// do nothing
+}
+/**
+ * @license
+ * Copyright 2017 Google LLC
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *   http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */ /**
+ * Check to make sure the appropriate number of arguments are provided for a public function.
+ * Throws an error if it fails.
+ *
+ * @param fnName The function name
+ * @param minCount The minimum number of arguments to allow for the function call
+ * @param maxCount The maximum number of argument to allow for the function call
+ * @param argCount The actual number of arguments provided.
+ */ var validateArgCount = function(fnName, minCount, maxCount, argCount) {
+    var argError;
+    if (argCount < minCount) argError = 'at least ' + minCount;
+    else if (argCount > maxCount) argError = maxCount === 0 ? 'none' : 'no more than ' + maxCount;
+    if (argError) {
+        var error = fnName + ' failed: Was called with ' + argCount + (argCount === 1 ? ' argument.' : ' arguments.') + ' Expects ' + argError + '.';
+        throw new Error(error);
+    }
+};
+/**
+ * Generates a string to prefix an error message about failed argument validation
+ *
+ * @param fnName The function name
+ * @param argName The name of the argument
+ * @return The prefix to add to the error thrown for validation.
+ */ function errorPrefix(fnName, argName) {
+    return fnName + " failed: " + argName + " argument ";
+}
+/**
+ * @param fnName
+ * @param argumentNumber
+ * @param namespace
+ * @param optional
+ */ function validateNamespace(fnName, namespace, optional) {
+    if (optional && !namespace) return;
+    if (typeof namespace !== 'string') //TODO: I should do more validation here. We only allow certain chars in namespaces.
+    throw new Error(errorPrefix(fnName, 'namespace') + 'must be a valid firebase namespace.');
+}
+function validateCallback(fnName, argumentName, // eslint-disable-next-line @typescript-eslint/ban-types
+callback, optional) {
+    if (optional && !callback) return;
+    if (typeof callback !== 'function') throw new Error(errorPrefix(fnName, argumentName) + 'must be a valid function.');
+}
+function validateContextObject(fnName, argumentName, context, optional) {
+    if (optional && !context) return;
+    if (typeof context !== 'object' || context === null) throw new Error(errorPrefix(fnName, argumentName) + 'must be a valid context object.');
+}
+/**
+ * @license
+ * Copyright 2017 Google LLC
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *   http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */ // Code originally came from goog.crypt.stringToUtf8ByteArray, but for some reason they
+// automatically replaced '\r\n' with '\n', and they didn't handle surrogate pairs,
+// so it's been modified.
+// Note that not all Unicode characters appear as single characters in JavaScript strings.
+// fromCharCode returns the UTF-16 encoding of a character - so some Unicode characters
+// use 2 characters in Javascript.  All 4-byte UTF-8 characters begin with a first
+// character in the range 0xD800 - 0xDBFF (the first character of a so-called surrogate
+// pair).
+// See http://www.ecma-international.org/ecma-262/5.1/#sec-15.1.3
+/**
+ * @param {string} str
+ * @return {Array}
+ */ var stringToByteArray = function(str) {
+    var out = [];
+    var p = 0;
+    for(var i = 0; i < str.length; i++){
+        var c = str.charCodeAt(i);
+        // Is this the lead surrogate in a surrogate pair?
+        if (c >= 55296 && c <= 56319) {
+            var high = c - 55296; // the high 10 bits.
+            i++;
+            assert(i < str.length, 'Surrogate pair missing trail surrogate.');
+            var low = str.charCodeAt(i) - 56320; // the low 10 bits.
+            c = 65536 + (high << 10) + low;
+        }
+        if (c < 128) out[p++] = c;
+        else if (c < 2048) {
+            out[p++] = c >> 6 | 192;
+            out[p++] = c & 63 | 128;
+        } else if (c < 65536) {
+            out[p++] = c >> 12 | 224;
+            out[p++] = c >> 6 & 63 | 128;
+            out[p++] = c & 63 | 128;
+        } else {
+            out[p++] = c >> 18 | 240;
+            out[p++] = c >> 12 & 63 | 128;
+            out[p++] = c >> 6 & 63 | 128;
+            out[p++] = c & 63 | 128;
+        }
+    }
+    return out;
+};
+/**
+ * Calculate length without actually converting; useful for doing cheaper validation.
+ * @param {string} str
+ * @return {number}
+ */ var stringLength = function(str) {
+    var p = 0;
+    for(var i = 0; i < str.length; i++){
+        var c = str.charCodeAt(i);
+        if (c < 128) p++;
+        else if (c < 2048) p += 2;
+        else if (c >= 55296 && c <= 56319) {
+            // Lead surrogate of a surrogate pair.  The pair together will take 4 bytes to represent.
+            p += 4;
+            i++; // skip trail surrogate.
+        } else p += 3;
+    }
+    return p;
+};
+/**
+ * @license
+ * Copyright 2019 Google LLC
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *   http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */ /**
+ * The amount of milliseconds to exponentially increase.
+ */ var DEFAULT_INTERVAL_MILLIS = 1000;
+/**
+ * The factor to backoff by.
+ * Should be a number greater than 1.
+ */ var DEFAULT_BACKOFF_FACTOR = 2;
+/**
+ * The maximum milliseconds to increase to.
+ *
+ * <p>Visible for testing
+ */ var MAX_VALUE_MILLIS = 14400000; // Four hours, like iOS and Android.
+/**
+ * The percentage of backoff time to randomize by.
+ * See
+ * http://go/safe-client-behavior#step-1-determine-the-appropriate-retry-interval-to-handle-spike-traffic
+ * for context.
+ *
+ * <p>Visible for testing
+ */ var RANDOM_FACTOR = 0.5;
+/**
+ * Based on the backoff method from
+ * https://github.com/google/closure-library/blob/master/closure/goog/math/exponentialbackoff.js.
+ * Extracted here so we don't need to pass metadata and a stateful ExponentialBackoff object around.
+ */ function calculateBackoffMillis(backoffCount, intervalMillis, backoffFactor) {
+    if (intervalMillis === void 0) intervalMillis = DEFAULT_INTERVAL_MILLIS;
+    if (backoffFactor === void 0) backoffFactor = DEFAULT_BACKOFF_FACTOR;
+    // Calculates an exponentially increasing value.
+    // Deviation: calculates value from count and a constant interval, so we only need to save value
+    // and count to restore state.
+    var currBaseValue = intervalMillis * Math.pow(backoffFactor, backoffCount);
+    // A random "fuzz" to avoid waves of retries.
+    // Deviation: randomFactor is required.
+    var randomWait = Math.round(// A fraction of the backoff value to add/subtract.
+    // Deviation: changes multiplication order to improve readability.
+    RANDOM_FACTOR * currBaseValue * (Math.random() - 0.5) * 2);
+    // Limits backoff to max to avoid effectively permanent backoff.
+    return Math.min(MAX_VALUE_MILLIS, currBaseValue + randomWait);
+}
+/**
+ * @license
+ * Copyright 2020 Google LLC
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *   http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */ /**
+ * Provide English ordinal letters after a number
+ */ function ordinal(i) {
+    if (!Number.isFinite(i)) return "" + i;
+    return i + indicator(i);
+}
+function indicator(i) {
+    i = Math.abs(i);
+    var cent = i % 100;
+    if (cent >= 10 && cent <= 20) return 'th';
+    var dec = i % 10;
+    if (dec === 1) return 'st';
+    if (dec === 2) return 'nd';
+    if (dec === 3) return 'rd';
+    return 'th';
+}
+/**
+ * @license
+ * Copyright 2021 Google LLC
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *   http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */ function getModularInstance(service) {
+    if (service && service._delegate) return service._delegate;
+    else return service;
+}
+
+},{"tslib":"bjkXk","@parcel/transformer-js/src/esmodule-helpers.js":"JacNc"}],"A0nlJ":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "LogLevel", ()=>LogLevel
+);
+parcelHelpers.export(exports, "Logger", ()=>Logger
+);
+parcelHelpers.export(exports, "setLogLevel", ()=>setLogLevel
+);
+parcelHelpers.export(exports, "setUserLogHandler", ()=>setUserLogHandler
+);
+/*! *****************************************************************************
+Copyright (c) Microsoft Corporation. All rights reserved.
+Licensed under the Apache License, Version 2.0 (the "License"); you may not use
+this file except in compliance with the License. You may obtain a copy of the
+License at http://www.apache.org/licenses/LICENSE-2.0
+
+THIS CODE IS PROVIDED ON AN *AS IS* BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+KIND, EITHER EXPRESS OR IMPLIED, INCLUDING WITHOUT LIMITATION ANY IMPLIED
+WARRANTIES OR CONDITIONS OF TITLE, FITNESS FOR A PARTICULAR PURPOSE,
+MERCHANTABLITY OR NON-INFRINGEMENT.
+
+See the Apache Version 2.0 License for specific language governing permissions
+and limitations under the License.
+***************************************************************************** */ function __spreadArrays() {
+    for(var s = 0, i = 0, il = arguments.length; i < il; i++)s += arguments[i].length;
+    for(var r = Array(s), k = 0, i = 0; i < il; i++)for(var a = arguments[i], j = 0, jl = a.length; j < jl; j++, k++)r[k] = a[j];
+    return r;
+}
+/**
+ * @license
+ * Copyright 2017 Google LLC
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *   http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */ var _a;
+/**
+ * A container for all of the Logger instances
+ */ var instances = [];
+/**
+ * The JS SDK supports 5 log levels and also allows a user the ability to
+ * silence the logs altogether.
+ *
+ * The order is a follows:
+ * DEBUG < VERBOSE < INFO < WARN < ERROR
+ *
+ * All of the log types above the current log level will be captured (i.e. if
+ * you set the log level to `INFO`, errors will still be logged, but `DEBUG` and
+ * `VERBOSE` logs will not)
+ */ var LogLevel;
+(function(LogLevel1) {
+    LogLevel1[LogLevel1["DEBUG"] = 0] = "DEBUG";
+    LogLevel1[LogLevel1["VERBOSE"] = 1] = "VERBOSE";
+    LogLevel1[LogLevel1["INFO"] = 2] = "INFO";
+    LogLevel1[LogLevel1["WARN"] = 3] = "WARN";
+    LogLevel1[LogLevel1["ERROR"] = 4] = "ERROR";
+    LogLevel1[LogLevel1["SILENT"] = 5] = "SILENT";
+})(LogLevel || (LogLevel = {
+}));
+var levelStringToEnum = {
+    'debug': LogLevel.DEBUG,
+    'verbose': LogLevel.VERBOSE,
+    'info': LogLevel.INFO,
+    'warn': LogLevel.WARN,
+    'error': LogLevel.ERROR,
+    'silent': LogLevel.SILENT
+};
+/**
+ * The default log level
+ */ var defaultLogLevel = LogLevel.INFO;
+/**
+ * By default, `console.debug` is not displayed in the developer console (in
+ * chrome). To avoid forcing users to have to opt-in to these logs twice
+ * (i.e. once for firebase, and once in the console), we are sending `DEBUG`
+ * logs to the `console.log` function.
+ */ var ConsoleMethod = (_a = {
+}, _a[LogLevel.DEBUG] = 'log', _a[LogLevel.VERBOSE] = 'log', _a[LogLevel.INFO] = 'info', _a[LogLevel.WARN] = 'warn', _a[LogLevel.ERROR] = 'error', _a);
+/**
+ * The default log handler will forward DEBUG, VERBOSE, INFO, WARN, and ERROR
+ * messages on to their corresponding console counterparts (if the log method
+ * is supported by the current log level)
+ */ var defaultLogHandler = function(instance, logType) {
+    var args = [];
+    for(var _i = 2; _i < arguments.length; _i++)args[_i - 2] = arguments[_i];
+    if (logType < instance.logLevel) return;
+    var now = new Date().toISOString();
+    var method = ConsoleMethod[logType];
+    if (method) console[method].apply(console, __spreadArrays([
+        "[" + now + "]  " + instance.name + ":"
+    ], args));
+    else throw new Error("Attempted to log a message with an invalid logType (value: " + logType + ")");
+};
+var Logger = function() {
+    /**
+     * Gives you an instance of a Logger to capture messages according to
+     * Firebase's logging scheme.
+     *
+     * @param name The name that the logs will be associated with
+     */ function Logger1(name) {
+        this.name = name;
+        /**
+         * The log level of the given Logger instance.
+         */ this._logLevel = defaultLogLevel;
+        /**
+         * The main (internal) log handler for the Logger instance.
+         * Can be set to a new function in internal package code but not by user.
+         */ this._logHandler = defaultLogHandler;
+        /**
+         * The optional, additional, user-defined log handler for the Logger instance.
+         */ this._userLogHandler = null;
+        /**
+         * Capture the current instance for later use
+         */ instances.push(this);
+    }
+    Object.defineProperty(Logger1.prototype, "logLevel", {
+        get: function() {
+            return this._logLevel;
+        },
+        set: function(val) {
+            if (!(val in LogLevel)) throw new TypeError("Invalid value \"" + val + "\" assigned to `logLevel`");
+            this._logLevel = val;
+        },
+        enumerable: false,
+        configurable: true
+    });
+    // Workaround for setter/getter having to be the same type.
+    Logger1.prototype.setLogLevel = function(val) {
+        this._logLevel = typeof val === 'string' ? levelStringToEnum[val] : val;
+    };
+    Object.defineProperty(Logger1.prototype, "logHandler", {
+        get: function() {
+            return this._logHandler;
+        },
+        set: function(val) {
+            if (typeof val !== 'function') throw new TypeError('Value assigned to `logHandler` must be a function');
+            this._logHandler = val;
+        },
+        enumerable: false,
+        configurable: true
+    });
+    Object.defineProperty(Logger1.prototype, "userLogHandler", {
+        get: function() {
+            return this._userLogHandler;
+        },
+        set: function(val) {
+            this._userLogHandler = val;
+        },
+        enumerable: false,
+        configurable: true
+    });
+    /**
+     * The functions below are all based on the `console` interface
+     */ Logger1.prototype.debug = function() {
+        var args = [];
+        for(var _i = 0; _i < arguments.length; _i++)args[_i] = arguments[_i];
+        this._userLogHandler && this._userLogHandler.apply(this, __spreadArrays([
+            this,
+            LogLevel.DEBUG
+        ], args));
+        this._logHandler.apply(this, __spreadArrays([
+            this,
+            LogLevel.DEBUG
+        ], args));
+    };
+    Logger1.prototype.log = function() {
+        var args = [];
+        for(var _i = 0; _i < arguments.length; _i++)args[_i] = arguments[_i];
+        this._userLogHandler && this._userLogHandler.apply(this, __spreadArrays([
+            this,
+            LogLevel.VERBOSE
+        ], args));
+        this._logHandler.apply(this, __spreadArrays([
+            this,
+            LogLevel.VERBOSE
+        ], args));
+    };
+    Logger1.prototype.info = function() {
+        var args = [];
+        for(var _i = 0; _i < arguments.length; _i++)args[_i] = arguments[_i];
+        this._userLogHandler && this._userLogHandler.apply(this, __spreadArrays([
+            this,
+            LogLevel.INFO
+        ], args));
+        this._logHandler.apply(this, __spreadArrays([
+            this,
+            LogLevel.INFO
+        ], args));
+    };
+    Logger1.prototype.warn = function() {
+        var args = [];
+        for(var _i = 0; _i < arguments.length; _i++)args[_i] = arguments[_i];
+        this._userLogHandler && this._userLogHandler.apply(this, __spreadArrays([
+            this,
+            LogLevel.WARN
+        ], args));
+        this._logHandler.apply(this, __spreadArrays([
+            this,
+            LogLevel.WARN
+        ], args));
+    };
+    Logger1.prototype.error = function() {
+        var args = [];
+        for(var _i = 0; _i < arguments.length; _i++)args[_i] = arguments[_i];
+        this._userLogHandler && this._userLogHandler.apply(this, __spreadArrays([
+            this,
+            LogLevel.ERROR
+        ], args));
+        this._logHandler.apply(this, __spreadArrays([
+            this,
+            LogLevel.ERROR
+        ], args));
+    };
+    return Logger1;
+}();
+function setLogLevel(level) {
+    instances.forEach(function(inst) {
+        inst.setLogLevel(level);
+    });
+}
+function setUserLogHandler(logCallback, options) {
+    var _loop_1 = function(instance) {
+        var customLogLevel = null;
+        if (options && options.level) customLogLevel = levelStringToEnum[options.level];
+        if (logCallback === null) instance.userLogHandler = null;
+        else instance.userLogHandler = function(instance1, level) {
+            var args = [];
+            for(var _i = 2; _i < arguments.length; _i++)args[_i - 2] = arguments[_i];
+            var message = args.map(function(arg) {
+                if (arg == null) return null;
+                else if (typeof arg === 'string') return arg;
+                else if (typeof arg === 'number' || typeof arg === 'boolean') return arg.toString();
+                else if (arg instanceof Error) return arg.message;
+                else try {
+                    return JSON.stringify(arg);
+                } catch (ignored) {
+                    return null;
+                }
+            }).filter(function(arg) {
+                return arg;
+            }).join(' ');
+            if (level >= (customLogLevel !== null && customLogLevel !== void 0 ? customLogLevel : instance1.logLevel)) logCallback({
+                level: LogLevel[level].toLowerCase(),
+                message: message,
+                args: args,
+                type: instance1.name
+            });
+        };
+    };
+    for(var _i = 0, instances_1 = instances; _i < instances_1.length; _i++){
+        var instance = instances_1[_i];
+        _loop_1(instance);
+    }
+}
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"JacNc"}],"jRsWt":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+var _lite = require("@firebase/firestore/lite");
+parcelHelpers.exportAll(_lite, exports);
+
+},{"@firebase/firestore/lite":"5jkA1","@parcel/transformer-js/src/esmodule-helpers.js":"JacNc"}],"5jkA1":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "Bytes", ()=>_e
+);
+parcelHelpers.export(exports, "CollectionReference", ()=>he
+);
+parcelHelpers.export(exports, "DocumentReference", ()=>ce
+);
+parcelHelpers.export(exports, "DocumentSnapshot", ()=>Ge
+);
+parcelHelpers.export(exports, "FieldPath", ()=>pe
+);
+parcelHelpers.export(exports, "FieldValue", ()=>ge
+);
+parcelHelpers.export(exports, "Firestore", ()=>re
+);
+parcelHelpers.export(exports, "FirestoreError", ()=>U
+);
+parcelHelpers.export(exports, "GeoPoint", ()=>be
+);
+parcelHelpers.export(exports, "Query", ()=>ae
+);
+parcelHelpers.export(exports, "QueryConstraint", ()=>Ze
+);
+parcelHelpers.export(exports, "QueryDocumentSnapshot", ()=>He
+);
+parcelHelpers.export(exports, "QuerySnapshot", ()=>Ye
+);
+parcelHelpers.export(exports, "Timestamp", ()=>yt
+);
+parcelHelpers.export(exports, "Transaction", ()=>Lr
+);
+parcelHelpers.export(exports, "WriteBatch", ()=>Dr
+);
+parcelHelpers.export(exports, "addDoc", ()=>Tr
+);
+parcelHelpers.export(exports, "arrayRemove", ()=>Vr
+);
+parcelHelpers.export(exports, "arrayUnion", ()=>Rr
+);
+parcelHelpers.export(exports, "collection", ()=>le
+);
+parcelHelpers.export(exports, "collectionGroup", ()=>fe
+);
+parcelHelpers.export(exports, "connectFirestoreEmulator", ()=>oe
+);
+parcelHelpers.export(exports, "deleteDoc", ()=>Ir
+);
+parcelHelpers.export(exports, "deleteField", ()=>Ar
+);
+parcelHelpers.export(exports, "doc", ()=>de
+);
+parcelHelpers.export(exports, "documentId", ()=>ye
+);
+parcelHelpers.export(exports, "endAt", ()=>fr
+);
+parcelHelpers.export(exports, "endBefore", ()=>lr
+);
+parcelHelpers.export(exports, "getDoc", ()=>gr
+);
+parcelHelpers.export(exports, "getDocs", ()=>br
+);
+parcelHelpers.export(exports, "getFirestore", ()=>ie
+);
+parcelHelpers.export(exports, "increment", ()=>Nr
+);
+parcelHelpers.export(exports, "initializeFirestore", ()=>se
+);
+parcelHelpers.export(exports, "limit", ()=>ir
+);
+parcelHelpers.export(exports, "limitToLast", ()=>or
+);
+parcelHelpers.export(exports, "orderBy", ()=>rr
+);
+parcelHelpers.export(exports, "query", ()=>Xe
+);
+parcelHelpers.export(exports, "queryEqual", ()=>me
+);
+parcelHelpers.export(exports, "refEqual", ()=>we
+);
+parcelHelpers.export(exports, "runTransaction", ()=>Ur
+);
+parcelHelpers.export(exports, "serverTimestamp", ()=>Pr
+);
+parcelHelpers.export(exports, "setDoc", ()=>vr
+);
+parcelHelpers.export(exports, "setLogLevel", ()=>w
+);
+parcelHelpers.export(exports, "snapshotEqual", ()=>Ke
+);
+parcelHelpers.export(exports, "startAfter", ()=>ar
+);
+parcelHelpers.export(exports, "startAt", ()=>cr
+);
+parcelHelpers.export(exports, "terminate", ()=>ue
+);
+parcelHelpers.export(exports, "updateDoc", ()=>Er
+);
+parcelHelpers.export(exports, "where", ()=>nr
+);
+parcelHelpers.export(exports, "writeBatch", ()=>Fr
+);
+var _app = require("@firebase/app");
+var _component = require("@firebase/component");
+var _logger = require("@firebase/logger");
+var _util = require("@firebase/util");
+/**
+ * @license
+ * Copyright 2017 Google LLC
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *   http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */ /**
+ * Simple wrapper around a nullable UID. Mostly exists to make code more
+ * readable.
+ */ class l {
+    constructor(t1){
+        this.uid = t1;
+    }
+    isAuthenticated() {
+        return null != this.uid;
+    }
+    /**
+     * Returns a key representing this user, suitable for inclusion in a
+     * dictionary.
+     */ toKey() {
+        return this.isAuthenticated() ? "uid:" + this.uid : "anonymous-user";
+    }
+    isEqual(t) {
+        return t.uid === this.uid;
+    }
+}
+/** A user with a null UID. */ l.UNAUTHENTICATED = new l(null), // TODO(mikelehen): Look into getting a proper uid-equivalent for
+// non-FirebaseAuth providers.
+l.GOOGLE_CREDENTIALS = new l("google-credentials-uid"), l.FIRST_PARTY = new l("first-party-uid"), l.MOCK_USER = new l("mock-user");
+/**
+ * @license
+ * Copyright 2017 Google LLC
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *   http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */ let f = "9.0.1";
+/**
+ * @license
+ * Copyright 2017 Google LLC
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *   http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */ const d = new _logger.Logger("@firebase/firestore");
+/**
+ * Sets the verbosity of Cloud Firestore logs (debug, error, or silent).
+ *
+ * @param logLevel - The verbosity you set for activity and error logging. Can
+ *   be any of the following values:
+ *
+ *   <ul>
+ *     <li>`debug` for the most verbose logging level, primarily for
+ *     debugging.</li>
+ *     <li>`error` to log errors only.</li>
+ *     <li><code>`silent` to turn off logging.</li>
+ *   </ul>
+ */ function w(t2) {
+    d.setLogLevel(t2);
+}
+function m(t2, ...n) {
+    if (d.logLevel <= _logger.LogLevel.DEBUG) {
+        const e = n.map(_);
+        d.debug(`Firestore (${f}): ${t2}`, ...e);
+    }
+}
+function p(t2, ...n) {
+    if (d.logLevel <= _logger.LogLevel.ERROR) {
+        const e = n.map(_);
+        d.error(`Firestore (${f}): ${t2}`, ...e);
+    }
+}
+/**
+ * @internal
+ */ function y(t2, ...n) {
+    if (d.logLevel <= _logger.LogLevel.WARN) {
+        const e = n.map(_);
+        d.warn(`Firestore (${f}): ${t2}`, ...e);
+    }
+}
+/**
+ * Converts an additional log parameter to a string representation.
+ */ function _(t2) {
+    if ("string" == typeof t2) return t2;
+    try {
+        return n = t2, JSON.stringify(n);
+    } catch (n) {
+        // Converting to JSON failed, just log the object directly
+        return t2;
+    }
+    /**
+ * @license
+ * Copyright 2020 Google LLC
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *   http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */ /** Formats an object as a JSON string, suitable for logging. */ var n;
+}
+/**
+ * @license
+ * Copyright 2017 Google LLC
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *   http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */ /**
+ * Unconditionally fails, throwing an Error with the given message.
+ * Messages are stripped in production builds.
+ *
+ * Returns `never` and can be used in expressions:
+ * @example
+ * let futureVar = fail('not implemented yet');
+ */ function g(t2 = "Unexpected state") {
+    // Log the failure in addition to throw an exception, just in case the
+    // exception is swallowed.
+    const n = `FIRESTORE (${f}) INTERNAL ASSERTION FAILED: ` + t2;
+    // NOTE: We don't use FirestoreError here because these are internal failures
+    // that cannot be handled by the user. (Also it would create a circular
+    // dependency between the error and assert modules which doesn't work.)
+    throw p(n), new Error(n);
+}
+/**
+ * Fails if the given assertion condition is false, throwing an Error with the
+ * given message if it did.
+ *
+ * Messages are stripped in production builds.
+ */ function b(t2, n) {
+    t2 || g();
+}
+/**
+ * Casts `obj` to `T`. In non-production builds, verifies that `obj` is an
+ * instance of `T` before casting.
+ */ function v(t2, // eslint-disable-next-line @typescript-eslint/no-explicit-any
+n) {
+    return t2;
+}
+/**
+ * @license
+ * Copyright 2017 Google LLC
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *   http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */ const E = "ok", I = "cancelled", T = "unknown", A = "invalid-argument", P = "deadline-exceeded", R = "not-found", V = "already-exists", N = "permission-denied", D = "unauthenticated", $ = "resource-exhausted", F = "failed-precondition", S = "aborted", q = "out-of-range", x = "unimplemented", O = "internal", C = "unavailable", L = "data-loss";
+/** An error returned by a Firestore operation. */ class U extends Error {
+    /** @hideconstructor */ constructor(/**
+     * The backend error code associated with this error.
+     */ t2, /**
+     * A custom error description.
+     */ n2){
+        super(n2), this.code = t2, this.message = n2, /** The custom name for all FirestoreErrors. */ this.name = "FirebaseError", // HACK: We write a toString property directly because Error is not a real
+        // class and so inheritance does not work correctly. We could alternatively
+        // do the same "back-door inheritance" trick that FirebaseError does.
+        this.toString = ()=>`${this.name}: [code=${this.code}]: ${this.message}`
+        ;
+    }
+}
+/**
+ * @license
+ * Copyright 2017 Google LLC
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *   http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */ class j {
+    constructor(){
+        this.promise = new Promise((t3, n1)=>{
+            this.resolve = t3, this.reject = n1;
+        });
+    }
+}
+/**
+ * @license
+ * Copyright 2017 Google LLC
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *   http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */ class k {
+    constructor(t3, n1){
+        this.user = n1, this.type = "OAuth", this.authHeaders = {
+        }, // Set the headers using Object Literal notation to avoid minification
+        this.authHeaders.Authorization = `Bearer ${t3}`;
+    }
+}
+/** A CredentialsProvider that always yields an empty token. */ class M {
+    getToken() {
+        return Promise.resolve(null);
+    }
+    invalidateToken() {
+    }
+    start(t, n) {
+        // Fire with initial user.
+        t.enqueueRetryable(()=>n(l.UNAUTHENTICATED)
+        );
+    }
+    shutdown() {
+    }
+}
+/**
+ * A CredentialsProvider that always returns a constant token. Used for
+ * emulator token mocking.
+ */ class B {
+    constructor(t4){
+        this.token = t4, /**
+         * Stores the listener registered with setChangeListener()
+         * This isn't actually necessary since the UID never changes, but we use this
+         * to verify the listen contract is adhered to in tests.
+         */ this.changeListener = null;
+    }
+    getToken() {
+        return Promise.resolve(this.token);
+    }
+    invalidateToken() {
+    }
+    start(t, n) {
+        this.changeListener = n, // Fire with initial user.
+        t.enqueueRetryable(()=>n(this.token.user)
+        );
+    }
+    shutdown() {
+        this.changeListener = null;
+    }
+}
+/** Credential provider for the Lite SDK. */ class Q {
+    constructor(t5){
+        this.auth = null, t5.onInit((t6)=>{
+            this.auth = t6;
+        });
+    }
+    getToken() {
+        return this.auth ? this.auth.getToken().then((t6)=>t6 ? (b("string" == typeof t6.accessToken), new k(t6.accessToken, new l(this.auth.getUid()))) : null
+        ) : Promise.resolve(null);
+    }
+    invalidateToken() {
+    }
+    start(t, n) {
+    }
+    shutdown() {
+    }
+}
+/*
+ * FirstPartyToken provides a fresh token each time its value
+ * is requested, because if the token is too old, requests will be rejected.
+ * Technically this may no longer be necessary since the SDK should gracefully
+ * recover from unauthenticated errors (see b/33147818 for context), but it's
+ * safer to keep the implementation as-is.
+ */ class z {
+    constructor(t6, n3, e4){
+        this.t = t6, this.i = n3, this.o = e4, this.type = "FirstParty", this.user = l.FIRST_PARTY;
+    }
+    get authHeaders() {
+        const t7 = {
+            "X-Goog-AuthUser": this.i
+        }, n4 = this.t.auth.getAuthHeaderValueForFirstParty([]);
+        // Use array notation to prevent minification
+        return n4 && (t7.Authorization = n4), this.o && (t7["X-Goog-Iam-Authorization-Token"] = this.o), t7;
+    }
+}
+/*
+ * Provides user credentials required for the Firestore JavaScript SDK
+ * to authenticate the user, using technique that is only available
+ * to applications hosted by Google.
+ */ class W {
+    constructor(t7, n4, e1){
+        this.t = t7, this.i = n4, this.o = e1;
+    }
+    getToken() {
+        return Promise.resolve(new z(this.t, this.i, this.o));
+    }
+    start(t, n) {
+        // Fire with initial uid.
+        t.enqueueRetryable(()=>n(l.FIRST_PARTY)
+        );
+    }
+    shutdown() {
+    }
+    invalidateToken() {
+    }
+}
+/**
+ * Builds a CredentialsProvider depending on the type of
+ * the credentials passed in.
+ */ /**
+ * @license
+ * Copyright 2017 Google LLC
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *   http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */ class G {
+    /**
+     * Constructs a DatabaseInfo using the provided host, databaseId and
+     * persistenceKey.
+     *
+     * @param databaseId - The database to use.
+     * @param appId - The Firebase App Id.
+     * @param persistenceKey - A unique identifier for this Firestore's local
+     * storage (used in conjunction with the databaseId).
+     * @param host - The Firestore backend host to connect to.
+     * @param ssl - Whether to use SSL when connecting.
+     * @param forceLongPolling - Whether to use the forceLongPolling option
+     * when using WebChannel as the network transport.
+     * @param autoDetectLongPolling - Whether to use the detectBufferingProxy
+     * option when using WebChannel as the network transport.
+     * @param useFetchStreams Whether to use the Fetch API instead of
+     * XMLHTTPRequest
+     */ constructor(t8, n5, e2, r1, s6, i, o, u){
+        this.databaseId = t8, this.appId = n5, this.persistenceKey = e2, this.host = r1, this.ssl = s6, this.forceLongPolling = i, this.autoDetectLongPolling = o, this.useFetchStreams = u;
+    }
+}
+/** The default database name for a project. */ /**
+ * Represents the database ID a Firestore client is associated with.
+ * @internal
+ */ class H {
+    constructor(t9, n6){
+        this.projectId = t9, this.database = n6 || "(default)";
+    }
+    get isDefaultDatabase() {
+        return "(default)" === this.database;
+    }
+    isEqual(t) {
+        return t instanceof H && t.projectId === this.projectId && t.database === this.database;
+    }
+}
+/**
+ * @license
+ * Copyright 2017 Google LLC
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *   http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */ /**
+ * Path represents an ordered sequence of string segments.
+ */ class Y {
+    constructor(t10, n7, e3){
+        (void 0) === n7 ? n7 = 0 : n7 > t10.length && g(), (void 0) === e3 ? e3 = t10.length - n7 : e3 > t10.length - n7 && g(), this.segments = t10, this.offset = n7, this.len = e3;
+    }
+    get length() {
+        return this.len;
+    }
+    isEqual(t) {
+        return 0 === Y.comparator(this, t);
+    }
+    child(t) {
+        const n8 = this.segments.slice(this.offset, this.limit());
+        return t instanceof Y ? t.forEach((t11)=>{
+            n8.push(t11);
+        }) : n8.push(t), this.construct(n8);
+    }
+    /** The index of one past the last segment of the path. */ limit() {
+        return this.offset + this.length;
+    }
+    popFirst(t) {
+        return t = (void 0) === t ? 1 : t, this.construct(this.segments, this.offset + t, this.length - t);
+    }
+    popLast() {
+        return this.construct(this.segments, this.offset, this.length - 1);
+    }
+    firstSegment() {
+        return this.segments[this.offset];
+    }
+    lastSegment() {
+        return this.get(this.length - 1);
+    }
+    get(t) {
+        return this.segments[this.offset + t];
+    }
+    isEmpty() {
+        return 0 === this.length;
+    }
+    isPrefixOf(t) {
+        if (t.length < this.length) return !1;
+        for(let n8 = 0; n8 < this.length; n8++)if (this.get(n8) !== t.get(n8)) return !1;
+        return !0;
+    }
+    isImmediateParentOf(t) {
+        if (this.length + 1 !== t.length) return !1;
+        for(let n8 = 0; n8 < this.length; n8++)if (this.get(n8) !== t.get(n8)) return !1;
+        return !0;
+    }
+    forEach(t) {
+        for(let n8 = this.offset, e4 = this.limit(); n8 < e4; n8++)t(this.segments[n8]);
+    }
+    toArray() {
+        return this.segments.slice(this.offset, this.limit());
+    }
+    static comparator(t, n) {
+        const e4 = Math.min(t.length, n.length);
+        for(let r1 = 0; r1 < e4; r1++){
+            const e5 = t.get(r1), s1 = n.get(r1);
+            if (e5 < s1) return -1;
+            if (e5 > s1) return 1;
+        }
+        return t.length < n.length ? -1 : t.length > n.length ? 1 : 0;
+    }
+}
+/**
+ * A slash-separated path for navigating resources (documents and collections)
+ * within Firestore.
+ *
+ * @internal
+ */ class K extends Y {
+    construct(t, n, e) {
+        return new K(t, n, e);
+    }
+    canonicalString() {
+        // NOTE: The client is ignorant of any path segments containing escape
+        // sequences (e.g. __id123__) and just passes them through raw (they exist
+        // for legacy reasons and should not be used frequently).
+        return this.toArray().join("/");
+    }
+    toString() {
+        return this.canonicalString();
+    }
+    /**
+     * Creates a resource path from the given slash-delimited string. If multiple
+     * arguments are provided, all components are combined. Leading and trailing
+     * slashes from all components are ignored.
+     */ static fromString(...t) {
+        // NOTE: The client is ignorant of any path segments containing escape
+        // sequences (e.g. __id123__) and just passes them through raw (they exist
+        // for legacy reasons and should not be used frequently).
+        const n8 = [];
+        for (const e5 of t){
+            if (e5.indexOf("//") >= 0) throw new U(A, `Invalid segment (${e5}). Paths must not contain // in them.`);
+            // Strip leading and traling slashed.
+            n8.push(...e5.split("/").filter((t11)=>t11.length > 0
+            ));
+        }
+        return new K(n8);
+    }
+    static emptyPath() {
+        return new K([]);
+    }
+}
+const J = /^[_a-zA-Z][_a-zA-Z0-9]*$/;
+/**
+ * A dot-separated path for navigating sub-objects within a document.
+ * @internal
+ */ class Z extends Y {
+    construct(t, n, e) {
+        return new Z(t, n, e);
+    }
+    /**
+     * Returns true if the string could be used as a segment in a field path
+     * without escaping.
+     */ static isValidIdentifier(t) {
+        return J.test(t);
+    }
+    canonicalString() {
+        return this.toArray().map((t11)=>(t11 = t11.replace(/\\/g, "\\\\").replace(/`/g, "\\`"), Z.isValidIdentifier(t11) || (t11 = "`" + t11 + "`"), t11)
+        ).join(".");
+    }
+    toString() {
+        return this.canonicalString();
+    }
+    /**
+     * Returns true if this field references the key of a document.
+     */ isKeyField() {
+        return 1 === this.length && "__name__" === this.get(0);
+    }
+    /**
+     * The field designating the key of a document.
+     */ static keyField() {
+        return new Z([
+            "__name__"
+        ]);
+    }
+    /**
+     * Parses a field string from the given server-formatted string.
+     *
+     * - Splitting the empty string is not allowed (for now at least).
+     * - Empty segments within the string (e.g. if there are two consecutive
+     *   separators) are not allowed.
+     *
+     * TODO(b/37244157): we should make this more strict. Right now, it allows
+     * non-identifier path components, even if they aren't escaped.
+     */ static fromServerFormat(t) {
+        const n8 = [];
+        let e5 = "", r1 = 0;
+        const s1 = ()=>{
+            if (0 === e5.length) throw new U(A, `Invalid field path (${t}). Paths must not be empty, begin with '.', end with '.', or contain '..'`);
+            n8.push(e5), e5 = "";
+        };
+        let i1 = !1;
+        for(; r1 < t.length;){
+            const n9 = t[r1];
+            if ("\\" === n9) {
+                if (r1 + 1 === t.length) throw new U(A, "Path has trailing escape character: " + t);
+                const n10 = t[r1 + 1];
+                if ("\\" !== n10 && "." !== n10 && "`" !== n10) throw new U(A, "Path has invalid escape sequence: " + t);
+                e5 += n10, r1 += 2;
+            } else "`" === n9 ? (i1 = !i1, r1++) : "." !== n9 || i1 ? (e5 += n9, r1++) : (s1(), r1++);
+        }
+        if (s1(), i1) throw new U(A, "Unterminated ` in path: " + t);
+        return new Z(n8);
+    }
+    static emptyPath() {
+        return new Z([]);
+    }
+}
+/**
+ * @license
+ * Copyright 2017 Google LLC
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *   http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */ /**
+ * @internal
+ */ class X {
+    constructor(t11){
+        this.path = t11;
+    }
+    static fromPath(t) {
+        return new X(K.fromString(t));
+    }
+    static fromName(t) {
+        return new X(K.fromString(t).popFirst(5));
+    }
+    /** Returns true if the document is in the specified collectionId. */ hasCollectionId(t) {
+        return this.path.length >= 2 && this.path.get(this.path.length - 2) === t;
+    }
+    isEqual(t) {
+        return null !== t && 0 === K.comparator(this.path, t.path);
+    }
+    toString() {
+        return this.path.toString();
+    }
+    static comparator(t, n) {
+        return K.comparator(t.path, n.path);
+    }
+    static isDocumentKey(t) {
+        return t.length % 2 == 0;
+    }
+    /**
+     * Creates and returns a new document key with the given segments.
+     *
+     * @param segments - The segments of the path to the document
+     * @returns A new instance of DocumentKey
+     */ static fromSegments(t) {
+        return new X(new K(t.slice()));
+    }
+}
+/**
+ * @license
+ * Copyright 2017 Google LLC
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *   http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */ function tt(t12, n8, e5) {
+    if (!e5) throw new U(A, `Function ${t12}() cannot be called with an empty ${n8}.`);
+}
+/**
+ * Validates that two boolean options are not set at the same time.
+ * @internal
+ */ /**
+ * Validates that `path` refers to a document (indicated by the fact it contains
+ * an even numbers of segments).
+ */ function nt(t12) {
+    if (!X.isDocumentKey(t12)) throw new U(A, `Invalid document reference. Document references must have an even number of segments, but ${t12} has ${t12.length}.`);
+}
+/**
+ * Validates that `path` refers to a collection (indicated by the fact it
+ * contains an odd numbers of segments).
+ */ function et(t12) {
+    if (X.isDocumentKey(t12)) throw new U(A, `Invalid collection reference. Collection references must have an odd number of segments, but ${t12} has ${t12.length}.`);
+}
+/**
+ * Returns true if it's a non-null object without a custom prototype
+ * (i.e. excludes Array, Date, etc.).
+ */ /** Returns a string describing the type / value of the provided input. */ function rt(t12) {
+    if ((void 0) === t12) return "undefined";
+    if (null === t12) return "null";
+    if ("string" == typeof t12) return t12.length > 20 && (t12 = `${t12.substring(0, 20)}...`), JSON.stringify(t12);
+    if ("number" == typeof t12 || "boolean" == typeof t12) return "" + t12;
+    if ("object" == typeof t12) {
+        if (t12 instanceof Array) return "an array";
+        {
+            const n8 = /** Hacky method to try to get the constructor name for an object. */ function(t13) {
+                if (t13.constructor) {
+                    const n9 = /function\s+([^\s(]+)\s*\(/.exec(t13.constructor.toString());
+                    if (n9 && n9.length > 1) return n9[1];
+                }
+                return null;
+            }(t12);
+            return n8 ? `a custom ${n8} object` : "an object";
+        }
+    }
+    return "function" == typeof t12 ? "a function" : g();
+}
+function st(t12, // eslint-disable-next-line @typescript-eslint/no-explicit-any
+n8) {
+    if ("_delegate" in t12 && // Unwrap Compat types
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    (t12 = t12._delegate), !(t12 instanceof n8)) {
+        if (n8.name === t12.constructor.name) throw new U(A, "Type does not match the expected instance. Did you pass a reference from a different Firestore SDK?");
+        {
+            const e5 = rt(t12);
+            throw new U(A, `Expected type '${n8.name}', but it was: ${e5}`);
+        }
+    }
+    return t12;
+}
+function it(t12, n8) {
+    if (n8 <= 0) throw new U(A, `Function ${t12}() requires a positive number, but it was: ${n8}.`);
+}
+/**
+ * @license
+ * Copyright 2017 Google LLC
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *   http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */ /**
+ * Returns whether a variable is either undefined or null.
+ */ function ot(t12) {
+    return null == t12;
+}
+/** Returns whether the value represents -0. */ function ut(t12) {
+    // Detect if the value is -0.0. Based on polyfill from
+    // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/is
+    return 0 === t12 && 1 / t12 == -1 / 0;
+}
+/**
+ * Returns whether a value is an integer and in the safe integer range
+ * @param value - The value to test for being an integer and in the safe range
+ */ /**
+ * @license
+ * Copyright 2020 Google LLC
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *   http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */ const ct = {
+    BatchGetDocuments: "batchGet",
+    Commit: "commit",
+    RunQuery: "runQuery"
+};
+/**
+ * Maps RPC names to the corresponding REST endpoint name.
+ *
+ * We use array notation to avoid mangling.
+ */ /**
+ * @license
+ * Copyright 2017 Google LLC
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *   http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */ /**
+ * Error Codes describing the different ways GRPC can fail. These are copied
+ * directly from GRPC's sources here:
+ *
+ * https://github.com/grpc/grpc/blob/bceec94ea4fc5f0085d81235d8e1c06798dc341a/include/grpc%2B%2B/impl/codegen/status_code_enum.h
+ *
+ * Important! The names of these identifiers matter because the string forms
+ * are used for reverse lookups from the webchannel stream. Do NOT change the
+ * names of these identifiers or change this into a const enum.
+ */ var at, ht;
+/**
+ * Converts an HTTP Status Code to the equivalent error code.
+ *
+ * @param status - An HTTP Status Code, like 200, 404, 503, etc.
+ * @returns The equivalent Code. Unknown status codes are mapped to
+ *     Code.UNKNOWN.
+ */ function lt(t12) {
+    if ((void 0) === t12) return p("RPC_ERROR", "HTTP error has no status"), T;
+    // The canonical error codes for Google APIs [1] specify mapping onto HTTP
+    // status codes but the mapping is not bijective. In each case of ambiguity
+    // this function chooses a primary error.
+    // [1]
+    // https://github.com/googleapis/googleapis/blob/master/google/rpc/code.proto
+    switch(t12){
+        case 200:
+            // OK
+            return E;
+        case 400:
+            // Bad Request
+            return F;
+        // Other possibilities based on the forward mapping
+        // return Code.INVALID_ARGUMENT;
+        // return Code.OUT_OF_RANGE;
+        case 401:
+            // Unauthorized
+            return D;
+        case 403:
+            // Forbidden
+            return N;
+        case 404:
+            // Not Found
+            return R;
+        case 409:
+            // Conflict
+            return S;
+        // Other possibilities:
+        // return Code.ALREADY_EXISTS;
+        case 416:
+            // Range Not Satisfiable
+            return q;
+        case 429:
+            // Too Many Requests
+            return $;
+        case 499:
+            // Client Closed Request
+            return I;
+        case 500:
+            // Internal Server Error
+            return T;
+        // Other possibilities:
+        // return Code.INTERNAL;
+        // return Code.DATA_LOSS;
+        case 501:
+            // Unimplemented
+            return x;
+        case 503:
+            // Service Unavailable
+            return C;
+        case 504:
+            // Gateway Timeout
+            return P;
+        default:
+            return t12 >= 200 && t12 < 300 ? E : t12 >= 400 && t12 < 500 ? F : t12 >= 500 && t12 < 600 ? O : T;
+    }
+}
+/**
+ * @license
+ * Copyright 2020 Google LLC
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *   http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */ /**
+ * A Rest-based connection that relies on the native HTTP stack
+ * (e.g. `fetch` or a polyfill).
+ */ (ht = at || (at = {
+}))[ht.OK = 0] = "OK", ht[ht.CANCELLED = 1] = "CANCELLED", ht[ht.UNKNOWN = 2] = "UNKNOWN", ht[ht.INVALID_ARGUMENT = 3] = "INVALID_ARGUMENT", ht[ht.DEADLINE_EXCEEDED = 4] = "DEADLINE_EXCEEDED", ht[ht.NOT_FOUND = 5] = "NOT_FOUND", ht[ht.ALREADY_EXISTS = 6] = "ALREADY_EXISTS", ht[ht.PERMISSION_DENIED = 7] = "PERMISSION_DENIED", ht[ht.UNAUTHENTICATED = 16] = "UNAUTHENTICATED", ht[ht.RESOURCE_EXHAUSTED = 8] = "RESOURCE_EXHAUSTED", ht[ht.FAILED_PRECONDITION = 9] = "FAILED_PRECONDITION", ht[ht.ABORTED = 10] = "ABORTED", ht[ht.OUT_OF_RANGE = 11] = "OUT_OF_RANGE", ht[ht.UNIMPLEMENTED = 12] = "UNIMPLEMENTED", ht[ht.INTERNAL = 13] = "INTERNAL", ht[ht.UNAVAILABLE = 14] = "UNAVAILABLE", ht[ht.DATA_LOSS = 15] = "DATA_LOSS";
+class ft extends /**
+ * Base class for all Rest-based connections to the backend (WebChannel and
+ * HTTP).
+ */ class {
+    constructor(t12){
+        this.databaseInfo = t12, this.databaseId = t12.databaseId;
+        const n8 = t12.ssl ? "https" : "http";
+        this.u = n8 + "://" + t12.host, this.h = "projects/" + this.databaseId.projectId + "/databases/" + this.databaseId.database + "/documents";
+    }
+    l(t, n, e, r) {
+        const s1 = this.m(t, n);
+        m("RestConnection", "Sending: ", s1, e);
+        const i1 = {
+        };
+        return this.p(i1, r), this.g(t, s1, i1, e).then((t13)=>(m("RestConnection", "Received: ", t13), t13)
+        , (n9)=>{
+            throw y("RestConnection", `${t} failed with error: `, n9, "url: ", s1, "request:", e), n9;
+        });
+    }
+    v(t, n, e, r) {
+        // The REST API automatically aggregates all of the streamed results, so we
+        // can just use the normal invoke() method.
+        return this.l(t, n, e, r);
+    }
+    /**
+     * Modifies the headers for a request, adding any authorization token if
+     * present and any additional headers for the request.
+     */ p(t, n) {
+        if (t["X-Goog-Api-Client"] = "gl-js/ fire/" + f, // Content-Type: text/plain will avoid preflight requests which might
+        // mess with CORS and redirects by proxies. If we add custom headers
+        // we will need to change this code to potentially use the $httpOverwrite
+        // parameter supported by ESF to avoid triggering preflight requests.
+        t["Content-Type"] = "text/plain", this.databaseInfo.appId && (t["X-Firebase-GMPID"] = this.databaseInfo.appId), n) for(const e5 in n.authHeaders)n.authHeaders.hasOwnProperty(e5) && (t[e5] = n.authHeaders[e5]);
+    }
+    m(t, n) {
+        const e5 = ct[t];
+        return `${this.u}/v1/${n}:${e5}`;
+    }
+} {
+    /**
+     * @param databaseInfo - The connection info.
+     * @param fetchImpl - `fetch` or a Polyfill that implements the fetch API.
+     */ constructor(t13, n9){
+        super(t13), this.I = n9;
+    }
+    T(t, n) {
+        throw new Error("Not supported by FetchConnection");
+    }
+    async g(t, n, e, r) {
+        const s1 = JSON.stringify(r);
+        let i1;
+        try {
+            i1 = await this.I(n, {
+                method: "POST",
+                headers: e,
+                body: s1
+            });
+        } catch (t14) {
+            throw new U(lt(t14.status), "Request failed with error: " + t14.statusText);
+        }
+        if (!i1.ok) throw new U(lt(i1.status), "Request failed with error: " + i1.statusText);
+        return i1.json();
+    }
+}
+/**
+ * @license
+ * Copyright 2020 Google LLC
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *   http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */ /** Initializes the HTTP connection for the REST API. */ /**
+ * @license
+ * Copyright 2020 Google LLC
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *   http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */ /**
+ * Generates `nBytes` of random bytes.
+ *
+ * If `nBytes < 0` , an error will be thrown.
+ */ function dt(t14) {
+    // Polyfills for IE and WebWorker by using `self` and `msCrypto` when `crypto` is not available.
+    const n10 = // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    "undefined" != typeof self && (self.crypto || self.msCrypto), e5 = new Uint8Array(t14);
+    if (n10 && "function" == typeof n10.getRandomValues) n10.getRandomValues(e5);
+    else // Falls back to Math.random
+    for(let n11 = 0; n11 < t14; n11++)e5[n11] = Math.floor(256 * Math.random());
+    return e5;
+}
+/**
+ * @license
+ * Copyright 2017 Google LLC
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *   http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */ class wt {
+    static A() {
+        // Alphanumeric characters
+        const t14 = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789", n10 = Math.floor(256 / t14.length) * t14.length;
+        // The largest byte value that is a multiple of `char.length`.
+        let e5 = "";
+        for(; e5.length < 20;){
+            const r2 = dt(40);
+            for(let s1 = 0; s1 < r2.length; ++s1)// Only accept values that are [0, maxMultiple), this ensures they can
+            // be evenly mapped to indices of `chars` via a modulo operation.
+            e5.length < 20 && r2[s1] < n10 && (e5 += t14.charAt(r2[s1] % t14.length));
+        }
+        return e5;
+    }
+}
+function mt(t14, n10) {
+    return t14 < n10 ? -1 : t14 > n10 ? 1 : 0;
+}
+/** Helper to compare arrays using isEqual(). */ function pt(t14, n10, e5) {
+    return t14.length === n10.length && t14.every((t15, r2)=>e5(t15, n10[r2])
+    );
+}
+/**
+ * @license
+ * Copyright 2017 Google LLC
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *   http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */ // The earliest date supported by Firestore timestamps (0001-01-01T00:00:00Z).
+/**
+ * A `Timestamp` represents a point in time independent of any time zone or
+ * calendar, represented as seconds and fractions of seconds at nanosecond
+ * resolution in UTC Epoch time.
+ *
+ * It is encoded using the Proleptic Gregorian Calendar which extends the
+ * Gregorian calendar backwards to year one. It is encoded assuming all minutes
+ * are 60 seconds long, i.e. leap seconds are "smeared" so that no leap second
+ * table is needed for interpretation. Range is from 0001-01-01T00:00:00Z to
+ * 9999-12-31T23:59:59.999999999Z.
+ *
+ * For examples and further specifications, refer to the
+ * {@link https://github.com/google/protobuf/blob/master/src/google/protobuf/timestamp.proto | Timestamp definition}.
+ */ class yt {
+    /**
+     * Creates a new timestamp.
+     *
+     * @param seconds - The number of seconds of UTC time since Unix epoch
+     *     1970-01-01T00:00:00Z. Must be from 0001-01-01T00:00:00Z to
+     *     9999-12-31T23:59:59Z inclusive.
+     * @param nanoseconds - The non-negative fractions of a second at nanosecond
+     *     resolution. Negative second values with fractions must still have
+     *     non-negative nanoseconds values that count forward in time. Must be
+     *     from 0 to 999,999,999 inclusive.
+     */ constructor(/**
+     * The number of seconds of UTC time since Unix epoch 1970-01-01T00:00:00Z.
+     */ t14, /**
+     * The fractions of a second at nanosecond resolution.*
+     */ n10){
+        if (this.seconds = t14, this.nanoseconds = n10, n10 < 0) throw new U(A, "Timestamp nanoseconds out of range: " + n10);
+        if (n10 >= 1000000000) throw new U(A, "Timestamp nanoseconds out of range: " + n10);
+        if (t14 < -62135596800) throw new U(A, "Timestamp seconds out of range: " + t14);
+        // This will break in the year 10,000.
+        if (t14 >= 253402300800) throw new U(A, "Timestamp seconds out of range: " + t14);
+    }
+    /**
+     * Creates a new timestamp with the current date, with millisecond precision.
+     *
+     * @returns a new timestamp representing the current date.
+     */ static now() {
+        return yt.fromMillis(Date.now());
+    }
+    /**
+     * Creates a new timestamp from the given date.
+     *
+     * @param date - The date to initialize the `Timestamp` from.
+     * @returns A new `Timestamp` representing the same point in time as the given
+     *     date.
+     */ static fromDate(t) {
+        return yt.fromMillis(t.getTime());
+    }
+    /**
+     * Creates a new timestamp from the given number of milliseconds.
+     *
+     * @param milliseconds - Number of milliseconds since Unix epoch
+     *     1970-01-01T00:00:00Z.
+     * @returns A new `Timestamp` representing the same point in time as the given
+     *     number of milliseconds.
+     */ static fromMillis(t) {
+        const n11 = Math.floor(t / 1000), e5 = Math.floor(1000000 * (t - 1000 * n11));
+        return new yt(n11, e5);
+    }
+    /**
+     * Converts a `Timestamp` to a JavaScript `Date` object. This conversion
+     * causes a loss of precision since `Date` objects only support millisecond
+     * precision.
+     *
+     * @returns JavaScript `Date` object representing the same point in time as
+     *     this `Timestamp`, with millisecond precision.
+     */ toDate() {
+        return new Date(this.toMillis());
+    }
+    /**
+     * Converts a `Timestamp` to a numeric timestamp (in milliseconds since
+     * epoch). This operation causes a loss of precision.
+     *
+     * @returns The point in time corresponding to this timestamp, represented as
+     *     the number of milliseconds since Unix epoch 1970-01-01T00:00:00Z.
+     */ toMillis() {
+        return 1000 * this.seconds + this.nanoseconds / 1000000;
+    }
+    _compareTo(t) {
+        return this.seconds === t.seconds ? mt(this.nanoseconds, t.nanoseconds) : mt(this.seconds, t.seconds);
+    }
+    /**
+     * Returns true if this `Timestamp` is equal to the provided one.
+     *
+     * @param other - The `Timestamp` to compare against.
+     * @returns true if this `Timestamp` is equal to the provided one.
+     */ isEqual(t) {
+        return t.seconds === this.seconds && t.nanoseconds === this.nanoseconds;
+    }
+    /** Returns a textual representation of this `Timestamp`. */ toString() {
+        return "Timestamp(seconds=" + this.seconds + ", nanoseconds=" + this.nanoseconds + ")";
+    }
+    /** Returns a JSON-serializable representation of this `Timestamp`. */ toJSON() {
+        return {
+            seconds: this.seconds,
+            nanoseconds: this.nanoseconds
+        };
+    }
+    /**
+     * Converts this object to a primitive string, which allows `Timestamp` objects
+     * to be compared using the `>`, `<=`, `>=` and `>` operators.
+     */ valueOf() {
+        // This method returns a string of the form <seconds>.<nanoseconds> where
+        // <seconds> is translated to have a non-negative value and both <seconds>
+        // and <nanoseconds> are left-padded with zeroes to be a consistent length.
+        // Strings with this format then have a lexiographical ordering that matches
+        // the expected ordering. The <seconds> translation is done to avoid having
+        // a leading negative sign (i.e. a leading '-' character) in its string
+        // representation, which would affect its lexiographical ordering.
+        const t15 = this.seconds - -62135596800;
+        // Note: Up to 12 decimal digits are required to represent all valid
+        // 'seconds' values.
+        return String(t15).padStart(12, "0") + "." + String(this.nanoseconds).padStart(9, "0");
+    }
+}
+/**
+ * @license
+ * Copyright 2017 Google LLC
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *   http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */ /**
+ * A version of a document in Firestore. This corresponds to the version
+ * timestamp, such as update_time or read_time.
+ */ class _t {
+    constructor(t15){
+        this.timestamp = t15;
+    }
+    static fromTimestamp(t) {
+        return new _t(t);
+    }
+    static min() {
+        return new _t(new yt(0, 0));
+    }
+    compareTo(t) {
+        return this.timestamp._compareTo(t.timestamp);
+    }
+    isEqual(t) {
+        return this.timestamp.isEqual(t.timestamp);
+    }
+    /** Returns a number representation of the version for use in spec tests. */ toMicroseconds() {
+        // Convert to microseconds.
+        return 1000000 * this.timestamp.seconds + this.timestamp.nanoseconds / 1000;
+    }
+    toString() {
+        return "SnapshotVersion(" + this.timestamp.toString() + ")";
+    }
+    toTimestamp() {
+        return this.timestamp;
+    }
+}
+/**
+ * @license
+ * Copyright 2017 Google LLC
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *   http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */ function gt(t16) {
+    let n11 = 0;
+    for(const e5 in t16)Object.prototype.hasOwnProperty.call(t16, e5) && n11++;
+    return n11;
+}
+function bt(t16, n11) {
+    for(const e5 in t16)Object.prototype.hasOwnProperty.call(t16, e5) && n11(e5, t16[e5]);
+}
+/**
+ * @license
+ * Copyright 2020 Google LLC
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *   http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */ /**
+ * Provides a set of fields that can be used to partially patch a document.
+ * FieldMask is used in conjunction with ObjectValue.
+ * Examples:
+ *   foo - Overwrites foo entirely with the provided value. If foo is not
+ *         present in the companion ObjectValue, the field is deleted.
+ *   foo.bar - Overwrites only the field bar of the object foo.
+ *             If foo is not an object, foo is replaced with an object
+ *             containing foo
+ */ class vt {
+    constructor(t16){
+        this.fields = t16, // TODO(dimond): validation of FieldMask
+        // Sort the field mask to support `FieldMask.isEqual()` and assert below.
+        t16.sort(Z.comparator);
+    }
+    /**
+     * Verifies that `fieldPath` is included by at least one field in this field
+     * mask.
+     *
+     * This is an O(n) operation, where `n` is the size of the field mask.
+     */ covers(t) {
+        for (const n11 of this.fields)if (n11.isPrefixOf(t)) return !0;
+        return !1;
+    }
+    isEqual(t) {
+        return pt(this.fields, t.fields, (t17, n11)=>t17.isEqual(n11)
+        );
+    }
+}
+/**
+ * @license
+ * Copyright 2020 Google LLC
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *   http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */ /** Converts a Base64 encoded string to a binary string. */ /**
+ * @license
+ * Copyright 2020 Google LLC
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *   http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */ /**
+ * Immutable class that represents a "proto" byte string.
+ *
+ * Proto byte strings can either be Base64-encoded strings or Uint8Arrays when
+ * sent on the wire. This class abstracts away this differentiation by holding
+ * the proto byte string in a common class that must be converted into a string
+ * before being sent as a proto.
+ * @internal
+ */ class Et {
+    constructor(t17){
+        this.binaryString = t17;
+    }
+    static fromBase64String(t) {
+        const n11 = atob(t);
+        return new Et(n11);
+    }
+    static fromUint8Array(t) {
+        const n11 = /**
+ * Helper function to convert an Uint8array to a binary string.
+ */ function(t18) {
+            let n12 = "";
+            for(let e5 = 0; e5 < t18.length; ++e5)n12 += String.fromCharCode(t18[e5]);
+            return n12;
+        }(t);
+        return new Et(n11);
+    }
+    toBase64() {
+        var t18;
+        return t18 = this.binaryString, btoa(t18);
+    }
+    toUint8Array() {
+        return (function(t19) {
+            const n11 = new Uint8Array(t19.length);
+            for(let e5 = 0; e5 < t19.length; e5++)n11[e5] = t19.charCodeAt(e5);
+            return n11;
+        })(this.binaryString);
+    }
+    approximateByteSize() {
+        return 2 * this.binaryString.length;
+    }
+    compareTo(t) {
+        return mt(this.binaryString, t.binaryString);
+    }
+    isEqual(t) {
+        return this.binaryString === t.binaryString;
+    }
+}
+Et.EMPTY_BYTE_STRING = new Et("");
+const It = new RegExp(/^\d{4}-\d\d-\d\dT\d\d:\d\d:\d\d(?:\.(\d+))?Z$/);
+/**
+ * Converts the possible Proto values for a timestamp value into a "seconds and
+ * nanos" representation.
+ */ function Tt(t19) {
+    // The json interface (for the browser) will return an iso timestamp string,
+    // while the proto js library (for node) will return a
+    // google.protobuf.Timestamp instance.
+    if (b(!!t19), "string" == typeof t19) {
+        // The date string can have higher precision (nanos) than the Date class
+        // (millis), so we do some custom parsing here.
+        // Parse the nanos right out of the string.
+        let n11 = 0;
+        const e5 = It.exec(t19);
+        if (b(!!e5), e5[1]) {
+            // Pad the fraction out to 9 digits (nanos).
+            let t20 = e5[1];
+            t20 = (t20 + "000000000").substr(0, 9), n11 = Number(t20);
+        }
+        // Parse the date to get the seconds.
+        const r2 = new Date(t19);
+        return {
+            seconds: Math.floor(r2.getTime() / 1000),
+            nanos: n11
+        };
+    }
+    return {
+        seconds: At(t19.seconds),
+        nanos: At(t19.nanos)
+    };
+}
+/**
+ * Converts the possible Proto types for numbers into a JavaScript number.
+ * Returns 0 if the value is not numeric.
+ */ function At(t19) {
+    // TODO(bjornick): Handle int64 greater than 53 bits.
+    return "number" == typeof t19 ? t19 : "string" == typeof t19 ? Number(t19) : 0;
+}
+/** Converts the possible Proto types for Blobs into a ByteString. */ function Pt(t19) {
+    return "string" == typeof t19 ? Et.fromBase64String(t19) : Et.fromUint8Array(t19);
+}
+/**
+ * @license
+ * Copyright 2020 Google LLC
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *   http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */ /**
+ * Represents a locally-applied ServerTimestamp.
+ *
+ * Server Timestamps are backed by MapValues that contain an internal field
+ * `__type__` with a value of `server_timestamp`. The previous value and local
+ * write time are stored in its `__previous_value__` and `__local_write_time__`
+ * fields respectively.
+ *
+ * Notes:
+ * - ServerTimestampValue instances are created as the result of applying a
+ *   transform. They can only exist in the local view of a document. Therefore
+ *   they do not need to be parsed or serialized.
+ * - When evaluated locally (e.g. for snapshot.data()), they by default
+ *   evaluate to `null`. This behavior can be configured by passing custom
+ *   FieldValueOptions to value().
+ * - With respect to other ServerTimestampValues, they sort by their
+ *   localWriteTime.
+ */ function Rt(t19) {
+    var n11, e5;
+    return "server_timestamp" === (null === (e5 = ((null === (n11 = null == t19 ? void 0 : t19.mapValue) || (void 0) === n11 ? void 0 : n11.fields) || {
+    }).__type__) || (void 0) === e5 ? void 0 : e5.stringValue);
+}
+/**
+ * Returns the value of the field before this ServerTimestamp was set.
+ *
+ * Preserving the previous values allows the user to display the last resoled
+ * value until the backend responds with the timestamp.
+ */ function Vt(t19) {
+    const n11 = t19.mapValue.fields.__previous_value__;
+    return Rt(n11) ? Vt(n11) : n11;
+}
+/**
+ * Returns the local time at which this timestamp was first set.
+ */ function Nt(t19) {
+    const n11 = Tt(t19.mapValue.fields.__local_write_time__.timestampValue);
+    return new yt(n11.seconds, n11.nanos);
+}
+/**
+ * @license
+ * Copyright 2020 Google LLC
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *   http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */ /** Extracts the backend's type order for the provided value. */ function Dt(t19) {
+    return "nullValue" in t19 ? 0 /* NullValue */  : "booleanValue" in t19 ? 1 /* BooleanValue */  : "integerValue" in t19 || "doubleValue" in t19 ? 2 /* NumberValue */  : "timestampValue" in t19 ? 3 /* TimestampValue */  : "stringValue" in t19 ? 5 /* StringValue */  : "bytesValue" in t19 ? 6 /* BlobValue */  : "referenceValue" in t19 ? 7 /* RefValue */  : "geoPointValue" in t19 ? 8 /* GeoPointValue */  : "arrayValue" in t19 ? 9 /* ArrayValue */  : "mapValue" in t19 ? Rt(t19) ? 4 /* ServerTimestampValue */  : 10 /* ObjectValue */  : g();
+}
+/** Tests `left` and `right` for equality based on the backend semantics. */ function $t(t19, n11) {
+    const e5 = Dt(t19);
+    if (e5 !== Dt(n11)) return !1;
+    switch(e5){
+        case 0 /* NullValue */ :
+            return !0;
+        case 1 /* BooleanValue */ :
+            return t19.booleanValue === n11.booleanValue;
+        case 4 /* ServerTimestampValue */ :
+            return Nt(t19).isEqual(Nt(n11));
+        case 3 /* TimestampValue */ :
+            return (function(t20, n12) {
+                if ("string" == typeof t20.timestampValue && "string" == typeof n12.timestampValue && t20.timestampValue.length === n12.timestampValue.length) // Use string equality for ISO 8601 timestamps
+                return t20.timestampValue === n12.timestampValue;
+                const e6 = Tt(t20.timestampValue), r2 = Tt(n12.timestampValue);
+                return e6.seconds === r2.seconds && e6.nanos === r2.nanos;
+            })(t19, n11);
+        case 5 /* StringValue */ :
+            return t19.stringValue === n11.stringValue;
+        case 6 /* BlobValue */ :
+            return (function(t20, n12) {
+                return Pt(t20.bytesValue).isEqual(Pt(n12.bytesValue));
+            })(t19, n11);
+        case 7 /* RefValue */ :
+            return t19.referenceValue === n11.referenceValue;
+        case 8 /* GeoPointValue */ :
+            return (function(t20, n12) {
+                return At(t20.geoPointValue.latitude) === At(n12.geoPointValue.latitude) && At(t20.geoPointValue.longitude) === At(n12.geoPointValue.longitude);
+            })(t19, n11);
+        case 2 /* NumberValue */ :
+            return (function(t20, n12) {
+                if ("integerValue" in t20 && "integerValue" in n12) return At(t20.integerValue) === At(n12.integerValue);
+                if ("doubleValue" in t20 && "doubleValue" in n12) {
+                    const e6 = At(t20.doubleValue), r2 = At(n12.doubleValue);
+                    return e6 === r2 ? ut(e6) === ut(r2) : isNaN(e6) && isNaN(r2);
+                }
+                return !1;
+            })(t19, n11);
+        case 9 /* ArrayValue */ :
+            return pt(t19.arrayValue.values || [], n11.arrayValue.values || [], $t);
+        case 10 /* ObjectValue */ :
+            return (function(t20, n12) {
+                const e6 = t20.mapValue.fields || {
+                }, r2 = n12.mapValue.fields || {
+                };
+                if (gt(e6) !== gt(r2)) return !1;
+                for(const t21 in e6)if (e6.hasOwnProperty(t21) && ((void 0) === r2[t21] || !$t(e6[t21], r2[t21]))) return !1;
+                return !0;
+            })(t19, n11);
+        default:
+            return g();
+    }
+}
+function Ft(t19, n11) {
+    return (void 0) !== (t19.values || []).find((t20)=>$t(t20, n11)
+    );
+}
+function St(t19, n11) {
+    const e5 = Dt(t19), r2 = Dt(n11);
+    if (e5 !== r2) return mt(e5, r2);
+    switch(e5){
+        case 0 /* NullValue */ :
+            return 0;
+        case 1 /* BooleanValue */ :
+            return mt(t19.booleanValue, n11.booleanValue);
+        case 2 /* NumberValue */ :
+            return (function(t20, n12) {
+                const e6 = At(t20.integerValue || t20.doubleValue), r3 = At(n12.integerValue || n12.doubleValue);
+                return e6 < r3 ? -1 : e6 > r3 ? 1 : e6 === r3 ? 0 : // one or both are NaN.
+                isNaN(e6) ? isNaN(r3) ? 0 : -1 : 1;
+            })(t19, n11);
+        case 3 /* TimestampValue */ :
+            return qt(t19.timestampValue, n11.timestampValue);
+        case 4 /* ServerTimestampValue */ :
+            return qt(Nt(t19), Nt(n11));
+        case 5 /* StringValue */ :
+            return mt(t19.stringValue, n11.stringValue);
+        case 6 /* BlobValue */ :
+            return (function(t20, n12) {
+                const e6 = Pt(t20), r3 = Pt(n12);
+                return e6.compareTo(r3);
+            })(t19.bytesValue, n11.bytesValue);
+        case 7 /* RefValue */ :
+            return (function(t20, n12) {
+                const e6 = t20.split("/"), r3 = n12.split("/");
+                for(let t21 = 0; t21 < e6.length && t21 < r3.length; t21++){
+                    const n13 = mt(e6[t21], r3[t21]);
+                    if (0 !== n13) return n13;
+                }
+                return mt(e6.length, r3.length);
+            })(t19.referenceValue, n11.referenceValue);
+        case 8 /* GeoPointValue */ :
+            return (function(t20, n12) {
+                const e6 = mt(At(t20.latitude), At(n12.latitude));
+                if (0 !== e6) return e6;
+                return mt(At(t20.longitude), At(n12.longitude));
+            })(t19.geoPointValue, n11.geoPointValue);
+        case 9 /* ArrayValue */ :
+            return (function(t20, n12) {
+                const e6 = t20.values || [], r3 = n12.values || [];
+                for(let t21 = 0; t21 < e6.length && t21 < r3.length; ++t21){
+                    const n13 = St(e6[t21], r3[t21]);
+                    if (n13) return n13;
+                }
+                return mt(e6.length, r3.length);
+            })(t19.arrayValue, n11.arrayValue);
+        case 10 /* ObjectValue */ :
+            return (function(t20, n12) {
+                const e6 = t20.fields || {
+                }, r3 = Object.keys(e6), s1 = n12.fields || {
+                }, i1 = Object.keys(s1);
+                // Even though MapValues are likely sorted correctly based on their insertion
+                // order (e.g. when received from the backend), local modifications can bring
+                // elements out of order. We need to re-sort the elements to ensure that
+                // canonical IDs are independent of insertion order.
+                r3.sort(), i1.sort();
+                for(let t21 = 0; t21 < r3.length && t21 < i1.length; ++t21){
+                    const n13 = mt(r3[t21], i1[t21]);
+                    if (0 !== n13) return n13;
+                    const o1 = St(e6[r3[t21]], s1[i1[t21]]);
+                    if (0 !== o1) return o1;
+                }
+                return mt(r3.length, i1.length);
+            })(t19.mapValue, n11.mapValue);
+        default:
+            throw g();
+    }
+}
+function qt(t19, n11) {
+    if ("string" == typeof t19 && "string" == typeof n11 && t19.length === n11.length) return mt(t19, n11);
+    const e5 = Tt(t19), r2 = Tt(n11), s1 = mt(e5.seconds, r2.seconds);
+    return 0 !== s1 ? s1 : mt(e5.nanos, r2.nanos);
+}
+function xt(t19, n11) {
+    return {
+        referenceValue: `projects/${t19.projectId}/databases/${t19.database}/documents/${n11.path.canonicalString()}`
+    };
+}
+/** Returns true if `value` is an ArrayValue. */ function Ot(t19) {
+    return !!t19 && "arrayValue" in t19;
+}
+/** Returns true if `value` is a NullValue. */ function Ct(t19) {
+    return !!t19 && "nullValue" in t19;
+}
+/** Returns true if `value` is NaN. */ function Lt(t19) {
+    return !!t19 && "doubleValue" in t19 && isNaN(Number(t19.doubleValue));
+}
+/** Returns true if `value` is a MapValue. */ function Ut(t19) {
+    return !!t19 && "mapValue" in t19;
+}
+/** Creates a deep copy of `source`. */ function jt(t19) {
+    if (t19.geoPointValue) return {
+        geoPointValue: Object.assign({
+        }, t19.geoPointValue)
+    };
+    if (t19.timestampValue && "object" == typeof t19.timestampValue) return {
+        timestampValue: Object.assign({
+        }, t19.timestampValue)
+    };
+    if (t19.mapValue) {
+        const n11 = {
+            mapValue: {
+                fields: {
+                }
+            }
+        };
+        return bt(t19.mapValue.fields, (t20, e5)=>n11.mapValue.fields[t20] = jt(e5)
+        ), n11;
+    }
+    if (t19.arrayValue) {
+        const n11 = {
+            arrayValue: {
+                values: []
+            }
+        };
+        for(let e5 = 0; e5 < (t19.arrayValue.values || []).length; ++e5)n11.arrayValue.values[e5] = jt(t19.arrayValue.values[e5]);
+        return n11;
+    }
+    return Object.assign({
+    }, t19);
+}
+/**
+ * @license
+ * Copyright 2017 Google LLC
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *   http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */ /**
+ * An ObjectValue represents a MapValue in the Firestore Proto and offers the
+ * ability to add and remove fields (via the ObjectValueBuilder).
+ */ class kt {
+    constructor(t19){
+        this.value = t19;
+    }
+    static empty() {
+        return new kt({
+            mapValue: {
+            }
+        });
+    }
+    /**
+     * Returns the value at the given path or null.
+     *
+     * @param path - the path to search
+     * @returns The value at the path or null if the path is not set.
+     */ field(t) {
+        if (t.isEmpty()) return this.value;
+        {
+            let n11 = this.value;
+            for(let e5 = 0; e5 < t.length - 1; ++e5)if (n11 = (n11.mapValue.fields || {
+            })[t.get(e5)], !Ut(n11)) return null;
+            return n11 = (n11.mapValue.fields || {
+            })[t.lastSegment()], n11 || null;
+        }
+    }
+    /**
+     * Sets the field to the provided value.
+     *
+     * @param path - The field path to set.
+     * @param value - The value to set.
+     */ set(t, n) {
+        this.getFieldsMap(t.popLast())[t.lastSegment()] = jt(n);
+    }
+    /**
+     * Sets the provided fields to the provided values.
+     *
+     * @param data - A map of fields to values (or null for deletes).
+     */ setAll(t) {
+        let n11 = Z.emptyPath(), e5 = {
+        }, r2 = [];
+        t.forEach((t20, s1)=>{
+            if (!n11.isImmediateParentOf(s1)) {
+                // Insert the accumulated changes at this parent location
+                const t21 = this.getFieldsMap(n11);
+                this.applyChanges(t21, e5, r2), e5 = {
+                }, r2 = [], n11 = s1.popLast();
+            }
+            t20 ? e5[s1.lastSegment()] = jt(t20) : r2.push(s1.lastSegment());
+        });
+        const s1 = this.getFieldsMap(n11);
+        this.applyChanges(s1, e5, r2);
+    }
+    /**
+     * Removes the field at the specified path. If there is no field at the
+     * specified path, nothing is changed.
+     *
+     * @param path - The field path to remove.
+     */ delete(t) {
+        const n11 = this.field(t.popLast());
+        Ut(n11) && n11.mapValue.fields && delete n11.mapValue.fields[t.lastSegment()];
+    }
+    isEqual(t) {
+        return $t(this.value, t.value);
+    }
+    /**
+     * Returns the map that contains the leaf element of `path`. If the parent
+     * entry does not yet exist, or if it is not a map, a new map will be created.
+     */ getFieldsMap(t) {
+        let n11 = this.value;
+        n11.mapValue.fields || (n11.mapValue = {
+            fields: {
+            }
+        });
+        for(let e5 = 0; e5 < t.length; ++e5){
+            let r2 = n11.mapValue.fields[t.get(e5)];
+            Ut(r2) && r2.mapValue.fields || (r2 = {
+                mapValue: {
+                    fields: {
+                    }
+                }
+            }, n11.mapValue.fields[t.get(e5)] = r2), n11 = r2;
+        }
+        return n11.mapValue.fields;
+    }
+    /**
+     * Modifies `fieldsMap` by adding, replacing or deleting the specified
+     * entries.
+     */ applyChanges(t, n, e) {
+        bt(n, (n11, e5)=>t[n11] = e5
+        );
+        for (const n11 of e)delete t[n11];
+    }
+    clone() {
+        return new kt(jt(this.value));
+    }
+}
+/**
+ * @license
+ * Copyright 2017 Google LLC
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *   http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */ /**
+ * Represents a document in Firestore with a key, version, data and whether it
+ * has local mutations applied to it.
+ *
+ * Documents can transition between states via `convertToFoundDocument()`,
+ * `convertToNoDocument()` and `convertToUnknownDocument()`. If a document does
+ * not transition to one of these states even after all mutations have been
+ * applied, `isValidDocument()` returns false and the document should be removed
+ * from all views.
+ */ class Mt {
+    constructor(t20, n11, e5, r2, s1){
+        this.key = t20, this.documentType = n11, this.version = e5, this.data = r2, this.documentState = s1;
+    }
+    /**
+     * Creates a document with no known version or data, but which can serve as
+     * base document for mutations.
+     */ static newInvalidDocument(t) {
+        return new Mt(t, 0 /* INVALID */ , _t.min(), kt.empty(), 0 /* SYNCED */ );
+    }
+    /**
+     * Creates a new document that is known to exist with the given data at the
+     * given version.
+     */ static newFoundDocument(t, n, e) {
+        return new Mt(t, 1 /* FOUND_DOCUMENT */ , n, e, 0 /* SYNCED */ );
+    }
+    /** Creates a new document that is known to not exist at the given version. */ static newNoDocument(t, n) {
+        return new Mt(t, 2 /* NO_DOCUMENT */ , n, kt.empty(), 0 /* SYNCED */ );
+    }
+    /**
+     * Creates a new document that is known to exist at the given version but
+     * whose data is not known (e.g. a document that was updated without a known
+     * base document).
+     */ static newUnknownDocument(t, n) {
+        return new Mt(t, 3 /* UNKNOWN_DOCUMENT */ , n, kt.empty(), 2 /* HAS_COMMITTED_MUTATIONS */ );
+    }
+    /**
+     * Changes the document type to indicate that it exists and that its version
+     * and data are known.
+     */ convertToFoundDocument(t, n) {
+        return this.version = t, this.documentType = 1 /* FOUND_DOCUMENT */ , this.data = n, this.documentState = 0 /* SYNCED */ , this;
+    }
+    /**
+     * Changes the document type to indicate that it doesn't exist at the given
+     * version.
+     */ convertToNoDocument(t) {
+        return this.version = t, this.documentType = 2 /* NO_DOCUMENT */ , this.data = kt.empty(), this.documentState = 0 /* SYNCED */ , this;
+    }
+    /**
+     * Changes the document type to indicate that it exists at a given version but
+     * that its data is not known (e.g. a document that was updated without a known
+     * base document).
+     */ convertToUnknownDocument(t) {
+        return this.version = t, this.documentType = 3 /* UNKNOWN_DOCUMENT */ , this.data = kt.empty(), this.documentState = 2 /* HAS_COMMITTED_MUTATIONS */ , this;
+    }
+    setHasCommittedMutations() {
+        return this.documentState = 2 /* HAS_COMMITTED_MUTATIONS */ , this;
+    }
+    setHasLocalMutations() {
+        return this.documentState = 1 /* HAS_LOCAL_MUTATIONS */ , this;
+    }
+    get hasLocalMutations() {
+        return 1 /* HAS_LOCAL_MUTATIONS */  === this.documentState;
+    }
+    get hasCommittedMutations() {
+        return 2 /* HAS_COMMITTED_MUTATIONS */  === this.documentState;
+    }
+    get hasPendingWrites() {
+        return this.hasLocalMutations || this.hasCommittedMutations;
+    }
+    isValidDocument() {
+        return 0 /* INVALID */  !== this.documentType;
+    }
+    isFoundDocument() {
+        return 1 /* FOUND_DOCUMENT */  === this.documentType;
+    }
+    isNoDocument() {
+        return 2 /* NO_DOCUMENT */  === this.documentType;
+    }
+    isUnknownDocument() {
+        return 3 /* UNKNOWN_DOCUMENT */  === this.documentType;
+    }
+    isEqual(t) {
+        return t instanceof Mt && this.key.isEqual(t.key) && this.version.isEqual(t.version) && this.documentType === t.documentType && this.documentState === t.documentState && this.data.isEqual(t.data);
+    }
+    clone() {
+        return new Mt(this.key, this.documentType, this.version, this.data.clone(), this.documentState);
+    }
+    toString() {
+        return `Document(${this.key}, ${this.version}, ${JSON.stringify(this.data.value)}, {documentType: ${this.documentType}}), {documentState: ${this.documentState}})`;
+    }
+}
+/**
+ * @license
+ * Copyright 2019 Google LLC
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *   http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */ // Visible for testing
+class Bt {
+    constructor(t21, n12 = null, e6 = [], r3 = [], s2 = null, i1 = null, o1 = null){
+        this.path = t21, this.collectionGroup = n12, this.orderBy = e6, this.filters = r3, this.limit = s2, this.startAt = i1, this.endAt = o1, this.P = null;
+    }
+}
+/**
+ * Initializes a Target with a path and optional additional query constraints.
+ * Path must currently be empty if this is a collection group query.
+ *
+ * NOTE: you should always construct `Target` from `Query.toTarget` instead of
+ * using this factory method, because `Query` provides an implicit `orderBy`
+ * property.
+ */ function Qt(t22, n13 = null, e7 = [], r4 = [], s3 = null, i2 = null, o2 = null) {
+    return new Bt(t22, n13, e7, r4, s3, i2, o2);
+}
+class zt extends class {
+} {
+    constructor(t22, n13, e7){
+        super(), this.field = t22, this.op = n13, this.value = e7;
+    }
+    /**
+     * Creates a filter based on the provided arguments.
+     */ static create(t, n, e) {
+        return t.isKeyField() ? "in" /* IN */  === n || "not-in" /* NOT_IN */  === n ? this.R(t, n, e) : new Wt(t, n, e) : "array-contains" /* ARRAY_CONTAINS */  === n ? new Kt(t, e) : "in" /* IN */  === n ? new Jt(t, e) : "not-in" /* NOT_IN */  === n ? new Zt(t, e) : "array-contains-any" /* ARRAY_CONTAINS_ANY */  === n ? new Xt(t, e) : new zt(t, n, e);
+    }
+    static R(t, n, e) {
+        return "in" /* IN */  === n ? new Gt(t, e) : new Ht(t, e);
+    }
+    matches(t) {
+        const n14 = t.data.field(this.field);
+        // Types do not have to match in NOT_EQUAL filters.
+        return "!=" /* NOT_EQUAL */  === this.op ? null !== n14 && this.V(St(n14, this.value)) : null !== n14 && Dt(this.value) === Dt(n14) && this.V(St(n14, this.value));
+    // Only compare types with matching backend order (such as double and int).
+    }
+    V(t) {
+        switch(this.op){
+            case "<" /* LESS_THAN */ :
+                return t < 0;
+            case "<=" /* LESS_THAN_OR_EQUAL */ :
+                return t <= 0;
+            case "==" /* EQUAL */ :
+                return 0 === t;
+            case "!=" /* NOT_EQUAL */ :
+                return 0 !== t;
+            case ">" /* GREATER_THAN */ :
+                return t > 0;
+            case ">=" /* GREATER_THAN_OR_EQUAL */ :
+                return t >= 0;
+            default:
+                return g();
+        }
+    }
+    N() {
+        return [
+            "<" /* LESS_THAN */ ,
+            "<=" /* LESS_THAN_OR_EQUAL */ ,
+            ">" /* GREATER_THAN */ ,
+            ">=" /* GREATER_THAN_OR_EQUAL */ ,
+            "!=" /* NOT_EQUAL */ ,
+            "not-in" /* NOT_IN */ 
+        ].indexOf(this.op) >= 0;
+    }
+}
+/** Filter that matches on key fields (i.e. '__name__'). */ class Wt extends zt {
+    constructor(t23, n14, e8){
+        super(t23, n14, e8), this.key = X.fromName(e8.referenceValue);
+    }
+    matches(t) {
+        const n15 = X.comparator(t.key, this.key);
+        return this.V(n15);
+    }
+}
+/** Filter that matches on key fields within an array. */ class Gt extends zt {
+    constructor(t24, n15){
+        super(t24, "in" /* IN */ , n15), this.keys = Yt("in" /* IN */ , n15);
+    }
+    matches(t) {
+        return this.keys.some((n16)=>n16.isEqual(t.key)
+        );
+    }
+}
+/** Filter that matches on key fields not present within an array. */ class Ht extends zt {
+    constructor(t25, n16){
+        super(t25, "not-in" /* NOT_IN */ , n16), this.keys = Yt("not-in" /* NOT_IN */ , n16);
+    }
+    matches(t) {
+        return !this.keys.some((n17)=>n17.isEqual(t.key)
+        );
+    }
+}
+function Yt(t26, n17) {
+    var e9;
+    return ((null === (e9 = n17.arrayValue) || (void 0) === e9 ? void 0 : e9.values) || []).map((t27)=>X.fromName(t27.referenceValue)
+    );
+}
+/** A Filter that implements the array-contains operator. */ class Kt extends zt {
+    constructor(t26, n17){
+        super(t26, "array-contains" /* ARRAY_CONTAINS */ , n17);
+    }
+    matches(t) {
+        const n18 = t.data.field(this.field);
+        return Ot(n18) && Ft(n18.arrayValue, this.value);
+    }
+}
+/** A Filter that implements the IN operator. */ class Jt extends zt {
+    constructor(t27, n18){
+        super(t27, "in" /* IN */ , n18);
+    }
+    matches(t) {
+        const n19 = t.data.field(this.field);
+        return null !== n19 && Ft(this.value.arrayValue, n19);
+    }
+}
+/** A Filter that implements the not-in operator. */ class Zt extends zt {
+    constructor(t28, n19){
+        super(t28, "not-in" /* NOT_IN */ , n19);
+    }
+    matches(t) {
+        if (Ft(this.value.arrayValue, {
+            nullValue: "NULL_VALUE"
+        })) return !1;
+        const n20 = t.data.field(this.field);
+        return null !== n20 && !Ft(this.value.arrayValue, n20);
+    }
+}
+/** A Filter that implements the array-contains-any operator. */ class Xt extends zt {
+    constructor(t29, n20){
+        super(t29, "array-contains-any" /* ARRAY_CONTAINS_ANY */ , n20);
+    }
+    matches(t) {
+        const n21 = t.data.field(this.field);
+        return !(!Ot(n21) || !n21.arrayValue.values) && n21.arrayValue.values.some((t30)=>Ft(this.value.arrayValue, t30)
+        );
+    }
+}
+/**
+ * Represents a bound of a query.
+ *
+ * The bound is specified with the given components representing a position and
+ * whether it's just before or just after the position (relative to whatever the
+ * query order is).
+ *
+ * The position represents a logical index position for a query. It's a prefix
+ * of values for the (potentially implicit) order by clauses of a query.
+ *
+ * Bound provides a function to determine whether a document comes before or
+ * after a bound. This is influenced by whether the position is just before or
+ * just after the provided values.
+ */ class tn {
+    constructor(t30, n21){
+        this.position = t30, this.before = n21;
+    }
+}
+/**
+ * An ordering on a field, in some Direction. Direction defaults to ASCENDING.
+ */ class nn {
+    constructor(t31, n22 = "asc" /* ASCENDING */ ){
+        this.field = t31, this.dir = n22;
+    }
+}
+function en(t32, n23) {
+    return t32.dir === n23.dir && t32.field.isEqual(n23.field);
+}
+function rn(t32, n23) {
+    if (null === t32) return null === n23;
+    if (null === n23) return !1;
+    if (t32.before !== n23.before || t32.position.length !== n23.position.length) return !1;
+    for(let e9 = 0; e9 < t32.position.length; e9++){
+        if (!$t(t32.position[e9], n23.position[e9])) return !1;
+    }
+    return !0;
+}
+/**
+ * @license
+ * Copyright 2017 Google LLC
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *   http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */ /**
+ * Query encapsulates all the query attributes we support in the SDK. It can
+ * be run against the LocalStore, as well as be converted to a `Target` to
+ * query the RemoteStore results.
+ *
+ * Visible for testing.
+ */ class sn {
+    /**
+     * Initializes a Query with a path and optional additional query constraints.
+     * Path must currently be empty if this is a collection group query.
+     */ constructor(t32, n23 = null, e9 = [], r4 = [], s3 = null, i2 = "F" /* First */ , o2 = null, u1 = null){
+        this.path = t32, this.collectionGroup = n23, this.explicitOrderBy = e9, this.filters = r4, this.limit = s3, this.limitType = i2, this.startAt = o2, this.endAt = u1, this.D = null, // The corresponding `Target` of this `Query` instance.
+        this.$ = null, this.startAt, this.endAt;
+    }
+}
+/** Creates a new Query for a query that matches all documents at `path` */ function on(t33) {
+    return !ot(t33.limit) && "L" /* Last */  === t33.limitType;
+}
+function un(t33) {
+    return t33.explicitOrderBy.length > 0 ? t33.explicitOrderBy[0].field : null;
+}
+function cn(t33) {
+    for (const n24 of t33.filters)if (n24.N()) return n24.field;
+    return null;
+}
+/**
+ * Checks if any of the provided Operators are included in the query and
+ * returns the first one that is, or null if none are.
+ */ /**
+ * Returns whether the query matches a collection group rather than a specific
+ * collection.
+ */ function an(t33) {
+    return null !== t33.collectionGroup;
+}
+/**
+ * Returns the implicit order by constraint that is used to execute the Query,
+ * which can be different from the order by constraints the user provided (e.g.
+ * the SDK and backend always orders by `__name__`).
+ */ function hn(t33) {
+    const n24 = v(t33);
+    if (null === n24.D) {
+        n24.D = [];
+        const t34 = cn(n24), e10 = un(n24);
+        if (null !== t34 && null === e10) // In order to implicitly add key ordering, we must also add the
+        // inequality filter field for it to be a valid query.
+        // Note that the default inequality field and key ordering is ascending.
+        t34.isKeyField() || n24.D.push(new nn(t34)), n24.D.push(new nn(Z.keyField(), "asc" /* ASCENDING */ ));
+        else {
+            let t35 = !1;
+            for (const e11 of n24.explicitOrderBy)n24.D.push(e11), e11.field.isKeyField() && (t35 = !0);
+            if (!t35) {
+                // The order of the implicit key ordering always matches the last
+                // explicit order by
+                const t36 = n24.explicitOrderBy.length > 0 ? n24.explicitOrderBy[n24.explicitOrderBy.length - 1].dir : "asc" /* ASCENDING */ ;
+                n24.D.push(new nn(Z.keyField(), t36));
+            }
+        }
+    }
+    return n24.D;
+}
+/**
+ * Converts this `Query` instance to it's corresponding `Target` representation.
+ */ function ln(t33) {
+    const n24 = v(t33);
+    if (!n24.$) {
+        if ("F" /* First */  === n24.limitType) n24.$ = Qt(n24.path, n24.collectionGroup, hn(n24), n24.filters, n24.limit, n24.startAt, n24.endAt);
+        else {
+            // Flip the orderBy directions since we want the last results
+            const t34 = [];
+            for (const e10 of hn(n24)){
+                const n25 = "desc" /* DESCENDING */  === e10.dir ? "asc" /* ASCENDING */  : "desc" /* DESCENDING */ ;
+                t34.push(new nn(e10.field, n25));
+            }
+            // We need to swap the cursors to match the now-flipped query ordering.
+            const e11 = n24.endAt ? new tn(n24.endAt.position, !n24.endAt.before) : null, r5 = n24.startAt ? new tn(n24.startAt.position, !n24.startAt.before) : null;
+            // Now return as a LimitType.First query.
+            n24.$ = Qt(n24.path, n24.collectionGroup, t34, n24.filters, n24.limit, e11, r5);
+        }
+    }
+    return n24.$;
+}
+function fn(t33, n24) {
+    return (function(t34, n25) {
+        if (t34.limit !== n25.limit) return !1;
+        if (t34.orderBy.length !== n25.orderBy.length) return !1;
+        for(let e10 = 0; e10 < t34.orderBy.length; e10++)if (!en(t34.orderBy[e10], n25.orderBy[e10])) return !1;
+        if (t34.filters.length !== n25.filters.length) return !1;
+        for(let s4 = 0; s4 < t34.filters.length; s4++)if (e11 = t34.filters[s4], r5 = n25.filters[s4], e11.op !== r5.op || !e11.field.isEqual(r5.field) || !$t(e11.value, r5.value)) return !1;
+        var e11, r5;
+        return t34.collectionGroup === n25.collectionGroup && !!t34.path.isEqual(n25.path) && !!rn(t34.startAt, n25.startAt) && rn(t34.endAt, n25.endAt);
+    })(ln(t33), ln(n24)) && t33.limitType === n24.limitType;
+}
+/**
+ * @license
+ * Copyright 2020 Google LLC
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *   http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */ /**
+ * Returns an DoubleValue for `value` that is encoded based the serializer's
+ * `useProto3Json` setting.
+ */ /**
+ * Returns a value for a number that's appropriate to put into a proto.
+ * The return value is an IntegerValue if it can safely represent the value,
+ * otherwise a DoubleValue is returned.
+ */ function dn(t33, n24) {
+    return (function(t34) {
+        return "number" == typeof t34 && Number.isInteger(t34) && !ut(t34) && t34 <= Number.MAX_SAFE_INTEGER && t34 >= Number.MIN_SAFE_INTEGER;
+    })(n24) ? /**
+ * Returns an IntegerValue for `value`.
+ */ (function(t34) {
+        return {
+            integerValue: "" + t34
+        };
+    })(n24) : (function(t34, n25) {
+        if (t34.F) {
+            if (isNaN(n25)) return {
+                doubleValue: "NaN"
+            };
+            if (n25 === 1 / 0) return {
+                doubleValue: "Infinity"
+            };
+            if (n25 === -1 / 0) return {
+                doubleValue: "-Infinity"
+            };
+        }
+        return {
+            doubleValue: ut(n25) ? "-0" : n25
+        };
+    })(t33, n24);
+}
+/**
+ * @license
+ * Copyright 2018 Google LLC
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *   http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */ /** Used to represent a field transform on a mutation. */ class wn {
+    constructor(){
+        // Make sure that the structural type of `TransformOperation` is unique.
+        // See https://github.com/microsoft/TypeScript/issues/5451
+        this._ = void 0;
+    }
+}
+/** Transforms a value into a server-generated timestamp. */ class mn extends wn {
+}
+/** Transforms an array value via a union operation. */ class pn extends wn {
+    constructor(t33){
+        super(), this.elements = t33;
+    }
+}
+/** Transforms an array value via a remove operation. */ class yn extends wn {
+    constructor(t34){
+        super(), this.elements = t34;
+    }
+}
+/**
+ * Implements the backend semantics for locally computed NUMERIC_ADD (increment)
+ * transforms. Converts all field values to integers or doubles, but unlike the
+ * backend does not cap integer values at 2^63. Instead, JavaScript number
+ * arithmetic is used and precision loss can occur for values greater than 2^53.
+ */ class _n extends wn {
+    constructor(t35, n24){
+        super(), this.S = t35, this.q = n24;
+    }
+}
+/**
+ * @license
+ * Copyright 2017 Google LLC
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *   http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */ /** A field path and the TransformOperation to perform upon it. */ class gn {
+    constructor(t36, n25){
+        this.field = t36, this.transform = n25;
+    }
+}
+/**
+ * Encodes a precondition for a mutation. This follows the model that the
+ * backend accepts with the special case of an explicit "empty" precondition
+ * (meaning no precondition).
+ */ class bn {
+    constructor(t37, n26){
+        this.updateTime = t37, this.exists = n26;
+    }
+    /** Creates a new empty Precondition. */ static none() {
+        return new bn;
+    }
+    /** Creates a new Precondition with an exists flag. */ static exists(t) {
+        return new bn(void 0, t);
+    }
+    /** Creates a new Precondition based on a version a document exists at. */ static updateTime(t) {
+        return new bn(t);
+    }
+    /** Returns whether this Precondition is empty. */ get isNone() {
+        return (void 0) === this.updateTime && (void 0) === this.exists;
+    }
+    isEqual(t) {
+        return this.exists === t.exists && (this.updateTime ? !!t.updateTime && this.updateTime.isEqual(t.updateTime) : !t.updateTime);
+    }
+}
+/**
+ * A mutation describes a self-contained change to a document. Mutations can
+ * create, replace, delete, and update subsets of documents.
+ *
+ * Mutations not only act on the value of the document but also its version.
+ *
+ * For local mutations (mutations that haven't been committed yet), we preserve
+ * the existing version for Set and Patch mutations. For Delete mutations, we
+ * reset the version to 0.
+ *
+ * Here's the expected transition table.
+ *
+ * MUTATION           APPLIED TO            RESULTS IN
+ *
+ * SetMutation        Document(v3)          Document(v3)
+ * SetMutation        NoDocument(v3)        Document(v0)
+ * SetMutation        InvalidDocument(v0)   Document(v0)
+ * PatchMutation      Document(v3)          Document(v3)
+ * PatchMutation      NoDocument(v3)        NoDocument(v3)
+ * PatchMutation      InvalidDocument(v0)   UnknownDocument(v3)
+ * DeleteMutation     Document(v3)          NoDocument(v0)
+ * DeleteMutation     NoDocument(v3)        NoDocument(v0)
+ * DeleteMutation     InvalidDocument(v0)   NoDocument(v0)
+ *
+ * For acknowledged mutations, we use the updateTime of the WriteResponse as
+ * the resulting version for Set and Patch mutations. As deletes have no
+ * explicit update time, we use the commitTime of the WriteResponse for
+ * Delete mutations.
+ *
+ * If a mutation is acknowledged by the backend but fails the precondition check
+ * locally, we transition to an `UnknownDocument` and rely on Watch to send us
+ * the updated version.
+ *
+ * Field transforms are used only with Patch and Set Mutations. We use the
+ * `updateTransforms` message to store transforms, rather than the `transforms`s
+ * messages.
+ *
+ * ## Subclassing Notes
+ *
+ * Every type of mutation needs to implement its own applyToRemoteDocument() and
+ * applyToLocalView() to implement the actual behavior of applying the mutation
+ * to some source document (see `applySetMutationToRemoteDocument()` for an
+ * example).
+ */ class vn {
+}
+/**
+ * A mutation that creates or replaces the document at the given key with the
+ * object value contents.
+ */ class En extends vn {
+    constructor(t38, n27, e10, r5 = []){
+        super(), this.key = t38, this.value = n27, this.precondition = e10, this.fieldTransforms = r5, this.type = 0 /* Set */ ;
+    }
+}
+/**
+ * A mutation that modifies fields of the document at the given key with the
+ * given values. The values are applied through a field mask:
+ *
+ *  * When a field is in both the mask and the values, the corresponding field
+ *    is updated.
+ *  * When a field is in neither the mask nor the values, the corresponding
+ *    field is unmodified.
+ *  * When a field is in the mask but not in the values, the corresponding field
+ *    is deleted.
+ *  * When a field is not in the mask but is in the values, the values map is
+ *    ignored.
+ */ class In extends vn {
+    constructor(t39, n28, e11, r6, s4 = []){
+        super(), this.key = t39, this.data = n28, this.fieldMask = e11, this.precondition = r6, this.fieldTransforms = s4, this.type = 1 /* Patch */ ;
+    }
+}
+/** A mutation that deletes the document at the given key. */ class Tn extends vn {
+    constructor(t40, n29){
+        super(), this.key = t40, this.precondition = n29, this.type = 2 /* Delete */ , this.fieldTransforms = [];
+    }
+}
+/**
+ * A mutation that verifies the existence of the document at the given key with
+ * the provided precondition.
+ *
+ * The `verify` operation is only used in Transactions, and this class serves
+ * primarily to facilitate serialization into protos.
+ */ class An extends vn {
+    constructor(t41, n30){
+        super(), this.key = t41, this.precondition = n30, this.type = 3 /* Verify */ , this.fieldTransforms = [];
+    }
+}
+/**
+ * @license
+ * Copyright 2017 Google LLC
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *   http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */ const Pn = (()=>{
+    const t42 = {
+        asc: "ASCENDING",
+        desc: "DESCENDING"
+    };
+    return t42;
+})(), Rn = (()=>{
+    const t42 = {
+        "<": "LESS_THAN",
+        "<=": "LESS_THAN_OR_EQUAL",
+        ">": "GREATER_THAN",
+        ">=": "GREATER_THAN_OR_EQUAL",
+        "==": "EQUAL",
+        "!=": "NOT_EQUAL",
+        "array-contains": "ARRAY_CONTAINS",
+        in: "IN",
+        "not-in": "NOT_IN",
+        "array-contains-any": "ARRAY_CONTAINS_ANY"
+    };
+    return t42;
+})();
+/**
+ * This class generates JsonObject values for the Datastore API suitable for
+ * sending to either GRPC stub methods or via the JSON/HTTP REST API.
+ *
+ * The serializer supports both Protobuf.js and Proto3 JSON formats. By
+ * setting `useProto3Json` to true, the serializer will use the Proto3 JSON
+ * format.
+ *
+ * For a description of the Proto3 JSON format check
+ * https://developers.google.com/protocol-buffers/docs/proto3#json
+ *
+ * TODO(klimt): We can remove the databaseId argument if we keep the full
+ * resource name in documents.
+ */ class Vn {
+    constructor(t42, n31){
+        this.databaseId = t42, this.F = n31;
+    }
+}
+/**
+ * Returns a value for a number (or null) that's appropriate to put into
+ * a google.protobuf.Int32Value proto.
+ * DO NOT USE THIS FOR ANYTHING ELSE.
+ * This method cheats. It's typed as returning "number" because that's what
+ * our generated proto interfaces say Int32Value must be. But GRPC actually
+ * expects a { value: <number> } struct.
+ */ /**
+ * Returns a value for a Date that's appropriate to put into a proto.
+ */ function Nn(t43, n32) {
+    if (t43.F) return `${new Date(1000 * n32.seconds).toISOString().replace(/\.\d*/, "").replace("Z", "")}.${("000000000" + n32.nanoseconds).slice(-9)}Z`;
+    return {
+        seconds: "" + n32.seconds,
+        nanos: n32.nanoseconds
+    };
+}
+/**
+ * Returns a value for bytes that's appropriate to put in a proto.
+ *
+ * Visible for testing.
+ */ function Dn(t43, n32) {
+    return t43.F ? n32.toBase64() : n32.toUint8Array();
+}
+function $n(t43, n32) {
+    return Nn(t43, n32.toTimestamp());
+}
+function Fn(t43) {
+    return b(!!t43), _t.fromTimestamp(function(t44) {
+        const n32 = Tt(t44);
+        return new yt(n32.seconds, n32.nanos);
+    }(t43));
+}
+function Sn(t43, n32) {
+    return (function(t44) {
+        return new K([
+            "projects",
+            t44.projectId,
+            "databases",
+            t44.database
+        ]);
+    })(t43).child("documents").child(n32).canonicalString();
+}
+function qn(t43, n32) {
+    return Sn(t43.databaseId, n32.path);
+}
+function xn(t43, n32) {
+    const e12 = function(t44) {
+        const n33 = K.fromString(t44);
+        return b(Gn(n33)), n33;
+    }(n32);
+    if (e12.get(1) !== t43.databaseId.projectId) throw new U(A, "Tried to deserialize key from different project: " + e12.get(1) + " vs " + t43.databaseId.projectId);
+    if (e12.get(3) !== t43.databaseId.database) throw new U(A, "Tried to deserialize key from different database: " + e12.get(3) + " vs " + t43.databaseId.database);
+    var r7;
+    return new X((b((r7 = e12).length > 4 && "documents" === r7.get(4)), r7.popFirst(5)));
+/** Creates a Document proto from key and fields (but no create/update time) */ }
+function On(t43, n32) {
+    return Sn(t43.databaseId, n32);
+}
+function Cn(t43) {
+    return new K([
+        "projects",
+        t43.databaseId.projectId,
+        "databases",
+        t43.databaseId.database
+    ]).canonicalString();
+}
+function Ln(t43, n32, e12) {
+    return {
+        name: qn(t43, n32),
+        fields: e12.value.mapValue.fields
+    };
+}
+function Un(t43, n32) {
+    return "found" in n32 ? (function(t44, n33) {
+        b(!!n33.found), n33.found.name, n33.found.updateTime;
+        const e12 = xn(t44, n33.found.name), r7 = Fn(n33.found.updateTime), s5 = new kt({
+            mapValue: {
+                fields: n33.found.fields
+            }
+        });
+        return Mt.newFoundDocument(e12, r7, s5);
+    })(t43, n32) : "missing" in n32 ? (function(t44, n33) {
+        b(!!n33.missing), b(!!n33.readTime);
+        const e12 = xn(t44, n33.missing), r7 = Fn(n33.readTime);
+        return Mt.newNoDocument(e12, r7);
+    })(t43, n32) : g();
+}
+function jn(t43, n32) {
+    let e12;
+    if (n32 instanceof En) e12 = {
+        update: Ln(t43, n32.key, n32.value)
+    };
+    else if (n32 instanceof Tn) e12 = {
+        delete: qn(t43, n32.key)
+    };
+    else if (n32 instanceof In) e12 = {
+        update: Ln(t43, n32.key, n32.data),
+        updateMask: Wn(n32.fieldMask)
+    };
+    else {
+        if (!(n32 instanceof An)) return g();
+        e12 = {
+            verify: qn(t43, n32.key)
+        };
+    }
+    return n32.fieldTransforms.length > 0 && (e12.updateTransforms = n32.fieldTransforms.map((t44)=>(function(t45, n33) {
+            const e13 = n33.transform;
+            if (e13 instanceof mn) return {
+                fieldPath: n33.field.canonicalString(),
+                setToServerValue: "REQUEST_TIME"
+            };
+            if (e13 instanceof pn) return {
+                fieldPath: n33.field.canonicalString(),
+                appendMissingElements: {
+                    values: e13.elements
+                }
+            };
+            if (e13 instanceof yn) return {
+                fieldPath: n33.field.canonicalString(),
+                removeAllFromArray: {
+                    values: e13.elements
+                }
+            };
+            if (e13 instanceof _n) return {
+                fieldPath: n33.field.canonicalString(),
+                increment: e13.q
+            };
+            throw g();
+        })(0, t44)
+    )), n32.precondition.isNone || (e12.currentDocument = (function(t44, n33) {
+        return (void 0) !== n33.updateTime ? {
+            updateTime: $n(t44, n33.updateTime)
+        } : (void 0) !== n33.exists ? {
+            exists: n33.exists
+        } : g();
+    })(t43, n32.precondition)), e12;
+}
+function kn(t43, n32) {
+    // Dissect the path into parent, collectionId, and optional key filter.
+    const e12 = {
+        structuredQuery: {
+        }
+    }, r7 = n32.path;
+    null !== n32.collectionGroup ? (e12.parent = On(t43, r7), e12.structuredQuery.from = [
+        {
+            collectionId: n32.collectionGroup,
+            allDescendants: !0
+        }
+    ]) : (e12.parent = On(t43, r7.popLast()), e12.structuredQuery.from = [
+        {
+            collectionId: r7.lastSegment()
+        }
+    ]);
+    const s5 = function(t44) {
+        if (0 === t44.length) return;
+        const n33 = t44.map((t45)=>// visible for testing
+            (function(t46) {
+                if ("==" /* EQUAL */  === t46.op) {
+                    if (Lt(t46.value)) return {
+                        unaryFilter: {
+                            field: zn(t46.field),
+                            op: "IS_NAN"
+                        }
+                    };
+                    if (Ct(t46.value)) return {
+                        unaryFilter: {
+                            field: zn(t46.field),
+                            op: "IS_NULL"
+                        }
+                    };
+                } else if ("!=" /* NOT_EQUAL */  === t46.op) {
+                    if (Lt(t46.value)) return {
+                        unaryFilter: {
+                            field: zn(t46.field),
+                            op: "IS_NOT_NAN"
+                        }
+                    };
+                    if (Ct(t46.value)) return {
+                        unaryFilter: {
+                            field: zn(t46.field),
+                            op: "IS_NOT_NULL"
+                        }
+                    };
+                }
+                return {
+                    fieldFilter: {
+                        field: zn(t46.field),
+                        op: Qn(t46.op),
+                        value: t46.value
+                    }
+                };
+            })(t45)
+        );
+        if (1 === n33.length) return n33[0];
+        return {
+            compositeFilter: {
+                op: "AND",
+                filters: n33
+            }
+        };
+    }(n32.filters);
+    s5 && (e12.structuredQuery.where = s5);
+    const i3 = function(t44) {
+        if (0 === t44.length) return;
+        return t44.map((t45)=>// visible for testing
+            (function(t46) {
+                return {
+                    field: zn(t46.field),
+                    direction: Bn(t46.dir)
+                };
+            })(t45)
+        );
+    }(n32.orderBy);
+    i3 && (e12.structuredQuery.orderBy = i3);
+    const o3 = function(t44, n33) {
+        return t44.F || ot(n33) ? n33 : {
+            value: n33
+        };
+    }(t43, n32.limit);
+    return null !== o3 && (e12.structuredQuery.limit = o3), n32.startAt && (e12.structuredQuery.startAt = Mn(n32.startAt)), n32.endAt && (e12.structuredQuery.endAt = Mn(n32.endAt)), e12;
+}
+function Mn(t43) {
+    return {
+        before: t43.before,
+        values: t43.position
+    };
+}
+// visible for testing
+function Bn(t43) {
+    return Pn[t43];
+}
+// visible for testing
+function Qn(t43) {
+    return Rn[t43];
+}
+function zn(t43) {
+    return {
+        fieldPath: t43.canonicalString()
+    };
+}
+function Wn(t43) {
+    const n32 = [];
+    return t43.fields.forEach((t44)=>n32.push(t44.canonicalString())
+    ), {
+        fieldPaths: n32
+    };
+}
+function Gn(t43) {
+    // Resource names have at least 4 components (project ID, database ID)
+    return t43.length >= 4 && "projects" === t43.get(0) && "databases" === t43.get(2);
+}
+/**
+ * @license
+ * Copyright 2020 Google LLC
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *   http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */ function Hn(t43) {
+    return new Vn(t43, /* useProto3Json= */ !0);
+}
+/**
+ * @license
+ * Copyright 2017 Google LLC
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *   http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */ /**
+ * A helper for running delayed tasks following an exponential backoff curve
+ * between attempts.
+ *
+ * Each delay is made up of a "base" delay which follows the exponential
+ * backoff curve, and a +/- 50% "jitter" that is calculated and added to the
+ * base delay. This prevents clients from accidentally synchronizing their
+ * delays causing spikes of load to the backend.
+ */ class Yn {
+    constructor(/**
+     * The AsyncQueue to run backoff operations on.
+     */ t43, /**
+     * The ID to use when scheduling backoff operations on the AsyncQueue.
+     */ n32, /**
+     * The initial delay (used as the base delay on the first retry attempt).
+     * Note that jitter will still be applied, so the actual delay could be as
+     * little as 0.5*initialDelayMs.
+     */ e12 = 1000, r7 = 1.5, s5 = 60000){
+        this.O = t43, this.timerId = n32, this.C = e12, this.L = r7, this.U = s5, this.j = 0, this.k = null, /** The last backoff attempt, as epoch milliseconds. */ this.M = Date.now(), this.reset();
+    }
+    /**
+     * Resets the backoff delay.
+     *
+     * The very next backoffAndWait() will have no delay. If it is called again
+     * (i.e. due to an error), initialDelayMs (plus jitter) will be used, and
+     * subsequent ones will increase according to the backoffFactor.
+     */ reset() {
+        this.j = 0;
+    }
+    /**
+     * Resets the backoff delay to the maximum delay (e.g. for use after a
+     * RESOURCE_EXHAUSTED error).
+     */ B() {
+        this.j = this.U;
+    }
+    /**
+     * Returns a promise that resolves after currentDelayMs, and increases the
+     * delay for any subsequent attempts. If there was a pending backoff operation
+     * already, it will be canceled.
+     */ W(t) {
+        // Cancel any pending backoff operation.
+        this.cancel();
+        // First schedule using the current base (which may be 0 and should be
+        // honored as such).
+        const n33 = Math.floor(this.j + this.G()), e13 = Math.max(0, Date.now() - this.M), r8 = Math.max(0, n33 - e13);
+        // Guard against lastAttemptTime being in the future due to a clock change.
+        r8 > 0 && m("ExponentialBackoff", `Backing off for ${r8} ms (base delay: ${this.j} ms, delay with jitter: ${n33} ms, last attempt: ${e13} ms ago)`), this.k = this.O.enqueueAfterDelay(this.timerId, r8, ()=>(this.M = Date.now(), t())
+        ), // Apply backoff factor to determine next delay and ensure it is within
+        // bounds.
+        this.j *= this.L, this.j < this.C && (this.j = this.C), this.j > this.U && (this.j = this.U);
+    }
+    H() {
+        null !== this.k && (this.k.skipDelay(), this.k = null);
+    }
+    cancel() {
+        null !== this.k && (this.k.cancel(), this.k = null);
+    }
+    /** Returns a random value in the range [-currentBaseMs/2, currentBaseMs/2] */ G() {
+        return (Math.random() - 0.5) * this.j;
+    }
+}
+/**
+ * @license
+ * Copyright 2017 Google LLC
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *   http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */ /**
+ * Datastore and its related methods are a wrapper around the external Google
+ * Cloud Datastore grpc API, which provides an interface that is more convenient
+ * for the rest of the client SDK architecture to consume.
+ */ /**
+ * An implementation of Datastore that exposes additional state for internal
+ * consumption.
+ */ class Kn extends class {
+} {
+    constructor(t44, n33, e13){
+        super(), this.credentials = t44, this.Y = n33, this.S = e13, this.K = !1;
+    }
+    J() {
+        if (this.K) throw new U(F, "The client has already been terminated.");
+    }
+    /** Gets an auth token and invokes the provided RPC. */ l(t, n, e) {
+        return this.J(), this.credentials.getToken().then((r8)=>this.Y.l(t, n, e, r8)
+        ).catch((t45)=>{
+            throw "FirebaseError" === t45.name ? (t45.code === D && this.credentials.invalidateToken(), t45) : new U(T, t45.toString());
+        });
+    }
+    /** Gets an auth token and invokes the provided RPC with streamed results. */ v(t, n, e) {
+        return this.J(), this.credentials.getToken().then((r8)=>this.Y.v(t, n, e, r8)
+        ).catch((t45)=>{
+            throw "FirebaseError" === t45.name ? (t45.code === D && this.credentials.invalidateToken(), t45) : new U(T, t45.toString());
+        });
+    }
+    terminate() {
+        this.K = !0;
+    }
+}
+// TODO(firestorexp): Make sure there is only one Datastore instance per
+// firestore-exp client.
+async function Jn(t45, n34) {
+    const e14 = v(t45), r8 = Cn(e14.S) + "/documents", s6 = {
+        writes: n34.map((t46)=>jn(e14.S, t46)
+        )
+    };
+    await e14.l("Commit", r8, s6);
+}
+async function Zn(t45, n34) {
+    const e14 = v(t45), r8 = Cn(e14.S) + "/documents", s6 = {
+        documents: n34.map((t46)=>qn(e14.S, t46)
+        )
+    }, i3 = await e14.v("BatchGetDocuments", r8, s6), o3 = new Map;
+    i3.forEach((t46)=>{
+        const n35 = Un(e14.S, t46);
+        o3.set(n35.key.toString(), n35);
+    });
+    const u2 = [];
+    return n34.forEach((t46)=>{
+        const n35 = o3.get(t46.toString());
+        b(!!n35), u2.push(n35);
+    }), u2;
+}
+async function Xn(t45, n34) {
+    const e14 = v(t45), r8 = kn(e14.S, ln(n34));
+    return (await e14.v("RunQuery", r8.parent, {
+        structuredQuery: r8.structuredQuery
+    })).filter((t46)=>!!t46.document
+    ).map((t46)=>(function(t47, n35, e15) {
+            const r9 = xn(t47, n35.name), s6 = Fn(n35.updateTime), i3 = new kt({
+                mapValue: {
+                    fields: n35.fields
+                }
+            }), o3 = Mt.newFoundDocument(r9, s6, i3);
+            return e15 && o3.setHasCommittedMutations(), e15 ? o3.setHasCommittedMutations() : o3;
+        })(e14.S, t46.document, void 0)
+    );
+}
+/**
+ * @license
+ * Copyright 2020 Google LLC
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *   http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */ const te = new Map;
+/**
+ * An instance map that ensures only one Datastore exists per Firestore
+ * instance.
+ */ /**
+ * Returns an initialized and started Datastore for the given Firestore
+ * instance. Callers must invoke removeComponents() when the Firestore
+ * instance is terminated.
+ */ function ne(t45) {
+    if (t45._terminated) throw new U(F, "The client has already been terminated.");
+    if (!te.has(t45)) {
+        m("ComponentProvider", "Initializing Datastore");
+        const i3 = function(t46) {
+            return new ft(t46, fetch.bind(null));
+        }((n34 = t45._databaseId, e14 = t45.app.options.appId || "", r8 = t45._persistenceKey, s7 = t45._freezeSettings(), new G(n34, e14, r8, s7.host, s7.ssl, s7.experimentalForceLongPolling, s7.experimentalAutoDetectLongPolling, s7.useFetchStreams))), o3 = Hn(t45._databaseId), u2 = function(t46, n34, e14) {
+            return new Kn(t46, n34, e14);
+        }(t45._credentials, i3, o3);
+        te.set(t45, u2);
+    }
+    var n34, e14, r8, s7;
+    /**
+ * @license
+ * Copyright 2018 Google LLC
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *   http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */ return te.get(t45);
+}
+/**
+ * Removes all components associated with the provided instance. Must be called
+ * when the `Firestore` instance is terminated.
+ */ /**
+ * A concrete type describing all the values that can be applied via a
+ * user-supplied `FirestoreSettings` object. This is a separate type so that
+ * defaults can be supplied and the value can be checked for equality.
+ */ class ee {
+    constructor(t45){
+        var n34;
+        if ((void 0) === t45.host) {
+            if ((void 0) !== t45.ssl) throw new U(A, "Can't provide ssl option if host option is not set");
+            this.host = "firestore.googleapis.com", this.ssl = true;
+        } else this.host = t45.host, this.ssl = null === (n34 = t45.ssl) || (void 0) === n34 || n34;
+        if (this.credentials = t45.credentials, this.ignoreUndefinedProperties = !!t45.ignoreUndefinedProperties, (void 0) === t45.cacheSizeBytes) this.cacheSizeBytes = 41943040;
+        else {
+            if (-1 !== t45.cacheSizeBytes && t45.cacheSizeBytes < 1048576) throw new U(A, "cacheSizeBytes must be at least 1048576");
+            this.cacheSizeBytes = t45.cacheSizeBytes;
+        }
+        this.experimentalForceLongPolling = !!t45.experimentalForceLongPolling, this.experimentalAutoDetectLongPolling = !!t45.experimentalAutoDetectLongPolling, this.useFetchStreams = !!t45.useFetchStreams, (function(t46, n35, e14, r8) {
+            if (!0 === n35 && !0 === r8) throw new U(A, `${t46} and ${e14} cannot be used together.`);
+        })("experimentalForceLongPolling", t45.experimentalForceLongPolling, "experimentalAutoDetectLongPolling", t45.experimentalAutoDetectLongPolling);
+    }
+    isEqual(t) {
+        return this.host === t.host && this.ssl === t.ssl && this.credentials === t.credentials && this.cacheSizeBytes === t.cacheSizeBytes && this.experimentalForceLongPolling === t.experimentalForceLongPolling && this.experimentalAutoDetectLongPolling === t.experimentalAutoDetectLongPolling && this.ignoreUndefinedProperties === t.ignoreUndefinedProperties && this.useFetchStreams === t.useFetchStreams;
+    }
+}
+/**
+ * @license
+ * Copyright 2020 Google LLC
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *   http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */ /**
+ * The Cloud Firestore service interface.
+ *
+ * Do not call this constructor directly. Instead, use {@link getFirestore}.
+ */ class re {
+    /** @hideconstructor */ constructor(t46, n35){
+        this._credentials = n35, /**
+         * Whether it's a Firestore or Firestore Lite instance.
+         */ this.type = "firestore-lite", this._persistenceKey = "(lite)", this._settings = new ee({
+        }), this._settingsFrozen = !1, t46 instanceof H ? this._databaseId = t46 : (this._app = t46, this._databaseId = (function(t47) {
+            if (!Object.prototype.hasOwnProperty.apply(t47.options, [
+                "projectId"
+            ])) throw new U(A, '"projectId" not provided in firebase.initializeApp.');
+            return new H(t47.options.projectId);
+        })(t46));
+    }
+    /**
+     * The {@link @firebase/app#FirebaseApp} associated with this `Firestore` service
+     * instance.
+     */ get app() {
+        if (!this._app) throw new U(F, "Firestore was not initialized using the Firebase SDK. 'app' is not available");
+        return this._app;
+    }
+    get _initialized() {
+        return this._settingsFrozen;
+    }
+    get _terminated() {
+        return (void 0) !== this._terminateTask;
+    }
+    _setSettings(t) {
+        if (this._settingsFrozen) throw new U(F, "Firestore has already been started and its settings can no longer be changed. You can only modify settings before calling any other methods on a Firestore object.");
+        this._settings = new ee(t), (void 0) !== t.credentials && (this._credentials = (function(t47) {
+            if (!t47) return new M;
+            switch(t47.type){
+                case "gapi":
+                    const n36 = t47.client;
+                    // Make sure this really is a Gapi client.
+                    return b(!("object" != typeof n36 || null === n36 || !n36.auth || !n36.auth.getAuthHeaderValueForFirstParty)), new W(n36, t47.sessionIndex || "0", t47.iamToken || null);
+                case "provider":
+                    return t47.client;
+                default:
+                    throw new U(A, "makeCredentialsProvider failed due to invalid credential type");
+            }
+        })(t.credentials));
+    }
+    _getSettings() {
+        return this._settings;
+    }
+    _freezeSettings() {
+        return this._settingsFrozen = !0, this._settings;
+    }
+    _delete() {
+        return this._terminateTask || (this._terminateTask = this._terminate()), this._terminateTask;
+    }
+    /** Returns a JSON-serializable representation of this `Firestore` instance. */ toJSON() {
+        return {
+            app: this._app,
+            databaseId: this._databaseId,
+            settings: this._settings
+        };
+    }
+    /**
+     * Terminates all components used by this client. Subclasses can override
+     * this method to clean up their own dependencies, but must also call this
+     * method.
+     *
+     * Only ever called once.
+     */ _terminate() {
+        return (function(t47) {
+            const n36 = te.get(t47);
+            n36 && (m("ComponentProvider", "Removing Datastore"), te.delete(t47), n36.terminate());
+        })(this), Promise.resolve();
+    }
+}
+function se(n36, e14) {
+    const r8 = _app._getProvider(n36, "firestore/lite");
+    if (r8.isInitialized()) throw new U(F, "Firestore can only be initialized once per app.");
+    return r8.initialize({
+        options: e14
+    });
+}
+/**
+ * Returns the existing `Firestore` instance that is associated with the
+ * provided {@link @firebase/app#FirebaseApp}. If no instance exists, initializes a new
+ * instance with default settings.
+ *
+ * @param app - The {@link @firebase/app#FirebaseApp} instance that the returned `Firestore`
+ * instance is associated with.
+ * @returns The `Firestore` instance of the provided app.
+ */ function ie(e14 = _app.getApp()) {
+    return _app._getProvider(e14, "firestore/lite").getImmediate();
+}
+/**
+ * Modify this instance to communicate with the Cloud Firestore emulator.
+ *
+ * Note: This must be called before this instance has been used to do any
+ * operations.
+ *
+ * @param firestore - The `Firestore` instance to configure to connect to the
+ * emulator.
+ * @param host - the emulator host (ex: localhost).
+ * @param port - the emulator port (ex: 9000).
+ * @param options.mockUserToken - the mock auth token to use for unit testing
+ * Security Rules.
+ */ function oe(t47, n36, e14, r8 = {
+}) {
+    var s7;
+    const i3 = (t47 = st(t47, re))._getSettings();
+    if ("firestore.googleapis.com" !== i3.host && i3.host !== n36 && y("Host has been set in both settings() and useEmulator(), emulator host will be used"), t47._setSettings(Object.assign(Object.assign({
+    }, i3), {
+        host: `${n36}:${e14}`,
+        ssl: !1
+    })), r8.mockUserToken) {
+        let n37, e15;
+        if ("string" == typeof r8.mockUserToken) n37 = r8.mockUserToken, e15 = l.MOCK_USER;
+        else {
+            // Let createMockUserToken validate first (catches common mistakes like
+            // invalid field "uid" and missing field "sub" / "user_id".)
+            n37 = _util.createMockUserToken(r8.mockUserToken, null === (s7 = t47._app) || (void 0) === s7 ? void 0 : s7.options.projectId);
+            const i4 = r8.mockUserToken.sub || r8.mockUserToken.user_id;
+            if (!i4) throw new U(A, "mockUserToken must contain 'sub' or 'user_id' field!");
+            e15 = new l(i4);
+        }
+        t47._credentials = new B(new k(n37, e15));
+    }
+}
+/**
+ * Terminates the provided `Firestore` instance.
+ *
+ * After calling `terminate()` only the `clearIndexedDbPersistence()` functions
+ * may be used. Any other function will throw a `FirestoreError`. Termination
+ * does not cancel any pending writes, and any promises that are awaiting a
+ * response from the server will not be resolved.
+ *
+ * To restart after termination, create a new instance of `Firestore` with
+ * {@link getFirestore}.
+ *
+ * Note: Under normal circumstances, calling `terminate()` is not required. This
+ * function is useful only when you want to force this instance to release all of
+ * its resources or in combination with {@link clearIndexedDbPersistence} to
+ * ensure that all local state is destroyed between test runs.
+ *
+ * @param firestore - The `Firestore` instance to terminate.
+ * @returns A `Promise` that is resolved when the instance has been successfully
+ * terminated.
+ */ function ue(t47) {
+    return t47 = st(t47, re), _app._removeServiceInstance(t47.app, "firestore/lite"), t47._delete();
+}
+/**
+ * @license
+ * Copyright 2020 Google LLC
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *   http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */ /**
+ * @license
+ * Copyright 2020 Google LLC
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *   http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */ /**
+ * A `DocumentReference` refers to a document location in a Firestore database
+ * and can be used to write, read, or listen to the location. The document at
+ * the referenced location may or may not exist.
+ */ class ce {
+    /** @hideconstructor */ constructor(t47, /**
+     * If provided, the `FirestoreDataConverter` associated with this instance.
+     */ n36, e14){
+        this.converter = n36, this._key = e14, /** The type of this Firestore reference. */ this.type = "document", this.firestore = t47;
+    }
+    get _path() {
+        return this._key.path;
+    }
+    /**
+     * The document's identifier within its collection.
+     */ get id() {
+        return this._key.path.lastSegment();
+    }
+    /**
+     * A string representing the path of the referenced document (relative
+     * to the root of the database).
+     */ get path() {
+        return this._key.path.canonicalString();
+    }
+    /**
+     * The collection this `DocumentReference` belongs to.
+     */ get parent() {
+        return new he(this.firestore, this.converter, this._key.path.popLast());
+    }
+    withConverter(t) {
+        return new ce(this.firestore, t, this._key);
+    }
+}
+/**
+ * A `Query` refers to a query which you can read or listen to. You can also
+ * construct refined `Query` objects by adding filters and ordering.
+ */ class ae {
+    // This is the lite version of the Query class in the main SDK.
+    /** @hideconstructor protected */ constructor(t48, /**
+     * If provided, the `FirestoreDataConverter` associated with this instance.
+     */ n37, e15){
+        this.converter = n37, this._query = e15, /** The type of this Firestore reference. */ this.type = "query", this.firestore = t48;
+    }
+    withConverter(t) {
+        return new ae(this.firestore, t, this._query);
+    }
+}
+/**
+ * A `CollectionReference` object can be used for adding documents, getting
+ * document references, and querying for documents (using {@link query}).
+ */ class he extends ae {
+    /** @hideconstructor */ constructor(t49, n38, e16){
+        super(t49, n38, new sn(e16)), this._path = e16, /** The type of this Firestore reference. */ this.type = "collection";
+    }
+    /** The collection's identifier. */ get id() {
+        return this._query.path.lastSegment();
+    }
+    /**
+     * A string representing the path of the referenced collection (relative
+     * to the root of the database).
+     */ get path() {
+        return this._query.path.canonicalString();
+    }
+    /**
+     * A reference to the containing `DocumentReference` if this is a
+     * subcollection. If this isn't a subcollection, the reference is null.
+     */ get parent() {
+        const t50 = this._path.popLast();
+        return t50.isEmpty() ? null : new ce(this.firestore, /* converter= */ null, new X(t50));
+    }
+    withConverter(t) {
+        return new he(this.firestore, t, this._path);
+    }
+}
+function le(t50, n39, ...e17) {
+    if (t50 = _util.getModularInstance(t50), tt("collection", "path", n39), t50 instanceof re) {
+        const r8 = K.fromString(n39, ...e17);
+        return et(r8), new he(t50, /* converter= */ null, r8);
+    }
+    {
+        if (!(t50 instanceof ce || t50 instanceof he)) throw new U(A, "Expected first argument to collection() to be a CollectionReference, a DocumentReference or FirebaseFirestore");
+        const r8 = K.fromString(t50.path, ...e17).child(K.fromString(n39));
+        return et(r8), new he(t50.firestore, /* converter= */ null, r8);
+    }
+}
+// TODO(firestorelite): Consider using ErrorFactory -
+// https://github.com/firebase/firebase-js-sdk/blob/0131e1f/packages/util/src/errors.ts#L106
+/**
+ * Creates and returns a new `Query` instance that includes all documents in the
+ * database that are contained in a collection or subcollection with the
+ * given `collectionId`.
+ *
+ * @param firestore - A reference to the root `Firestore` instance.
+ * @param collectionId - Identifies the collections to query over. Every
+ * collection or subcollection with this ID as the last segment of its path
+ * will be included. Cannot contain a slash.
+ * @returns The created `Query`.
+ */ function fe(t50, n39) {
+    if (t50 = st(t50, re), tt("collectionGroup", "collection id", n39), n39.indexOf("/") >= 0) throw new U(A, `Invalid collection ID '${n39}' passed to function collectionGroup(). Collection IDs must not contain '/'.`);
+    return new ae(t50, /* converter= */ null, /**
+ * Creates a new Query for a collection group query that matches all documents
+ * within the provided collection group.
+ */ function(t51) {
+        return new sn(K.emptyPath(), t51);
+    }(n39));
+}
+function de(t50, n39, ...e17) {
+    if (t50 = _util.getModularInstance(t50), // We allow omission of 'pathString' but explicitly prohibit passing in both
+    // 'undefined' and 'null'.
+    1 === arguments.length && (n39 = wt.A()), tt("doc", "path", n39), t50 instanceof re) {
+        const r8 = K.fromString(n39, ...e17);
+        return nt(r8), new ce(t50, /* converter= */ null, new X(r8));
+    }
+    {
+        if (!(t50 instanceof ce || t50 instanceof he)) throw new U(A, "Expected first argument to collection() to be a CollectionReference, a DocumentReference or FirebaseFirestore");
+        const r8 = t50._path.child(K.fromString(n39, ...e17));
+        return nt(r8), new ce(t50.firestore, t50 instanceof he ? t50.converter : null, new X(r8));
+    }
+}
+/**
+ * Returns true if the provided references are equal.
+ *
+ * @param left - A reference to compare.
+ * @param right - A reference to compare.
+ * @returns true if the references point to the same location in the same
+ * Firestore database.
+ */ function we(t50, n39) {
+    return t50 = _util.getModularInstance(t50), n39 = _util.getModularInstance(n39), (t50 instanceof ce || t50 instanceof he) && (n39 instanceof ce || n39 instanceof he) && t50.firestore === n39.firestore && t50.path === n39.path && t50.converter === n39.converter;
+}
+/**
+ * Returns true if the provided queries point to the same collection and apply
+ * the same constraints.
+ *
+ * @param left - A `Query` to compare.
+ * @param right - A `Query` to compare.
+ * @returns true if the references point to the same location in the same
+ * Firestore database.
+ */ function me(t50, n39) {
+    return t50 = _util.getModularInstance(t50), n39 = _util.getModularInstance(n39), t50 instanceof ae && n39 instanceof ae && t50.firestore === n39.firestore && fn(t50._query, n39._query) && t50.converter === n39.converter;
+}
+/**
+ * @license
+ * Copyright 2020 Google LLC
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *   http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */ /**
+ * A `FieldPath` refers to a field in a document. The path may consist of a
+ * single field name (referring to a top-level field in the document), or a
+ * list of field names (referring to a nested field in the document).
+ *
+ * Create a `FieldPath` by providing field names. If more than one field
+ * name is provided, the path will point to a nested field in a document.
+ */ class pe {
+    /**
+     * Creates a `FieldPath` from the provided field names. If more than one field
+     * name is provided, the path will point to a nested field in a document.
+     *
+     * @param fieldNames - A list of field names.
+     */ constructor(...t50){
+        for(let n39 = 0; n39 < t50.length; ++n39)if (0 === t50[n39].length) throw new U(A, "Invalid field name at argument $(i + 1). Field names must not be empty.");
+        this._internalPath = new Z(t50);
+    }
+    /**
+     * Returns true if this `FieldPath` is equal to the provided one.
+     *
+     * @param other - The `FieldPath` to compare against.
+     * @returns true if this `FieldPath` is equal to the provided one.
+     */ isEqual(t) {
+        return this._internalPath.isEqual(t._internalPath);
+    }
+}
+/**
+ * Returns a special sentinel `FieldPath` to refer to the ID of a document.
+ * It can be used in queries to sort or filter by the document ID.
+ */ function ye() {
+    return new pe("__name__");
+}
+/**
+ * @license
+ * Copyright 2020 Google LLC
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *   http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */ /**
+ * An immutable object representing an array of bytes.
+ */ class _e {
+    /** @hideconstructor */ constructor(t51){
+        this._byteString = t51;
+    }
+    /**
+     * Creates a new `Bytes` object from the given Base64 string, converting it to
+     * bytes.
+     *
+     * @param base64 - The Base64 string used to create the `Bytes` object.
+     */ static fromBase64String(t) {
+        try {
+            return new _e(Et.fromBase64String(t));
+        } catch (t52) {
+            throw new U(A, "Failed to construct data from Base64 string: " + t52);
+        }
+    }
+    /**
+     * Creates a new `Bytes` object from the given Uint8Array.
+     *
+     * @param array - The Uint8Array used to create the `Bytes` object.
+     */ static fromUint8Array(t) {
+        return new _e(Et.fromUint8Array(t));
+    }
+    /**
+     * Returns the underlying bytes as a Base64-encoded string.
+     *
+     * @returns The Base64-encoded string created from the `Bytes` object.
+     */ toBase64() {
+        return this._byteString.toBase64();
+    }
+    /**
+     * Returns the underlying bytes in a new `Uint8Array`.
+     *
+     * @returns The Uint8Array created from the `Bytes` object.
+     */ toUint8Array() {
+        return this._byteString.toUint8Array();
+    }
+    /**
+     * Returns a string representation of the `Bytes` object.
+     *
+     * @returns A string representation of the `Bytes` object.
+     */ toString() {
+        return "Bytes(base64: " + this.toBase64() + ")";
+    }
+    /**
+     * Returns true if this `Bytes` object is equal to the provided one.
+     *
+     * @param other - The `Bytes` object to compare against.
+     * @returns true if this `Bytes` object is equal to the provided one.
+     */ isEqual(t) {
+        return this._byteString.isEqual(t._byteString);
+    }
+}
+/**
+ * @license
+ * Copyright 2020 Google LLC
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *   http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */ /**
+ * Sentinel values that can be used when writing document fields with `set()`
+ * or `update()`.
+ */ class ge {
+    /**
+     * @param _methodName - The public API endpoint that returns this class.
+     * @hideconstructor
+     */ constructor(t52){
+        this._methodName = t52;
+    }
+}
+/**
+ * @license
+ * Copyright 2017 Google LLC
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *   http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */ /**
+ * An immutable object representing a geographic location in Firestore. The
+ * location is represented as latitude/longitude pair.
+ *
+ * Latitude values are in the range of [-90, 90].
+ * Longitude values are in the range of [-180, 180].
+ */ class be {
+    /**
+     * Creates a new immutable `GeoPoint` object with the provided latitude and
+     * longitude values.
+     * @param latitude - The latitude as number between -90 and 90.
+     * @param longitude - The longitude as number between -180 and 180.
+     */ constructor(t53, n40){
+        if (!isFinite(t53) || t53 < -90 || t53 > 90) throw new U(A, "Latitude must be a number between -90 and 90, but was: " + t53);
+        if (!isFinite(n40) || n40 < -180 || n40 > 180) throw new U(A, "Longitude must be a number between -180 and 180, but was: " + n40);
+        this._lat = t53, this._long = n40;
+    }
+    /**
+     * The latitude of this `GeoPoint` instance.
+     */ get latitude() {
+        return this._lat;
+    }
+    /**
+     * The longitude of this `GeoPoint` instance.
+     */ get longitude() {
+        return this._long;
+    }
+    /**
+     * Returns true if this `GeoPoint` is equal to the provided one.
+     *
+     * @param other - The `GeoPoint` to compare against.
+     * @returns true if this `GeoPoint` is equal to the provided one.
+     */ isEqual(t) {
+        return this._lat === t._lat && this._long === t._long;
+    }
+    /** Returns a JSON-serializable representation of this GeoPoint. */ toJSON() {
+        return {
+            latitude: this._lat,
+            longitude: this._long
+        };
+    }
+    /**
+     * Actually private to JS consumers of our API, so this function is prefixed
+     * with an underscore.
+     */ _compareTo(t) {
+        return mt(this._lat, t._lat) || mt(this._long, t._long);
+    }
+}
+/**
+ * @license
+ * Copyright 2017 Google LLC
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *   http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */ const ve = /^__.*__$/;
+/** The result of parsing document data (e.g. for a setData call). */ class Ee {
+    constructor(t54, n41, e17){
+        this.data = t54, this.fieldMask = n41, this.fieldTransforms = e17;
+    }
+    toMutation(t, n) {
+        return null !== this.fieldMask ? new In(t, this.data, this.fieldMask, n, this.fieldTransforms) : new En(t, this.data, n, this.fieldTransforms);
+    }
+}
+/** The result of parsing "update" data (i.e. for an updateData call). */ class Ie {
+    constructor(t55, // The fieldMask does not include document transforms.
+    n42, e18){
+        this.data = t55, this.fieldMask = n42, this.fieldTransforms = e18;
+    }
+    toMutation(t, n) {
+        return new In(t, this.data, this.fieldMask, n, this.fieldTransforms);
+    }
+}
+function Te(t56) {
+    switch(t56){
+        case 0 /* Set */ :
+        // fall through
+        case 2 /* MergeSet */ :
+        // fall through
+        case 1 /* Update */ :
+            return !0;
+        case 3 /* Argument */ :
+        case 4 /* ArrayArgument */ :
+            return !1;
+        default:
+            throw g();
+    }
+}
+/** A "context" object passed around while parsing user data. */ class Ae {
+    /**
+     * Initializes a ParseContext with the given source and path.
+     *
+     * @param settings - The settings for the parser.
+     * @param databaseId - The database ID of the Firestore instance.
+     * @param serializer - The serializer to use to generate the Value proto.
+     * @param ignoreUndefinedProperties - Whether to ignore undefined properties
+     * rather than throw.
+     * @param fieldTransforms - A mutable list of field transforms encountered
+     * while parsing the data.
+     * @param fieldMask - A mutable list of field paths encountered while parsing
+     * the data.
+     *
+     * TODO(b/34871131): We don't support array paths right now, so path can be
+     * null to indicate the context represents any location within an array (in
+     * which case certain features will not work and errors will be somewhat
+     * compromised).
+     */ constructor(t56, n43, e19, r8, s7, i3){
+        this.settings = t56, this.databaseId = n43, this.S = e19, this.ignoreUndefinedProperties = r8, // Minor hack: If fieldTransforms is undefined, we assume this is an
+        // external call and we need to validate the entire path.
+        (void 0) === s7 && this.Z(), this.fieldTransforms = s7 || [], this.fieldMask = i3 || [];
+    }
+    get path() {
+        return this.settings.path;
+    }
+    get X() {
+        return this.settings.X;
+    }
+    /** Returns a new context with the specified settings overwritten. */ tt(t) {
+        return new Ae(Object.assign(Object.assign({
+        }, this.settings), t), this.databaseId, this.S, this.ignoreUndefinedProperties, this.fieldTransforms, this.fieldMask);
+    }
+    nt(t) {
+        var n44;
+        const e20 = null === (n44 = this.path) || (void 0) === n44 ? void 0 : n44.child(t), r9 = this.tt({
+            path: e20,
+            et: !1
+        });
+        return r9.rt(t), r9;
+    }
+    st(t) {
+        var n45;
+        const e20 = null === (n45 = this.path) || (void 0) === n45 ? void 0 : n45.child(t), r9 = this.tt({
+            path: e20,
+            et: !1
+        });
+        return r9.Z(), r9;
+    }
+    it(t) {
+        // TODO(b/34871131): We don't support array paths right now; so make path
+        // undefined.
+        return this.tt({
+            path: void 0,
+            et: !0
+        });
+    }
+    ot(t) {
+        return ze(t, this.settings.methodName, this.settings.ut || !1, this.path, this.settings.ct);
+    }
+    /** Returns 'true' if 'fieldPath' was traversed when creating this context. */ contains(t) {
+        return (void 0) !== this.fieldMask.find((n46)=>t.isPrefixOf(n46)
+        ) || (void 0) !== this.fieldTransforms.find((n46)=>t.isPrefixOf(n46.field)
+        );
+    }
+    Z() {
+        // TODO(b/34871131): Remove null check once we have proper paths for fields
+        // within arrays.
+        if (this.path) for(let t57 = 0; t57 < this.path.length; t57++)this.rt(this.path.get(t57));
+    }
+    rt(t) {
+        if (0 === t.length) throw this.ot("Document fields must not be empty");
+        if (Te(this.X) && ve.test(t)) throw this.ot('Document fields cannot begin and end with "__"');
+    }
+}
+/**
+ * Helper for parsing raw user input (provided via the API) into internal model
+ * classes.
+ */ class Pe {
+    constructor(t57, n46, e20){
+        this.databaseId = t57, this.ignoreUndefinedProperties = n46, this.S = e20 || Hn(t57);
+    }
+    /** Creates a new top-level parse context. */ at(t, n, e, r = !1) {
+        return new Ae({
+            X: t,
+            methodName: n,
+            ct: e,
+            path: Z.emptyPath(),
+            et: !1,
+            ut: r
+        }, this.databaseId, this.S, this.ignoreUndefinedProperties);
+    }
+}
+function Re(t58) {
+    const n47 = t58._freezeSettings(), e21 = Hn(t58._databaseId);
+    return new Pe(t58._databaseId, !!n47.ignoreUndefinedProperties, e21);
+}
+/** Parse document data from a set() call. */ function Ve(t58, n47, e21, r9, s8, i4 = {
+}) {
+    const o3 = t58.at(i4.merge || i4.mergeFields ? 2 /* MergeSet */  : 0 /* Set */ , n47, e21, s8);
+    ke("Data must be an object, but it was:", o3, r9);
+    const u2 = Ue(r9, o3);
+    let c, a;
+    if (i4.merge) c = new vt(o3.fieldMask), a = o3.fieldTransforms;
+    else if (i4.mergeFields) {
+        const t59 = [];
+        for (const r10 of i4.mergeFields){
+            const s9 = Me(n47, r10, e21);
+            if (!o3.contains(s9)) throw new U(A, `Field '${s9}' is specified in your field mask but missing from your input data.`);
+            We(t59, s9) || t59.push(s9);
+        }
+        c = new vt(t59), a = o3.fieldTransforms.filter((t60)=>c.covers(t60.field)
+        );
+    } else c = null, a = o3.fieldTransforms;
+    return new Ee(new kt(u2), c, a);
+}
+class Ne extends ge {
+    _toFieldTransform(t) {
+        if (2 /* MergeSet */  !== t.X) throw 1 /* Update */  === t.X ? t.ot(`${this._methodName}() can only appear at the top level of your update data`) : t.ot(`${this._methodName}() cannot be used with set() unless you pass {merge:true}`);
+        // No transform to add for a delete, but we need to add it to our
+        // fieldMask so it gets deleted.
+        return t.fieldMask.push(t.path), null;
+    }
+    isEqual(t) {
+        return t instanceof Ne;
+    }
+}
+/**
+ * Creates a child context for parsing SerializableFieldValues.
+ *
+ * This is different than calling `ParseContext.contextWith` because it keeps
+ * the fieldTransforms and fieldMask separate.
+ *
+ * The created context has its `dataSource` set to `UserDataSource.Argument`.
+ * Although these values are used with writes, any elements in these FieldValues
+ * are not considered writes since they cannot contain any FieldValue sentinels,
+ * etc.
+ *
+ * @param fieldValue - The sentinel FieldValue for which to create a child
+ *     context.
+ * @param context - The parent context.
+ * @param arrayElement - Whether or not the FieldValue has an array.
+ */ function De(t58, n47, e21) {
+    return new Ae({
+        X: 3 /* Argument */ ,
+        ct: n47.settings.ct,
+        methodName: t58._methodName,
+        et: e21
+    }, n47.databaseId, n47.S, n47.ignoreUndefinedProperties);
+}
+class $e extends ge {
+    _toFieldTransform(t) {
+        return new gn(t.path, new mn);
+    }
+    isEqual(t) {
+        return t instanceof $e;
+    }
+}
+class Fe extends ge {
+    constructor(t58, n47){
+        super(t58), this.ht = n47;
+    }
+    _toFieldTransform(t) {
+        const n48 = De(this, t, /*array=*/ !0), e21 = this.ht.map((t59)=>Le(t59, n48)
+        ), r9 = new pn(e21);
+        return new gn(t.path, r9);
+    }
+    isEqual(t) {
+        // TODO(mrschmidt): Implement isEquals
+        return this === t;
+    }
+}
+class Se extends ge {
+    constructor(t59, n48){
+        super(t59), this.ht = n48;
+    }
+    _toFieldTransform(t) {
+        const n49 = De(this, t, /*array=*/ !0), e21 = this.ht.map((t60)=>Le(t60, n49)
+        ), r9 = new yn(e21);
+        return new gn(t.path, r9);
+    }
+    isEqual(t) {
+        // TODO(mrschmidt): Implement isEquals
+        return this === t;
+    }
+}
+class qe extends ge {
+    constructor(t60, n49){
+        super(t60), this.lt = n49;
+    }
+    _toFieldTransform(t) {
+        const n50 = new _n(t.S, dn(t.S, this.lt));
+        return new gn(t.path, n50);
+    }
+    isEqual(t) {
+        // TODO(mrschmidt): Implement isEquals
+        return this === t;
+    }
+}
+/** Parse update data from an update() call. */ function xe(t61, n50, e21, r9) {
+    const s8 = t61.at(1 /* Update */ , n50, e21);
+    ke("Data must be an object, but it was:", s8, r9);
+    const i4 = [], o3 = kt.empty();
+    bt(r9, (t62, r10)=>{
+        const u2 = Qe(n50, t62, e21);
+        // For Compat types, we have to "extract" the underlying types before
+        // performing validation.
+        r10 = _util.getModularInstance(r10);
+        const c = s8.st(u2);
+        if (r10 instanceof Ne) // Add it to the field mask, but don't add anything to updateData.
+        i4.push(u2);
+        else {
+            const t63 = Le(r10, c);
+            null != t63 && (i4.push(u2), o3.set(u2, t63));
+        }
+    });
+    const u2 = new vt(i4);
+    return new Ie(o3, u2, s8.fieldTransforms);
+}
+/** Parse update data from a list of field/value arguments. */ function Oe(t61, n50, e21, r9, s8, i4) {
+    const o3 = t61.at(1 /* Update */ , n50, e21), u2 = [
+        Me(n50, r9, e21)
+    ], c = [
+        s8
+    ];
+    if (i4.length % 2 != 0) throw new U(A, `Function ${n50}() needs to be called with an even number of arguments that alternate between field names and values.`);
+    for(let t62 = 0; t62 < i4.length; t62 += 2)u2.push(Me(n50, i4[t62])), c.push(i4[t62 + 1]);
+    const a = [], l1 = kt.empty();
+    // We iterate in reverse order to pick the last value for a field if the
+    // user specified the field multiple times.
+    for(let t63 = u2.length - 1; t63 >= 0; --t63)if (!We(a, u2[t63])) {
+        const n51 = u2[t63];
+        let e22 = c[t63];
+        // For Compat types, we have to "extract" the underlying types before
+        // performing validation.
+        e22 = _util.getModularInstance(e22);
+        const r10 = o3.st(n51);
+        if (e22 instanceof Ne) // Add it to the field mask, but don't add anything to updateData.
+        a.push(n51);
+        else {
+            const t64 = Le(e22, r10);
+            null != t64 && (a.push(n51), l1.set(n51, t64));
+        }
+    }
+    const f1 = new vt(a);
+    return new Ie(l1, f1, o3.fieldTransforms);
+}
+/**
+ * Parse a "query value" (e.g. value in a where filter or a value in a cursor
+ * bound).
+ *
+ * @param allowArrays - Whether the query value is an array that may directly
+ * contain additional arrays (e.g. the operand of an `in` query).
+ */ function Ce(t61, n50, e21, r9 = !1) {
+    return Le(e21, t61.at(r9 ? 4 /* ArrayArgument */  : 3 /* Argument */ , n50));
+}
+/**
+ * Parses user data to Protobuf Values.
+ *
+ * @param input - Data to be parsed.
+ * @param context - A context object representing the current path being parsed,
+ * the source of the data being parsed, etc.
+ * @returns The parsed value, or null if the value was a FieldValue sentinel
+ * that should not be included in the resulting parsed data.
+ */ function Le(t61, n50) {
+    if (je(// Unwrap the API type from the Compat SDK. This will return the API type
+    // from firestore-exp.
+    t61 = _util.getModularInstance(t61))) return ke("Unsupported field value:", n50, t61), Ue(t61, n50);
+    if (t61 instanceof ge) // FieldValues usually parse into transforms (except FieldValue.delete())
+    // in which case we do not want to include this field in our parsed data
+    // (as doing so will overwrite the field directly prior to the transform
+    // trying to transform it). So we don't add this location to
+    // context.fieldMask and we return null as our parsing result.
+    /**
+ * "Parses" the provided FieldValueImpl, adding any necessary transforms to
+ * context.fieldTransforms.
+ */ return (function(t62, n51) {
+        // Sentinels are only supported with writes, and not within arrays.
+        if (!Te(n51.X)) throw n51.ot(`${t62._methodName}() can only be used with update() and set()`);
+        if (!n51.path) throw n51.ot(`${t62._methodName}() is not currently supported inside arrays`);
+        const e21 = t62._toFieldTransform(n51);
+        e21 && n51.fieldTransforms.push(e21);
+    })(t61, n50), null;
+    if ((void 0) === t61 && n50.ignoreUndefinedProperties) // If the input is undefined it can never participate in the fieldMask, so
+    // don't handle this below. If `ignoreUndefinedProperties` is false,
+    // `parseScalarValue` will reject an undefined value.
+    return null;
+    if (// If context.path is null we are inside an array and we don't support
+    // field mask paths more granular than the top-level array.
+    n50.path && n50.fieldMask.push(n50.path), t61 instanceof Array) {
+        // TODO(b/34871131): Include the path containing the array in the error
+        // message.
+        // In the case of IN queries, the parsed data is an array (representing
+        // the set of values to be included for the IN query) that may directly
+        // contain additional arrays (each representing an individual field
+        // value), so we disable this validation.
+        if (n50.settings.et && 4 /* ArrayArgument */  !== n50.X) throw n50.ot("Nested arrays are not supported");
+        return (function(t62, n51) {
+            const e21 = [];
+            let r9 = 0;
+            for (const s8 of t62){
+                let t63 = Le(s8, n51.it(r9));
+                null == t63 && // Just include nulls in the array for fields being replaced with a
+                // sentinel.
+                (t63 = {
+                    nullValue: "NULL_VALUE"
+                }), e21.push(t63), r9++;
+            }
+            return {
+                arrayValue: {
+                    values: e21
+                }
+            };
+        })(t61, n50);
+    }
+    return (function(t62, n51) {
+        if (null === (t62 = _util.getModularInstance(t62))) return {
+            nullValue: "NULL_VALUE"
+        };
+        if ("number" == typeof t62) return dn(n51.S, t62);
+        if ("boolean" == typeof t62) return {
+            booleanValue: t62
+        };
+        if ("string" == typeof t62) return {
+            stringValue: t62
+        };
+        if (t62 instanceof Date) {
+            const e21 = yt.fromDate(t62);
+            return {
+                timestampValue: Nn(n51.S, e21)
+            };
+        }
+        if (t62 instanceof yt) {
+            // Firestore backend truncates precision down to microseconds. To ensure
+            // offline mode works the same with regards to truncation, perform the
+            // truncation immediately without waiting for the backend to do that.
+            const e21 = new yt(t62.seconds, 1000 * Math.floor(t62.nanoseconds / 1000));
+            return {
+                timestampValue: Nn(n51.S, e21)
+            };
+        }
+        if (t62 instanceof be) return {
+            geoPointValue: {
+                latitude: t62.latitude,
+                longitude: t62.longitude
+            }
+        };
+        if (t62 instanceof _e) return {
+            bytesValue: Dn(n51.S, t62._byteString)
+        };
+        if (t62 instanceof ce) {
+            const e21 = n51.databaseId, r9 = t62.firestore._databaseId;
+            if (!r9.isEqual(e21)) throw n51.ot(`Document reference is for database ${r9.projectId}/${r9.database} but should be for database ${e21.projectId}/${e21.database}`);
+            return {
+                referenceValue: Sn(t62.firestore._databaseId || n51.databaseId, t62._key.path)
+            };
+        }
+        throw n51.ot(`Unsupported field value: ${rt(t62)}`);
+    })(t61, n50);
+}
+function Ue(t61, n50) {
+    const e21 = {
+    };
+    return !function(t62) {
+        for(const n51 in t62)if (Object.prototype.hasOwnProperty.call(t62, n51)) return !1;
+        return !0;
+    }(t61) ? bt(t61, (t62, r9)=>{
+        const s8 = Le(r9, n50.nt(t62));
+        null != s8 && (e21[t62] = s8);
+    }) : // If we encounter an empty object, we explicitly add it to the update
+    // mask to ensure that the server creates a map entry.
+    n50.path && n50.path.length > 0 && n50.fieldMask.push(n50.path), {
+        mapValue: {
+            fields: e21
+        }
+    };
+}
+function je(t61) {
+    return !("object" != typeof t61 || null === t61 || t61 instanceof Array || t61 instanceof Date || t61 instanceof yt || t61 instanceof be || t61 instanceof _e || t61 instanceof ce || t61 instanceof ge);
+}
+function ke(t61, n50, e21) {
+    if (!je(e21) || !function(t62) {
+        return "object" == typeof t62 && null !== t62 && (Object.getPrototypeOf(t62) === Object.prototype || null === Object.getPrototypeOf(t62));
+    }(e21)) {
+        const r9 = rt(e21);
+        throw "an object" === r9 ? n50.ot(t61 + " a custom object") : n50.ot(t61 + " " + r9);
+    }
+}
+/**
+ * Helper that calls fromDotSeparatedString() but wraps any error thrown.
+ */ function Me(t61, n50, e21) {
+    if (// If required, replace the FieldPath Compat class with with the firestore-exp
+    // FieldPath.
+    (n50 = _util.getModularInstance(n50)) instanceof pe) return n50._internalPath;
+    if ("string" == typeof n50) return Qe(t61, n50);
+    throw ze("Field path arguments must be of type string or FieldPath.", t61, /* hasConverter= */ !1, /* path= */ void 0, e21);
+}
+/**
+ * Matches any characters in a field path string that are reserved.
+ */ const Be = new RegExp("[~\\*/\\[\\]]");
+/**
+ * Wraps fromDotSeparatedString with an error message about the method that
+ * was thrown.
+ * @param methodName - The publicly visible method name
+ * @param path - The dot-separated string form of a field path which will be
+ * split on dots.
+ * @param targetDoc - The document against which the field path will be
+ * evaluated.
+ */ function Qe(t61, n50, e21) {
+    if (n50.search(Be) >= 0) throw ze(`Invalid field path (${n50}). Paths must not contain '~', '*', '/', '[', or ']'`, t61, /* hasConverter= */ !1, /* path= */ void 0, e21);
+    try {
+        return new pe(...n50.split("."))._internalPath;
+    } catch (r9) {
+        throw ze(`Invalid field path (${n50}). Paths must not be empty, begin with '.', end with '.', or contain '..'`, t61, /* hasConverter= */ !1, /* path= */ void 0, e21);
+    }
+}
+function ze(t61, n50, e21, r9, s8) {
+    const i4 = r9 && !r9.isEmpty(), o3 = (void 0) !== s8;
+    let u2 = `Function ${n50}() called with invalid data`;
+    e21 && (u2 += " (via `toFirestore()`)"), u2 += ". ";
+    let c = "";
+    return (i4 || o3) && (c += " (found", i4 && (c += ` in field ${r9}`), o3 && (c += ` in document ${s8}`), c += ")"), new U(A, u2 + t61 + c);
+}
+/** Checks `haystack` if FieldPath `needle` is present. Runs in O(n). */ function We(t61, n50) {
+    return t61.some((t62)=>t62.isEqual(n50)
+    );
+}
+/**
+ * @license
+ * Copyright 2020 Google LLC
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *   http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */ /**
+ * A `DocumentSnapshot` contains data read from a document in your Firestore
+ * database. The data can be extracted with `.data()` or `.get(<field>)` to
+ * get a specific field.
+ *
+ * For a `DocumentSnapshot` that points to a non-existing document, any data
+ * access will return 'undefined'. You can use the `exists()` method to
+ * explicitly verify a document's existence.
+ */ class Ge {
+    // Note: This class is stripped down version of the DocumentSnapshot in
+    // the legacy SDK. The changes are:
+    // - No support for SnapshotMetadata.
+    // - No support for SnapshotOptions.
+    /** @hideconstructor protected */ constructor(t61, n50, e21, r9, s8){
+        this._firestore = t61, this._userDataWriter = n50, this._key = e21, this._document = r9, this._converter = s8;
+    }
+    /** Property of the `DocumentSnapshot` that provides the document's ID. */ get id() {
+        return this._key.path.lastSegment();
+    }
+    /**
+     * The `DocumentReference` for the document included in the `DocumentSnapshot`.
+     */ get ref() {
+        return new ce(this._firestore, this._converter, this._key);
+    }
+    /**
+     * Signals whether or not the document at the snapshot's location exists.
+     *
+     * @returns true if the document exists.
+     */ exists() {
+        return null !== this._document;
+    }
+    /**
+     * Retrieves all fields in the document as an `Object`. Returns `undefined` if
+     * the document doesn't exist.
+     *
+     * @returns An `Object` containing all fields in the document or `undefined`
+     * if the document doesn't exist.
+     */ data() {
+        if (this._document) {
+            if (this._converter) {
+                // We only want to use the converter and create a new DocumentSnapshot
+                // if a converter has been provided.
+                const t62 = new He(this._firestore, this._userDataWriter, this._key, this._document, /* converter= */ null);
+                return this._converter.fromFirestore(t62);
+            }
+            return this._userDataWriter.convertValue(this._document.data.value);
+        }
+    }
+    /**
+     * Retrieves the field specified by `fieldPath`. Returns `undefined` if the
+     * document or field doesn't exist.
+     *
+     * @param fieldPath - The path (for example 'foo' or 'foo.bar') to a specific
+     * field.
+     * @returns The data at the specified field location or undefined if no such
+     * field exists in the document.
+     */ // We are using `any` here to avoid an explicit cast by our users.
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    get(t) {
+        if (this._document) {
+            const n51 = this._document.data.field(Je("DocumentSnapshot.get", t));
+            if (null !== n51) return this._userDataWriter.convertValue(n51);
+        }
+    }
+}
+/**
+ * A `QueryDocumentSnapshot` contains data read from a document in your
+ * Firestore database as part of a query. The document is guaranteed to exist
+ * and its data can be extracted with `.data()` or `.get(<field>)` to get a
+ * specific field.
+ *
+ * A `QueryDocumentSnapshot` offers the same API surface as a
+ * `DocumentSnapshot`. Since query results contain only existing documents, the
+ * `exists` property will always be true and `data()` will never return
+ * 'undefined'.
+ */ class He extends Ge {
+    /**
+     * Retrieves all fields in the document as an `Object`.
+     *
+     * @override
+     * @returns An `Object` containing all fields in the document.
+     */ data() {
+        return super.data();
+    }
+}
+/**
+ * A `QuerySnapshot` contains zero or more `DocumentSnapshot` objects
+ * representing the results of a query. The documents can be accessed as an
+ * array via the `docs` property or enumerated using the `forEach` method. The
+ * number of documents can be determined via the `empty` and `size`
+ * properties.
+ */ class Ye {
+    /** @hideconstructor */ constructor(t62, n51){
+        this._docs = n51, this.query = t62;
+    }
+    /** An array of all the documents in the `QuerySnapshot`. */ get docs() {
+        return [
+            ...this._docs
+        ];
+    }
+    /** The number of documents in the `QuerySnapshot`. */ get size() {
+        return this.docs.length;
+    }
+    /** True if there are no documents in the `QuerySnapshot`. */ get empty() {
+        return 0 === this.docs.length;
+    }
+    /**
+     * Enumerates all of the documents in the `QuerySnapshot`.
+     *
+     * @param callback - A callback to be called with a `QueryDocumentSnapshot` for
+     * each document in the snapshot.
+     * @param thisArg - The `this` binding for the callback.
+     */ forEach(t, n) {
+        this._docs.forEach(t, n);
+    }
+}
+/**
+ * Returns true if the provided snapshots are equal.
+ *
+ * @param left - A snapshot to compare.
+ * @param right - A snapshot to compare.
+ * @returns true if the snapshots are equal.
+ */ function Ke(t63, n52) {
+    return t63 = _util.getModularInstance(t63), n52 = _util.getModularInstance(n52), t63 instanceof Ge && n52 instanceof Ge ? t63._firestore === n52._firestore && t63._key.isEqual(n52._key) && (null === t63._document ? null === n52._document : t63._document.isEqual(n52._document)) && t63._converter === n52._converter : t63 instanceof Ye && n52 instanceof Ye && me(t63.query, n52.query) && pt(t63.docs, n52.docs, Ke);
+}
+/**
+ * Helper that calls `fromDotSeparatedString()` but wraps any error thrown.
+ */ function Je(t63, n52) {
+    return "string" == typeof n52 ? Qe(t63, n52) : n52 instanceof pe ? n52._internalPath : n52._delegate._internalPath;
+}
+/**
+ * @license
+ * Copyright 2020 Google LLC
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *   http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */ /**
+ * A `QueryConstraint` is used to narrow the set of documents returned by a
+ * Firestore query. `QueryConstraint`s are created by invoking {@link where},
+ * {@link orderBy}, {@link (startAt:1)}, {@link (startAfter:1)}, {@link
+ * endBefore:1}, {@link (endAt:1)}, {@link limit} or {@link limitToLast} and
+ * can then be passed to {@link query} to create a new query instance that
+ * also contains this `QueryConstraint`.
+ */ class Ze {
+}
+/**
+ * Creates a new immutable instance of {@link Query} that is extended to also include
+ * additional query constraints.
+ *
+ * @param query - The {@link Query} instance to use as a base for the new constraints.
+ * @param queryConstraints - The list of {@link QueryConstraint}s to apply.
+ * @throws if any of the provided query constraints cannot be combined with the
+ * existing or new constraints.
+ */ function Xe(t63, ...n52) {
+    for (const e22 of n52)t63 = e22._apply(t63);
+    return t63;
+}
+class tr extends Ze {
+    constructor(t63, n52, e22){
+        super(), this.ft = t63, this.dt = n52, this.wt = e22, this.type = "where";
+    }
+    _apply(t) {
+        const n53 = Re(t.firestore), e23 = function(t64, n54, e24, r10, s9, i4, o3) {
+            let u2;
+            if (s9.isKeyField()) {
+                if ("array-contains" /* ARRAY_CONTAINS */  === i4 || "array-contains-any" /* ARRAY_CONTAINS_ANY */  === i4) throw new U(A, `Invalid Query. You can't perform '${i4}' queries on FieldPath.documentId().`);
+                if ("in" /* IN */  === i4 || "not-in" /* NOT_IN */  === i4) {
+                    mr(o3, i4);
+                    const n55 = [];
+                    for (const e25 of o3)n55.push(wr(r10, t64, e25));
+                    u2 = {
+                        arrayValue: {
+                            values: n55
+                        }
+                    };
+                } else u2 = wr(r10, t64, o3);
+            } else "in" /* IN */  !== i4 && "not-in" /* NOT_IN */  !== i4 && "array-contains-any" /* ARRAY_CONTAINS_ANY */  !== i4 || mr(o3, i4), u2 = Ce(e24, n54, o3, /* allowArrays= */ "in" /* IN */  === i4 || "not-in" /* NOT_IN */  === i4);
+            const c = zt.create(s9, i4, u2);
+            return (function(t65, n55) {
+                if (n55.N()) {
+                    const e25 = cn(t65);
+                    if (null !== e25 && !e25.isEqual(n55.field)) throw new U(A, `Invalid query. All where filters with an inequality (<, <=, !=, not-in, >, or >=) must be on the same field. But you have inequality filters on '${e25.toString()}' and '${n55.field.toString()}'`);
+                    const r11 = un(t65);
+                    null !== r11 && pr(t65, n55.field, r11);
+                }
+                const e25 = function(t66, n56) {
+                    for (const e26 of t66.filters)if (n56.indexOf(e26.op) >= 0) return e26.op;
+                    return null;
+                }(t65, /**
+ * Given an operator, returns the set of operators that cannot be used with it.
+ *
+ * Operators in a query must adhere to the following set of rules:
+ * 1. Only one array operator is allowed.
+ * 2. Only one disjunctive operator is allowed.
+ * 3. `NOT_EQUAL` cannot be used with another `NOT_EQUAL` operator.
+ * 4. `NOT_IN` cannot be used with array, disjunctive, or `NOT_EQUAL` operators.
+ *
+ * Array operators: `ARRAY_CONTAINS`, `ARRAY_CONTAINS_ANY`
+ * Disjunctive operators: `IN`, `ARRAY_CONTAINS_ANY`, `NOT_IN`
+ */ function(t66) {
+                    switch(t66){
+                        case "!=" /* NOT_EQUAL */ :
+                            return [
+                                "!=" /* NOT_EQUAL */ ,
+                                "not-in" /* NOT_IN */ 
+                            ];
+                        case "array-contains" /* ARRAY_CONTAINS */ :
+                            return [
+                                "array-contains" /* ARRAY_CONTAINS */ ,
+                                "array-contains-any" /* ARRAY_CONTAINS_ANY */ ,
+                                "not-in" /* NOT_IN */ 
+                            ];
+                        case "in" /* IN */ :
+                            return [
+                                "array-contains-any" /* ARRAY_CONTAINS_ANY */ ,
+                                "in" /* IN */ ,
+                                "not-in" /* NOT_IN */ 
+                            ];
+                        case "array-contains-any" /* ARRAY_CONTAINS_ANY */ :
+                            return [
+                                "array-contains" /* ARRAY_CONTAINS */ ,
+                                "array-contains-any" /* ARRAY_CONTAINS_ANY */ ,
+                                "in" /* IN */ ,
+                                "not-in" /* NOT_IN */ 
+                            ];
+                        case "not-in" /* NOT_IN */ :
+                            return [
+                                "array-contains" /* ARRAY_CONTAINS */ ,
+                                "array-contains-any" /* ARRAY_CONTAINS_ANY */ ,
+                                "in" /* IN */ ,
+                                "not-in" /* NOT_IN */ ,
+                                "!=" /* NOT_EQUAL */ 
+                            ];
+                        default:
+                            return [];
+                    }
+                }(n55.op));
+                if (null !== e25) // Special case when it's a duplicate op to give a slightly clearer error message.
+                throw e25 === n55.op ? new U(A, `Invalid query. You cannot use more than one '${n55.op.toString()}' filter.`) : new U(A, `Invalid query. You cannot use '${n55.op.toString()}' filters with '${e25.toString()}' filters.`);
+            })(t64, c), c;
+        }(t._query, "where", n53, t.firestore._databaseId, this.ft, this.dt, this.wt);
+        return new ae(t.firestore, t.converter, function(t64, n54) {
+            const e24 = t64.filters.concat([
+                n54
+            ]);
+            return new sn(t64.path, t64.collectionGroup, t64.explicitOrderBy.slice(), e24, t64.limit, t64.limitType, t64.startAt, t64.endAt);
+        }(t._query, e23));
+    }
+}
+/**
+ * Creates a {@link QueryConstraint} that enforces that documents must contain the
+ * specified field and that the value should satisfy the relation constraint
+ * provided.
+ *
+ * @param fieldPath - The path to compare
+ * @param opStr - The operation string (e.g "&lt;", "&lt;=", "==", "&lt;",
+ *   "&lt;=", "!=").
+ * @param value - The value for comparison
+ * @returns The created {@link Query}.
+ */ function nr(t64, n53, e23) {
+    const r10 = n53, s9 = Je("where", t64);
+    return new tr(s9, r10, e23);
+}
+class er extends Ze {
+    constructor(t64, n53){
+        super(), this.ft = t64, this.yt = n53, this.type = "orderBy";
+    }
+    _apply(t) {
+        const n54 = function(t65, n55, e23) {
+            if (null !== t65.startAt) throw new U(A, "Invalid query. You must not call startAt() or startAfter() before calling orderBy().");
+            if (null !== t65.endAt) throw new U(A, "Invalid query. You must not call endAt() or endBefore() before calling orderBy().");
+            const r10 = new nn(n55, e23);
+            return (function(t66, n56) {
+                if (null === un(t66)) {
+                    // This is the first order by. It must match any inequality.
+                    const e24 = cn(t66);
+                    null !== e24 && pr(t66, e24, n56.field);
+                }
+            })(t65, r10), r10;
+        }(t._query, this.ft, this.yt);
+        return new ae(t.firestore, t.converter, function(t65, n55) {
+            // TODO(dimond): validate that orderBy does not list the same key twice.
+            const e23 = t65.explicitOrderBy.concat([
+                n55
+            ]);
+            return new sn(t65.path, t65.collectionGroup, e23, t65.filters.slice(), t65.limit, t65.limitType, t65.startAt, t65.endAt);
+        }(t._query, n54));
+    }
+}
+/**
+ * Creates a {@link QueryConstraint} that sorts the query result by the
+ * specified field, optionally in descending order instead of ascending.
+ *
+ * @param fieldPath - The field to sort by.
+ * @param directionStr - Optional direction to sort by ('asc' or 'desc'). If
+ * not specified, order will be ascending.
+ * @returns The created {@link Query}.
+ */ function rr(t65, n54 = "asc") {
+    const e23 = n54, r10 = Je("orderBy", t65);
+    return new er(r10, e23);
+}
+class sr extends Ze {
+    constructor(t65, n54, e23){
+        super(), this.type = t65, this._t = n54, this.gt = e23;
+    }
+    _apply(t) {
+        return new ae(t.firestore, t.converter, function(t66, n55, e24) {
+            return new sn(t66.path, t66.collectionGroup, t66.explicitOrderBy.slice(), t66.filters.slice(), n55, e24, t66.startAt, t66.endAt);
+        }(t._query, this._t, this.gt));
+    }
+}
+/**
+ * Creates a {@link QueryConstraint} that only returns the first matching documents.
+ *
+ * @param limit - The maximum number of items to return.
+ * @returns The created {@link Query}.
+ */ function ir(t66) {
+    return it("limit", t66), new sr("limit", t66, "F" /* First */ );
+}
+/**
+ * Creates a {@link QueryConstraint} that only returns the last matching documents.
+ *
+ * You must specify at least one `orderBy` clause for `limitToLast` queries,
+ * otherwise an exception will be thrown during execution.
+ *
+ * @param limit - The maximum number of items to return.
+ * @returns The created {@link Query}.
+ */ function or(t66) {
+    return it("limitToLast", t66), new sr("limitToLast", t66, "L" /* Last */ );
+}
+class ur extends Ze {
+    constructor(t66, n55, e24){
+        super(), this.type = t66, this.bt = n55, this.vt = e24;
+    }
+    _apply(t) {
+        const n56 = dr(t, this.type, this.bt, this.vt);
+        return new ae(t.firestore, t.converter, function(t67, n57) {
+            return new sn(t67.path, t67.collectionGroup, t67.explicitOrderBy.slice(), t67.filters.slice(), t67.limit, t67.limitType, n57, t67.endAt);
+        }(t._query, n56));
+    }
+}
+function cr(...t67) {
+    return new ur("startAt", t67, /*before=*/ !0);
+}
+function ar(...t67) {
+    return new ur("startAfter", t67, /*before=*/ !1);
+}
+class hr extends Ze {
+    constructor(t67, n56, e25){
+        super(), this.type = t67, this.bt = n56, this.vt = e25;
+    }
+    _apply(t) {
+        const n57 = dr(t, this.type, this.bt, this.vt);
+        return new ae(t.firestore, t.converter, function(t68, n58) {
+            return new sn(t68.path, t68.collectionGroup, t68.explicitOrderBy.slice(), t68.filters.slice(), t68.limit, t68.limitType, t68.startAt, n58);
+        }(t._query, n57));
+    }
+}
+function lr(...t68) {
+    return new hr("endBefore", t68, /*before=*/ !0);
+}
+function fr(...t68) {
+    return new hr("endAt", t68, /*before=*/ !1);
+}
+/** Helper function to create a bound from a document or fields */ function dr(t68, n57, e26, r10) {
+    if (e26[0] = _util.getModularInstance(e26[0]), e26[0] instanceof Ge) return (function(t69, n58, e27, r11, s9) {
+        if (!r11) throw new U(R, `Can't use a DocumentSnapshot that doesn't exist for ${e27}().`);
+        const i4 = [];
+        // Because people expect to continue/end a query at the exact document
+        // provided, we need to use the implicit sort order rather than the explicit
+        // sort order, because it's guaranteed to contain the document key. That way
+        // the position becomes unambiguous and the query continues/ends exactly at
+        // the provided document. Without the key (by using the explicit sort
+        // orders), multiple documents could match the position, yielding duplicate
+        // results.
+        for (const e28 of hn(t69))if (e28.field.isKeyField()) i4.push(xt(n58, r11.key));
+        else {
+            const t70 = r11.data.field(e28.field);
+            if (Rt(t70)) throw new U(A, 'Invalid query. You are trying to start or end a query using a document for which the field "' + e28.field + '" is an uncommitted server timestamp. (Since the value of this field is unknown, you cannot start/end a query with it.)');
+            if (null === t70) {
+                const t71 = e28.field.canonicalString();
+                throw new U(A, `Invalid query. You are trying to start or end a query using a document for which the field '${t71}' (used as the orderBy) does not exist.`);
+            }
+            i4.push(t70);
+        }
+        return new tn(i4, s9);
+    })(t68._query, t68.firestore._databaseId, n57, e26[0]._document, r10);
+    {
+        const s9 = Re(t68.firestore);
+        return (function(t69, n58, e27, r11, s10, i4) {
+            // Use explicit order by's because it has to match the query the user made
+            const o3 = t69.explicitOrderBy;
+            if (s10.length > o3.length) throw new U(A, `Too many arguments provided to ${r11}(). The number of arguments must be less than or equal to the number of orderBy() clauses`);
+            const u2 = [];
+            for(let i5 = 0; i5 < s10.length; i5++){
+                const c = s10[i5];
+                if (o3[i5].field.isKeyField()) {
+                    if ("string" != typeof c) throw new U(A, `Invalid query. Expected a string for document ID in ${r11}(), but got a ${typeof c}`);
+                    if (!an(t69) && -1 !== c.indexOf("/")) throw new U(A, `Invalid query. When querying a collection and ordering by FieldPath.documentId(), the value passed to ${r11}() must be a plain document ID, but '${c}' contains a slash.`);
+                    const e28 = t69.path.child(K.fromString(c));
+                    if (!X.isDocumentKey(e28)) throw new U(A, `Invalid query. When querying a collection group and ordering by FieldPath.documentId(), the value passed to ${r11}() must result in a valid document path, but '${e28}' is not because it contains an odd number of segments.`);
+                    const s11 = new X(e28);
+                    u2.push(xt(n58, s11));
+                } else {
+                    const t70 = Ce(e27, r11, c);
+                    u2.push(t70);
+                }
+            }
+            return new tn(u2, i4);
+        })(t68._query, t68.firestore._databaseId, s9, n57, e26, r10);
+    }
+}
+function wr(t68, n57, e26) {
+    if ("string" == typeof (e26 = _util.getModularInstance(e26))) {
+        if ("" === e26) throw new U(A, "Invalid query. When querying with FieldPath.documentId(), you must provide a valid document ID, but it was an empty string.");
+        if (!an(n57) && -1 !== e26.indexOf("/")) throw new U(A, `Invalid query. When querying a collection by FieldPath.documentId(), you must provide a plain document ID, but '${e26}' contains a '/' character.`);
+        const r10 = n57.path.child(K.fromString(e26));
+        if (!X.isDocumentKey(r10)) throw new U(A, `Invalid query. When querying a collection group by FieldPath.documentId(), the value provided must result in a valid document path, but '${r10}' is not because it has an odd number of segments (${r10.length}).`);
+        return xt(t68, new X(r10));
+    }
+    if (e26 instanceof ce) return xt(t68, e26._key);
+    throw new U(A, `Invalid query. When querying with FieldPath.documentId(), you must provide a valid string or a DocumentReference, but it was: ${rt(e26)}.`);
+}
+/**
+ * Validates that the value passed into a disjunctive filter satisfies all
+ * array requirements.
+ */ function mr(t68, n57) {
+    if (!Array.isArray(t68) || 0 === t68.length) throw new U(A, `Invalid Query. A non-empty array is required for '${n57.toString()}' filters.`);
+    if (t68.length > 10) throw new U(A, `Invalid Query. '${n57.toString()}' filters support a maximum of 10 elements in the value array.`);
+}
+function pr(t68, n57, e26) {
+    if (!e26.isEqual(n57)) throw new U(A, `Invalid query. You have a where filter with an inequality (<, <=, !=, not-in, >, or >=) on field '${n57.toString()}' and so you must also use '${n57.toString()}' as your first argument to orderBy(), but your first orderBy() is on field '${e26.toString()}' instead.`);
+}
+/**
+ * @license
+ * Copyright 2020 Google LLC
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *   http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */ /**
+ * Converts Firestore's internal types to the JavaScript types that we expose
+ * to the user.
+ *
+ * @internal
+ */ /**
+ * @license
+ * Copyright 2020 Google LLC
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *   http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */ /**
+ * Converts custom model object of type T into `DocumentData` by applying the
+ * converter if it exists.
+ *
+ * This function is used when converting user objects to `DocumentData`
+ * because we want to provide the user with a more specific error message if
+ * their `set()` or fails due to invalid data originating from a `toFirestore()`
+ * call.
+ */ function yr(t68, n57, e26) {
+    let r10;
+    // Cast to `any` in order to satisfy the union type constraint on
+    // toFirestore().
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    return r10 = t68 ? e26 && (e26.merge || e26.mergeFields) ? t68.toFirestore(n57, e26) : t68.toFirestore(n57) : n57, r10;
+}
+class _r extends class {
+    convertValue(t, n = "none") {
+        switch(Dt(t)){
+            case 0 /* NullValue */ :
+                return null;
+            case 1 /* BooleanValue */ :
+                return t.booleanValue;
+            case 2 /* NumberValue */ :
+                return At(t.integerValue || t.doubleValue);
+            case 3 /* TimestampValue */ :
+                return this.convertTimestamp(t.timestampValue);
+            case 4 /* ServerTimestampValue */ :
+                return this.convertServerTimestamp(t, n);
+            case 5 /* StringValue */ :
+                return t.stringValue;
+            case 6 /* BlobValue */ :
+                return this.convertBytes(Pt(t.bytesValue));
+            case 7 /* RefValue */ :
+                return this.convertReference(t.referenceValue);
+            case 8 /* GeoPointValue */ :
+                return this.convertGeoPoint(t.geoPointValue);
+            case 9 /* ArrayValue */ :
+                return this.convertArray(t.arrayValue, n);
+            case 10 /* ObjectValue */ :
+                return this.convertObject(t.mapValue, n);
+            default:
+                throw g();
+        }
+    }
+    convertObject(t, n) {
+        const e26 = {
+        };
+        return bt(t.fields, (t68, r10)=>{
+            e26[t68] = this.convertValue(r10, n);
+        }), e26;
+    }
+    convertGeoPoint(t) {
+        return new be(At(t.latitude), At(t.longitude));
+    }
+    convertArray(t, n) {
+        return (t.values || []).map((t68)=>this.convertValue(t68, n)
+        );
+    }
+    convertServerTimestamp(t, n) {
+        switch(n){
+            case "previous":
+                const e26 = Vt(t);
+                return null == e26 ? null : this.convertValue(e26, n);
+            case "estimate":
+                return this.convertTimestamp(Nt(t));
+            default:
+                return null;
+        }
+    }
+    convertTimestamp(t) {
+        const n57 = Tt(t);
+        return new yt(n57.seconds, n57.nanos);
+    }
+    convertDocumentKey(t, n) {
+        const e26 = K.fromString(t);
+        b(Gn(e26));
+        const r10 = new H(e26.get(1), e26.get(3)), s9 = new X(e26.popFirst(5));
+        return r10.isEqual(n) || // TODO(b/64130202): Somehow support foreign references.
+        p(`Document ${s9} contains a document reference within a different database (${r10.projectId}/${r10.database}) which is not supported. It will be treated as a reference in the current database (${n.projectId}/${n.database}) instead.`), s9;
+    }
+} {
+    constructor(t68){
+        super(), this.firestore = t68;
+    }
+    convertBytes(t) {
+        return new _e(t);
+    }
+    convertReference(t) {
+        const n57 = this.convertDocumentKey(t, this.firestore._databaseId);
+        return new ce(this.firestore, /* converter= */ null, n57);
+    }
+}
+/**
+ * Reads the document referred to by the specified document reference.
+ *
+ * All documents are directly fetched from the server, even if the document was
+ * previously read or modified. Recent modifications are only reflected in the
+ * retrieved `DocumentSnapshot` if they have already been applied by the
+ * backend. If the client is offline, the read fails. If you like to use
+ * caching or see local modifications, please use the full Firestore SDK.
+ *
+ * @param reference - The reference of the document to fetch.
+ * @returns A Promise resolved with a `DocumentSnapshot` containing the current
+ * document contents.
+ */ function gr(t69) {
+    const n57 = ne((t69 = st(t69, ce)).firestore), e26 = new _r(t69.firestore);
+    return Zn(n57, [
+        t69._key
+    ]).then((n58)=>{
+        b(1 === n58.length);
+        const r10 = n58[0];
+        return new Ge(t69.firestore, e26, t69._key, r10.isFoundDocument() ? r10 : null, t69.converter);
+    });
+}
+/**
+ * Executes the query and returns the results as a {@link QuerySnapshot}.
+ *
+ * All queries are executed directly by the server, even if the the query was
+ * previously executed. Recent modifications are only reflected in the retrieved
+ * results if they have already been applied by the backend. If the client is
+ * offline, the operation fails. To see previously cached result and local
+ * modifications, use the full Firestore SDK.
+ *
+ * @param query - The `Query` to execute.
+ * @returns A Promise that will be resolved with the results of the query.
+ */ function br(t69) {
+    !function(t70) {
+        if (on(t70) && 0 === t70.explicitOrderBy.length) throw new U(x, "limitToLast() queries require specifying at least one orderBy() clause");
+    }((t69 = st(t69, ae))._query);
+    const n57 = ne(t69.firestore), e26 = new _r(t69.firestore);
+    return Xn(n57, t69._query).then((n58)=>{
+        const r10 = n58.map((n59)=>new He(t69.firestore, e26, n59.key, n59, t69.converter)
+        );
+        return on(t69._query) && // Limit to last queries reverse the orderBy constraint that was
+        // specified by the user. As such, we need to reverse the order of the
+        // results to return the documents in the expected order.
+        r10.reverse(), new Ye(t69, r10);
+    });
+}
+function vr(t69, n57, e26) {
+    const r10 = yr((t69 = st(t69, ce)).converter, n57, e26), s9 = Ve(Re(t69.firestore), "setDoc", t69._key, r10, null !== t69.converter, e26);
+    return Jn(ne(t69.firestore), [
+        s9.toMutation(t69._key, bn.none())
+    ]);
+}
+function Er(t69, n57, e26, ...r10) {
+    const s9 = Re((t69 = st(t69, ce)).firestore);
+    // For Compat types, we have to "extract" the underlying types before
+    // performing validation.
+    let i4;
+    i4 = "string" == typeof (n57 = _util.getModularInstance(n57)) || n57 instanceof pe ? Oe(s9, "updateDoc", t69._key, n57, e26, r10) : xe(s9, "updateDoc", t69._key, n57);
+    return Jn(ne(t69.firestore), [
+        i4.toMutation(t69._key, bn.exists(!0))
+    ]);
+}
+/**
+ * Deletes the document referred to by the specified `DocumentReference`.
+ *
+ * The deletion will only be reflected in document reads that occur after the
+ * returned promise resolves. If the client is offline, the
+ * delete fails. If you would like to see local modifications or buffer writes
+ * until the client is online, use the full Firestore SDK.
+ *
+ * @param reference - A reference to the document to delete.
+ * @returns A `Promise` resolved once the document has been successfully
+ * deleted from the backend.
+ */ function Ir(t69) {
+    return Jn(ne((t69 = st(t69, ce)).firestore), [
+        new Tn(t69._key, bn.none())
+    ]);
+}
+/**
+ * Add a new document to specified `CollectionReference` with the given data,
+ * assigning it a document ID automatically.
+ *
+ * The result of this write will only be reflected in document reads that occur
+ * after the returned promise resolves. If the client is offline, the
+ * write fails. If you would like to see local modifications or buffer writes
+ * until the client is online, use the full Firestore SDK.
+ *
+ * @param reference - A reference to the collection to add this document to.
+ * @param data - An Object containing the data for the new document.
+ * @returns A `Promise` resolved with a `DocumentReference` pointing to the
+ * newly created document after it has been written to the backend.
+ */ function Tr(t69, n57) {
+    const e26 = de(t69 = st(t69, he)), r10 = yr(t69.converter, n57), s9 = Ve(Re(t69.firestore), "addDoc", e26._key, r10, null !== e26.converter, {
+    });
+    return Jn(ne(t69.firestore), [
+        s9.toMutation(e26._key, bn.exists(!1))
+    ]).then(()=>e26
+    );
+}
+/**
+ * @license
+ * Copyright 2020 Google LLC
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *   http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */ /**
+ * Returns a sentinel for use with {@link @firebase/firestore/lite#(updateDoc:1)} or
+ * {@link @firebase/firestore/lite#(setDoc:1)} with `{merge: true}` to mark a field for deletion.
+ */ function Ar() {
+    return new Ne("deleteField");
+}
+/**
+ * Returns a sentinel used with {@link @firebase/firestore/lite#(setDoc:1)} or {@link @firebase/firestore/lite#(updateDoc:1)} to
+ * include a server-generated timestamp in the written data.
+ */ function Pr() {
+    return new $e("serverTimestamp");
+}
+/**
+ * Returns a special value that can be used with {@link @firebase/firestore/lite#(setDoc:1)} or {@link
+ * @firebase/firestore/lite#(updateDoc:1)} that tells the server to union the given elements with any array
+ * value that already exists on the server. Each specified element that doesn't
+ * already exist in the array will be added to the end. If the field being
+ * modified is not already an array it will be overwritten with an array
+ * containing exactly the specified elements.
+ *
+ * @param elements - The elements to union into the array.
+ * @returns The `FieldValue` sentinel for use in a call to `setDoc()` or
+ * `updateDoc()`.
+ */ function Rr(...t69) {
+    // NOTE: We don't actually parse the data until it's used in set() or
+    // update() since we'd need the Firestore instance to do this.
+    return new Fe("arrayUnion", t69);
+}
+/**
+ * Returns a special value that can be used with {@link (setDoc:1)} or {@link
+ * updateDoc:1} that tells the server to remove the given elements from any
+ * array value that already exists on the server. All instances of each element
+ * specified will be removed from the array. If the field being modified is not
+ * already an array it will be overwritten with an empty array.
+ *
+ * @param elements - The elements to remove from the array.
+ * @returns The `FieldValue` sentinel for use in a call to `setDoc()` or
+ * `updateDoc()`
+ */ function Vr(...t69) {
+    // NOTE: We don't actually parse the data until it's used in set() or
+    // update() since we'd need the Firestore instance to do this.
+    return new Se("arrayRemove", t69);
+}
+/**
+ * Returns a special value that can be used with {@link @firebase/firestore/lite#(setDoc:1)} or {@link
+ * @firebase/firestore/lite#(updateDoc:1)} that tells the server to increment the field's current value by
+ * the given value.
+ *
+ * If either the operand or the current field value uses floating point
+ * precision, all arithmetic follows IEEE 754 semantics. If both values are
+ * integers, values outside of JavaScript's safe number range
+ * (`Number.MIN_SAFE_INTEGER` to `Number.MAX_SAFE_INTEGER`) are also subject to
+ * precision loss. Furthermore, once processed by the Firestore backend, all
+ * integer operations are capped between -2^63 and 2^63-1.
+ *
+ * If the current field value is not of type `number`, or if the field does not
+ * yet exist, the transformation sets the field to the given value.
+ *
+ * @param n - The value to increment by.
+ * @returns The `FieldValue` sentinel for use in a call to `setDoc()` or
+ * `updateDoc()`
+ */ function Nr(t69) {
+    return new qe("increment", t69);
+}
+/**
+ * @license
+ * Copyright 2020 Google LLC
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *   http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */ /**
+ * A write batch, used to perform multiple writes as a single atomic unit.
+ *
+ * A `WriteBatch` object can be acquired by calling {@link writeBatch}. It
+ * provides methods for adding writes to the write batch. None of the writes
+ * will be committed (or visible locally) until {@link WriteBatch.commit} is
+ * called.
+ */ class Dr {
+    /** @hideconstructor */ constructor(t69, n57){
+        this._firestore = t69, this._commitHandler = n57, this._mutations = [], this._committed = !1, this._dataReader = Re(t69);
+    }
+    set(t, n, e) {
+        this._verifyNotCommitted();
+        const r10 = $r(t, this._firestore), s9 = yr(r10.converter, n, e), i4 = Ve(this._dataReader, "WriteBatch.set", r10._key, s9, null !== r10.converter, e);
+        return this._mutations.push(i4.toMutation(r10._key, bn.none())), this;
+    }
+    update(t, n, e, ...r) {
+        this._verifyNotCommitted();
+        const s9 = $r(t, this._firestore);
+        // For Compat types, we have to "extract" the underlying types before
+        // performing validation.
+        let i4;
+        return i4 = "string" == typeof (n = _util.getModularInstance(n)) || n instanceof pe ? Oe(this._dataReader, "WriteBatch.update", s9._key, n, e, r) : xe(this._dataReader, "WriteBatch.update", s9._key, n), this._mutations.push(i4.toMutation(s9._key, bn.exists(!0))), this;
+    }
+    /**
+     * Deletes the document referred to by the provided {@link DocumentReference}.
+     *
+     * @param documentRef - A reference to the document to be deleted.
+     * @returns This `WriteBatch` instance. Used for chaining method calls.
+     */ delete(t) {
+        this._verifyNotCommitted();
+        const n58 = $r(t, this._firestore);
+        return this._mutations = this._mutations.concat(new Tn(n58._key, bn.none())), this;
+    }
+    /**
+     * Commits all of the writes in this write batch as a single atomic unit.
+     *
+     * The result of these writes will only be reflected in document reads that
+     * occur after the returned promise resolves. If the client is offline, the
+     * write fails. If you would like to see local modifications or buffer writes
+     * until the client is online, use the full Firestore SDK.
+     *
+     * @returns A `Promise` resolved once all of the writes in the batch have been
+     * successfully written to the backend as an atomic unit (note that it won't
+     * resolve while you're offline).
+     */ commit() {
+        return this._verifyNotCommitted(), this._committed = !0, this._mutations.length > 0 ? this._commitHandler(this._mutations) : Promise.resolve();
+    }
+    _verifyNotCommitted() {
+        if (this._committed) throw new U(F, "A write batch can no longer be used after commit() has been called.");
+    }
+}
+function $r(t70, n58) {
+    if ((t70 = _util.getModularInstance(t70)).firestore !== n58) throw new U(A, "Provided document reference is from a different Firestore instance.");
+    return t70;
+}
+/**
+ * Creates a write batch, used for performing multiple writes as a single
+ * atomic operation. The maximum number of writes allowed in a single WriteBatch
+ * is 500.
+ *
+ * The result of these writes will only be reflected in document reads that
+ * occur after the returned promise resolves. If the client is offline, the
+ * write fails. If you would like to see local modifications or buffer writes
+ * until the client is online, use the full Firestore SDK.
+ *
+ * @returns A `WriteBatch` that can be used to atomically execute multiple
+ * writes.
+ */ function Fr(t70) {
+    const n58 = ne(t70 = st(t70, re));
+    return new Dr(t70, (t71)=>Jn(n58, t71)
+    );
+}
+/**
+ * @license
+ * Copyright 2017 Google LLC
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *   http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */ /**
+ * Internal transaction object responsible for accumulating the mutations to
+ * perform and the base versions for any documents read.
+ */ class Sr {
+    constructor(t70){
+        this.datastore = t70, // The version of each document that was read during this transaction.
+        this.readVersions = new Map, this.mutations = [], this.committed = !1, /**
+         * A deferred usage error that occurred previously in this transaction that
+         * will cause the transaction to fail once it actually commits.
+         */ this.lastWriteError = null, /**
+         * Set of documents that have been written in the transaction.
+         *
+         * When there's more than one write to the same key in a transaction, any
+         * writes after the first are handled differently.
+         */ this.writtenDocs = new Set;
+    }
+    async lookup(t) {
+        if (this.ensureCommitNotCalled(), this.mutations.length > 0) throw new U(A, "Firestore transactions require all reads to be executed before all writes.");
+        const n58 = await Zn(this.datastore, t);
+        return n58.forEach((t71)=>this.recordVersion(t71)
+        ), n58;
+    }
+    set(t, n) {
+        this.write(n.toMutation(t, this.precondition(t))), this.writtenDocs.add(t.toString());
+    }
+    update(t, n) {
+        try {
+            this.write(n.toMutation(t, this.preconditionForUpdate(t)));
+        } catch (t71) {
+            this.lastWriteError = t71;
+        }
+        this.writtenDocs.add(t.toString());
+    }
+    delete(t) {
+        this.write(new Tn(t, this.precondition(t))), this.writtenDocs.add(t.toString());
+    }
+    async commit() {
+        if (this.ensureCommitNotCalled(), this.lastWriteError) throw this.lastWriteError;
+        const t71 = this.readVersions;
+        // For each mutation, note that the doc was written.
+        this.mutations.forEach((n58)=>{
+            t71.delete(n58.key.toString());
+        }), // For each document that was read but not written to, we want to perform
+        // a `verify` operation.
+        t71.forEach((t72, n58)=>{
+            const e26 = X.fromPath(n58);
+            this.mutations.push(new An(e26, this.precondition(e26)));
+        }), await Jn(this.datastore, this.mutations), this.committed = !0;
+    }
+    recordVersion(t) {
+        let n58;
+        if (t.isFoundDocument()) n58 = t.version;
+        else {
+            if (!t.isNoDocument()) throw g();
+            // For deleted docs, we must use baseVersion 0 when we overwrite them.
+            n58 = _t.min();
+        }
+        const e26 = this.readVersions.get(t.key.toString());
+        if (e26) {
+            if (!n58.isEqual(e26)) // This transaction will fail no matter what.
+            throw new U(S, "Document version changed between two reads.");
+        } else this.readVersions.set(t.key.toString(), n58);
+    }
+    /**
+     * Returns the version of this document when it was read in this transaction,
+     * as a precondition, or no precondition if it was not read.
+     */ precondition(t) {
+        const n58 = this.readVersions.get(t.toString());
+        return !this.writtenDocs.has(t.toString()) && n58 ? bn.updateTime(n58) : bn.none();
+    }
+    /**
+     * Returns the precondition for a document if the operation is an update.
+     */ preconditionForUpdate(t) {
+        const n58 = this.readVersions.get(t.toString());
+        // The first time a document is written, we want to take into account the
+        // read time and existence
+        if (!this.writtenDocs.has(t.toString()) && n58) {
+            if (n58.isEqual(_t.min())) // The document doesn't exist, so fail the transaction.
+            // This has to be validated locally because you can't send a
+            // precondition that a document does not exist without changing the
+            // semantics of the backend write to be an insert. This is the reverse
+            // of what we want, since we want to assert that the document doesn't
+            // exist but then send the update and have it fail. Since we can't
+            // express that to the backend, we have to validate locally.
+            // Note: this can change once we can send separate verify writes in the
+            // transaction.
+            throw new U(A, "Can't update a document that doesn't exist.");
+            // Document exists, base precondition on document update time.
+            return bn.updateTime(n58);
+        }
+        // Document was not read, so we just use the preconditions for a blind
+        // update.
+        return bn.exists(!0);
+    }
+    write(t) {
+        this.ensureCommitNotCalled(), this.mutations.push(t);
+    }
+    ensureCommitNotCalled() {
+    }
+}
+/**
+ * @license
+ * Copyright 2019 Google LLC
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *   http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */ /**
+ * TransactionRunner encapsulates the logic needed to run and retry transactions
+ * with backoff.
+ */ class qr {
+    constructor(t71, n58, e26, r10){
+        this.asyncQueue = t71, this.datastore = n58, this.updateFunction = e26, this.deferred = r10, this.Et = 5, this.It = new Yn(this.asyncQueue, "transaction_retry" /* TransactionRetry */ );
+    }
+    /** Runs the transaction and sets the result on deferred. */ run() {
+        this.Et -= 1, this.Tt();
+    }
+    Tt() {
+        this.It.W(async ()=>{
+            const t72 = new Sr(this.datastore), n59 = this.At(t72);
+            n59 && n59.then((n60)=>{
+                this.asyncQueue.enqueueAndForget(()=>t72.commit().then(()=>{
+                        this.deferred.resolve(n60);
+                    }).catch((t73)=>{
+                        this.Pt(t73);
+                    })
+                );
+            }).catch((t73)=>{
+                this.Pt(t73);
+            });
+        });
+    }
+    At(t) {
+        try {
+            const n59 = this.updateFunction(t);
+            return !ot(n59) && n59.catch && n59.then ? n59 : (this.deferred.reject(Error("Transaction callback must return a Promise")), null);
+        } catch (t72) {
+            // Do not retry errors thrown by user provided updateFunction.
+            return this.deferred.reject(t72), null;
+        }
+    }
+    Pt(t) {
+        this.Et > 0 && this.Rt(t) ? (this.Et -= 1, this.asyncQueue.enqueueAndForget(()=>(this.Tt(), Promise.resolve())
+        )) : this.deferred.reject(t);
+    }
+    Rt(t) {
+        if ("FirebaseError" === t.name) {
+            // In transactions, the backend will fail outdated reads with FAILED_PRECONDITION and
+            // non-matching document versions with ABORTED. These errors should be retried.
+            const n59 = t.code;
+            return "aborted" === n59 || "failed-precondition" === n59 || !/**
+ * Determines whether an error code represents a permanent error when received
+ * in response to a non-write operation.
+ *
+ * See isPermanentWriteError for classifying write errors.
+ */ function(t72) {
+                switch(t72){
+                    case E:
+                        return g();
+                    case I:
+                    case T:
+                    case P:
+                    case $:
+                    case O:
+                    case C:
+                    // Unauthenticated means something went wrong with our token and we need
+                    // to retry with new credentials which will happen automatically.
+                    case D:
+                        return !1;
+                    case A:
+                    case R:
+                    case V:
+                    case N:
+                    case F:
+                    // Aborted might be retried in some scenarios, but that is dependant on
+                    // the context and should handled individually by the calling code.
+                    // See https://cloud.google.com/apis/design/errors.
+                    case S:
+                    case q:
+                    case x:
+                    case L:
+                        return !0;
+                    default:
+                        return g();
+                }
+            }(n59);
+        }
+        return !1;
+    }
+}
+/**
+ * @license
+ * Copyright 2020 Google LLC
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *   http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */ /** The Platform's 'document' implementation or null if not available. */ function xr() {
+    // `document` is not always available, e.g. in ReactNative and WebWorkers.
+    // eslint-disable-next-line no-restricted-globals
+    return "undefined" != typeof document ? document : null;
+}
+/**
+ * @license
+ * Copyright 2017 Google LLC
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *   http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */ /**
+ * Represents an operation scheduled to be run in the future on an AsyncQueue.
+ *
+ * It is created via DelayedOperation.createAndSchedule().
+ *
+ * Supports cancellation (via cancel()) and early execution (via skipDelay()).
+ *
+ * Note: We implement `PromiseLike` instead of `Promise`, as the `Promise` type
+ * in newer versions of TypeScript defines `finally`, which is not available in
+ * IE.
+ */ class Or {
+    constructor(t72, n59, e27, r11, s9){
+        this.asyncQueue = t72, this.timerId = n59, this.targetTimeMs = e27, this.op = r11, this.removalCallback = s9, this.deferred = new j, this.then = this.deferred.promise.then.bind(this.deferred.promise), // It's normal for the deferred promise to be canceled (due to cancellation)
+        // and so we attach a dummy catch callback to avoid
+        // 'UnhandledPromiseRejectionWarning' log spam.
+        this.deferred.promise.catch((t73)=>{
+        });
+    }
+    /**
+     * Creates and returns a DelayedOperation that has been scheduled to be
+     * executed on the provided asyncQueue after the provided delayMs.
+     *
+     * @param asyncQueue - The queue to schedule the operation on.
+     * @param id - A Timer ID identifying the type of operation this is.
+     * @param delayMs - The delay (ms) before the operation should be scheduled.
+     * @param op - The operation to run.
+     * @param removalCallback - A callback to be called synchronously once the
+     *   operation is executed or canceled, notifying the AsyncQueue to remove it
+     *   from its delayedOperations list.
+     *   PORTING NOTE: This exists to prevent making removeDelayedOperation() and
+     *   the DelayedOperation class public.
+     */ static createAndSchedule(t, n, e, r, s) {
+        const i4 = Date.now() + e, o3 = new Or(t, n, i4, r, s);
+        return o3.start(e), o3;
+    }
+    /**
+     * Starts the timer. This is called immediately after construction by
+     * createAndSchedule().
+     */ start(t) {
+        this.timerHandle = setTimeout(()=>this.handleDelayElapsed()
+        , t);
+    }
+    /**
+     * Queues the operation to run immediately (if it hasn't already been run or
+     * canceled).
+     */ skipDelay() {
+        return this.handleDelayElapsed();
+    }
+    /**
+     * Cancels the operation if it hasn't already been executed or canceled. The
+     * promise will be rejected.
+     *
+     * As long as the operation has not yet been run, calling cancel() provides a
+     * guarantee that the operation will not be run.
+     */ cancel(t) {
+        null !== this.timerHandle && (this.clearTimeout(), this.deferred.reject(new U(I, "Operation cancelled" + (t ? ": " + t : ""))));
+    }
+    handleDelayElapsed() {
+        this.asyncQueue.enqueueAndForget(()=>null !== this.timerHandle ? (this.clearTimeout(), this.op().then((t73)=>this.deferred.resolve(t73)
+            )) : Promise.resolve()
+        );
+    }
+    clearTimeout() {
+        null !== this.timerHandle && (this.removalCallback(this), clearTimeout(this.timerHandle), this.timerHandle = null);
+    }
+}
+/**
+ * @license
+ * Copyright 2020 Google LLC
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *   http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */ class Cr {
+    constructor(){
+        // The last promise in the queue.
+        this.Vt = Promise.resolve(), // A list of retryable operations. Retryable operations are run in order and
+        // retried with backoff.
+        this.Nt = [], // Is this AsyncQueue being shut down? Once it is set to true, it will not
+        // be changed again.
+        this.Dt = !1, // Operations scheduled to be queued in the future. Operations are
+        // automatically removed after they are run or canceled.
+        this.$t = [], // visible for testing
+        this.Ft = null, // Flag set while there's an outstanding AsyncQueue operation, used for
+        // assertion sanity-checks.
+        this.St = !1, // Enabled during shutdown on Safari to prevent future access to IndexedDB.
+        this.qt = !1, // List of TimerIds to fast-forward delays for.
+        this.xt = [], // Backoff timer used to schedule retries for retryable operations
+        this.It = new Yn(this, "async_queue_retry" /* AsyncQueueRetry */ ), // Visibility handler that triggers an immediate retry of all retryable
+        // operations. Meant to speed up recovery when we regain file system access
+        // after page comes into foreground.
+        this.Ot = ()=>{
+            const t73 = xr();
+            t73 && m("AsyncQueue", "Visibility state changed to " + t73.visibilityState), this.It.H();
+        };
+        const t73 = xr();
+        t73 && "function" == typeof t73.addEventListener && t73.addEventListener("visibilitychange", this.Ot);
+    }
+    get isShuttingDown() {
+        return this.Dt;
+    }
+    /**
+     * Adds a new operation to the queue without waiting for it to complete (i.e.
+     * we ignore the Promise result).
+     */ enqueueAndForget(t) {
+        // eslint-disable-next-line @typescript-eslint/no-floating-promises
+        this.enqueue(t);
+    }
+    enqueueAndForgetEvenWhileRestricted(t) {
+        this.Ct(), // eslint-disable-next-line @typescript-eslint/no-floating-promises
+        this.Lt(t);
+    }
+    enterRestrictedMode(t) {
+        if (!this.Dt) {
+            this.Dt = !0, this.qt = t || !1;
+            const n60 = xr();
+            n60 && "function" == typeof n60.removeEventListener && n60.removeEventListener("visibilitychange", this.Ot);
+        }
+    }
+    enqueue(t) {
+        if (this.Ct(), this.Dt) // Return a Promise which never resolves.
+        return new Promise(()=>{
+        });
+        // Create a deferred Promise that we can return to the callee. This
+        // allows us to return a "hanging Promise" only to the callee and still
+        // advance the queue even when the operation is not run.
+        const n60 = new j;
+        return this.Lt(()=>this.Dt && this.qt ? Promise.resolve() : (t().then(n60.resolve, n60.reject), n60.promise)
+        ).then(()=>n60.promise
+        );
+    }
+    enqueueRetryable(t) {
+        this.enqueueAndForget(()=>(this.Nt.push(t), this.Ut())
+        );
+    }
+    /**
+     * Runs the next operation from the retryable queue. If the operation fails,
+     * reschedules with backoff.
+     */ async Ut() {
+        if (0 !== this.Nt.length) {
+            try {
+                await this.Nt[0](), this.Nt.shift(), this.It.reset();
+            } catch (t74) {
+                if (!/**
+ * @license
+ * Copyright 2017 Google LLC
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *   http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */ /** Verifies whether `e` is an IndexedDbTransactionError. */ function(t75) {
+                    // Use name equality, as instanceof checks on errors don't work with errors
+                    // that wrap other errors.
+                    return "IndexedDbTransactionError" === t75.name;
+                }(t74)) throw t74;
+                // Failure will be handled by AsyncQueue
+                m("AsyncQueue", "Operation failed with retryable error: " + t74);
+            }
+            this.Nt.length > 0 && // If there are additional operations, we re-schedule `retryNextOp()`.
+            // This is necessary to run retryable operations that failed during
+            // their initial attempt since we don't know whether they are already
+            // enqueued. If, for example, `op1`, `op2`, `op3` are enqueued and `op1`
+            // needs to  be re-run, we will run `op1`, `op1`, `op2` using the
+            // already enqueued calls to `retryNextOp()`. `op3()` will then run in the
+            // call scheduled here.
+            // Since `backoffAndRun()` cancels an existing backoff and schedules a
+            // new backoff on every call, there is only ever a single additional
+            // operation in the queue.
+            this.It.W(()=>this.Ut()
+            );
+        }
+    }
+    Lt(t) {
+        const n60 = this.Vt.then(()=>(this.St = !0, t().catch((t74)=>{
+                this.Ft = t74, this.St = !1;
+                // Re-throw the error so that this.tail becomes a rejected Promise and
+                // all further attempts to chain (via .then) will just short-circuit
+                // and return the rejected Promise.
+                throw p("INTERNAL UNHANDLED ERROR: ", /**
+ * Chrome includes Error.message in Error.stack. Other browsers do not.
+ * This returns expected output of message + stack when available.
+ * @param error - Error or FirestoreError
+ */ function(t75) {
+                    let n61 = t75.message || "";
+                    t75.stack && (n61 = t75.stack.includes(t75.message) ? t75.stack : t75.message + "\n" + t75.stack);
+                    return n61;
+                }(t74)), t74;
+            }).then((t74)=>(this.St = !1, t74)
+            ))
+        );
+        return this.Vt = n60, n60;
+    }
+    enqueueAfterDelay(t, n, e) {
+        this.Ct(), // Fast-forward delays for timerIds that have been overriden.
+        this.xt.indexOf(t) > -1 && (n = 0);
+        const r12 = Or.createAndSchedule(this, t, n, e, (t74)=>this.jt(t74)
+        );
+        return this.$t.push(r12), r12;
+    }
+    Ct() {
+        this.Ft && g();
+    }
+    verifyOperationInProgress() {
+    }
+    /**
+     * Waits until all currently queued tasks are finished executing. Delayed
+     * operations are not run.
+     */ async kt() {
+        // Operations in the queue prior to draining may have enqueued additional
+        // operations. Keep draining the queue until the tail is no longer advanced,
+        // which indicates that no more new operations were enqueued and that all
+        // operations were executed.
+        let t74;
+        do t74 = this.Vt, await t74;
+        while (t74 !== this.Vt)
+    }
+    /**
+     * For Tests: Determine if a delayed operation with a particular TimerId
+     * exists.
+     */ Mt(t) {
+        for (const n60 of this.$t)if (n60.timerId === t) return !0;
+        return !1;
+    }
+    /**
+     * For Tests: Runs some or all delayed operations early.
+     *
+     * @param lastTimerId - Delayed operations up to and including this TimerId
+     * will be drained. Pass TimerId.All to run all delayed operations.
+     * @returns a Promise that resolves once all operations have been run.
+     */ Bt(t) {
+        // Note that draining may generate more delayed ops, so we do that first.
+        return this.kt().then(()=>{
+            // Run ops in the same order they'd run if they ran naturally.
+            this.$t.sort((t74, n60)=>t74.targetTimeMs - n60.targetTimeMs
+            );
+            for (const n60 of this.$t)if (n60.skipDelay(), "all" /* All */  !== t && n60.timerId === t) break;
+            return this.kt();
+        });
+    }
+    /**
+     * For Tests: Skip all subsequent delays for a timer id.
+     */ Qt(t) {
+        this.xt.push(t);
+    }
+    /** Called once a DelayedOperation is run or canceled. */ jt(t) {
+        // NOTE: indexOf / slice are O(n), but delayedOperations is expected to be small.
+        const n60 = this.$t.indexOf(t);
+        this.$t.splice(n60, 1);
+    }
+}
+class Lr {
+    /** @hideconstructor */ constructor(t74, n60){
+        this._firestore = t74, this._transaction = n60, this._dataReader = Re(t74);
+    }
+    /**
+     * Reads the document referenced by the provided {@link DocumentReference}.
+     *
+     * @param documentRef - A reference to the document to be read.
+     * @returns A `DocumentSnapshot` with the read data.
+     */ get(t) {
+        const n61 = $r(t, this._firestore), e28 = new _r(this._firestore);
+        return this._transaction.lookup([
+            n61._key
+        ]).then((t75)=>{
+            if (!t75 || 1 !== t75.length) return g();
+            const r12 = t75[0];
+            if (r12.isFoundDocument()) return new Ge(this._firestore, e28, r12.key, r12, n61.converter);
+            if (r12.isNoDocument()) return new Ge(this._firestore, e28, n61._key, null, n61.converter);
+            throw g();
+        });
+    }
+    set(t, n, e) {
+        const r12 = $r(t, this._firestore), s10 = yr(r12.converter, n, e), i4 = Ve(this._dataReader, "Transaction.set", r12._key, s10, null !== r12.converter, e);
+        return this._transaction.set(r12._key, i4), this;
+    }
+    update(t, n, e, ...r) {
+        const s10 = $r(t, this._firestore);
+        // For Compat types, we have to "extract" the underlying types before
+        // performing validation.
+        let i4;
+        return i4 = "string" == typeof (n = _util.getModularInstance(n)) || n instanceof pe ? Oe(this._dataReader, "Transaction.update", s10._key, n, e, r) : xe(this._dataReader, "Transaction.update", s10._key, n), this._transaction.update(s10._key, i4), this;
+    }
+    /**
+     * Deletes the document referred to by the provided {@link DocumentReference}.
+     *
+     * @param documentRef - A reference to the document to be deleted.
+     * @returns This `Transaction` instance. Used for chaining method calls.
+     */ delete(t) {
+        const n61 = $r(t, this._firestore);
+        return this._transaction.delete(n61._key), this;
+    }
+}
+/**
+ * Executes the given `updateFunction` and then attempts to commit the changes
+ * applied within the transaction. If any document read within the transaction
+ * has changed, Cloud Firestore retries the `updateFunction`. If it fails to
+ * commit after 5 attempts, the transaction fails.
+ *
+ * The maximum number of writes allowed in a single transaction is 500.
+ *
+ * @param firestore - A reference to the Firestore database to run this
+ * transaction against.
+ * @param updateFunction - The function to execute within the transaction
+ * context.
+ * @returns If the transaction completed successfully or was explicitly aborted
+ * (the `updateFunction` returned a failed promise), the promise returned by the
+ * `updateFunction `is returned here. Otherwise, if the transaction failed, a
+ * rejected promise with the corresponding failure error is returned.
+ */ function Ur(t75, n61) {
+    const e28 = ne(t75 = st(t75, re)), r12 = new j;
+    return new qr(new Cr, e28, (e29)=>n61(new Lr(t75, e29))
+    , r12).run(), r12.promise;
+}
+/**
+ * Firestore Lite
+ *
+ * @remarks Firestore Lite is a small online-only SDK that allows read
+ * and write access to your Firestore database. All operations connect
+ * directly to the backend, and `onSnapshot()` APIs are not supported.
+ * @packageDocumentation
+ */ !function(t75) {
+    f = t75;
+}(`${_app.SDK_VERSION}_lite`), _app._registerComponent(new _component.Component("firestore/lite", (t75, { options: n61  })=>{
+    const e28 = t75.getProvider("app").getImmediate(), r12 = new re(e28, new Q(t75.getProvider("auth-internal")));
+    return n61 && r12._setSettings(n61), r12;
+}, "PUBLIC" /* PUBLIC */ )), _app.registerVersion("firestore-lite", "3.0.1", "node");
+
+},{"@firebase/app":"3wZLz","@firebase/component":"inEPs","@firebase/logger":"A0nlJ","@firebase/util":"3qRMM","@parcel/transformer-js/src/esmodule-helpers.js":"JacNc"}],"jUTZ8":[function() {},{}],"9CH5F":[function(require,module,exports) {
 module.exports = require('./helpers/bundle-url').getBundleURL('3VpAv') + "edwardian-script-itc-regular.1a4ac1b3.ttf";
 
 },{"./helpers/bundle-url":"8YnfL"}]},["2rAXy","6a0zu","dLPEP"], "dLPEP", "parcelRequiree681")
