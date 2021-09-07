@@ -22769,7 +22769,6 @@ class MainView extends _reactDefault.default.Component {
     }
     componentDidMount() {
         this.getArt();
-        console.log(this.state.art);
     }
     getArt() {
         axios.get('https://shrouded-caverns-29574.herokuapp.com/art').then((response)=>{
@@ -22777,7 +22776,6 @@ class MainView extends _reactDefault.default.Component {
                 art: response.data,
                 imagePath: response.data[0].ImagePath
             });
-            console.log(this.state.imagePath);
         }).catch(function(error) {
             console.log(error);
         });
@@ -22787,13 +22785,13 @@ class MainView extends _reactDefault.default.Component {
         return(/*#__PURE__*/ _jsxRuntime.jsx(_reactRouterDom.BrowserRouter, {
             __source: {
                 fileName: "src/components/main-view/main-view.jsx",
-                lineNumber: 43
+                lineNumber: 41
             },
             __self: this,
             children: /*#__PURE__*/ _jsxRuntime.jsxs("div", {
                 __source: {
                     fileName: "src/components/main-view/main-view.jsx",
-                    lineNumber: 44
+                    lineNumber: 42
                 },
                 __self: this,
                 children: [
@@ -22802,14 +22800,14 @@ class MainView extends _reactDefault.default.Component {
                         path: "/",
                         __source: {
                             fileName: "src/components/main-view/main-view.jsx",
-                            lineNumber: 45
+                            lineNumber: 43
                         },
                         __self: this,
                         children: [
                             /*#__PURE__*/ _jsxRuntime.jsx(_logoView.LogoView, {
                                 __source: {
                                     fileName: "src/components/main-view/main-view.jsx",
-                                    lineNumber: 46
+                                    lineNumber: 44
                                 },
                                 __self: this
                             }),
@@ -22817,14 +22815,14 @@ class MainView extends _reactDefault.default.Component {
                                 className: "start",
                                 __source: {
                                     fileName: "src/components/main-view/main-view.jsx",
-                                    lineNumber: 47
+                                    lineNumber: 45
                                 },
                                 __self: this,
                                 children: [
                                     /*#__PURE__*/ _jsxRuntime.jsx(_navigationView.NavigationView, {
                                         __source: {
                                             fileName: "src/components/main-view/main-view.jsx",
-                                            lineNumber: 48
+                                            lineNumber: 46
                                         },
                                         __self: this
                                     }),
@@ -22833,7 +22831,7 @@ class MainView extends _reactDefault.default.Component {
                                         image: this.state.imagePath,
                                         __source: {
                                             fileName: "src/components/main-view/main-view.jsx",
-                                            lineNumber: 49
+                                            lineNumber: 47
                                         },
                                         __self: this
                                     })
@@ -22846,14 +22844,14 @@ class MainView extends _reactDefault.default.Component {
                         path: "/artist",
                         __source: {
                             fileName: "src/components/main-view/main-view.jsx",
-                            lineNumber: 53
+                            lineNumber: 51
                         },
                         __self: this,
                         children: [
                             /*#__PURE__*/ _jsxRuntime.jsx(_logoView.LogoView, {
                                 __source: {
                                     fileName: "src/components/main-view/main-view.jsx",
-                                    lineNumber: 54
+                                    lineNumber: 52
                                 },
                                 __self: this
                             }),
@@ -22861,13 +22859,13 @@ class MainView extends _reactDefault.default.Component {
                                 className: "start",
                                 __source: {
                                     fileName: "src/components/main-view/main-view.jsx",
-                                    lineNumber: 55
+                                    lineNumber: 53
                                 },
                                 __self: this,
                                 children: /*#__PURE__*/ _jsxRuntime.jsx(_navigationView.NavigationView, {
                                     __source: {
                                         fileName: "src/components/main-view/main-view.jsx",
-                                        lineNumber: 56
+                                        lineNumber: 54
                                     },
                                     __self: this
                                 })
@@ -22885,7 +22883,7 @@ class MainView extends _reactDefault.default.Component {
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-runtime":"8xIwr","react":"6TuXu","./main-view.scss":"jyMAr","react-router-dom":"cpyQW","../logo-view/logo-view":"21Hac","../navigation-view/navigation-view":"3XDAu","../imageslide-view/imageslide-view":"cx3Hi","axios":"iYoWk","@parcel/transformer-js/src/esmodule-helpers.js":"JacNc","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"5V79J"}],"jyMAr":[function() {},{}],"cpyQW":[function(require,module,exports) {
+},{"react/jsx-runtime":"8xIwr","react":"6TuXu","./main-view.scss":"jyMAr","react-router-dom":"cpyQW","../logo-view/logo-view":"21Hac","../navigation-view/navigation-view":"3XDAu","../imageslide-view/imageslide-view":"cx3Hi","@parcel/transformer-js/src/esmodule-helpers.js":"JacNc","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"5V79J","axios":"iYoWk"}],"jyMAr":[function() {},{}],"cpyQW":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "MemoryRouter", ()=>_reactRouter.MemoryRouter

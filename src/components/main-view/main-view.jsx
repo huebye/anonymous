@@ -20,7 +20,6 @@ export class MainView extends React.Component {
 
     componentDidMount() {
         this.getArt();
-        console.log(this.state.art)
       }
 
       getArt() {
@@ -30,7 +29,6 @@ export class MainView extends React.Component {
             art: response.data,   
             imagePath: response.data[0].ImagePath                                          
           });
-          console.log(this.state.imagePath)
         })
         .catch(function (error) {
           console.log(error);
