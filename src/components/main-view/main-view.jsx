@@ -16,15 +16,13 @@ const firebaseConfig = {
   appId: "1:1049067056124:web:eaf8db415d82e8a069a079",
   measurementId: "G-WC8RFHKR2V"
 };
-
+console.log('hi')
 export class MainView extends React.Component {
     constructor() {
         super();
         this.state = {
-            art: {},
-            imagePath: {},
+          art: ''
         }
-
     }
 
 
@@ -36,14 +34,14 @@ export class MainView extends React.Component {
         const anonymousCol = collection(db, 'anonymous');
         const anonymousSnapshot = await getDocs(anonymousCol);
         const dataList = anonymousSnapshot.docs.map(doc => doc.data());
-        return dataList;
+        this.setState({
+          art: dataList
+        });
       }
-      console.log(dataList);
       }
 
 
     render () {
-       const {art} = this.state
         return (
         <Router>
         <div>
@@ -51,7 +49,7 @@ export class MainView extends React.Component {
             <LogoView />
                 <div className="start">
             <NavigationView />
-            <ImageSlideView art={art} image={this.state.imagePath}/>
+            <ImageSlideView />
                 </div>
             </Route>
 

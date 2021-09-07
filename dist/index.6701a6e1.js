@@ -22767,14 +22767,12 @@ const firebaseConfig = {
     appId: "1:1049067056124:web:eaf8db415d82e8a069a079",
     measurementId: "G-WC8RFHKR2V"
 };
+console.log('hi');
 class MainView extends _reactDefault.default.Component {
     constructor(){
         super();
         this.state = {
-            art: {
-            },
-            imagePath: {
-            }
+            art: ''
         };
     }
     componentDidMount() {
@@ -22785,22 +22783,22 @@ class MainView extends _reactDefault.default.Component {
             const anonymousSnapshot = await _lite.getDocs(anonymousCol);
             const dataList = anonymousSnapshot.docs.map((doc)=>doc.data()
             );
-            return dataList;
+            this.setState({
+                art: dataList
+            });
         }
-        console.log(dataList);
     }
     render() {
-        const { art  } = this.state;
         return(/*#__PURE__*/ _jsxRuntime.jsx(_reactRouterDom.BrowserRouter, {
             __source: {
                 fileName: "src/components/main-view/main-view.jsx",
-                lineNumber: 48
+                lineNumber: 46
             },
             __self: this,
             children: /*#__PURE__*/ _jsxRuntime.jsxs("div", {
                 __source: {
                     fileName: "src/components/main-view/main-view.jsx",
-                    lineNumber: 49
+                    lineNumber: 47
                 },
                 __self: this,
                 children: [
@@ -22809,14 +22807,14 @@ class MainView extends _reactDefault.default.Component {
                         path: "/",
                         __source: {
                             fileName: "src/components/main-view/main-view.jsx",
-                            lineNumber: 50
+                            lineNumber: 48
                         },
                         __self: this,
                         children: [
                             /*#__PURE__*/ _jsxRuntime.jsx(_logoView.LogoView, {
                                 __source: {
                                     fileName: "src/components/main-view/main-view.jsx",
-                                    lineNumber: 51
+                                    lineNumber: 49
                                 },
                                 __self: this
                             }),
@@ -22824,23 +22822,21 @@ class MainView extends _reactDefault.default.Component {
                                 className: "start",
                                 __source: {
                                     fileName: "src/components/main-view/main-view.jsx",
-                                    lineNumber: 52
+                                    lineNumber: 50
                                 },
                                 __self: this,
                                 children: [
                                     /*#__PURE__*/ _jsxRuntime.jsx(_navigationView.NavigationView, {
                                         __source: {
                                             fileName: "src/components/main-view/main-view.jsx",
-                                            lineNumber: 53
+                                            lineNumber: 51
                                         },
                                         __self: this
                                     }),
                                     /*#__PURE__*/ _jsxRuntime.jsx(_imageslideView.ImageSlideView, {
-                                        art: art,
-                                        image: this.state.imagePath,
                                         __source: {
                                             fileName: "src/components/main-view/main-view.jsx",
-                                            lineNumber: 54
+                                            lineNumber: 52
                                         },
                                         __self: this
                                     })
@@ -22853,14 +22849,14 @@ class MainView extends _reactDefault.default.Component {
                         path: "/artist",
                         __source: {
                             fileName: "src/components/main-view/main-view.jsx",
-                            lineNumber: 58
+                            lineNumber: 56
                         },
                         __self: this,
                         children: [
                             /*#__PURE__*/ _jsxRuntime.jsx(_logoView.LogoView, {
                                 __source: {
                                     fileName: "src/components/main-view/main-view.jsx",
-                                    lineNumber: 59
+                                    lineNumber: 57
                                 },
                                 __self: this
                             }),
@@ -22868,13 +22864,13 @@ class MainView extends _reactDefault.default.Component {
                                 className: "start",
                                 __source: {
                                     fileName: "src/components/main-view/main-view.jsx",
-                                    lineNumber: 60
+                                    lineNumber: 58
                                 },
                                 __self: this,
                                 children: /*#__PURE__*/ _jsxRuntime.jsx(_navigationView.NavigationView, {
                                     __source: {
                                         fileName: "src/components/main-view/main-view.jsx",
-                                        lineNumber: 61
+                                        lineNumber: 59
                                     },
                                     __self: this
                                 })
@@ -26289,7 +26285,6 @@ class ImageSlideView extends _reactDefault.default.Component {
     _onImageClick(event) {
         let image = event.target.src;
         let index = this._imageGallery.getCurrentIndex();
-        console.log(index);
         this.setState({
             clickedImage: image,
             isZoomed: true,
@@ -26325,7 +26320,7 @@ class ImageSlideView extends _reactDefault.default.Component {
             className: "imageslide",
             __source: {
                 fileName: "src/components/imageslide-view/imageslide-view.jsx",
-                lineNumber: 81
+                lineNumber: 80
             },
             __self: this,
             children: /*#__PURE__*/ _jsxRuntime.jsx(_reactImageGalleryDefault.default, {
@@ -26352,7 +26347,7 @@ class ImageSlideView extends _reactDefault.default.Component {
                 startIndex: this.state.imageIndex,
                 __source: {
                     fileName: "src/components/imageslide-view/imageslide-view.jsx",
-                    lineNumber: 82
+                    lineNumber: 81
                 },
                 __self: this
             })
@@ -26361,7 +26356,7 @@ class ImageSlideView extends _reactDefault.default.Component {
             className: "fullscreen",
             __source: {
                 fileName: "src/components/imageslide-view/imageslide-view.jsx",
-                lineNumber: 108
+                lineNumber: 107
             },
             __self: this,
             children: /*#__PURE__*/ _jsxRuntime.jsx(_reactMediumImageZoom.Controlled, {
@@ -26372,13 +26367,13 @@ class ImageSlideView extends _reactDefault.default.Component {
                 onZoomChange: this._handleZoomChange.bind(this),
                 __source: {
                     fileName: "src/components/imageslide-view/imageslide-view.jsx",
-                    lineNumber: 109
+                    lineNumber: 108
                 },
                 __self: this,
                 children: /*#__PURE__*/ _jsxRuntime.jsx("div", {
                     __source: {
                         fileName: "src/components/imageslide-view/imageslide-view.jsx",
-                        lineNumber: 109
+                        lineNumber: 108
                     },
                     __self: this,
                     children: /*#__PURE__*/ _jsxRuntime.jsx("img", {
@@ -26386,7 +26381,7 @@ class ImageSlideView extends _reactDefault.default.Component {
                         alt: "",
                         __source: {
                             fileName: "src/components/imageslide-view/imageslide-view.jsx",
-                            lineNumber: 109
+                            lineNumber: 108
                         },
                         __self: this
                     })
