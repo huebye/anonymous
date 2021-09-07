@@ -6,12 +6,13 @@ import { NavigationView } from '../navigation-view/navigation-view';
 import { ImageSlideView } from '../imageslide-view/imageslide-view';
 const axios = require('axios');
 
+
 export class MainView extends React.Component {
     constructor() {
         super();
         this.state = {
-            art: null,
-            imagePath: null,
+            art: {},
+            imagePath: {},
         }
         
     }
@@ -25,12 +26,10 @@ export class MainView extends React.Component {
       getArt() {
         axios.get('https://shrouded-caverns-29574.herokuapp.com/art')
         .then(response => {
-            console.log(response);
           this.setState({
             art: response.data,   
-            imagePath: response.data[0].ImagePath                                           
+            imagePath: response.data[0].ImagePath                                          
           });
-          console.log(this.state.art);
           console.log(this.state.imagePath)
         })
         .catch(function (error) {

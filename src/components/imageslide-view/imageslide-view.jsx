@@ -64,7 +64,7 @@ export class ImageSlideView extends React.Component {
 
     const images = [
       {
-        original: image ,
+        original: WillyBrandt ,
         description: '• Willy Brandt',
       },
       {
@@ -78,7 +78,7 @@ export class ImageSlideView extends React.Component {
     ];
 if(fullscreen === false) {
   return (
-    <div className="imageslide">
+    <div className="imageslide" >
     <ImageGallery 
     items={images}
     ref={i => this._imageGallery = i}   

@@ -22761,8 +22761,10 @@ class MainView extends _reactDefault.default.Component {
     constructor(){
         super();
         this.state = {
-            art: null,
-            imagePath: null
+            art: {
+            },
+            imagePath: {
+            }
         };
     }
     componentDidMount() {
@@ -22771,12 +22773,10 @@ class MainView extends _reactDefault.default.Component {
     }
     getArt() {
         axios.get('https://shrouded-caverns-29574.herokuapp.com/art').then((response)=>{
-            console.log(response);
             this.setState({
                 art: response.data,
                 imagePath: response.data[0].ImagePath
             });
-            console.log(this.state.art);
             console.log(this.state.imagePath);
         }).catch(function(error) {
             console.log(error);
@@ -22787,13 +22787,13 @@ class MainView extends _reactDefault.default.Component {
         return(/*#__PURE__*/ _jsxRuntime.jsx(_reactRouterDom.BrowserRouter, {
             __source: {
                 fileName: "src/components/main-view/main-view.jsx",
-                lineNumber: 44
+                lineNumber: 43
             },
             __self: this,
             children: /*#__PURE__*/ _jsxRuntime.jsxs("div", {
                 __source: {
                     fileName: "src/components/main-view/main-view.jsx",
-                    lineNumber: 45
+                    lineNumber: 44
                 },
                 __self: this,
                 children: [
@@ -22802,14 +22802,14 @@ class MainView extends _reactDefault.default.Component {
                         path: "/",
                         __source: {
                             fileName: "src/components/main-view/main-view.jsx",
-                            lineNumber: 46
+                            lineNumber: 45
                         },
                         __self: this,
                         children: [
                             /*#__PURE__*/ _jsxRuntime.jsx(_logoView.LogoView, {
                                 __source: {
                                     fileName: "src/components/main-view/main-view.jsx",
-                                    lineNumber: 47
+                                    lineNumber: 46
                                 },
                                 __self: this
                             }),
@@ -22817,14 +22817,14 @@ class MainView extends _reactDefault.default.Component {
                                 className: "start",
                                 __source: {
                                     fileName: "src/components/main-view/main-view.jsx",
-                                    lineNumber: 48
+                                    lineNumber: 47
                                 },
                                 __self: this,
                                 children: [
                                     /*#__PURE__*/ _jsxRuntime.jsx(_navigationView.NavigationView, {
                                         __source: {
                                             fileName: "src/components/main-view/main-view.jsx",
-                                            lineNumber: 49
+                                            lineNumber: 48
                                         },
                                         __self: this
                                     }),
@@ -22833,7 +22833,7 @@ class MainView extends _reactDefault.default.Component {
                                         image: this.state.imagePath,
                                         __source: {
                                             fileName: "src/components/main-view/main-view.jsx",
-                                            lineNumber: 50
+                                            lineNumber: 49
                                         },
                                         __self: this
                                     })
@@ -22846,14 +22846,14 @@ class MainView extends _reactDefault.default.Component {
                         path: "/artist",
                         __source: {
                             fileName: "src/components/main-view/main-view.jsx",
-                            lineNumber: 54
+                            lineNumber: 53
                         },
                         __self: this,
                         children: [
                             /*#__PURE__*/ _jsxRuntime.jsx(_logoView.LogoView, {
                                 __source: {
                                     fileName: "src/components/main-view/main-view.jsx",
-                                    lineNumber: 55
+                                    lineNumber: 54
                                 },
                                 __self: this
                             }),
@@ -22861,13 +22861,13 @@ class MainView extends _reactDefault.default.Component {
                                 className: "start",
                                 __source: {
                                     fileName: "src/components/main-view/main-view.jsx",
-                                    lineNumber: 56
+                                    lineNumber: 55
                                 },
                                 __self: this,
                                 children: /*#__PURE__*/ _jsxRuntime.jsx(_navigationView.NavigationView, {
                                     __source: {
                                         fileName: "src/components/main-view/main-view.jsx",
-                                        lineNumber: 57
+                                        lineNumber: 56
                                     },
                                     __self: this
                                 })
@@ -26302,7 +26302,7 @@ class ImageSlideView extends _reactDefault.default.Component {
         const { art , image  } = this.props;
         const images = [
             {
-                original: image,
+                original: _willyBrandtPngDefault.default,
                 description: '• Willy Brandt'
             },
             {
