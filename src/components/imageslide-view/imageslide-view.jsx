@@ -8,7 +8,6 @@ import { Controlled as ControlledZoom } from 'react-medium-image-zoom'
 import 'react-medium-image-zoom/dist/styles.css';
 import ImageGallery from 'react-image-gallery';
 import "react-image-gallery/styles/css/image-gallery.css";
-const axios = require('axios');
 
 
 export class ImageSlideView extends React.Component {
@@ -60,10 +59,9 @@ export class ImageSlideView extends React.Component {
     render () {
     const { fullscreen ,isZoomed} = this.state
     const {art, image} = this.props
-
     const images = [
       {
-        original: WillyBrandt ,
+        original: art.ImagePath ,
         description: '• Willy Brandt',
       },
       {
