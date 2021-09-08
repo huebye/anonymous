@@ -22883,7 +22883,7 @@ class MainView extends _reactDefault.default.Component {
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-runtime":"8xIwr","react":"6TuXu","./main-view.scss":"jyMAr","react-router-dom":"cpyQW","../logo-view/logo-view":"21Hac","../navigation-view/navigation-view":"3XDAu","../imageslide-view/imageslide-view":"cx3Hi","@parcel/transformer-js/src/esmodule-helpers.js":"JacNc","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"5V79J","axios":"iYoWk"}],"jyMAr":[function() {},{}],"cpyQW":[function(require,module,exports) {
+},{"react/jsx-runtime":"8xIwr","react":"6TuXu","./main-view.scss":"jyMAr","react-router-dom":"cpyQW","../logo-view/logo-view":"21Hac","../navigation-view/navigation-view":"3XDAu","../imageslide-view/imageslide-view":"cx3Hi","axios":"iYoWk","@parcel/transformer-js/src/esmodule-helpers.js":"JacNc","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"5V79J"}],"jyMAr":[function() {},{}],"cpyQW":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "MemoryRouter", ()=>_reactRouter.MemoryRouter
@@ -22953,10 +22953,10 @@ var _tinyInvariantDefault = parcelHelpers.interopDefault(_tinyInvariant);
     }
     var _proto = BrowserRouter2.prototype;
     _proto.render = function render() {
-        return _reactDefault.default.createElement(_reactRouter.Router, {
+        return(/*#__PURE__*/ _reactDefault.default.createElement(_reactRouter.Router, {
             history: this.history,
             children: this.props.children
-        });
+        }));
     };
     return BrowserRouter2;
 }(_reactDefault.default.Component);
@@ -22985,10 +22985,10 @@ BrowserRouter1.prototype.componentDidMount = function() {
     }
     var _proto = HashRouter2.prototype;
     _proto.render = function render() {
-        return _reactDefault.default.createElement(_reactRouter.Router, {
+        return(/*#__PURE__*/ _reactDefault.default.createElement(_reactRouter.Router, {
             history: this.history,
             children: this.props.children
-        });
+        }));
     };
     return HashRouter2;
 }(_reactDefault.default.Component);
@@ -23044,7 +23044,7 @@ var LinkAnchor = forwardRef(function(_ref, forwardedRef) {
     }); // React 15 compat
     if (forwardRefShim !== forwardRef) props.ref = forwardedRef || innerRef;
     else props.ref = innerRef;
-    /* eslint-disable-next-line jsx-a11y/anchor-has-content */ return _reactDefault.default.createElement("a", props);
+    /* eslint-disable-next-line jsx-a11y/anchor-has-content */ return(/*#__PURE__*/ _reactDefault.default.createElement("a", props));
 });
 LinkAnchor.displayName = "LinkAnchor";
 /**
@@ -23056,7 +23056,7 @@ LinkAnchor.displayName = "LinkAnchor";
         "to",
         "innerRef"
     ]);
-    return _reactDefault.default.createElement(_reactRouter.__RouterContext.Consumer, null, function(context) {
+    return(/*#__PURE__*/ _reactDefault.default.createElement(_reactRouter.__RouterContext.Consumer, null, function(context) {
         !context && _tinyInvariantDefault.default(false, "You should not use <Link> outside a <Router>");
         var history = context.history;
         var location = normalizeToLocation(resolveToLocation(to, context.location), context.location);
@@ -23066,14 +23066,15 @@ LinkAnchor.displayName = "LinkAnchor";
             href: href,
             navigate: function navigate() {
                 var location1 = resolveToLocation(to, context.location);
-                var method = replace ? history.replace : history.push;
+                var isDuplicateNavigation = _history.createPath(context.location) === _history.createPath(normalizeToLocation(location1));
+                var method = replace || isDuplicateNavigation ? history.replace : history.push;
                 method(location1);
             }
         }); // React 15 compat
         if (forwardRefShim !== forwardRef) props.ref = forwardedRef || innerRef;
         else props.innerRef = innerRef;
-        return _reactDefault.default.createElement(component, props);
-    });
+        return(/*#__PURE__*/ _reactDefault.default.createElement(component, props));
+    }));
 });
 var toType = _propTypesDefault.default.oneOfType([
     _propTypesDefault.default.string,
@@ -23123,7 +23124,7 @@ function joinClassnames() {
         "to",
         "innerRef"
     ]);
-    return _reactDefault.default.createElement(_reactRouter.__RouterContext.Consumer, null, function(context) {
+    return(/*#__PURE__*/ _reactDefault.default.createElement(_reactRouter.__RouterContext.Consumer, null, function(context) {
         !context && _tinyInvariantDefault.default(false, "You should not use <NavLink> outside a <Router>");
         var currentLocation = locationProp || context.location;
         var toLocation = normalizeToLocation(resolveToLocation(to, currentLocation), currentLocation);
@@ -23136,10 +23137,13 @@ function joinClassnames() {
             strict: strict
         }) : null;
         var isActive = !!(isActiveProp ? isActiveProp(match, currentLocation) : match);
-        var className = isActive ? joinClassnames(classNameProp, activeClassName) : classNameProp;
-        var style = isActive ? _extendsDefault.default({
-        }, styleProp, {
-        }, activeStyle) : styleProp;
+        var className = typeof classNameProp === "function" ? classNameProp(isActive) : classNameProp;
+        var style = typeof styleProp === "function" ? styleProp(isActive) : styleProp;
+        if (isActive) {
+            className = joinClassnames(className, activeClassName);
+            style = _extendsDefault.default({
+            }, style, activeStyle);
+        }
         var props = _extendsDefault.default({
             "aria-current": isActive && ariaCurrent || null,
             className: className,
@@ -23148,8 +23152,8 @@ function joinClassnames() {
         }, rest); // React 15 compat
         if (forwardRefShim$1 !== forwardRef$1) props.ref = forwardedRef || innerRef;
         else props.innerRef = innerRef;
-        return _reactDefault.default.createElement(Link, props);
-    });
+        return(/*#__PURE__*/ _reactDefault.default.createElement(Link, props));
+    }));
 });
 NavLink.displayName = "NavLink";
 var ariaCurrentType = _propTypesDefault.default.oneOf([
@@ -23158,20 +23162,27 @@ var ariaCurrentType = _propTypesDefault.default.oneOf([
     "location",
     "date",
     "time",
-    "true"
+    "true",
+    "false"
 ]);
 NavLink.propTypes = _extendsDefault.default({
 }, Link.propTypes, {
     "aria-current": ariaCurrentType,
     activeClassName: _propTypesDefault.default.string,
     activeStyle: _propTypesDefault.default.object,
-    className: _propTypesDefault.default.string,
+    className: _propTypesDefault.default.oneOfType([
+        _propTypesDefault.default.string,
+        _propTypesDefault.default.func
+    ]),
     exact: _propTypesDefault.default.bool,
     isActive: _propTypesDefault.default.func,
     location: _propTypesDefault.default.object,
     sensitive: _propTypesDefault.default.bool,
     strict: _propTypesDefault.default.bool,
-    style: _propTypesDefault.default.object
+    style: _propTypesDefault.default.oneOfType([
+        _propTypesDefault.default.object,
+        _propTypesDefault.default.func
+    ])
 });
 
 },{"react-router":"l4MNa","@babel/runtime/helpers/esm/inheritsLoose":"eO0be","react":"6TuXu","history":"6R8lq","prop-types":"1tgq3","tiny-warning":"4xDJt","@babel/runtime/helpers/esm/extends":"bKAu6","@babel/runtime/helpers/esm/objectWithoutPropertiesLoose":"3Rubg","tiny-invariant":"kiE0c","@parcel/transformer-js/src/esmodule-helpers.js":"JacNc"}],"l4MNa":[function(require,module,exports) {
@@ -23238,13 +23249,7 @@ var createNamedContext = function createNamedContext1(name) {
     return context;
 };
 var historyContext = /*#__PURE__*/ createNamedContext("Router-History");
-// TODO: Replace with React.createContext once we can assume React 16+
-var createNamedContext$1 = function createNamedContext2(name) {
-    var context = _miniCreateReactContextDefault.default();
-    context.displayName = name;
-    return context;
-};
-var context = /*#__PURE__*/ createNamedContext$1("Router");
+var context = /*#__PURE__*/ createNamedContext("Router");
 /**
  * The public API for putting history on context.
  */ var Router1 = /*#__PURE__*/ function(_React$Component) {
@@ -23286,20 +23291,24 @@ var context = /*#__PURE__*/ createNamedContext$1("Router");
         });
     };
     _proto.componentWillUnmount = function componentWillUnmount() {
-        if (this.unlisten) this.unlisten();
+        if (this.unlisten) {
+            this.unlisten();
+            this._isMounted = false;
+            this._pendingLocation = null;
+        }
     };
     _proto.render = function render() {
-        return _reactDefault.default.createElement(context.Provider, {
+        return(/*#__PURE__*/ _reactDefault.default.createElement(context.Provider, {
             value: {
                 history: this.props.history,
                 location: this.state.location,
                 match: Router2.computeRootMatch(this.state.location.pathname),
                 staticContext: this.props.staticContext
             }
-        }, _reactDefault.default.createElement(historyContext.Provider, {
+        }, /*#__PURE__*/ _reactDefault.default.createElement(historyContext.Provider, {
             children: this.props.children || null,
             value: this.props.history
-        }));
+        })));
     };
     return Router2;
 }(_reactDefault.default.Component);
@@ -23326,10 +23335,10 @@ Router1.prototype.componentDidUpdate = function(prevProps) {
     }
     var _proto = MemoryRouter2.prototype;
     _proto.render = function render() {
-        return _reactDefault.default.createElement(Router1, {
+        return(/*#__PURE__*/ _reactDefault.default.createElement(Router1, {
             history: this.history,
             children: this.props.children
-        });
+        }));
     };
     return MemoryRouter2;
 }(_reactDefault.default.Component);
@@ -23367,11 +23376,11 @@ var Lifecycle1 = /*#__PURE__*/ function(_React$Component) {
  * The public API for prompting the user before navigating away from a screen.
  */ function Prompt(_ref) {
     var message = _ref.message, _ref$when = _ref.when, when = _ref$when === void 0 ? true : _ref$when;
-    return _reactDefault.default.createElement(context.Consumer, null, function(context1) {
+    return(/*#__PURE__*/ _reactDefault.default.createElement(context.Consumer, null, function(context1) {
         !context1 && _tinyInvariantDefault.default(false, "You should not use <Prompt> outside a <Router>");
         if (!when || context1.staticContext) return null;
         var method = context1.history.block;
-        return _reactDefault.default.createElement(Lifecycle1, {
+        return(/*#__PURE__*/ _reactDefault.default.createElement(Lifecycle1, {
             onMount: function onMount(self) {
                 self.release = method(message);
             },
@@ -23385,8 +23394,8 @@ var Lifecycle1 = /*#__PURE__*/ function(_React$Component) {
                 self.release();
             },
             message: message
-        });
-    });
+        }));
+    }));
 }
 var messageType = _propTypesDefault.default.oneOfType([
     _propTypesDefault.default.func,
@@ -23423,7 +23432,7 @@ function compilePath(path) {
  * The public API for navigating programmatically with a component.
  */ function Redirect(_ref) {
     var computedMatch = _ref.computedMatch, to = _ref.to, _ref$push = _ref.push, push = _ref$push === void 0 ? false : _ref$push;
-    return _reactDefault.default.createElement(context.Consumer, null, function(context1) {
+    return(/*#__PURE__*/ _reactDefault.default.createElement(context.Consumer, null, function(context1) {
         !context1 && _tinyInvariantDefault.default(false, "You should not use <Redirect> outside a <Router>");
         var history = context1.history, staticContext = context1.staticContext;
         var method = push ? history.push : history.replace;
@@ -23436,7 +23445,7 @@ function compilePath(path) {
             method(location);
             return null;
         }
-        return _reactDefault.default.createElement(Lifecycle1, {
+        return(/*#__PURE__*/ _reactDefault.default.createElement(Lifecycle1, {
             onMount: function onMount() {
                 method(location);
             },
@@ -23448,8 +23457,8 @@ function compilePath(path) {
                 }))) method(location);
             },
             to: to
-        });
-    });
+        }));
+    }));
 }
 Redirect.propTypes = {
     push: _propTypesDefault.default.bool,
@@ -23536,7 +23545,7 @@ function evalChildrenDev(children, props, path) {
     var _proto = Route2.prototype;
     _proto.render = function render() {
         var _this = this;
-        return _reactDefault.default.createElement(context.Consumer, null, function(context$1) {
+        return(/*#__PURE__*/ _reactDefault.default.createElement(context.Consumer, null, function(context$1) {
             !context$1 && _tinyInvariantDefault.default(false, "You should not use <Route> outside a <Router>");
             var location = _this.props.location || context$1.location;
             var match = _this.props.computedMatch ? _this.props.computedMatch // <Switch> already computed the match for us
@@ -23548,11 +23557,11 @@ function evalChildrenDev(children, props, path) {
             });
             var _this$props = _this.props, children = _this$props.children, component = _this$props.component, render1 = _this$props.render; // Preact uses an empty array as children by
             // default, so use null if that's the case.
-            if (Array.isArray(children) && children.length === 0) children = null;
-            return _reactDefault.default.createElement(context.Provider, {
+            if (Array.isArray(children) && isEmptyChildren(children)) children = null;
+            return(/*#__PURE__*/ _reactDefault.default.createElement(context.Provider, {
                 value: props
-            }, props.match ? children ? typeof children === "function" ? evalChildrenDev(children, props, _this.props.path) : children : component ? _reactDefault.default.createElement(component, props) : render1 ? render1(props) : null : typeof children === "function" ? evalChildrenDev(children, props, _this.props.path) : null);
-        });
+            }, props.match ? children ? typeof children === "function" ? evalChildrenDev(children, props, _this.props.path) : children : component ? /*#__PURE__*/ _reactDefault.default.createElement(component, props) : render1 ? render1(props) : null : typeof children === "function" ? evalChildrenDev(children, props, _this.props.path) : null));
+        }));
     };
     return Route2;
 }(_reactDefault.default.Component);
@@ -23668,11 +23677,11 @@ function noop() {
             listen: this.handleListen,
             block: this.handleBlock
         };
-        return _reactDefault.default.createElement(Router1, _extendsDefault.default({
+        return(/*#__PURE__*/ _reactDefault.default.createElement(Router1, _extendsDefault.default({
         }, rest, {
             history: history,
             staticContext: context1
-        }));
+        })));
     };
     return StaticRouter2;
 }(_reactDefault.default.Component);
@@ -23697,7 +23706,7 @@ StaticRouter1.prototype.componentDidMount = function() {
     var _proto = Switch2.prototype;
     _proto.render = function render() {
         var _this = this;
-        return _reactDefault.default.createElement(context.Consumer, null, function(context1) {
+        return(/*#__PURE__*/ _reactDefault.default.createElement(context.Consumer, null, function(context1) {
             !context1 && _tinyInvariantDefault.default(false, "You should not use <Switch> outside a <Router>");
             var location = _this.props.location || context1.location;
             var element, match; // We use React.Children.forEach instead of React.Children.toArray().find()
@@ -23705,7 +23714,7 @@ StaticRouter1.prototype.componentDidMount = function() {
             // to trigger an unmount/remount for two <Route>s that render the same
             // component at different URLs.
             _reactDefault.default.Children.forEach(_this.props.children, function(child) {
-                if (match == null && _reactDefault.default.isValidElement(child)) {
+                if (match == null && /*#__PURE__*/ _reactDefault.default.isValidElement(child)) {
                     element = child;
                     var path = child.props.path || child.props.from;
                     match = path ? matchPath(location.pathname, _extendsDefault.default({
@@ -23714,11 +23723,11 @@ StaticRouter1.prototype.componentDidMount = function() {
                     })) : context1.match;
                 }
             });
-            return match ? _reactDefault.default.cloneElement(element, {
+            return match ? /*#__PURE__*/ _reactDefault.default.cloneElement(element, {
                 location: location,
                 computedMatch: match
             }) : null;
-        });
+        }));
     };
     return Switch2;
 }(_reactDefault.default.Component);
@@ -23738,13 +23747,13 @@ Switch1.prototype.componentDidUpdate = function(prevProps) {
         var wrappedComponentRef = props.wrappedComponentRef, remainingProps = _objectWithoutPropertiesLooseDefault.default(props, [
             "wrappedComponentRef"
         ]);
-        return _reactDefault.default.createElement(context.Consumer, null, function(context1) {
+        return(/*#__PURE__*/ _reactDefault.default.createElement(context.Consumer, null, function(context1) {
             !context1 && _tinyInvariantDefault.default(false, "You should not use <" + displayName + " /> outside a <Router>");
-            return _reactDefault.default.createElement(Component, _extendsDefault.default({
+            return(/*#__PURE__*/ _reactDefault.default.createElement(Component, _extendsDefault.default({
             }, remainingProps, context1, {
                 ref: wrappedComponentRef
-            }));
-        });
+            })));
+        }));
     };
     C.displayName = displayName;
     C.WrappedComponent = Component;
@@ -23795,7 +23804,7 @@ if (typeof window !== "undefined") {
     global[key] = "esm";
 }
 
-},{"@babel/runtime/helpers/esm/inheritsLoose":"eO0be","react":"6TuXu","prop-types":"1tgq3","history":"6R8lq","tiny-warning":"4xDJt","mini-create-react-context":"bwjcK","tiny-invariant":"kiE0c","@babel/runtime/helpers/esm/extends":"bKAu6","path-to-regexp":"1CwUw","react-is":"5wFcP","@babel/runtime/helpers/esm/objectWithoutPropertiesLoose":"3Rubg","hoist-non-react-statics":"jfzb6","@parcel/transformer-js/src/esmodule-helpers.js":"JacNc"}],"eO0be":[function(require,module,exports) {
+},{"@babel/runtime/helpers/esm/inheritsLoose":"eO0be","react":"6TuXu","prop-types":"1tgq3","history":"6R8lq","tiny-warning":"4xDJt","mini-create-react-context":"bwjcK","tiny-invariant":"kiE0c","@babel/runtime/helpers/esm/extends":"bKAu6","path-to-regexp":"6SN7C","react-is":"5wFcP","@babel/runtime/helpers/esm/objectWithoutPropertiesLoose":"3Rubg","hoist-non-react-statics":"jfzb6","@parcel/transformer-js/src/esmodule-helpers.js":"JacNc"}],"eO0be":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 var _setPrototypeOfJs = require("./setPrototypeOf.js");
@@ -25517,7 +25526,7 @@ function createReactContext(defaultValue, calculateChangedBits) {
 var index = _reactDefault.default.createContext || createReactContext;
 exports.default = index;
 
-},{"react":"6TuXu","@babel/runtime/helpers/esm/inheritsLoose":"eO0be","prop-types":"1tgq3","tiny-warning":"4xDJt","@parcel/transformer-js/src/esmodule-helpers.js":"JacNc"}],"1CwUw":[function(require,module,exports) {
+},{"react":"6TuXu","@babel/runtime/helpers/esm/inheritsLoose":"eO0be","prop-types":"1tgq3","tiny-warning":"4xDJt","@parcel/transformer-js/src/esmodule-helpers.js":"JacNc"}],"6SN7C":[function(require,module,exports) {
 var isarray = require('isarray');
 /**
  * Expose `pathToRegexp`.
@@ -25825,7 +25834,7 @@ module.exports.tokensToRegExp = tokensToRegExp;
     return stringToRegexp(path, keys, options);
 }
 
-},{"isarray":"cSDKV"}],"cSDKV":[function(require,module,exports) {
+},{"isarray":"6o9Vr"}],"6o9Vr":[function(require,module,exports) {
 module.exports = Array.isArray || function(arr) {
     return Object.prototype.toString.call(arr) == '[object Array]';
 };
@@ -29492,7 +29501,7 @@ module.exports.default = axios;
 },{"./utils":"hOPY0","./helpers/bind":"4bHkG","./core/Axios":"KVzea","./core/mergeConfig":"8vb7m","./defaults":"g96L2","./cancel/Cancel":"iGO1D","./cancel/CancelToken":"6kJtU","./cancel/isCancel":"6KzET","./helpers/spread":"3fmMu","./helpers/isAxiosError":"1NqDP"}],"hOPY0":[function(require,module,exports) {
 'use strict';
 var bind = require('./helpers/bind');
-/*global toString:true*/ // utils is a library of generic helper functions non-specific to axios
+// utils is a library of generic helper functions non-specific to axios
 var toString = Object.prototype.toString;
 /**
  * Determine if a value is an Array
@@ -29633,7 +29642,7 @@ var toString = Object.prototype.toString;
  * @param {String} str The String to trim
  * @returns {String} The String freed of excess whitespace
  */ function trim(str) {
-    return str.replace(/^\s*/, '').replace(/\s*$/, '');
+    return str.trim ? str.trim() : str.replace(/^\s+|\s+$/g, '');
 }
 /**
  * Determine if we're running in a standard browser environment
@@ -29772,6 +29781,8 @@ var buildURL = require('../helpers/buildURL');
 var InterceptorManager = require('./InterceptorManager');
 var dispatchRequest = require('./dispatchRequest');
 var mergeConfig = require('./mergeConfig');
+var validator = require('../helpers/validator');
+var validators = validator.validators;
 /**
  * Create a new instance of Axios
  *
@@ -29800,19 +29811,53 @@ var mergeConfig = require('./mergeConfig');
     if (config.method) config.method = config.method.toLowerCase();
     else if (this.defaults.method) config.method = this.defaults.method.toLowerCase();
     else config.method = 'get';
-    // Hook up interceptors middleware
-    var chain = [
-        dispatchRequest,
-        undefined
-    ];
-    var promise = Promise.resolve(config);
+    var transitional = config.transitional;
+    if (transitional !== undefined) validator.assertOptions(transitional, {
+        silentJSONParsing: validators.transitional(validators.boolean, '1.0.0'),
+        forcedJSONParsing: validators.transitional(validators.boolean, '1.0.0'),
+        clarifyTimeoutError: validators.transitional(validators.boolean, '1.0.0')
+    }, false);
+    // filter out skipped interceptors
+    var requestInterceptorChain = [];
+    var synchronousRequestInterceptors = true;
     this.interceptors.request.forEach(function unshiftRequestInterceptors(interceptor) {
-        chain.unshift(interceptor.fulfilled, interceptor.rejected);
+        if (typeof interceptor.runWhen === 'function' && interceptor.runWhen(config) === false) return;
+        synchronousRequestInterceptors = synchronousRequestInterceptors && interceptor.synchronous;
+        requestInterceptorChain.unshift(interceptor.fulfilled, interceptor.rejected);
     });
+    var responseInterceptorChain = [];
     this.interceptors.response.forEach(function pushResponseInterceptors(interceptor) {
-        chain.push(interceptor.fulfilled, interceptor.rejected);
+        responseInterceptorChain.push(interceptor.fulfilled, interceptor.rejected);
     });
-    while(chain.length)promise = promise.then(chain.shift(), chain.shift());
+    var promise;
+    if (!synchronousRequestInterceptors) {
+        var chain = [
+            dispatchRequest,
+            undefined
+        ];
+        Array.prototype.unshift.apply(chain, requestInterceptorChain);
+        chain = chain.concat(responseInterceptorChain);
+        promise = Promise.resolve(config);
+        while(chain.length)promise = promise.then(chain.shift(), chain.shift());
+        return promise;
+    }
+    var newConfig = config;
+    while(requestInterceptorChain.length){
+        var onFulfilled = requestInterceptorChain.shift();
+        var onRejected = requestInterceptorChain.shift();
+        try {
+            newConfig = onFulfilled(newConfig);
+        } catch (error) {
+            onRejected(error);
+            break;
+        }
+    }
+    try {
+        promise = dispatchRequest(newConfig);
+    } catch (error) {
+        return Promise.reject(error);
+    }
+    while(responseInterceptorChain.length)promise = promise.then(responseInterceptorChain.shift(), responseInterceptorChain.shift());
     return promise;
 };
 Axios.prototype.getUri = function getUri(config) {
@@ -29852,7 +29897,7 @@ utils.forEach([
 });
 module.exports = Axios;
 
-},{"./../utils":"hOPY0","../helpers/buildURL":"3Jodf","./InterceptorManager":"9kkIC","./dispatchRequest":"dmFav","./mergeConfig":"8vb7m"}],"3Jodf":[function(require,module,exports) {
+},{"./../utils":"hOPY0","../helpers/buildURL":"3Jodf","./InterceptorManager":"9kkIC","./dispatchRequest":"dmFav","./mergeConfig":"8vb7m","../helpers/validator":"4sigL"}],"3Jodf":[function(require,module,exports) {
 'use strict';
 var utils = require('./../utils');
 function encode(val) {
@@ -29906,10 +29951,12 @@ function InterceptorManager() {
  * @param {Function} rejected The function to handle `reject` for a `Promise`
  *
  * @return {Number} An ID used to remove interceptor later
- */ InterceptorManager.prototype.use = function use(fulfilled, rejected) {
+ */ InterceptorManager.prototype.use = function use(fulfilled, rejected, options) {
     this.handlers.push({
         fulfilled: fulfilled,
-        rejected: rejected
+        rejected: rejected,
+        synchronous: options ? options.synchronous : false,
+        runWhen: options ? options.runWhen : null
     });
     return this.handlers.length - 1;
 };
@@ -29956,7 +30003,7 @@ var defaults = require('../defaults');
     config.headers = config.headers || {
     };
     // Transform request data
-    config.data = transformData(config.data, config.headers, config.transformRequest);
+    config.data = transformData.call(config, config.data, config.headers, config.transformRequest);
     // Flatten headers
     config.headers = utils.merge(config.headers.common || {
     }, config.headers[config.method] || {
@@ -29976,13 +30023,13 @@ var defaults = require('../defaults');
     return adapter(config).then(function onAdapterResolution(response) {
         throwIfCancellationRequested(config);
         // Transform response data
-        response.data = transformData(response.data, response.headers, config.transformResponse);
+        response.data = transformData.call(config, response.data, response.headers, config.transformResponse);
         return response;
     }, function onAdapterRejection(reason) {
         if (!isCancel(reason)) {
             throwIfCancellationRequested(config);
             // Transform response data
-            if (reason && reason.response) reason.response.data = transformData(reason.response.data, reason.response.headers, config.transformResponse);
+            if (reason && reason.response) reason.response.data = transformData.call(config, reason.response.data, reason.response.headers, config.transformResponse);
         }
         return Promise.reject(reason);
     });
@@ -29991,6 +30038,7 @@ var defaults = require('../defaults');
 },{"./../utils":"hOPY0","./transformData":"57wgh","../cancel/isCancel":"6KzET","../defaults":"g96L2"}],"57wgh":[function(require,module,exports) {
 'use strict';
 var utils = require('./../utils');
+var defaults = require('./../defaults');
 /**
  * Transform the data for a request or a response
  *
@@ -29999,23 +30047,19 @@ var utils = require('./../utils');
  * @param {Array|Function} fns A single function or Array of functions
  * @returns {*} The resulting transformed data
  */ module.exports = function transformData(data, headers, fns) {
+    var context = this || defaults;
     /*eslint no-param-reassign:0*/ utils.forEach(fns, function transform(fn) {
-        data = fn(data, headers);
+        data = fn.call(context, data, headers);
     });
     return data;
 };
 
-},{"./../utils":"hOPY0"}],"6KzET":[function(require,module,exports) {
-'use strict';
-module.exports = function isCancel(value) {
-    return !!(value && value.__CANCEL__);
-};
-
-},{}],"g96L2":[function(require,module,exports) {
+},{"./../utils":"hOPY0","./../defaults":"g96L2"}],"g96L2":[function(require,module,exports) {
 var process = require("process");
 'use strict';
 var utils = require('./utils');
 var normalizeHeaderName = require('./helpers/normalizeHeaderName');
+var enhanceError = require('./core/enhanceError');
 var DEFAULT_CONTENT_TYPE = {
     'Content-Type': 'application/x-www-form-urlencoded'
 };
@@ -30030,7 +30074,21 @@ function getDefaultAdapter() {
     adapter = require('./adapters/http');
     return adapter;
 }
+function stringifySafely(rawValue, parser, encoder) {
+    if (utils.isString(rawValue)) try {
+        (parser || JSON.parse)(rawValue);
+        return utils.trim(rawValue);
+    } catch (e) {
+        if (e.name !== 'SyntaxError') throw e;
+    }
+    return (encoder || JSON.stringify)(rawValue);
+}
 var defaults = {
+    transitional: {
+        silentJSONParsing: true,
+        forcedJSONParsing: true,
+        clarifyTimeoutError: false
+    },
     adapter: getDefaultAdapter(),
     transformRequest: [
         function transformRequest(data, headers) {
@@ -30042,18 +30100,26 @@ var defaults = {
                 setContentTypeIfUnset(headers, 'application/x-www-form-urlencoded;charset=utf-8');
                 return data.toString();
             }
-            if (utils.isObject(data)) {
-                setContentTypeIfUnset(headers, 'application/json;charset=utf-8');
-                return JSON.stringify(data);
+            if (utils.isObject(data) || headers && headers['Content-Type'] === 'application/json') {
+                setContentTypeIfUnset(headers, 'application/json');
+                return stringifySafely(data);
             }
             return data;
         }
     ],
     transformResponse: [
         function transformResponse(data) {
-            /*eslint no-param-reassign:0*/ if (typeof data === 'string') try {
-                data = JSON.parse(data);
+            var transitional = this.transitional;
+            var silentJSONParsing = transitional && transitional.silentJSONParsing;
+            var forcedJSONParsing = transitional && transitional.forcedJSONParsing;
+            var strictJSONParsing = !silentJSONParsing && this.responseType === 'json';
+            if (strictJSONParsing || forcedJSONParsing && utils.isString(data) && data.length) try {
+                return JSON.parse(data);
             } catch (e) {
+                if (strictJSONParsing) {
+                    if (e.name === 'SyntaxError') throw enhanceError(e, this, 'E_JSON_PARSE');
+                    throw e;
+                }
             }
             return data;
         }
@@ -30092,7 +30158,7 @@ utils.forEach([
 });
 module.exports = defaults;
 
-},{"process":"6Upk8","./utils":"hOPY0","./helpers/normalizeHeaderName":"6GUF5","./adapters/xhr":"4uZQD","./adapters/http":"4uZQD"}],"6Upk8":[function(require,module,exports) {
+},{"process":"6Upk8","./utils":"hOPY0","./helpers/normalizeHeaderName":"6GUF5","./core/enhanceError":"3f4N4","./adapters/xhr":"4uZQD","./adapters/http":"4uZQD"}],"6Upk8":[function(require,module,exports) {
 // shim for using process in browser
 var process = module.exports = {
 };
@@ -30253,7 +30319,45 @@ module.exports = function normalizeHeaderName(headers, normalizedName) {
     });
 };
 
-},{"../utils":"hOPY0"}],"4uZQD":[function(require,module,exports) {
+},{"../utils":"hOPY0"}],"3f4N4":[function(require,module,exports) {
+'use strict';
+/**
+ * Update an Error with the specified config, error code, and response.
+ *
+ * @param {Error} error The error to update.
+ * @param {Object} config The config.
+ * @param {string} [code] The error code (for example, 'ECONNABORTED').
+ * @param {Object} [request] The request.
+ * @param {Object} [response] The response.
+ * @returns {Error} The error.
+ */ module.exports = function enhanceError(error, config, code, request, response) {
+    error.config = config;
+    if (code) error.code = code;
+    error.request = request;
+    error.response = response;
+    error.isAxiosError = true;
+    error.toJSON = function toJSON() {
+        return {
+            // Standard
+            message: this.message,
+            name: this.name,
+            // Microsoft
+            description: this.description,
+            number: this.number,
+            // Mozilla
+            fileName: this.fileName,
+            lineNumber: this.lineNumber,
+            columnNumber: this.columnNumber,
+            stack: this.stack,
+            // Axios
+            config: this.config,
+            code: this.code
+        };
+    };
+    return error;
+};
+
+},{}],"4uZQD":[function(require,module,exports) {
 'use strict';
 var utils = require('./../utils');
 var settle = require('./../core/settle');
@@ -30267,6 +30371,7 @@ module.exports = function xhrAdapter(config) {
     return new Promise(function dispatchXhrRequest(resolve, reject) {
         var requestData = config.data;
         var requestHeaders = config.headers;
+        var responseType = config.responseType;
         if (utils.isFormData(requestData)) delete requestHeaders['Content-Type']; // Let the browser set it
         var request = new XMLHttpRequest();
         // HTTP basic authentication
@@ -30279,17 +30384,11 @@ module.exports = function xhrAdapter(config) {
         request.open(config.method.toUpperCase(), buildURL(fullPath, config.params, config.paramsSerializer), true);
         // Set the request timeout in MS
         request.timeout = config.timeout;
-        // Listen for ready state
-        request.onreadystatechange = function handleLoad() {
-            if (!request || request.readyState !== 4) return;
-            // The request errored out and we didn't get a response, this will be
-            // handled by onerror instead
-            // With one exception: request that using file: protocol, most browsers
-            // will return status as 0 even though it's a successful request
-            if (request.status === 0 && !(request.responseURL && request.responseURL.indexOf('file:') === 0)) return;
+        function onloadend() {
+            if (!request) return;
             // Prepare the response
             var responseHeaders = 'getAllResponseHeaders' in request ? parseHeaders(request.getAllResponseHeaders()) : null;
-            var responseData = !config.responseType || config.responseType === 'text' ? request.responseText : request.response;
+            var responseData = !responseType || responseType === 'text' || responseType === 'json' ? request.responseText : request.response;
             var response = {
                 data: responseData,
                 status: request.status,
@@ -30301,6 +30400,20 @@ module.exports = function xhrAdapter(config) {
             settle(resolve, reject, response);
             // Clean up request
             request = null;
+        }
+        if ('onloadend' in request) // Use onloadend if available
+        request.onloadend = onloadend;
+        else // Listen for ready state to emulate onloadend
+        request.onreadystatechange = function handleLoad() {
+            if (!request || request.readyState !== 4) return;
+            // The request errored out and we didn't get a response, this will be
+            // handled by onerror instead
+            // With one exception: request that using file: protocol, most browsers
+            // will return status as 0 even though it's a successful request
+            if (request.status === 0 && !(request.responseURL && request.responseURL.indexOf('file:') === 0)) return;
+            // readystate handler is calling before onerror or ontimeout handlers,
+            // so we should call onloadend on the next 'tick'
+            setTimeout(onloadend);
         };
         // Handle browser request cancellation (as opposed to a manual cancellation)
         request.onabort = function handleAbort() {
@@ -30321,7 +30434,7 @@ module.exports = function xhrAdapter(config) {
         request.ontimeout = function handleTimeout() {
             var timeoutErrorMessage = 'timeout of ' + config.timeout + 'ms exceeded';
             if (config.timeoutErrorMessage) timeoutErrorMessage = config.timeoutErrorMessage;
-            reject(createError(timeoutErrorMessage, config, 'ECONNABORTED', request));
+            reject(createError(timeoutErrorMessage, config, config.transitional && config.transitional.clarifyTimeoutError ? 'ETIMEDOUT' : 'ECONNABORTED', request));
             // Clean up request
             request = null;
         };
@@ -30343,13 +30456,7 @@ module.exports = function xhrAdapter(config) {
         // Add withCredentials to request if needed
         if (!utils.isUndefined(config.withCredentials)) request.withCredentials = !!config.withCredentials;
         // Add responseType to request if needed
-        if (config.responseType) try {
-            request.responseType = config.responseType;
-        } catch (e) {
-            // Expected DOMException thrown by browsers not compatible XMLHttpRequest Level 2.
-            // But, this can be suppressed for 'json' type as it can be parsed by default 'transformResponse' function.
-            if (config.responseType !== 'json') throw e;
-        }
+        if (responseType && responseType !== 'json') request.responseType = config.responseType;
         // Handle progress if needed
         if (typeof config.onDownloadProgress === 'function') request.addEventListener('progress', config.onDownloadProgress);
         // Not all browsers support upload events
@@ -30400,45 +30507,7 @@ var enhanceError = require('./enhanceError');
     return enhanceError(error, config, code, request, response);
 };
 
-},{"./enhanceError":"3f4N4"}],"3f4N4":[function(require,module,exports) {
-'use strict';
-/**
- * Update an Error with the specified config, error code, and response.
- *
- * @param {Error} error The error to update.
- * @param {Object} config The config.
- * @param {string} [code] The error code (for example, 'ECONNABORTED').
- * @param {Object} [request] The request.
- * @param {Object} [response] The response.
- * @returns {Error} The error.
- */ module.exports = function enhanceError(error, config, code, request, response) {
-    error.config = config;
-    if (code) error.code = code;
-    error.request = request;
-    error.response = response;
-    error.isAxiosError = true;
-    error.toJSON = function toJSON() {
-        return {
-            // Standard
-            message: this.message,
-            name: this.name,
-            // Microsoft
-            description: this.description,
-            number: this.number,
-            // Mozilla
-            fileName: this.fileName,
-            lineNumber: this.lineNumber,
-            columnNumber: this.columnNumber,
-            stack: this.stack,
-            // Axios
-            config: this.config,
-            code: this.code
-        };
-    };
-    return error;
-};
-
-},{}],"dRE5q":[function(require,module,exports) {
+},{"./enhanceError":"3f4N4"}],"dRE5q":[function(require,module,exports) {
 'use strict';
 var utils = require('./../utils');
 module.exports = utils.isStandardBrowserEnv() ? // Standard browser envs support document.cookie
@@ -30626,7 +30695,13 @@ module.exports = utils.isStandardBrowserEnv() ? // Standard browser envs have fu
     };
 })();
 
-},{"./../utils":"hOPY0"}],"8vb7m":[function(require,module,exports) {
+},{"./../utils":"hOPY0"}],"6KzET":[function(require,module,exports) {
+'use strict';
+module.exports = function isCancel(value) {
+    return !!(value && value.__CANCEL__);
+};
+
+},{}],"8vb7m":[function(require,module,exports) {
 'use strict';
 var utils = require('../utils');
 /**
@@ -30712,7 +30787,94 @@ var utils = require('../utils');
     return config;
 };
 
-},{"../utils":"hOPY0"}],"iGO1D":[function(require,module,exports) {
+},{"../utils":"hOPY0"}],"4sigL":[function(require,module,exports) {
+'use strict';
+var pkg = require('./../../package.json');
+var validators = {
+};
+// eslint-disable-next-line func-names
+[
+    'object',
+    'boolean',
+    'number',
+    'function',
+    'string',
+    'symbol'
+].forEach(function(type, i) {
+    validators[type] = function validator(thing) {
+        return typeof thing === type || 'a' + (i < 1 ? 'n ' : ' ') + type;
+    };
+});
+var deprecatedWarnings = {
+};
+var currentVerArr = pkg.version.split('.');
+/**
+ * Compare package versions
+ * @param {string} version
+ * @param {string?} thanVersion
+ * @returns {boolean}
+ */ function isOlderVersion(version, thanVersion) {
+    var pkgVersionArr = thanVersion ? thanVersion.split('.') : currentVerArr;
+    var destVer = version.split('.');
+    for(var i = 0; i < 3; i++){
+        if (pkgVersionArr[i] > destVer[i]) return true;
+        else if (pkgVersionArr[i] < destVer[i]) return false;
+    }
+    return false;
+}
+/**
+ * Transitional option validator
+ * @param {function|boolean?} validator
+ * @param {string?} version
+ * @param {string} message
+ * @returns {function}
+ */ validators.transitional = function transitional(validator, version, message) {
+    var isDeprecated = version && isOlderVersion(version);
+    function formatMessage(opt, desc) {
+        return '[Axios v' + pkg.version + '] Transitional option \'' + opt + '\'' + desc + (message ? '. ' + message : '');
+    }
+    // eslint-disable-next-line func-names
+    return function(value, opt, opts) {
+        if (validator === false) throw new Error(formatMessage(opt, ' has been removed in ' + version));
+        if (isDeprecated && !deprecatedWarnings[opt]) {
+            deprecatedWarnings[opt] = true;
+            // eslint-disable-next-line no-console
+            console.warn(formatMessage(opt, ' has been deprecated since v' + version + ' and will be removed in the near future'));
+        }
+        return validator ? validator(value, opt, opts) : true;
+    };
+};
+/**
+ * Assert object's properties type
+ * @param {object} options
+ * @param {object} schema
+ * @param {boolean?} allowUnknown
+ */ function assertOptions(options, schema, allowUnknown) {
+    if (typeof options !== 'object') throw new TypeError('options must be an object');
+    var keys = Object.keys(options);
+    var i = keys.length;
+    while((i--) > 0){
+        var opt = keys[i];
+        var validator = schema[opt];
+        if (validator) {
+            var value = options[opt];
+            var result = value === undefined || validator(value, opt, options);
+            if (result !== true) throw new TypeError('option ' + opt + ' must be ' + result);
+            continue;
+        }
+        if (allowUnknown !== true) throw Error('Unknown option ' + opt);
+    }
+}
+module.exports = {
+    isOlderVersion: isOlderVersion,
+    assertOptions: assertOptions,
+    validators: validators
+};
+
+},{"./../../package.json":"5vay1"}],"5vay1":[function(require,module,exports) {
+module.exports = JSON.parse("{\"name\":\"axios\",\"version\":\"0.21.4\",\"description\":\"Promise based HTTP client for the browser and node.js\",\"main\":\"index.js\",\"scripts\":{\"test\":\"grunt test\",\"start\":\"node ./sandbox/server.js\",\"build\":\"NODE_ENV=production grunt build\",\"preversion\":\"npm test\",\"version\":\"npm run build && grunt version && git add -A dist && git add CHANGELOG.md bower.json package.json\",\"postversion\":\"git push && git push --tags\",\"examples\":\"node ./examples/server.js\",\"coveralls\":\"cat coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js\",\"fix\":\"eslint --fix lib/**/*.js\"},\"repository\":{\"type\":\"git\",\"url\":\"https://github.com/axios/axios.git\"},\"keywords\":[\"xhr\",\"http\",\"ajax\",\"promise\",\"node\"],\"author\":\"Matt Zabriskie\",\"license\":\"MIT\",\"bugs\":{\"url\":\"https://github.com/axios/axios/issues\"},\"homepage\":\"https://axios-http.com\",\"devDependencies\":{\"coveralls\":\"^3.0.0\",\"es6-promise\":\"^4.2.4\",\"grunt\":\"^1.3.0\",\"grunt-banner\":\"^0.6.0\",\"grunt-cli\":\"^1.2.0\",\"grunt-contrib-clean\":\"^1.1.0\",\"grunt-contrib-watch\":\"^1.0.0\",\"grunt-eslint\":\"^23.0.0\",\"grunt-karma\":\"^4.0.0\",\"grunt-mocha-test\":\"^0.13.3\",\"grunt-ts\":\"^6.0.0-beta.19\",\"grunt-webpack\":\"^4.0.2\",\"istanbul-instrumenter-loader\":\"^1.0.0\",\"jasmine-core\":\"^2.4.1\",\"karma\":\"^6.3.2\",\"karma-chrome-launcher\":\"^3.1.0\",\"karma-firefox-launcher\":\"^2.1.0\",\"karma-jasmine\":\"^1.1.1\",\"karma-jasmine-ajax\":\"^0.1.13\",\"karma-safari-launcher\":\"^1.0.0\",\"karma-sauce-launcher\":\"^4.3.6\",\"karma-sinon\":\"^1.0.5\",\"karma-sourcemap-loader\":\"^0.3.8\",\"karma-webpack\":\"^4.0.2\",\"load-grunt-tasks\":\"^3.5.2\",\"minimist\":\"^1.2.0\",\"mocha\":\"^8.2.1\",\"sinon\":\"^4.5.0\",\"terser-webpack-plugin\":\"^4.2.3\",\"typescript\":\"^4.0.5\",\"url-search-params\":\"^0.10.0\",\"webpack\":\"^4.44.2\",\"webpack-dev-server\":\"^3.11.0\"},\"browser\":{\"./lib/adapters/http.js\":\"./lib/adapters/xhr.js\"},\"jsdelivr\":\"dist/axios.min.js\",\"unpkg\":\"dist/axios.min.js\",\"typings\":\"./index.d.ts\",\"dependencies\":{\"follow-redirects\":\"^1.14.0\"},\"bundlesize\":[{\"path\":\"./dist/axios.min.js\",\"threshold\":\"5kB\"}]}");
+
+},{}],"iGO1D":[function(require,module,exports) {
 'use strict';
 /**
  * A `Cancel` is an object that is thrown when an operation is canceled.
