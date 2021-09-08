@@ -20,6 +20,7 @@ export class MainView extends React.Component {
 
     componentDidMount() {
         this.getArt();
+        console.log(art);
       }
 
       getArt() {
@@ -36,7 +37,6 @@ export class MainView extends React.Component {
       }
 
     render () {
-       const {art} = this.state
         return (
         <Router>
         <div>

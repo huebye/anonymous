@@ -22769,6 +22769,7 @@ class MainView extends _reactDefault.default.Component {
     }
     componentDidMount() {
         this.getArt();
+        console.log(art);
     }
     getArt() {
         axios.get('https://shrouded-caverns-29574.herokuapp.com/art').then((response)=>{
@@ -22781,7 +22782,6 @@ class MainView extends _reactDefault.default.Component {
         });
     }
     render() {
-        const { art  } = this.state;
         return(/*#__PURE__*/ _jsxRuntime.jsx(_reactRouterDom.BrowserRouter, {
             __source: {
                 fileName: "src/components/main-view/main-view.jsx",
