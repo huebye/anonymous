@@ -58,10 +58,10 @@ export class ImageSlideView extends React.Component {
 
     render () {
     const { fullscreen ,isZoomed} = this.state
-    const {art, image} = this.props
+    const {data} = this.props
     const images = [
       {
-        original: art.ImagePath ,
+        original: WillyBrandt ,
         description: '• Willy Brandt',
       },
       {
@@ -76,28 +76,7 @@ export class ImageSlideView extends React.Component {
 if(fullscreen === false) {
   return (
     <div className="imageslide" >
-    <ImageGallery 
-    items={images}
-    ref={i => this._imageGallery = i}   
-    slideDuration={this.state.slideDuration}
-    slideInterval={this.state.slideInterval}
-    showPlayButton={this.state.showPlayButton}
-    infinite={this.state.infinite}
-    showThumbnails={this.state.showThumbnails}
-    showGalleryFullscreenButton={this.state.showGalleryFullscreenButton}
-    showFullscreenButton={this.state.showFullscreenButton}
-    showBullets={this.state.showBullets}
-    autoPlay={this.state.autoPlay}
-    showNav={this.state.showNav}
-    useTranslate3D={this.state.useTranslate3D}
-    isRTL={this.state.isRTL}
-    swipeThreshold={this.state.swipeThreshold}
-    additionalClass="app-image-gallery"
-    lazyLoad={this.state.lazyLoad}
-    stopPropagation={this.state.stopPropagation}
-    onClick={this._onImageClick.bind(this)}
-    startIndex={this.state.imageIndex}
-    />
+    <img src="https://anonymousimages.s3.eu-central-1.amazonaws.com/WillyBrandt.png" alt="" />
 </div>
 )
 } else if(fullscreen === true) {
