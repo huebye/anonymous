@@ -4,4 +4,14 @@
     justify-content: center;
     align-items: center;    
     max-height: 100vH;
+    padding: 50px;
+}
+
+.artist_list {
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    max-height: 100vh;
+    height: 100vh;
+    overflow: auto;
 }
