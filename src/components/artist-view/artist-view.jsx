@@ -1,20 +1,30 @@
 import React from 'react'
 import ReactDOM from 'react-dom';
+import Zoom from 'react-medium-image-zoom'
+import 'react-medium-image-zoom/dist/styles.css'
 import './artist-view.scss';
 
-export function Artist(props) {   
+export class Artist extends React.Component {   
+  constructor() {
+    super()
+    this.state= {
+  
+    }
+  }
 
-  const { artist } = props
+render () {
+  const { artist } = this.props
 
-  console.log(artist);
+  //console.log(artist);
 
   return (
-    <div>
-
+    <div className="art">
+          <h2>{artist[0].Name}</h2>
           {artist.map((d,index) => {
             return (
           <div className="artist_view" key={index}>
-                <img src={d.ImagePath} alt="" />
+         <Zoom transitionDuration={0} overlayBgColorEnd='rgba(0,0,0,1)'  zoomMargin={190}><img className="artist_images" src={d.ImagePath} alt="" /></Zoom>
+                <p>Edition: {d.Edition}, Material: {d.Material}</p>
           </div>
 
             )
@@ -23,4 +33,5 @@ export function Artist(props) {
     
     </div>
   )
+}
 }

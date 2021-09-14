@@ -1,36 +1,54 @@
-import React from 'react'
+import React from 'react';
 import ReactDOM from 'react-dom';
+import AlphabetList from "react-alphabet-list";
 import './artist-list.view.scss';
-import { Artist } from '../artist-view/artist-view';
 import { Link } from "react-router-dom";
 
-export function ArtistList(props) {
+export class ArtistList extends React.Component {
+constructor() {
+    super()
+    this.state = {
+
+    } 
+
+}
 
 
+render() {
 
-  const { data } = props;
+  const { data } = this.props;
   const madeArr = Array.from(data);
+  const dataNames = madeArr.map((d) => (
+    {
+      Name: d.Name
+    }
+  ));
+
+  const group = dataNames
+    .sort((a, b) => a.Name.localeCompare(b.Name))
+    .reduce((r, e) => {
+      const key = e.Name[0];
+      if(!r[key]) r[key] = []
+      r[key].push(e);
+      return r;
+    }, {});
+
+
+  
   
 //console.log(madeArr);
-  return (
-    <ul>
-      {madeArr.map((d,index) => {
-        return (
-<div key={index} className="artist-list-view">
-          
-        <li key={d._id}>
-          <Link to={`/artist/${d.Name}`}>
-            ´<button className="artist_btn" variant="link">{d.Name}</button>
-          </Link>
-            </li>
-          
-        </div>
-        )
-    
-      })}
-    </ul>
-
-  )
+  return <div>
+  {Object.entries(group)
+    .map(([key, value], i) => {
+      return <div key={i}>
+        <strong className="strong_letter">{key}</strong>
+        {value.map((item, j) => <div key={j}><Link to={`/artist/${item.Name}`}>
+            ´<button className="artist_btn" variant="link">{item.Name}</button>
+          </Link></div>)}
+      </div>
+    })}
+    </div>
+}
 }
 
   

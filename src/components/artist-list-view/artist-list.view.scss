@@ -10,8 +10,15 @@
     margin: 0;
     font-size: 20px;
     font-weight: 100;
+    color: white;
+    text-decoration: none;
 }
 
 .artist_btn:hover {
     letter-spacing: 1px;
+}
+
+.strong_letter {
+    font-size: 22px;
+    padding-bottom: 200px;
 }

@@ -75,18 +75,17 @@ export class MainView extends React.Component {
             </Route>
 
             <Route exact path="/artist/:name" render={({ match, history }) => {
-              return (
-                <div className="artist_collection">
+              return <>
                   <LogoView />
                   <div className="start">
                   <NavigationView /> 
                   <div className="artist_list">     
-              <Artist artist={data.filter(d => d.Name === match.params.name)} onBackClick={() => history.goBack()}/>
+               <Artist artist={data.filter(d => d.Name === match.params.name)} onBackClick={() => history.goBack()}/>
                   </div>
               </div> 
-              </div>
+              </>
               
-              )
+          
             }}/>
         </div>
         </Router>

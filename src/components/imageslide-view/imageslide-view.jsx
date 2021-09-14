@@ -57,26 +57,20 @@ export class ImageSlideView extends React.Component {
     const { fullscreen ,isZoomed} = this.state
     const {data} = this.props
    // console.log(data);
-    const images = [
-      {
-        original: data[0].ImagePath ,
-        description: '• Willy Brandt',
-      },
-      {
-        original: data[0].ImagePath ,
-        description: '• Two Trucks',
-      },
-      {
-        original: data[0].ImagePath ,
-        description: '• Corporate Identity',
-      }
-    ];
+   const imagesGallery = data.map(elem => {
+  return{
+       original: elem.ImagePath,
+       description: elem.Title
+     }
+    });
+   console.log(imagesGallery);
+   
 if(fullscreen === false) {
   return (
     <div className="imageslide" >
     <ImageGallery 
     lazyLoad={true}
-    items={images}
+    items={imagesGallery}
     ref={i => this._imageGallery = i}   
     slideDuration={this.state.slideDuration}
     slideInterval={this.state.slideInterval}

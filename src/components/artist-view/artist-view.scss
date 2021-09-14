@@ -1,14 +1,29 @@
 .artist_view {
     display: flex;
     justify-content: center;
+    align-items: center;
     min-width: 100vH;
-    padding: 70px;
-    max-height: 100vH;
-    overflow: hidden;
-    padding: 50px;
+    flex-direction: column;
 }
 
-.artist_view > img {
-    max-width: 600px;
+.artist_images {
+    max-width: 550px;
     max-height: 500px;
+    margin: 10px;
+}
+
+.art {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-height: 100vh;
+    margin-top: 200px;
+    padding-bottom: 100px;
+}
+
+.art > h2 {
+    display: flex;
+    position: fixed;
+    bottom: 45%;
+    text-transform: uppercase;
 }
