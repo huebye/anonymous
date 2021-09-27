@@ -1,6 +1,4 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
-import AlphabetList from "react-alphabet-list";
 import './artist-list.view.scss';
 import { Link } from "react-router-dom";
 
@@ -14,6 +12,13 @@ constructor() {
 }
 
 
+
+getUniqueListBy(arr, key) {
+  return [...new Map(arr.map(item => [item[key], item])).values()]
+}
+
+
+
 render() {
 
   const { data } = this.props;
@@ -24,7 +29,10 @@ render() {
     }
   ));
 
-  const group = dataNames
+  const namesNoDouble = this.getUniqueListBy(dataNames, 'Name');
+
+
+  const group = namesNoDouble
     .sort((a, b) => a.Name.localeCompare(b.Name))
     .reduce((r, e) => {
       const key = e.Name[0];
@@ -33,7 +41,7 @@ render() {
       return r;
     }, {});
 
-
+    //console.log(namesNoDouble);
   
   
 //console.log(madeArr);
@@ -42,8 +50,9 @@ render() {
     .map(([key, value], i) => {
       return <div key={i}>
         <strong className="strong_letter">{key}</strong>
-        {value.map((item, j) => <div key={j}><Link to={`/artist/${item.Name}`}>
-            ´<button className="artist_btn" variant="link">{item.Name}</button>
+        {value.map((item, j) => <div key={j}>
+          <Link to={`/artist/${item.Name}`}>
+            <button className="artist_btn" variant="link">{item.Name}</button>
           </Link></div>)}
       </div>
     })}

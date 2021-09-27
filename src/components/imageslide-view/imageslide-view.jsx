@@ -1,7 +1,6 @@
 import React from 'react';
 import './imageslide-view.scss';
-import Zoom from 'react-medium-image-zoom';
-import { Controlled as ControlledZoom } from 'react-medium-image-zoom'
+import { Controlled as ControlledZoom } from 'react-medium-image-zoom';
 import 'react-medium-image-zoom/dist/styles.css';
 import ImageGallery from 'react-image-gallery';
 import "react-image-gallery/styles/css/image-gallery.css";
@@ -60,7 +59,7 @@ export class ImageSlideView extends React.Component {
    const imagesGallery = data.map(elem => {
   return{
        original: elem.ImagePath,
-       description: elem.Title
+       description: elem.Title,
      }
     });
    console.log(imagesGallery);

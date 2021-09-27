@@ -1,29 +1,65 @@
 .artist_view {
     display: flex;
-    justify-content: center;
     align-items: center;
-    min-width: 100vH;
     flex-direction: column;
+    width: 550px;
+}
+
+.artist_grid {
+    display: block;
+    height: 100vH;
+    padding-left: 200px;
+    overflow-y: scroll;
+    padding-bottom: 100px;
 }
 
 .artist_images {
     max-width: 550px;
     max-height: 500px;
-    margin: 10px;
 }
+
+.artist_images {
+    padding: 20px;
+}
+
 
 .art {
     display: flex;
-    flex-direction: column;
     justify-content: center;
-    min-height: 100vh;
-    margin-top: 200px;
-    padding-bottom: 100px;
+    flex-direction: column;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    padding-top: 120px;
 }
 
-.art > h2 {
-    display: flex;
+.artistName {
+    display: block;
+    min-height: 60px;
     position: fixed;
-    bottom: 45%;
+    top: 0;
+    z-index: 2;
+    background-color: black;
+}
+
+.artistName > h2 {
+    display: flex;
+    width: 500px;
+    height: 80px;
+    justify-content: left;
+    padding-left: 100px;
+    align-items: center;
     text-transform: uppercase;
+    font-size: 30px;
+    position: sticky;
+    top: 0;
+}
+
+@media only screen and (max-width: 1350px) {
+    .artist_grid {
+        padding-left: 0px;
+    }
+}
+
+@media only screen and (max-width: 900px) {
+   
 }

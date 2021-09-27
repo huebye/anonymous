@@ -5,10 +5,33 @@
     padding: 0px;
 }
 
+.logoImg {
+    width: auto;
+}
+
 h1 {
     font-family: 'ITC Edwardian Script';
     font-size: 100px;
     position: relative;
     bottom: 50px;
     left: 70px;
+    color: white;
+}
+
+a {
+    color: white;
+    text-decoration: none;
+}
+
+
+@media only screen and (max-width: 900px) {
+.logoImg {
+    width: 300px;
+}
+
+h1 {
+    font-size: 70px;
+    position: relative;
+    bottom: 38px;
+}
 }
