@@ -11,9 +11,9 @@ export class ImageSlideView extends React.Component {
         super();
         this.state= {
             slideDuration:0,
-            slideInterval: 3500,
+            slideInterval: 4000,
             showGalleryPlayButton: false,
-            showNav: false,
+            showNav: true,
             showPlayButton: false,
             showBullets: false,
             infinite: true,
@@ -29,6 +29,7 @@ export class ImageSlideView extends React.Component {
             isZoomed: true,
             fullscreen: false,
             imageIndex: 0,
+            swipingTransitionDuration: 1000,
         }
       }
 
@@ -59,7 +60,7 @@ export class ImageSlideView extends React.Component {
    const imagesGallery = data.map(elem => {
   return{
        original: elem.ImagePath,
-       description: elem.Title,
+       description: elem.Name + ' - ' + elem.Title,
      }
     });
    console.log(imagesGallery);
@@ -89,6 +90,7 @@ if(fullscreen === false) {
     stopPropagation={this.state.stopPropagation}
     onClick={this._onImageClick.bind(this)}
     startIndex={this.state.imageIndex}
+    swipingTransitionDuration={this.state.swipingTransitionDuration}
     />
 </div>
 )

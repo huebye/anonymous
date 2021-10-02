@@ -22,21 +22,19 @@ button {
 
 
 
-@media only screen and (max-width: 900px) {
+@media only screen and (max-width: 1088px) {
    button {
     margin-left: 120px;
     }
+    .navigation {
+        display: none;
+    }
+
 }
 
 @media only screen and (max-width: 600px) {
     .navigation {
-        flex-direction: row;
-        position: relative;
-        top: 50px;
-        left: 100px;
+        display: none;
     }
 
-    button {
-        margin-left: 40px;
-    }
     }

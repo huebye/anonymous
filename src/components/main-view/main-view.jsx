@@ -9,7 +9,7 @@ import { ArtistList } from '../artist-list-view/artist-list-view';
 import { Artist } from '../artist-view/artist-view';
 import { About } from '../about-view/about-view';
 import { LogoLoader } from '../logo-loader-view/logo-loader-view';
-
+import { MobileNavbar } from '../mobile-navigation-view/mobile-navigation-view';
 
 
 
@@ -62,7 +62,10 @@ export class MainView extends React.Component {
             <Route exact path="/">
             <LogoView />
                 <div className="start">
-            <NavigationView />
+                  <div>
+                  <NavigationView />
+                  <MobileNavbar />
+                  </div>
             <ImageSlideView data={data} />
                 </div>
             </Route>
@@ -70,7 +73,10 @@ export class MainView extends React.Component {
             <Route exact path="/artist">
             <LogoView />
             <div className="start">
-            <NavigationView />
+            <div>
+                  <NavigationView />
+                  <MobileNavbar />
+                  </div>
             <div className="artist_list">
             <ArtistList data={data}/>
             </div>
@@ -81,7 +87,10 @@ export class MainView extends React.Component {
               return <>
                   <LogoView />
                   <div className="start">
-                  <NavigationView /> 
+                  <div className="navView">
+                  <NavigationView />
+                  <MobileNavbar />
+                  </div>
                   <div className="artist_list">     
                <Artist />
                   </div>
@@ -92,7 +101,10 @@ export class MainView extends React.Component {
             <Route exact path="/about">
               <LogoView />
               <div className="start">
-              <NavigationView />
+              <div>
+                  <NavigationView />
+                  <MobileNavbar />
+                  </div>
               <About />
               </div>
             </Route>

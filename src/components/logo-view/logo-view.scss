@@ -24,7 +24,7 @@ a {
 }
 
 
-@media only screen and (max-width: 900px) {
+@media only screen and (max-width: 1088px) {
 .logoImg {
     width: 300px;
 }
@@ -34,4 +34,15 @@ h1 {
     position: relative;
     bottom: 38px;
 }
+.logo {
+    display: none;
 }
+
+}
+
+@media only screen and (max-width: 600px) {
+    .logo {
+        display: none;
+    }
+
+    }

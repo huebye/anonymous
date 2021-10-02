@@ -10,6 +10,7 @@
 
 .artist_btn {
     margin: 0;
+    padding-right: 2px;
     font-size: 20px;
     font-weight: 100;
     color: white;
@@ -17,14 +18,13 @@
 }
 
 .artist_btn:hover {
-    letter-spacing: 1px;
+    letter-spacing: 0.5px;
 }
 
 .strong_letter {
     font-size: 22px;
     padding-bottom: 200px;
 }
-
 
 @media only screen and (max-width: 600px) {
     .artist-list-view {
