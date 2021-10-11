@@ -13,7 +13,7 @@ export class ImageSlideView extends React.Component {
             slideDuration:0,
             slideInterval: 4000,
             showGalleryPlayButton: false,
-            showNav: true,
+            showNav: false,
             showPlayButton: false,
             showBullets: false,
             infinite: true,
@@ -26,6 +26,7 @@ export class ImageSlideView extends React.Component {
             lazyLoad: true,
             stopPropagation: false,
             clickedImage: null,
+            clickedDescription: null,
             isZoomed: true,
             fullscreen: false,
             imageIndex: 0,
@@ -34,6 +35,7 @@ export class ImageSlideView extends React.Component {
       }
 
       _onImageClick(event) {
+        console.log(event.target.alt)
         let image = event.target.src;
         let index = this._imageGallery.getCurrentIndex();
         this.setState({
@@ -63,7 +65,7 @@ export class ImageSlideView extends React.Component {
        description: elem.Name + ' - ' + elem.Title,
      }
     });
-   console.log(imagesGallery);
+   //console.log(imagesGallery);
    
 if(fullscreen === false) {
   return (
@@ -97,7 +99,9 @@ if(fullscreen === false) {
 } else if(fullscreen === true) {
   return (
     <div className="fullscreen">
-        <ControlledZoom transitionDuration={0} isZoomed={isZoomed} zoomMargin={190} overlayBgColorEnd='rgba(0,0,0,1)' onZoomChange={this._handleZoomChange.bind(this)} ><div><img src={this.state.clickedImage} alt="" /></div></ControlledZoom>
+        <ControlledZoom transitionDuration={0} isZoomed={isZoomed} zoomMargin={190} overlayBgColorEnd='rgba(0,0,0,1)' onZoomChange={this._handleZoomChange.bind(this)} ><div><img src={this.state.clickedImage} alt="" /></div>
+        <p className="fullscreen_description"></p>
+        </ControlledZoom>
   </div>
   )
 

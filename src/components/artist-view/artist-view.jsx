@@ -5,9 +5,9 @@ import 'react-medium-image-zoom/dist/styles.css';
 import './artist-view.scss';
 import axios from 'axios';
 
-export function Artist() {   
+export function Artist(props) {   
 const [artist, setArtist] = React.useState([])
-
+//console.log(props)
 const { name } = useParams();
 
  const getArtistData = () => {
@@ -20,10 +20,17 @@ const { name } = useParams();
         const data = response.data;
         const artistFiltered = data.filter(d => d.Name === name);
         setArtist(artistFiltered);
+        console.log('set fetch')
       });
       }
  
       React.useEffect(() => {
+        if(props.data) {
+          const dataProps = props.data;
+          const artistFilteredProps = dataProps.filter(d => d.Name === name);
+          setArtist(artistFilteredProps);
+          console.log('set props')
+        } else
         getArtistData()
         return () => {
           setArtist([]);
@@ -31,8 +38,9 @@ const { name } = useParams();
       }, [])
 
 
-console.log(artist)
+//console.log(artist)
   return (
+    <>
     <div className="artist_grid">
     <div className="artistName">
       <h2>{name}</h2>
@@ -41,8 +49,8 @@ console.log(artist)
           {artist.map((d,index) => {
             return (
           <div className="artist_view" key={index}>
-         <Zoom transitionDuration={0} overlayBgColorEnd='rgba(0,0,0,1)'  zoomMargin={190}><img className="artist_images" src={d.ImagePath} alt="" /></Zoom>
-                <p><strong>Title:</strong> {d.Title} <br /><strong>Edition:</strong> {d.Edition} <br /> <strong>Material:</strong> {d.Material} <br /> <strong>Size:</strong> {d.Size}</p>
+         <Zoom transitionDuration={0} overlayBgColorEnd='rgba(0,0,0,1)'  zoomMargin={90}><img className="artist_images" src={d.ImagePath} alt="" /></Zoom>
+                <p><strong>Title:</strong> {d.Title} <br /><strong>Year:</strong> {d.Year} <br /><strong>Material:</strong> {d.Material} <br /> <strong>Size:</strong> {d.Size} <br /> <strong>Edition:</strong> {d.Edition}</p>
           </div>
 
             )
@@ -51,5 +59,7 @@ console.log(artist)
     
     </div>
     </div>
+    <h2 className="name_bottom">{name}</h2>
+    </>
   )
 }

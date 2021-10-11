@@ -17,7 +17,7 @@ import { Link } from "react-router-dom";
     
     return <div className='navbar'>
   <header className="header">
-  <a href="/" className="logo"><img src={logo} height="90px" alt="" />
+  <a href="/" className="logoLink"><img className="logoImg" src={logo} alt="" />
   <h1 className="title_mobile">Collection</h1>
   </a>
   <input className="menu-btn" type="checkbox" id="menu-btn" />

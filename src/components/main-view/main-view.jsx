@@ -92,7 +92,7 @@ export class MainView extends React.Component {
                   <MobileNavbar />
                   </div>
                   <div className="artist_list">     
-               <Artist />
+               <Artist  data={data}/>
                   </div>
               </div> 
               </>       

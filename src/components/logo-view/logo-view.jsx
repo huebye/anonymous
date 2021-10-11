@@ -9,8 +9,8 @@ export class LogoView extends React.Component {
         return (
             <div className="logo">
                 <Link to={"/"}>
-                <img className="logoImg" src={logo} alt="logo image"/>
-            <h1>Collection</h1>
+                <img className="logoImg11" src={logo} alt="logo image"/>
+            <h1 className="title_view">Collection</h1>
                 </Link>
             </div>
         )

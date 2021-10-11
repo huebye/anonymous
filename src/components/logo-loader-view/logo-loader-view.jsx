@@ -13,7 +13,7 @@ export class LogoLoader extends React.Component {
     <div className="fullscreenLoader">
         <div>
             <img src={logo} alt=""  />
-            <h1>Collection</h1>
+            <h1 className="title_view">Collection</h1>
             </div>
 </div>
 </>
