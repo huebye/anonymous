@@ -1,6 +1,5 @@
 import React from 'react'
 import logo from '../assets/logo.png';
-import { Controlled as ControlledZoom } from 'react-medium-image-zoom'
 import './logo-loader-view.scss'
 
 export class LogoLoader extends React.Component {

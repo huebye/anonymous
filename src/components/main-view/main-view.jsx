@@ -52,6 +52,18 @@ export class MainView extends React.Component {
     render () {
       let { data, loader } = this.state;
 
+      const images = data.map(elem => {
+        return{
+             original: elem.ImagePath,
+             description: elem.Name + ' - ' + elem.Title,
+             originalAlt: elem.Name + ' - ' + elem.Title,
+           }
+          });
+
+          const imagesGallery = images.sort(()=> Math.random() - 0.5);
+   // console.log(dataShuffled)
+   //console.log(imagesGallery);
+
       if(loader === true) {
         return <LogoLoader />
       }
@@ -66,7 +78,7 @@ export class MainView extends React.Component {
                   <NavigationView />
                   <MobileNavbar />
                   </div>
-            <ImageSlideView data={data} />
+            <ImageSlideView data={imagesGallery} />
                 </div>
             </Route>
 
@@ -77,7 +89,7 @@ export class MainView extends React.Component {
                   <NavigationView />
                   <MobileNavbar />
                   </div>
-            <div className="artist_list">
+            <div className="artist_list fade-in">
             <ArtistList data={data}/>
             </div>
             </div>

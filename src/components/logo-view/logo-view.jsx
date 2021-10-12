@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 
 export class LogoView extends React.Component {
     render () {
+
         return (
             <div className="logo">
                 <Link to={"/"}>

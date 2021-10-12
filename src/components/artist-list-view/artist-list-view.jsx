@@ -45,12 +45,12 @@ render() {
   
   
 //console.log(madeArr);
-  return <div>
+  return <div className="artist-list-view">
   {Object.entries(group)
     .map(([key, value], i) => {
       return <div key={i}>
         <strong className="strong_letter">{key}</strong>
-        {value.map((item, j) => <div key={j}>
+        {value.map((item, j) => <div className="list_names" key={j}>
           <Link to={`/artist/${item.Name}`}>
             <button className="artist_btn" variant="link">{item.Name}</button>
           </Link></div>)}

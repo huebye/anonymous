@@ -1,16 +1,41 @@
 .artist_view {
     display: flex;
-    align-items: center;
     flex-direction: column;
-    width: 550px;
+    width: min-content;
+    align-self: left;
 }
 
 .artist_view > p {
+    display: block;
+    align-items: left;
     font-family: Arial, Helvetica, sans-serif;
-    max-width: 300px;
     padding-bottom: 20px;
+    padding-left: 20px;
+    line-height: 20px;
+}
+strong {
+    font-size: 17px;
+    padding-right: 2px;
+}
+.spanTitle {
+    padding-left: 20px;
 }
 
+.spanYear {
+    padding-left: 10px;
+}
+
+.spanMaterial {
+    padding-left: 10px;
+}
+
+.spanSize {
+    padding-left: 10px;
+}
+
+.spanEdition {
+    padding-left: 10px;
+}
 
 .artist_grid {
     display: flex;
@@ -22,11 +47,16 @@
 .artist_images {
     max-width: 550px;
     max-height: 500px;
+    opacity: 0;
 }
 
 .artist_images {
     padding: 20px;
 }
+
+.fade-in {
+    animation: fadein 0.9s ease forwards;
+  }
 
 
 .art {
@@ -40,19 +70,20 @@
 
 
 .artistName {
-    display: block;
+    display: flex;
     min-height: 60px;
     position: fixed;
+    text-align: center;
     top: 0;
     z-index: 2;
     background-color: black;
 }
 
 .artistName > h2 {
-    display: flex;
-    width: 700px;
+    display:flex;
+    width: 550px;
     height: 80px;
-    padding-left: 100px;
+    padding-left: 20px;
     padding-bottom: 40px;
     align-items: center;
     text-transform: uppercase;
@@ -64,6 +95,11 @@
 
 .name_bottom {
     display: none;
+}
+
+@keyframes fadein {
+    from {opacity: 0;}
+    to {opacity: 1;}
 }
 
 @media only screen and (max-width: 1350px) {

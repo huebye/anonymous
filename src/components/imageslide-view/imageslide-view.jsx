@@ -38,18 +38,23 @@ export class ImageSlideView extends React.Component {
         console.log(event.target.alt)
         let image = event.target.src;
         let index = this._imageGallery.getCurrentIndex();
+        console.log(index)
         this.setState({
             clickedImage: image,
             isZoomed: true,
             fullscreen: true,
-            imageIndex: index
+            autoPlay: false,
+            imageIndex: index,
+            clickedDescription: event.target.alt,
           });
       }
       _handleZoomChange() {
         this.setState({
             isZoomed: false,    
             clickedImage: null,
-            fullscreen: false
+            fullscreen: false,
+            autoPlay: true,
+            clickedDescription: null,
         })
       };  
 
@@ -58,21 +63,17 @@ export class ImageSlideView extends React.Component {
     render () {
     const { fullscreen ,isZoomed} = this.state
     const {data} = this.props
-   // console.log(data);
-   const imagesGallery = data.map(elem => {
-  return{
-       original: elem.ImagePath,
-       description: elem.Name + ' - ' + elem.Title,
-     }
-    });
-   //console.log(imagesGallery);
+
+    const styles = {
+      maxHeight: '800px',
+    }
    
 if(fullscreen === false) {
   return (
     <div className="imageslide" >
     <ImageGallery 
     lazyLoad={true}
-    items={imagesGallery}
+    items={data}
     ref={i => this._imageGallery = i}   
     slideDuration={this.state.slideDuration}
     slideInterval={this.state.slideInterval}
@@ -99,8 +100,9 @@ if(fullscreen === false) {
 } else if(fullscreen === true) {
   return (
     <div className="fullscreen">
-        <ControlledZoom transitionDuration={0} isZoomed={isZoomed} zoomMargin={190} overlayBgColorEnd='rgba(0,0,0,1)' onZoomChange={this._handleZoomChange.bind(this)} ><div><img src={this.state.clickedImage} alt="" /></div>
-        <p className="fullscreen_description"></p>
+        <ControlledZoom transitionDuration={0} isZoomed={isZoomed} zoomMargin={190} overlayBgColorEnd='rgba(0,0,0,1)' onZoomChange={this._handleZoomChange.bind(this)} ><div className="fullscreen_div fade-in"><img style={styles} src={this.state.clickedImage} alt={this.state.clickedDescription} />
+        <p className="fullscreen_description">{this.state.clickedDescription}</p>
+        </div>
         </ControlledZoom>
   </div>
   )
