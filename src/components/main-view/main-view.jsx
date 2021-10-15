@@ -28,7 +28,7 @@ export class MainView extends React.Component {
       this.getArt()
       setTimeout(() => {
         this.setState({loader: false})
-      }, 4000);
+      }, 2500);
       }
 
       
