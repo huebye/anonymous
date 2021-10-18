@@ -1,0 +1,165 @@
+.artist_view {
+    display: flex;
+    flex-direction: column;
+    width: min-content;
+    align-self: left;
+}
+
+.artist_view > p {
+    display: block;
+    align-items: left;
+    font-family: Arial, Helvetica, sans-serif;
+    padding-bottom: 20px;
+    padding-left: 20px;
+    line-height: 20px;
+}
+strong {
+    font-size: 17px;
+    padding-right: 2px;
+}
+.spanTitle {
+    padding-left: 20px;
+}
+
+.spanYear {
+    padding-left: 10px;
+}
+
+.spanMaterial {
+    padding-left: 10px;
+}
+
+.spanSize {
+    padding-left: 10px;
+}
+
+.spanEdition {
+    padding-left: 10px;
+}
+
+.artist_grid {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    padding-left: 200px;
+}
+
+.artist_images {
+    max-width: 550px;
+    max-height: 500px;
+    opacity: 0;
+}
+
+.artist_images {
+    padding: 20px;
+}
+
+.fade-in {
+    animation: fadein 0.9s ease forwards;
+  }
+
+
+.art {
+    display: flex;
+    flex-direction: column;
+    padding-top: 120px;
+    min-height: 100vh ;
+    height: auto;
+    width: 100%;
+}
+
+
+.artistName {
+    display: flex;
+    min-height: 60px;
+    position: fixed;
+    text-align: center;
+    top: 0;
+    z-index: 2;
+    background-color: black;
+}
+
+.artistName > h2 {
+    display:flex;
+    width: 550px;
+    height: 80px;
+    padding-left: 20px;
+    padding-bottom: 40px;
+    align-items: center;
+    text-transform: uppercase;
+    font-size: 30px;
+    position: sticky;
+    top: 0;
+    margin-top: 50px;
+}
+
+.name_bottom {
+    display: none;
+}
+
+@keyframes fadein {
+    from {opacity: 0;}
+    to {opacity: 1;}
+}
+
+@media only screen and (max-width: 1350px) {
+    .artist_grid {
+        padding-left: 0px;
+    }
+}
+
+@media only screen and (max-width: 1088px) {
+    .artistName {
+        display: none;
+    }
+
+    .name_bottom {
+        display: flex;
+        justify-content: center;
+        min-width: 100vw;
+        width: auto;
+        position: fixed;
+        bottom: 0;
+        text-transform: uppercase;
+        padding-top: 10px;
+        padding-bottom: 20px;
+        background-color: black;
+    }
+
+}
+
+@media only screen and (max-width: 600px) {
+    .artist_images {
+        max-width: 450px;
+        max-height: 400px;
+    }
+
+    .artist_grid {
+        padding-left: 0px;
+        height: 100vH;
+    }
+}
+
+@media only screen and (max-width: 400px) {
+    .artist_view {
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        width: auto;
+    }
+
+    .artist_images {
+        max-width: 350px;
+        max-height: 300px;
+        padding: 20px;
+    }
+
+    .artist_grid {
+        padding-left: 0px;
+        height: 100vH;
+    }
+
+    .art {
+        padding-top: 70px;
+    }
+}

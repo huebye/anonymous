@@ -1,0 +1,39 @@
+
+
+.logo {
+    position: fixed;
+    padding: 0px;
+}
+
+
+
+.title_view {
+    font-family: 'ITC Edwardian Script';
+    font-size: 80px;
+    position: relative;
+    bottom: 60px;
+    left: 65px;
+    color: white;
+}
+
+a {
+    color: white;
+    text-decoration: none;
+}
+
+
+@media only screen and (max-width: 1088px) {
+
+.logo {
+    display: none;
+    height: 0;
+    width: 0;
+}
+}
+
+@media only screen and (max-width: 600px) {
+    .logo {
+        display: none;
+    }
+
+    }

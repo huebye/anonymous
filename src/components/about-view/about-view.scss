@@ -1,0 +1,23 @@
+.aboutSection {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vH;
+    padding-left: 300px;
+    padding-right: 300px;
+    font-size: 20px;
+}
+
+@media only screen and (max-width: 1350px) {
+    .aboutSection {
+        padding-right: 150px;
+        padding-left: 250px;
+    }
+}
+
+@media only screen and (max-width: 900px) {
+    .aboutSection {
+        padding-right: 50px;
+        padding-left: 50px;
+    }
+}

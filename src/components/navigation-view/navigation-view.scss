@@ -1,0 +1,42 @@
+.navigation {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-height: auto;
+    align-self: center;
+    position: sticky;
+    top: 500px;
+}
+
+button {
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: black;
+    color: white;
+    border: none;
+    font-size: 25px;
+    font-weight: 400;
+    margin: 0;
+    margin-left: 160px;
+    cursor: pointer;
+}
+
+
+
+@media only screen and (max-width: 1088px) {
+   button {
+    margin-left: 120px;
+    }
+    .navigation {
+        display: none;
+        height: 0;
+        width: 0;
+    }
+
+}
+
+@media only screen and (max-width: 600px) {
+    .navigation {
+        display: none;
+    }
+
+    }
