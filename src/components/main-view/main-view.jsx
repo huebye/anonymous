@@ -1,7 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import './main-view.scss';
-import { BrowserRouter as Router, Route } from "react-router-dom";
+import { HashRouter as Router, Route } from "react-router-dom";
 import { LogoView } from '../logo-view/logo-view';
 import { NavigationView } from '../navigation-view/navigation-view.jsx';
 import { ImageSlideView } from '../imageslide-view/imageslide-view.jsx';
