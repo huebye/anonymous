@@ -15,6 +15,10 @@ $backcolor: black;
     box-sizing: border-box;
 }
 
+body {
+  overflow-y: hidden;
+}
+
 .anonymousCollection {
     display: block;
     min-height: 100vh;

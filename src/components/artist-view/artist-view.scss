@@ -109,15 +109,29 @@ strong {
 }
 
 @media only screen and (max-width: 1088px) {
+
+    .artist_grid {
+        margin-top: 40px
+    }
+
+
     .artistName {
         display: none;
+        height: 0;
+    }
+
+    .art {
+        padding-top: 0;
+    }
+
+    .art > .artist_view:last-of-type {
+        padding-bottom: 150px;
     }
 
     .name_bottom {
         display: flex;
         justify-content: center;
         min-width: 100vw;
-        width: auto;
         position: fixed;
         bottom: 0;
         text-transform: uppercase;
