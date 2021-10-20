@@ -48,7 +48,7 @@ const { name } = useParams();
     <div className="art fade-in">
           {artist.map((d,index) => {
             return (
-          <div className="artist_view" key={index}>
+          <div className="artist_view" key={d._id}>
          <Zoom transitionDuration={0} overlayBgColorEnd='rgba(0,0,0,1)'  zoomMargin={90}><img loading="lazy" className="artist_images fade-in" src={d.ImagePath} alt={d.Name + d.Title}  /></Zoom>
                 <p><strong>Title:</strong>  {d.Title} <br /><strong>Year:</strong> {d.Year} <br /><strong>Material:</strong> {d.Material} <br /> <strong>Size:</strong> {d.Size} <br /> <strong>Edition:</strong> {d.Edition}</p>
           </div>
