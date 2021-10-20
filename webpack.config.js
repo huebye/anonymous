@@ -1,5 +1,5 @@
 const path = require('path');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
+const CopyWebpackPlugin = require("copy-webpack-plugin");
 
 module.exports = {
     entry: [
@@ -62,8 +62,11 @@ module.exports = {
     resolve: {
     extensions: ['', '.js', '.jsx', '.css', '.scss','.png'],
   },
-  plugins: [new HtmlWebpackPlugin({
-    template: './src/index.html',
-    favicon: "./src/components/assets/favicon.ico"
- })]
+  plugins: [
+    new CopyWebpackPlugin({ 
+      patterns: [ 
+       { from: './src/components/assets/favicon.ico' }, // <- your path to favicon
+      ]
+   })
+  ]
 }
