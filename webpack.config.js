@@ -1,4 +1,5 @@
 const path = require('path');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
     entry: [
@@ -12,6 +13,7 @@ module.exports = {
     devServer: {
         historyApiFallback: true,
     },
+    devtool: false,
     module: {
         rules: [
             {
@@ -60,4 +62,7 @@ module.exports = {
     resolve: {
     extensions: ['', '.js', '.jsx', '.css', '.scss','.png'],
   },
+  plugins: [new HTMLWebpackPlugin({
+    favicon: "./src/components/assets/favicon.ico"
+ })]
 }
