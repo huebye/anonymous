@@ -62,7 +62,7 @@ module.exports = {
     resolve: {
     extensions: ['', '.js', '.jsx', '.css', '.scss','.png'],
   },
-  plugins: [new HTMLWebpackPlugin({
+  plugins: [new HtmlWebpackPlugin({
     favicon: "./src/components/assets/favicon.ico"
  })]
 }
