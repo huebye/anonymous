@@ -23,13 +23,12 @@ import { Link } from "react-router-dom";
   <input className="menu-btn" type="checkbox" id="menu-btn" />
   <label className="menu-icon" htmlFor="menu-btn"><span className="navicon"></span></label>
   <ul className="menu">
-    <li><Link to={"/artist"}>
-            <button>Artists</button>
-            </Link></li>
-    <li><Link to={"/about"}>
-            <button>About</button>
-            </Link></li>
-
+      <li><Link to={"/artist"}>
+       <button>Artists</button>
+        </Link></li>
+      <li><Link to={"/about"}>
+       <button>About</button>
+        </Link></li>
   </ul>
 </header>
     </div>

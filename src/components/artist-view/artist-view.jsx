@@ -7,7 +7,8 @@ import axios from 'axios';
 
 export function Artist(props) {   
 const [artist, setArtist] = React.useState([])
-//console.log(props)
+const [switchNameFinal, setName] = React.useState('')
+console.log(switchNameFinal);
 const { name } = useParams();
 
  const getArtistData = () => {
@@ -20,7 +21,6 @@ const { name } = useParams();
         const data = response.data;
         const artistFiltered = data.filter(d => d.Name === name);
         setArtist(artistFiltered);
-        console.log('set fetch')
       });
       }
  
@@ -29,37 +29,56 @@ const { name } = useParams();
           const dataProps = props.data;
           const artistFilteredProps = dataProps.filter(d => d.Name === name);
           setArtist(artistFilteredProps);
-          console.log('set props')
+          switchName(name)
         } else
         getArtistData()
+        switchName(name)
         return () => {
           setArtist([]);
         }
       }, [])
 
+      const switchName = (nameArtist) => {
+        let firstWord = nameArtist.split(" ")[0]
+        let secondWord = nameArtist.split(" ")[1]
+        let thirdWord = nameArtist.split(" ")[2]
+        let fourthWord = nameArtist.split(" ")[3]
 
-//console.log(artist)
+        if (thirdWord === undefined) {
+          const switchedName = secondWord + ' ' + firstWord;
+          return setName(switchedName)
+        } else if ((fourthWord === undefined) && (thirdWord === undefined)) {
+          const switchedName = secondWord + ' ' + firstWord ;
+          return setName(switchedName)
+        } else if ((fourthWord != undefined) && (thirdWord != undefined)) {
+          const switchedName = secondWord + ' ' + thirdWord + ' ' + fourthWord + ' ' + firstWord 
+          return setName(switchedName)
+        } else if (thirdWord != undefined) {
+          const switchedName = secondWord + ' ' + thirdWord + ' ' + firstWord;
+          return setName(switchedName)
+        }
+      }
+
   return (
+
     <>
-    <div className="artist_grid">
+  <div className="artist_grid">
     <div className="artistName">
-      <h2>{name}</h2>
+      <h2>{switchNameFinal}</h2>
       </div>
-    <div className="art fade-in">
-          {artist.map((d,index) => {
+     <div className="art fade-in">
+          {artist.map((d) => {
             return (
           <div className="artist_view" key={d._id}>
-         <Zoom transitionDuration={0} overlayBgColorEnd='rgba(0,0,0,1)'  zoomMargin={90}><img loading="lazy" className="artist_images fade-in" src={d.ImagePath} alt={d.Name + d.Title}  /></Zoom>
-                <p><strong>Title:</strong>  {d.Title} <br /><strong>Year:</strong> {d.Year} <br /><strong>Material:</strong> {d.Material} <br /> <strong>Size:</strong> {d.Size} <br /> <strong>Edition:</strong> {d.Edition}</p>
+           <Zoom transitionDuration={0} overlayBgColorEnd='rgba(0,0,0,1)'  zoomMargin={90}><img loading="lazy" className="artist_images fade-in" src={d.ImagePath} alt={d.Name + d.Title}  /></Zoom>
+            <p><strong>Title:</strong>  {d.Title} <br /><strong>Year:</strong> {d.Year} <br /><strong>Material:</strong> {d.Material} <br /> <strong>Size:</strong> {d.Size} <br /> <strong>Edition:</strong> {d.Edition}</p>
           </div>
-
             )
           })
-  }
-    
-    </div>
-    </div>
-    <h2 className="name_bottom">{name}</h2>
+  } 
+     </div>
+  </div>
+    <h2 className="name_bottom">{switchNameFinal}</h2>
     </>
   )
 }

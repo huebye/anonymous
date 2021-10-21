@@ -4,8 +4,6 @@ import './logo-loader-view.scss'
 
 export class LogoLoader extends React.Component {
 
-
-
   render () {
 
     return <>
@@ -14,7 +12,7 @@ export class LogoLoader extends React.Component {
             <img src={logo} alt=""  />
             <h1 className="title_view">Collection</h1>
             </div>
-</div>
+    </div>
 </>
   }
 }

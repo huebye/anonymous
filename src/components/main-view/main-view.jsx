@@ -61,9 +61,8 @@ export class MainView extends React.Component {
           });
 
           const imagesGallery = images.sort(()=> Math.random() - 0.5);
-   // console.log(dataShuffled)
-   //console.log(imagesGallery);
 
+          
       if(loader === true) {
         return <LogoLoader />
       }

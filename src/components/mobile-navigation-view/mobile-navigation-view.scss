@@ -150,3 +150,9 @@
       }
       
       }
+
+      @media only screen and (max-width: 350px) {
+        .header .menu-icon {
+          padding: 40px 20px;
+        }
+        }

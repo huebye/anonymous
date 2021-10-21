@@ -38,7 +38,6 @@ export class ImageSlideView extends React.Component {
         console.log(event.target.alt)
         let image = event.target.src;
         let index = this._imageGallery.getCurrentIndex();
-        console.log(index)
         this.setState({
             clickedImage: image,
             isZoomed: true,

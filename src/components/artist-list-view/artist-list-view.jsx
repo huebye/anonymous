@@ -12,7 +12,6 @@ constructor() {
 }
 
 
-
 getUniqueListBy(arr, key) {
   return [...new Map(arr.map(item => [item[key], item])).values()]
 }
@@ -41,10 +40,7 @@ render() {
       return r;
     }, {});
 
-    //console.log(namesNoDouble);
-  
-  
-//console.log(madeArr);
+
   return <div className="artist-list-view">
   {Object.entries(group)
     .map(([key, value], i) => {
