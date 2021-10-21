@@ -8,7 +8,7 @@ import axios from 'axios';
 export function Artist(props) {   
 const [artist, setArtist] = React.useState([])
 const [switchNameFinal, setName] = React.useState('')
-console.log(switchNameFinal);
+
 const { name } = useParams();
 
  const getArtistData = () => {
