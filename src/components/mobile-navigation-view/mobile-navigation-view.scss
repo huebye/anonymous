@@ -97,6 +97,7 @@
   .header .menu-btn {
     display: none;
   }
+
   
   .header .menu-btn:checked ~ .menu {
     max-height: 240px;
@@ -146,6 +147,10 @@
       .title_mobile {
         font-family: 'ITC Edwardian Script';
         font-size: 50px ;
+      }
+
+      .header .menu-btn:checked ~ .menu {
+        max-height: 240px;
       }
       
       }

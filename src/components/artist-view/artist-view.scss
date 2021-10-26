@@ -3,6 +3,7 @@
     flex-direction: column;
     width: min-content;
     align-self: left;
+    margin-bottom: 30px;
 }
 
 .artist_view > p {
@@ -17,25 +18,7 @@ strong {
     font-size: 17px;
     padding-right: 2px;
 }
-.spanTitle {
-    padding-left: 20px;
-}
 
-.spanYear {
-    padding-left: 10px;
-}
-
-.spanMaterial {
-    padding-left: 10px;
-}
-
-.spanSize {
-    padding-left: 10px;
-}
-
-.spanEdition {
-    padding-left: 10px;
-}
 
 .artist_grid {
     display: flex;
@@ -91,6 +74,11 @@ strong {
     position: sticky;
     top: 0;
     margin-top: 50px;
+    letter-spacing: 0.5px;
+}
+
+.artistName > h2 > span {
+    font-weight: 100;
 }
 
 .name_bottom {
@@ -136,8 +124,9 @@ strong {
         bottom: 0;
         text-transform: uppercase;
         padding-top: 10px;
-        padding-bottom: 20px;
+        padding-bottom: 15px;
         background-color: black;
+        font-family: Arial, Helvetica, sans-serif;
     }
 
 }
@@ -151,6 +140,10 @@ strong {
     .artist_grid {
         padding-left: 0px;
         height: 100vH;
+    }
+
+    .name_bottom {
+        font-size: 18px;
     }
 }
 
@@ -174,6 +167,6 @@ strong {
     }
 
     .art {
-        padding-top: 70px;
+        padding-top: 40px;
     }
 }

@@ -71,7 +71,7 @@ if(fullscreen === false) {
   return (
     <div className="imageslide" >
     <ImageGallery 
-    lazyLoad={true}
+    lazyLoad={this.state.lazyLoad}
     items={data}
     ref={i => this._imageGallery = i}   
     slideDuration={this.state.slideDuration}
