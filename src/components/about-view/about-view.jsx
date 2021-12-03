@@ -5,7 +5,16 @@ export class About extends React.Component {
 
   render () {
     return <div className='aboutSection'>
-      Lorem, ipsum dolor sit amet consectetur adipisicing elit. Alias saepe ex culpa totam harum optio, sint eveniet dolores possimus blanditiis delectus ducimus quisquam obcaecati ratione, est iure perspiciatis sunt doloremque.
+     <p>The presented artworks are part of a private collection located in Berlin, Germany. <br />
+        In order to offer the beauty and excellence of the artworks and their creators to a wider audience the presentation of the collection takes place online. <br />
+
+        We hope you can enjoy this idea and get to know artworks which would be hidden otherwise. <br />
+
+        In case of questions, please contact us: <br />
+
+        anonymous@anonymouscollection.com <br />
+
+        Have a nice day and stay healthy!</p>
     </div>
   }
 }
