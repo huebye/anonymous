@@ -9,6 +9,11 @@
     font-family: Arial, Helvetica, sans-serif;
 }
 
+.aboutSection > p {
+    max-width: 850px;
+    font-weight: 400;
+}
+
 @media only screen and (max-width: 1350px) {
     .aboutSection {
         padding-right: 150px;
@@ -18,7 +23,13 @@
 
 @media only screen and (max-width: 900px) {
     .aboutSection {
-        padding-right: 50px;
-        padding-left: 50px;
+        padding-right: 80px;
+        padding-left: 80px;
     }
 }
+
+@media only screen and (max-width: 600px) {
+   .aboutSection > p {
+    font-size: 15px;
+   }
+     }
