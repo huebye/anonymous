@@ -12,6 +12,11 @@
 .aboutSection > p {
     max-width: 850px;
     font-weight: 400;
+    line-height: 27px;
+}
+
+.aboutSection > p > span {
+    color: #d31208;
 }
 
 @media only screen and (max-width: 1350px) {
