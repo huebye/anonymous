@@ -57,7 +57,7 @@ const { name } = useParams();
           const switchedName = secondWord + ' ' + thirdWord + ' ' + firstWord;
           return setName(switchedName)
         }
-      }
+      };
 
   return (
 

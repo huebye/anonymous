@@ -48,15 +48,37 @@ export class MainView extends React.Component {
           console.log(error);
         });
       };
+      
+       switchNames = (names) => {
+        let firstWord = names.split(" ")[0]
+        let secondWord = names.split(" ")[1]
+        let thirdWord = names.split(" ")[2]
+        let fourthWord = names.split(" ")[3]
 
+        if (thirdWord === undefined) {
+          const switchedName = secondWord + ' ' + firstWord;
+          return switchedName
+        } else if ((fourthWord === undefined) && (thirdWord === undefined)) {
+          const switchedName = secondWord + ' ' + firstWord ;
+          return switchedName
+        } else if ((fourthWord != undefined) && (thirdWord != undefined)) {
+          const switchedName = secondWord + ' ' + thirdWord + ' ' + fourthWord + ' ' + firstWord 
+          return switchedName
+        } else if (thirdWord != undefined) {
+          const switchedName = secondWord + ' ' + thirdWord + ' ' + firstWord;
+          return switchedName
+        }
+      };
     render () {
       let { data, loader } = this.state;
-
+      
       const images = data.map(elem => {
-        return{
+        const names = this.switchNames(elem.Name);
+        console.log(names)
+        return { 
              original: elem.ImagePath,
-             description: elem.Name + ' - ' + elem.Title,
-             originalAlt: elem.Name + ' - ' + elem.Title,
+             description: names + ' - ' + elem.Title,
+             originalAlt: names + ' - ' + elem.Title,
            }
           });
 
