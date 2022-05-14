@@ -40,6 +40,12 @@ export class MainView extends React.Component {
         })
         .then(response => {
          const data = response.data;
+         data.forEach(x => {
+          let text = x.Size
+          let result = text.replace(/x/g,"×")
+          x.Size = result
+        });
+
           this.setState({
            data: data
          });
@@ -74,7 +80,6 @@ export class MainView extends React.Component {
       
       const images = data.map(elem => {
         const names = this.switchNames(elem.Name);
-        console.log(names)
         return { 
              original: elem.ImagePath,
              description: names + ' - ' + elem.Title,

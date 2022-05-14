@@ -35,7 +35,6 @@ export class ImageSlideView extends React.Component {
       }
 
       _onImageClick(event) {
-        console.log(event.target.alt)
         let image = event.target.src;
         let index = this._imageGallery.getCurrentIndex();
         this.setState({
@@ -99,7 +98,7 @@ if(fullscreen === false) {
 } else if(fullscreen === true) {
   return (
     <div className="fullscreen">
-        <ControlledZoom transitionDuration={0} isZoomed={isZoomed} zoomMargin={190} overlayBgColorEnd='rgba(0,0,0,1)' onZoomChange={this._handleZoomChange.bind(this)} ><div className="fullscreen_div fade-in"><img style={styles} src={this.state.clickedImage} alt={this.state.clickedDescription} />
+        <ControlledZoom transitionDuration={0} isZoomed={isZoomed} zoomMargin={190} overlayBgColorEnd='rgba(0,0,0,1)' onZoomChange={this._handleZoomChange.bind(this)} ><div className="fullscreen_div fade-in"><img loading='lazy' style={styles} src={this.state.clickedImage} alt={this.state.clickedDescription} />
         <p className="fullscreen_description">{this.state.clickedDescription}</p>
         </div>
         </ControlledZoom>
