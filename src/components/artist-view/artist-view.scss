@@ -120,7 +120,7 @@ strong {
     }
 
     .art > .artist_view:last-of-type {
-        padding-bottom: 150px;
+        padding-bottom: 190px;
     }
 
     .name_bottom {
@@ -159,12 +159,12 @@ strong {
         display: flex;
         align-items: left;
         flex-direction: column;
-        width: auto;
+        width: 100vw;
     }
 
     .artist_images {
-        max-width: 350px;
-        max-height: 300px;
+        max-width: 375px;
+        max-height: 325px;
         padding: 20px;
     }
 
