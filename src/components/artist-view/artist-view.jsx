@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import Zoom from 'react-medium-image-zoom';
+import { Controlled as ControlledZoom } from 'react-medium-image-zoom';
 import { useParams } from 'react-router';
 import 'react-medium-image-zoom/dist/styles.css';
 import './artist-view.scss';
@@ -8,6 +9,7 @@ import axios from 'axios';
 export function Artist(props) {   
 const [artist, setArtist] = React.useState([])
 const [switchNameFinal, setName] = React.useState('')
+const [isZoomed, setZoom] = React.useState(false)
 
 const { name } = useParams();
 
@@ -23,6 +25,11 @@ const { name } = useParams();
         setArtist(artistFiltered);
       });
       }
+
+      const handleZoomChange = () => {
+        if(isZoomed === false)
+        setZoom(true)
+      }; 
  
       React.useEffect(() => {
         if(props.data) {
@@ -70,7 +77,7 @@ const { name } = useParams();
           {artist.map((d) => {
             return (
           <div className="artist_view" key={d._id}>
-           <Zoom transitionDuration={0} overlayBgColorEnd='rgba(0,0,0,1)'  zoomMargin={90}><img loading="lazy" className="artist_images fade-in" src={d.ImagePath} alt={d.Name + d.Title}  /></Zoom>
+           <ControlledZoom isZoomed={isZoomed} onZoomChange={handleZoomChange.bind(this)} transitionDuration={0} overlayBgColorEnd='rgba(0,0,0,1)' zoomMargin={5}><img loading="lazy" className="artist_images fade-in" src={d.ImagePath} alt={d.Name + d.Title}  /></ControlledZoom>
             <p><strong>Title:</strong> <span>{d.Title.toUpperCase()}</span> <br /><strong>Year:</strong> {d.Year} <br /><strong>Material:</strong> {d.Material} <br /> <strong>Size:</strong> {d.Size}</p>
           </div>
             )
