@@ -28,8 +28,7 @@ const { name } = useParams();
       });
       }
 
-      const handleZoomChange = (event) => {
-        console.log(event)
+      const handleZoomChange = () => {
         if(isZoomed === true) {
           setZoom(false)
           setFullscreen(false)
@@ -39,12 +38,9 @@ const { name } = useParams();
       }; 
 
       const imageClicked = (event) => {
-        console.log(event.target.src)
         setFullscreen(true)
         setZoom(true)
         setClickedImage(event.target.src)
-        console.log(fullscreen)
-        console.log(clickedImage)
       }
  
       React.useEffect(() => {
