@@ -7,9 +7,11 @@ import './artist-view.scss';
 import axios from 'axios';
 
 export function Artist(props) {   
-const [artist, setArtist] = React.useState([])
-const [switchNameFinal, setName] = React.useState('')
-const [isZoomed, setZoom] = React.useState(false)
+const [artist, setArtist] = React.useState([]);
+const [switchNameFinal, setName] = React.useState('');
+const [isZoomed, setZoom] = React.useState(false);
+const [clickedImage, setClickedImage] = React.useState(null);
+const [fullscreen, setFullscreen] = React.useState(false)
 
 const { name } = useParams();
 
@@ -26,10 +28,24 @@ const { name } = useParams();
       });
       }
 
-      const handleZoomChange = () => {
-        if(isZoomed === false)
-        setZoom(true)
+      const handleZoomChange = (event) => {
+        console.log(event)
+        if(isZoomed === true) {
+          setZoom(false)
+          setFullscreen(false)
+        } else {
+          setZoom(true)
+        }
       }; 
+
+      const imageClicked = (event) => {
+        console.log(event.target.src)
+        setFullscreen(true)
+        setZoom(true)
+        setClickedImage(event.target.src)
+        console.log(fullscreen)
+        console.log(clickedImage)
+      }
  
       React.useEffect(() => {
         if(props.data) {
@@ -75,12 +91,21 @@ const { name } = useParams();
       </div>
      <div className="art fade-in">
           {artist.map((d) => {
-            return (
-          <div className="artist_view" key={d._id}>
-           <ControlledZoom isZoomed={isZoomed} onZoomChange={handleZoomChange.bind(this)} transitionDuration={0} overlayBgColorEnd='rgba(0,0,0,1)' zoomMargin={5}><img loading="lazy" className="artist_images fade-in" src={d.ImagePath} alt={d.Name + d.Title}  /></ControlledZoom>
-            <p><strong>Title:</strong> <span>{d.Title.toUpperCase()}</span> <br /><strong>Year:</strong> {d.Year} <br /><strong>Material:</strong> {d.Material} <br /> <strong>Size:</strong> {d.Size}</p>
-          </div>
-            )
+    
+              return (
+                <div className="artist_view" key={d._id}>
+                              <img loading="lazy" className="artist_images fade-in" src={d.ImagePath} alt={d.Name + d.Title} onClick={imageClicked.bind(this)} />
+                  <p><strong>Title:</strong> <span>{d.Title.toUpperCase()}</span> <br /><strong>Year:</strong> {d.Year} <br /><strong>Material:</strong> {d.Material} <br /> <strong>Size:</strong> {d.Size}</p>
+                  {fullscreen === true &&
+                  <div className='artist_view_zoom'>
+                    <ControlledZoom   isZoomed={isZoomed} onZoomChange={handleZoomChange.bind(this)} transitionDuration={0} overlayBgColorEnd='rgba(0,0,0,1)' zoomMargin={5}>
+                <img loading="lazy" className="artist_images_zoom fade-in " src={clickedImage} />
+                </ControlledZoom>
+                  </div>
+                  }
+                </div>
+                  )
+            
           })
   } 
      </div>

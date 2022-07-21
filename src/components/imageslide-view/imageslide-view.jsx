@@ -87,7 +87,6 @@ if(fullscreen === false) {
     isRTL={this.state.isRTL}
     swipeThreshold={this.state.swipeThreshold}
     additionalClass="app-image-gallery"
-    lazyLoad={this.state.lazyLoad}
     stopPropagation={this.state.stopPropagation}
     onClick={this._onImageClick.bind(this)}
     startIndex={this.state.imageIndex}

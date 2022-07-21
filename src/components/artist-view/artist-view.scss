@@ -162,7 +162,21 @@ strong {
         width: 100vw;
     }
 
+    .artist_view_zoom {
+        display: flex;
+        align-items: center;
+        width: 1000vw;
+    }
+
     .artist_images {
+        max-width: 365px;
+        width: auto;
+        height: auto;
+        padding: 20px;
+    }
+
+    .artist_images_zoom {
+       margin: 0 auto;
         max-width: 375px;
         max-height: 325px;
         padding: 20px;
