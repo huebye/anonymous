@@ -4,6 +4,9 @@
   "proxy": "https://shrouded-caverns-29574.herokuapp.com",
   "description": "",
   "main": "src/index.js",
+   "engines" : {
+    "node" : ">=14.0.0 <15.0.0"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "webpack-dev-server --mode development --hot --history-api-fallback",
