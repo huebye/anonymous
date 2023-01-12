@@ -78,11 +78,12 @@ const { name } = useParams();
         }
       };
 
+  if(fullscreen === false) {
   return (
 
     <>
-  <div className="artist_grid">
-    <div className="artistName">
+  <div className="artist_grid fade-in">
+    <div className="artistName ">
       <h2>{switchNameFinal}</h2>
       </div>
      <div className="art fade-in">
@@ -92,21 +93,21 @@ const { name } = useParams();
                 <div className="artist_view" key={d._id}>
                               <img loading="lazy" className="artist_images fade-in" src={d.ImagePath} alt={d.Name + d.Title} onClick={imageClicked.bind(this)} />
                   <p><strong>Title:</strong> <span>{d.Title.toUpperCase()}</span> <br /><strong>Year:</strong> {d.Year} <br /><strong>Material:</strong> {d.Material} <br /> <strong>Size:</strong> {d.Size}</p>
-                  {fullscreen === true &&
-                  <div className='artist_view_zoom'>
-                    <ControlledZoom   isZoomed={isZoomed} onZoomChange={handleZoomChange.bind(this)} transitionDuration={0} overlayBgColorEnd='rgba(0,0,0,1)' zoomMargin={5}>
-                <img loading="lazy" className="artist_images_zoom fade-in " src={clickedImage} />
-                </ControlledZoom>
-                  </div>
-                  }
                 </div>
                   )
             
           })
+          
   } 
      </div>
   </div>
     <h2 className="name_bottom">{switchNameFinal}</h2>
     </>
   )
+          } else if(fullscreen === true) {
+                  return (
+                    <div className='artist_view_zoom fade-in ' onClick={handleZoomChange.bind(this)}>
+                    <img id="zoomedImg" loading="lazy" className=" fade-in " src={clickedImage} />
+                      </div> 
+                  )}
 }

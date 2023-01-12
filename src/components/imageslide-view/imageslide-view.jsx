@@ -56,6 +56,37 @@ export class ImageSlideView extends React.Component {
         })
       };  
 
+      generateStyles(element) {
+        let style = {}
+
+        if(element === 'img') {
+          if(window.innerWidth < 600) {
+            style.maxWidth = '200px'
+            style.maxHeight = '200px'
+          } else if(window.innerWidth > 600 && window.innerWidth < 800) {
+            style.maxWidth = '400px'
+            style.maxHeight = '400px'
+          } else {
+            style.maxWidth = '800px'
+            style.maxHeight = '500px'
+          }
+        }
+
+        if(element === 'divFull') {
+          if(window.innerWidth < 500) {
+            style.transform = 'scale(1.9)'
+          } 
+        }
+
+        if(element === 'desc') {
+          if(window.innerWidth < 500) {
+            style.fontSize = '7px'
+            style.textAlign = 'center'
+          } 
+        }
+        return style
+      }
+
       
 
     render () {
@@ -96,11 +127,9 @@ if(fullscreen === false) {
 )
 } else if(fullscreen === true) {
   return (
-    <div className="fullscreen">
-        <ControlledZoom transitionDuration={0} isZoomed={isZoomed} zoomMargin={190} overlayBgColorEnd='rgba(0,0,0,1)' onZoomChange={this._handleZoomChange.bind(this)} ><div className="fullscreen_div fade-in"><img loading='lazy' style={styles} src={this.state.clickedImage} alt={this.state.clickedDescription} />
-        <p className="fullscreen_description">{this.state.clickedDescription}</p>
-        </div>
-        </ControlledZoom>
+    <div className="fullscreen" style={this.generateStyles('divFull')} onClick={this._handleZoomChange.bind(this)}>
+        <img loading='lazy' style={this.generateStyles('img')} src={this.state.clickedImage} alt={this.state.clickedDescription} />
+        <p className="fullscreen_description" style={this.generateStyles('desc')}>{this.state.clickedDescription}</p>
   </div>
   )
 

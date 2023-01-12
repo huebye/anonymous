@@ -45,6 +45,28 @@ strong {
     animation: fadein 0.9s ease forwards;
   }
 
+  .artist_view_zoom {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-width: 100vw;
+    padding: 70px;
+    min-height: 100vH;
+    overflow: hidden;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: black;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    z-index: 1000;
+
+    img {
+        max-width: 60vw;
+        max-height: 70vh;
+    }
+}
 
 .art {
     display: flex;
@@ -162,23 +184,10 @@ strong {
         width: 100vw;
     }
 
-    .artist_view_zoom {
-        display: flex;
-        align-items: center;
-        width: 1000vw;
-    }
-
     .artist_images {
         max-width: 365px;
         width: auto;
         height: auto;
-        padding: 20px;
-    }
-
-    .artist_images_zoom {
-       margin: 0 auto;
-        max-width: 375px;
-        max-height: 325px;
         padding: 20px;
     }
 
@@ -189,5 +198,17 @@ strong {
 
     .art {
         padding-top: 40px;
+    }
+
+    .artist_view_zoom {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        img {
+            transform: scale(1.4);
+            max-height: 300px;
+            position: relative;
+            top: -60px;
+        }
     }
 }
